@@ -53,3 +53,11 @@ project_id: ${{ secrets.PROJECT_ID }}
 ```
 ## GCP AppEngine Enable   
 ![image](https://user-images.githubusercontent.com/22079767/143732125-7f4e9d47-859a-4df7-8d4a-284e90ab5e5c.png)
+
+# APIs
+## user/init
+user get or init to datastore 
+![image](https://user-images.githubusercontent.com/22079767/143916685-d8c1ac37-bb44-4dae-8a7a-5c80d12beea8.png)
+![image](https://user-images.githubusercontent.com/22079767/143916716-668456e6-b21a-4f42-ae92-be08b7b7d26c.png)
+
+
