@@ -40,12 +40,12 @@ jobs:
     - name: Deploy - no stop previous version
       if: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
       run: |-
-        cd ${{ github.event.inputs.app_name }}
+        cd deployments/${{ github.event.inputs.app_name }}
         gcloud app deploy --no-stop-previous-version --quiet
 
     # Deploy - stop previous version
     - name: Deploy - stop previous version
       if: ${{ github.event.inputs.is_stop_previous_version == 'false' }}
       run: |-
-        cd ${{ github.event.inputs.app_name }}
+        cd deployments/${{ github.event.inputs.app_name }}
         gcloud app deploy --quiet

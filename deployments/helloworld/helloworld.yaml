@@ -14,3 +14,5 @@
 
 runtime: go115
 service: helloworld
+
+main: github.com/hojin-kr/indie-game-server-architecture/cmd/helloworld

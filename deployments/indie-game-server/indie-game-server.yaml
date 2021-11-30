@@ -13,9 +13,11 @@
 # limitations under the License.
 
 runtime: go115
-service: user
+service: indie-game-server
 
 instance_class: F1
 # todo secrests setting
 env_variables:
   PROJECT_ID: boss-dungeon
+# deployment target
+main: github.com/hojin-kr/indie-game-server-architecture/cmd/indie-game-server
