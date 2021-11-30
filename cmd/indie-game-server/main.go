@@ -47,7 +47,7 @@ func userInit(c *gin.Context) {
 		return
 	}
 	ctx := context.Background()
-	q := datastore.NewQuery("User").Filter("ClientID =", user.ID).Limit(1)
+	q := datastore.NewQuery("User").Filter("ClientID =", user.ClientID).Limit(1)
 	users := make([]*User, 0)
 	keys, err := datastoreClient.GetAll(ctx, q, &users)
 	if err != nil {
