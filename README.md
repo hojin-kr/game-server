@@ -2,7 +2,7 @@
 초기 비용 관리 및 용이한 확장성을 고려한 서버 아키텍처
 서비스 운영의 불확실성을 고려해서 초기에는 비용이 발생하지 않지만 사용량에 따라 스케일 조정이 용이한 아키텍처
 
-# Concept
+# Architecture Concept
 ## 인스턴스
 ### gcp app engine
 - 쉬운 배포
@@ -42,22 +42,44 @@ build해서 packages에 올리고 원하면 배포까지
 ## 로깅
 stdout
 
-
-# Setup
+# Using
 ## Instance Deploy to AppEngine
-Setup GCP service account key & product ID
-setting up github secrets
+
+### Setup GCP service account key & product ID
+setting up secrets
 ```
 service_account_key: ${{ secrets.SA_KEY }}
 project_id: ${{ secrets.PROJECT_ID }}
 ```
-## GCP AppEngine Enable   
-![image](https://user-images.githubusercontent.com/22079767/143732125-7f4e9d47-859a-4df7-8d4a-284e90ab5e5c.png)
+![image](https://user-images.githubusercontent.com/22079767/144077080-504aeb7c-ae48-4d99-b36c-e6d99216a9ad.png)
+
+### Enable Require GCP APIs AppEngine, Datastore
+https://console.cloud.google.com/appengine   
+https://console.cloud.google.com/datastore
+
+### Run Git Action workflow
+- app name : /deployments app_anme
+- --no-stop-previous-version : bool
+![image](https://user-images.githubusercontent.com/22079767/144077357-0c05438e-87e0-46c0-8ad3-5e1a21380cc3.png)
+
+### Check AppEngine Deploy & Ping Test
+https://console.cloud.google.com/appengine/services
+
+```
+➜  indie-game-server git:(main) curl https://{{YOUR_APPENGINE_ADDRESS}}.appspot.com/ping 
+{"message":"pong"}
+```
 
 # APIs
 ## user/init
-user get or init to datastore 
+user get or init to datastore
+```
+1. Lookup by ClientId
+1-1. Return Name/ID if there is information matching ClientId
+1-2. If there is no information matching the ClientId, a new one is created.
+```
 ![image](https://user-images.githubusercontent.com/22079767/143916685-d8c1ac37-bb44-4dae-8a7a-5c80d12beea8.png)
 ![image](https://user-images.githubusercontent.com/22079767/143916716-668456e6-b21a-4f42-ae92-be08b7b7d26c.png)
+
 
 
