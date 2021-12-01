@@ -1,21 +1,13 @@
 name: Deploy to AppEngine
 
 on:
-  workflow_dispatch:
-    inputs:
-      app_name:
-        description: 'app name'
-        default: 'helloworld'
-        required: true
-      is_stop_previous_version:
-        description: '--no-stop-previous-version'
-        default: 'true'
-        required: true
-
+  push:
+    branches:
+      - main
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  APP_NAME: ${{ github.event.inputs.app_name }}
-  PREVIOUS_VERSION: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
+  APP_NAME: indie-game-server
+  PREVIOUS_VERSION: true
 
 jobs:
   setup-deploy:
@@ -37,13 +29,6 @@ jobs:
     # helper for authentication
     - run: |-
         gcloud --quiet auth configure-docker
-
-    # Deploy - no stop previous version
-    - name: Deploy - no stop previous version
-      if: ${{ env.PREVIOUS_VERSION }}
-      run: |-
-        cd deployments/${{ env.APP_NAME }}
-        gcloud app deploy --no-stop-previous-version --quiet
 
     # Deploy - stop previous version
     - name: Deploy - stop previous version

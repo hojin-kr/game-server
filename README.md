@@ -71,17 +71,32 @@ https://console.cloud.google.com/appengine/services
 ➜  indie-game-server git:(main) curl https://{{YOUR_APPENGINE_ADDRESS}}.appspot.com/ping 
 {"message":"pong"}
 ```
+# Models
+```
+// Account account infomation
+type Account struct {
+	ClientID string
+	DeviceID string
+	ID       string `datastore:"-"`
+}
+
+// Profile profile inforamtion
+type Profile struct {
+	Nickname string
+	ID       string `datastore:"-"`
+}
+
+// Wallet wallet
+type Wallet struct {
+	Coin string
+	ID   string `datastore:"-"`
+}
+```
 
 # APIs
-## user/init
-user get or init to datastore
 ```
-1. Lookup by ClientId
-1-1. Return Name/ID if there is information matching ClientId
-1-2. If there is no information matching the ClientId, a new one is created.
+[GIN-debug] GET    /ping                     --> main.main.func1 (3 handlers)
+[GIN-debug] POST   /account/get              --> main.getAccount (3 handlers)
+[GIN-debug] POST   /profile/get              --> main.getProfile (3 handlers)
+[GIN-debug] POST   /profile/set              --> main.setProfile (3 handlers)
 ```
-![image](https://user-images.githubusercontent.com/22079767/143916685-d8c1ac37-bb44-4dae-8a7a-5c80d12beea8.png)
-![image](https://user-images.githubusercontent.com/22079767/143916716-668456e6-b21a-4f42-ae92-be08b7b7d26c.png)
-
-
-

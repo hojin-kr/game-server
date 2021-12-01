@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
@@ -29,51 +30,90 @@ func main() {
 		})
 	})
 	r.POST("/account/get", getAccount)
+	r.POST("/profile/get", getProfile)
+	r.POST("/profile/set", setProfile)
 	r.Run()
 }
 
 // Account account infomation
 type Account struct {
-	ClientID string
+	Created  int64
 	DeviceID string
-	ID       string `datastore:"-"`
+	GoogleID string
+	AppleID  string
+	LineID   string
+	KakaoID  string
+	ID       int64 `datastore:"-"`
 }
 
 // Profile profile inforamtion
 type Profile struct {
 	Nickname string
+	ID       int64 `datastore:"-"`
 }
 
 // Wallet wallet
 type Wallet struct {
 	Coin string
+	ID   int64 `datastore:"-"`
 }
 
-// getAccount account get or init
+// getAccount account init
 func getAccount(c *gin.Context) {
 	var account Account
 	if err := c.ShouldBind(&account); err != nil {
-		c.String(http.StatusBadRequest, "bad request")
+		c.String(http.StatusBadRequest, "Should Not Bind")
 		return
 	}
 	ctx := context.Background()
-	q := datastore.NewQuery("Account").Filter("ClientID =", account.ClientID).Limit(1)
-	accounts := make([]*Account, 0)
-	keys, err := datastoreClient.GetAll(ctx, q, &accounts)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Account get fail")
-	}
-	if len(accounts) < 1 {
-		accounts = append(accounts, &Account{ClientID: account.ClientID, DeviceID: account.DeviceID})
-		k := datastore.IncompleteKey("Account", nil)
-		key, err := datastoreClient.Put(ctx, k, accounts[0])
-		accounts[0].ID = key.String()
+	if account.ID == -1 {
+		account.Created = time.Now().Unix()
+		// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
+		key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{Created: account.Created})
 		if err != nil {
-			c.String(http.StatusBadRequest, "Account init fail")
+			c.String(http.StatusBadRequest, "Should Not Account Put")
 			return
 		}
+		account.ID = key.ID
 	} else {
-		accounts[0].ID = keys[0].String()
+		key := datastore.IDKey("Account", account.ID, nil)
+		err := datastoreClient.Get(ctx, datastore.IDKey("Account", account.ID, nil), &account)
+		if err != nil {
+			c.String(http.StatusBadRequest, "Should Not Account get")
+		}
+		account.ID = key.ID
 	}
-	c.JSON(http.StatusOK, accounts[0])
+	c.JSON(http.StatusOK, account)
+}
+
+// getProfile profile get
+func getProfile(c *gin.Context) {
+	var profile Profile
+	if err := c.ShouldBind(&profile); err != nil {
+		c.String(http.StatusBadRequest, "Should Not Bind")
+		return
+	}
+	ctx := context.Background()
+	key := datastore.IDKey("Profile", profile.ID, nil)
+	if err := datastoreClient.Get(ctx, key, &profile); err != nil {
+		c.String(http.StatusBadRequest, "Should Not Profile get")
+	}
+	c.JSON(http.StatusOK, profile)
+}
+
+// setProfile profile get
+func setProfile(c *gin.Context) {
+	var profile Profile
+	if err := c.ShouldBind(&profile); err != nil {
+		c.String(http.StatusBadRequest, "Should Not Bind")
+		return
+	}
+	ctx := context.Background()
+	key := datastore.IDKey("Profile", profile.ID, nil)
+	_, err := datastoreClient.Put(ctx, key, &profile)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Should Not Profile Put")
+		return
+	}
+	c.JSON(http.StatusOK, profile)
 }
