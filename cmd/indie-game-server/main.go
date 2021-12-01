@@ -28,42 +28,52 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.POST("/user/init", userInit)
+	r.POST("/account/get", getAccount)
 	r.Run()
 }
 
-// User user
-type User struct {
+// Account account infomation
+type Account struct {
 	ClientID string
 	DeviceID string
-	ID       int64 `datastore:"-"`
+	ID       string `datastore:"-"`
 }
 
-// userInit user get or init
-func userInit(c *gin.Context) {
-	var user User
-	if err := c.ShouldBind(&user); err != nil {
+// Profile profile inforamtion
+type Profile struct {
+	Nickname string
+}
+
+// Wallet wallet
+type Wallet struct {
+	Coin string
+}
+
+// getAccount account get or init
+func getAccount(c *gin.Context) {
+	var account Account
+	if err := c.ShouldBind(&account); err != nil {
 		c.String(http.StatusBadRequest, "bad request")
 		return
 	}
 	ctx := context.Background()
-	q := datastore.NewQuery("User").Filter("ClientID =", user.ClientID).Limit(1)
-	users := make([]*User, 0)
-	keys, err := datastoreClient.GetAll(ctx, q, &users)
+	q := datastore.NewQuery("Account").Filter("ClientID =", account.ClientID).Limit(1)
+	accounts := make([]*Account, 0)
+	keys, err := datastoreClient.GetAll(ctx, q, &accounts)
 	if err != nil {
-		c.String(http.StatusBadRequest, "user get fail")
+		c.String(http.StatusBadRequest, "Account get fail")
 	}
-	if len(users) < 1 {
-		users = append(users, &User{ClientID: user.ClientID, DeviceID: user.DeviceID})
-		k := datastore.IncompleteKey("User", nil)
-		key, err := datastoreClient.Put(ctx, k, users[0])
-		users[0].ID = key.ID
+	if len(accounts) < 1 {
+		accounts = append(accounts, &Account{ClientID: account.ClientID, DeviceID: account.DeviceID})
+		k := datastore.IncompleteKey("Account", nil)
+		key, err := datastoreClient.Put(ctx, k, accounts[0])
+		accounts[0].ID = key.String()
 		if err != nil {
-			c.String(http.StatusBadRequest, "user init fail")
+			c.String(http.StatusBadRequest, "Account init fail")
 			return
 		}
 	} else {
-		users[0].ID = keys[0].ID
+		accounts[0].ID = keys[0].String()
 	}
-	c.JSON(http.StatusOK, users[0])
+	c.JSON(http.StatusOK, accounts[0])
 }
