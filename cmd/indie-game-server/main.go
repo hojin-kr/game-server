@@ -10,6 +10,7 @@ import (
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/appengine"
 	"google.golang.org/appengine/memcache"
 )
 
@@ -35,6 +36,8 @@ func main() {
 	r.POST("/profile/get", getProfile)
 	r.POST("/profile/set", setProfile)
 	r.Run()
+	// for only appengine
+	appengine.Main()
 }
 
 // Account account infomation
