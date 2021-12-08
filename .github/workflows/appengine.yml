@@ -1,4 +1,4 @@
-name: Deploy to AppEngine
+name: Deploy to AppEngine Manual
 
 on:
   workflow_dispatch:
@@ -15,7 +15,6 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   APP_NAME: ${{ github.event.inputs.app_name }}
-  PREVIOUS_VERSION: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
 
 jobs:
   setup-deploy:
@@ -40,14 +39,14 @@ jobs:
 
     # Deploy - no stop previous version
     - name: Deploy - no stop previous version
-      if: ${{ env.PREVIOUS_VERSION }}
+      if: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
       run: |-
         cd deployments/${{ env.APP_NAME }}
         gcloud app deploy --no-stop-previous-version --quiet
 
     # Deploy - stop previous version
     - name: Deploy - stop previous version
-      if: ${{ env.PREVIOUS_VERSION }}
+      if: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
       run: |-
         cd deployments/${{ env.APP_NAME }}
         gcloud app deploy --quiet

@@ -1,4 +1,4 @@
-name: Deploy to AppEngine
+name: Deploy to AppEngine Main
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   APP_NAME: indie-game-server
-  PREVIOUS_VERSION: true
 
 jobs:
   setup-deploy:
@@ -32,7 +31,6 @@ jobs:
 
     # Deploy - stop previous version
     - name: Deploy - stop previous version
-      if: ${{ env.PREVIOUS_VERSION }}
       run: |-
         cd deployments/${{ env.APP_NAME }}
         gcloud app deploy --quiet
