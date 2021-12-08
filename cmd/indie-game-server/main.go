@@ -5,10 +5,12 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/appengine/memcache"
 )
 
 var datastoreClient *datastore.Client
@@ -62,7 +64,7 @@ type Wallet struct {
 func getAccount(c *gin.Context) {
 	var account Account
 	if err := c.ShouldBind(&account); err != nil {
-		c.String(http.StatusBadRequest, "Should Not Bind")
+		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())
 		return
 	}
 	ctx := context.Background()
@@ -71,17 +73,30 @@ func getAccount(c *gin.Context) {
 		// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 		key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{Created: account.Created})
 		if err != nil {
-			c.String(http.StatusBadRequest, "Should Not Account Put")
+			c.String(http.StatusBadRequest, "Should Not Account Put:"+err.Error())
 			return
 		}
 		account.ID = key.ID
 	} else {
+		memcacheKey := "account:" + strconv.Itoa(int(account.ID))
+		_, err := memcache.Get(ctx, memcacheKey)
+		if err != nil && err != memcache.ErrCacheMiss {
+			c.String(http.StatusBadRequest, "Should Not Set Memcache:"+err.Error())
+		}
 		key := datastore.IDKey("Account", account.ID, nil)
-		err := datastoreClient.Get(ctx, datastore.IDKey("Account", account.ID, nil), &account)
+		err = datastoreClient.Get(ctx, datastore.IDKey("Account", account.ID, nil), &account)
 		if err != nil {
-			c.String(http.StatusBadRequest, "Should Not Account get")
+			c.String(http.StatusBadRequest, "Should Not Account get:"+err.Error())
 		}
 		account.ID = key.ID
+		err = memcache.Set(ctx, &memcache.Item{
+			Key:    memcacheKey,
+			Value:  []byte("account"),
+			Object: account,
+		})
+		if err != nil {
+			c.String(http.StatusBadRequest, "Should Not Set Memcache:"+err.Error())
+		}
 	}
 	c.JSON(http.StatusOK, account)
 }
@@ -90,13 +105,13 @@ func getAccount(c *gin.Context) {
 func getProfile(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
-		c.String(http.StatusBadRequest, "Should Not Bind")
+		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())
 		return
 	}
 	ctx := context.Background()
 	key := datastore.IDKey("Profile", profile.ID, nil)
 	if err := datastoreClient.Get(ctx, key, &profile); err != nil {
-		c.String(http.StatusBadRequest, "Should Not Profile get")
+		c.String(http.StatusBadRequest, "Should Not Profile get:"+err.Error())
 	}
 	c.JSON(http.StatusOK, profile)
 }
@@ -105,14 +120,14 @@ func getProfile(c *gin.Context) {
 func setProfile(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
-		c.String(http.StatusBadRequest, "Should Not Bind")
+		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())
 		return
 	}
 	ctx := context.Background()
 	key := datastore.IDKey("Profile", profile.ID, nil)
 	_, err := datastoreClient.Put(ctx, key, &profile)
 	if err != nil {
-		c.String(http.StatusBadRequest, "Should Not Profile Put")
+		c.String(http.StatusBadRequest, "Should Not Profile Put:"+err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, profile)
