@@ -5,13 +5,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 	"time"
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/memcache"
 )
 
 var datastoreClient *datastore.Client
@@ -36,8 +33,6 @@ func main() {
 	r.POST("/profile/get", getProfile)
 	r.POST("/profile/set", setProfile)
 	r.Run()
-	// for only appengine
-	appengine.Main()
 }
 
 // Account account infomation
@@ -81,25 +76,12 @@ func getAccount(c *gin.Context) {
 		}
 		account.ID = key.ID
 	} else {
-		memcacheKey := "account:" + strconv.Itoa(int(account.ID))
-		_, err := memcache.Get(ctx, memcacheKey)
-		if err != nil && err != memcache.ErrCacheMiss {
-			c.String(http.StatusBadRequest, "Should Not Set Memcache:"+err.Error())
-		}
 		key := datastore.IDKey("Account", account.ID, nil)
-		err = datastoreClient.Get(ctx, datastore.IDKey("Account", account.ID, nil), &account)
+		err := datastoreClient.Get(ctx, datastore.IDKey("Account", account.ID, nil), &account)
 		if err != nil {
 			c.String(http.StatusBadRequest, "Should Not Account get:"+err.Error())
 		}
 		account.ID = key.ID
-		err = memcache.Set(ctx, &memcache.Item{
-			Key:    memcacheKey,
-			Value:  []byte("account"),
-			Object: account,
-		})
-		if err != nil {
-			c.String(http.StatusBadRequest, "Should Not Set Memcache:"+err.Error())
-		}
 	}
 	c.JSON(http.StatusOK, account)
 }
