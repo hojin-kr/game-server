@@ -54,7 +54,7 @@ project_id: ${{ secrets.PROJECT_ID }}
 ![image](https://user-images.githubusercontent.com/22079767/144077080-504aeb7c-ae48-4d99-b36c-e6d99216a9ad.png)
 
 ### Enable Require GCP APIs AppEngine, Datastore
-https://console.cloud.google.com/appengine   
+https://console.cloud.google.com/appengine
 https://console.cloud.google.com/datastore
 
 ### Run Git Action workflow
@@ -68,35 +68,41 @@ https://console.cloud.google.com/datastore
 https://console.cloud.google.com/appengine/services
 
 ```
-➜  indie-game-server git:(main) curl https://{{YOUR_APPENGINE_ADDRESS}}.appspot.com/ping 
+➜  indie-game-server git:(main) curl https://{{YOUR_APPENGINE_ADDRESS}}.appspot.com/ping
 {"message":"pong"}
 ```
 # Models
 ```
+
 // Account account infomation
 type Account struct {
-	ClientID string
-	DeviceID string
-	ID       string `datastore:"-"`
+	RegisterTimestamp int64
+	DeviceID          string
+	GoogleID          string
+	AppleID           string
+	LineID            string
+	KakaoID           string
+	ID                int64 `datastore:"-"`
 }
 
 // Profile profile inforamtion
 type Profile struct {
 	Nickname string
-	ID       string `datastore:"-"`
+	ID       int64 `datastore:"-"`
 }
 
 // Wallet wallet
 type Wallet struct {
 	Coin string
-	ID   string `datastore:"-"`
+	ID   int64 `datastore:"-"`
 }
 ```
 
 # APIs
 ```
+[GIN-debug] POST   /api/v1/accounts/get      --> main.getAccount (3 handlers)
+[GIN-debug] POST   /api/v1/profiles/get      --> main.getProfile (3 handlers)
+[GIN-debug] POST   /api/v1/profiles/set      --> main.setProfile (3 handlers)
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 [GIN-debug] GET    /ping                     --> main.main.func1 (3 handlers)
-[GIN-debug] POST   /account/get              --> main.getAccount (3 handlers)
-[GIN-debug] POST   /profile/get              --> main.getProfile (3 handlers)
-[GIN-debug] POST   /profile/set              --> main.setProfile (3 handlers)
 ```
