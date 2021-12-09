@@ -23,8 +23,6 @@ var datastoreClient *datastore.Client
 // @contact.name   Hojin Jang
 // @contact.url    https://github.com/hojin-kr
 // @contact.email  jhj377@gmail.com
-// @host      localhost
-// @BasePath  /api/v1
 func main() {
 	ctx := context.Background()
 	// Set this in app.yaml when running in production.
@@ -36,6 +34,7 @@ func main() {
 	}
 
 	r := gin.Default()
+	docs.SwaggerInfo.Host = os.Getenv("HOST")
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	v1 := r.Group("/api/v1")
 	{
