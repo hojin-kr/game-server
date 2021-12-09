@@ -1,5 +1,5 @@
 basePath: /api/v1
-host: localhost:8080
+host: localhost
 info:
   contact:
     email: jhj377@gmail.com
