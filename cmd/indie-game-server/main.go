@@ -23,7 +23,7 @@ var datastoreClient *datastore.Client
 // @contact.name   Hojin Jang
 // @contact.url    https://github.com/hojin-kr
 // @contact.email  jhj377@gmail.com
-// @host      localhost:8080
+// @host      localhost
 // @BasePath  /api/v1
 func main() {
 	ctx := context.Background()
