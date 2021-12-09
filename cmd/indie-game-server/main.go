@@ -9,10 +9,22 @@ import (
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
+	docs "github.com/hojin-kr/indie-game-server-architecture/cmd/indie-game-server/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 var datastoreClient *datastore.Client
 
+// @title           Game Server Basic API
+// @version         1.0
+// @description     This is a game server basic.
+
+// @contact.name   Hojin Jang
+// @contact.url    https://github.com/hojin-kr
+// @contact.email  jhj377@gmail.com
+// @host      localhost:8080
+// @BasePath  /api/v1
 func main() {
 	ctx := context.Background()
 	// Set this in app.yaml when running in production.
@@ -24,26 +36,39 @@ func main() {
 	}
 
 	r := gin.Default()
+	docs.SwaggerInfo.BasePath = "/api/v1"
+	v1 := r.Group("/api/v1")
+	{
+		accounts := v1.Group("/accounts")
+		{
+			accounts.POST("get", getAccount)
+		}
+		profiles := v1.Group("/profiles")
+		{
+			profiles.POST("get", getProfile)
+			profiles.POST("set", setProfile)
+		}
+	}
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
-	r.POST("/account/get", getAccount)
-	r.POST("/profile/get", getProfile)
-	r.POST("/profile/set", setProfile)
 	r.Run()
 }
 
 // Account account infomation
 type Account struct {
-	Created  int64
-	DeviceID string
-	GoogleID string
-	AppleID  string
-	LineID   string
-	KakaoID  string
-	ID       int64 `datastore:"-"`
+	RegisterTimestamp int64
+	DeviceID          string
+	GoogleID          string
+	AppleID           string
+	LineID            string
+	KakaoID           string
+	ID                int64 `datastore:"-"`
 }
 
 // Profile profile inforamtion
@@ -58,7 +83,14 @@ type Wallet struct {
 	ID   int64 `datastore:"-"`
 }
 
-// getAccount account init
+// getAccount godoc
+// @Summary      get an account
+// @Description  get or Register account by ID, ID에 -1을 넘기면 계정 생성
+// @Accept       json
+// @Tags         accounts
+// @Param        ID   query      int64  true  "Account ID"
+// @Success      200              {Account}  model.Account    "ok"
+// @Router       /accounts/get [post]
 func getAccount(c *gin.Context) {
 	var account Account
 	if err := c.ShouldBind(&account); err != nil {
@@ -67,9 +99,9 @@ func getAccount(c *gin.Context) {
 	}
 	ctx := context.Background()
 	if account.ID == -1 {
-		account.Created = time.Now().Unix()
+		account.RegisterTimestamp = time.Now().Unix()
 		// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
-		key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{Created: account.Created})
+		key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{RegisterTimestamp: account.RegisterTimestamp})
 		if err != nil {
 			c.String(http.StatusBadRequest, "Should Not Account Put:"+err.Error())
 			return
@@ -86,7 +118,14 @@ func getAccount(c *gin.Context) {
 	c.JSON(http.StatusOK, account)
 }
 
-// getProfile profile get
+// getProfile profile get godoc
+// @Summary      get an profile
+// @Description  get profile by ID
+// @Accept       json
+// @Tags         profiles
+// @Param        ID   query      int64  true  "Account ID"
+// @Success      200              {Profile}  model.Profile    "ok"
+// @Router       /profiles/get [post]
 func getProfile(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
@@ -101,7 +140,15 @@ func getProfile(c *gin.Context) {
 	c.JSON(http.StatusOK, profile)
 }
 
-// setProfile profile get
+// getProfile profile set godoc
+// @Summary      set an profile
+// @Description  set profile by ID
+// @Accept       json
+// @Tags         profiles
+// @Param        ID   query      int64  true  "Account ID"
+// @Param        Nickname   query      string  true  "Nickname"
+// @Success      200              {Profile}  model.Profile    "ok"
+// @Router       /profiles/set [post]
 func setProfile(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {

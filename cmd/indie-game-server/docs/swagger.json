@@ -1,0 +1,111 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a game server basic.",
+        "title": "Game Server Basic API",
+        "contact": {
+            "name": "Hojin Jang",
+            "url": "https://github.com/hojin-kr",
+            "email": "jhj377@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/accounts/get": {
+            "post": {
+                "description": "get or Register account by ID, ID에 -1을 넘기면 계정 생성",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "get an account",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Account ID",
+                        "name": "ID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "Account"
+                        }
+                    }
+                }
+            }
+        },
+        "/profiles/get": {
+            "post": {
+                "description": "get profile by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profiles"
+                ],
+                "summary": "get an profile",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Account ID",
+                        "name": "ID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "Profile"
+                        }
+                    }
+                }
+            }
+        },
+        "/profiles/set": {
+            "post": {
+                "description": "set profile by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profiles"
+                ],
+                "summary": "set an profile",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Account ID",
+                        "name": "ID",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Nickname",
+                        "name": "Nickname",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "Profile"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
