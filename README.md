@@ -106,3 +106,7 @@ type Wallet struct {
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 [GIN-debug] GET    /ping                     --> main.main.func1 (3 handlers)
 ```
+swagger api document gen   
+![image](https://user-images.githubusercontent.com/22079767/145431297-8ca09fcd-9018-4c27-bb96-b4ffe7b8111e.png)
+
+
