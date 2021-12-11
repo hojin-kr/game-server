@@ -13,7 +13,7 @@
 # limitations under the License.
 
 runtime: go115
-service: game-server
+service: indie-game-server
 
 instance_class: F1
 # todo secrests setting
