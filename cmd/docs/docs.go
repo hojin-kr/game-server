@@ -27,16 +27,48 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/accounts/get": {
+        "/account/get": {
             "post": {
-                "description": "get or Register account by ID, ID에 -1을 넘기면 계정 생성",
+                "description": "account 조회 및 생성 ID -1 로 요청시 account 생성 후 ID 반환",
                 "consumes": [
                     "application/json"
                 ],
                 "tags": [
-                    "accounts"
+                    "account"
                 ],
-                "summary": "get an account",
+                "summary": "account 조회 및 생성",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "ID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/account.Account"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/profile/get": {
+            "post": {
+                "description": "Account ID로 profile 조회",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "profile"
+                ],
+                "summary": "profile 조회",
                 "parameters": [
                     {
                         "type": "integer",
@@ -50,51 +82,25 @@ var doc = `{
                     "200": {
                         "description": "ok",
                         "schema": {
-                            "type": "Account"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/profile.Profile"
+                            }
                         }
                     }
                 }
             }
         },
-        "/profiles/get": {
+        "/profile/set": {
             "post": {
-                "description": "get profile by ID",
+                "description": "Account ID로 profile 등록",
                 "consumes": [
                     "application/json"
                 ],
                 "tags": [
-                    "profiles"
+                    "profile"
                 ],
-                "summary": "get an profile",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Account ID",
-                        "name": "ID",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "schema": {
-                            "type": "Profile"
-                        }
-                    }
-                }
-            }
-        },
-        "/profiles/set": {
-            "post": {
-                "description": "set profile by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "tags": [
-                    "profiles"
-                ],
-                "summary": "set an profile",
+                "summary": "profile 등록",
                 "parameters": [
                     {
                         "type": "integer",
@@ -115,9 +121,55 @@ var doc = `{
                     "200": {
                         "description": "ok",
                         "schema": {
-                            "type": "Profile"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/profile.Profile"
+                            }
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "account.Account": {
+            "type": "object",
+            "properties": {
+                "appleID": {
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                },
+                "googleID": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 5373899369873408
+                },
+                "kakaoID": {
+                    "type": "string"
+                },
+                "lineID": {
+                    "type": "string"
+                },
+                "registerTimestamp": {
+                    "type": "integer",
+                    "example": 1639056738
+                }
+            }
+        },
+        "profile.Profile": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 5373899369873408
+                },
+                "nickname": {
+                    "type": "string",
+                    "example": "myNickname"
                 }
             }
         }
@@ -136,8 +188,8 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "localhost",
-	BasePath:    "/api/v1",
+	Host:        "",
+	BasePath:    "",
 	Schemes:     []string{},
 	Title:       "Game Server Basic API",
 	Description: "This is a game server basic.",

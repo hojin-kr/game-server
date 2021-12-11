@@ -1,0 +1,107 @@
+definitions:
+  account.Account:
+    properties:
+      appleID:
+        type: string
+      deviceID:
+        type: string
+      googleID:
+        type: string
+      id:
+        example: 5373899369873408
+        type: integer
+      kakaoID:
+        type: string
+      lineID:
+        type: string
+      registerTimestamp:
+        example: 1639056738
+        type: integer
+    type: object
+  profile.Profile:
+    properties:
+      id:
+        example: 5373899369873408
+        type: integer
+      nickname:
+        example: myNickname
+        type: string
+    type: object
+info:
+  contact:
+    email: jhj377@gmail.com
+    name: Hojin Jang
+    url: https://github.com/hojin-kr
+  description: This is a game server basic.
+  title: Game Server Basic API
+  version: "1.0"
+paths:
+  /account/get:
+    post:
+      consumes:
+      - application/json
+      description: account 조회 및 생성 ID -1 로 요청시 account 생성 후 ID 반환
+      parameters:
+      - description: ID
+        in: query
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/account.Account'
+            type: array
+      summary: account 조회 및 생성
+      tags:
+      - account
+  /profile/get:
+    post:
+      consumes:
+      - application/json
+      description: Account ID로 profile 조회
+      parameters:
+      - description: Account ID
+        in: query
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/profile.Profile'
+            type: array
+      summary: profile 조회
+      tags:
+      - profile
+  /profile/set:
+    post:
+      consumes:
+      - application/json
+      description: Account ID로 profile 등록
+      parameters:
+      - description: Account ID
+        in: query
+        name: ID
+        required: true
+        type: integer
+      - description: Nickname
+        in: query
+        name: Nickname
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/profile.Profile'
+            type: array
+      summary: profile 등록
+      tags:
+      - profile
+swagger: "2.0"

@@ -13,6 +13,12 @@
 # limitations under the License.
 
 runtime: go115
-service: helloworld
+service: game-server
 
-main: github.com/hojin-kr/indie-game-server-architecture/cmd/helloworld
+instance_class: F1
+# todo secrests setting
+env_variables:
+  PROJECT_ID: ${PROJECT_ID}
+  HOST: ${HOST}
+# deployment target
+main: github.com/hojin-kr/indie-game-server-architecture/cmd
