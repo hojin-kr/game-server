@@ -64,7 +64,6 @@ func Set(c *gin.Context) {
 	}
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(c.Request.Context(), os.Getenv("PROJECT_ID"))
-	c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 	if err != nil {
 		c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 		return
