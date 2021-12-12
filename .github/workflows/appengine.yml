@@ -7,10 +7,12 @@ on:
         description: '--no-stop-previous-version'
         default: 'true'
         required: true
-
+      deployment_name:
+        description: 'deployment name'
+        default: 'test'
+        required: true
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  HOST: ${{ secrets.HOST }}
 
 jobs:
   setup-deploy:
@@ -37,16 +39,14 @@ jobs:
     - name: Deploy - no stop previous version
       if: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
       run: |-
-        cd deployments/appengine
+        cd deployments/${{ github.event.inputs.deployment_name }}
         sed -i 's/${PROJECT_ID}/${{ env.PROJECT_ID }}/g' app.yaml
-        sed -i 's/${HOST}/${{ env.HOST }}/g' app.yaml
         gcloud app deploy --no-stop-previous-version --quiet
 
     # Deploy - stop previous version
     - name: Deploy - stop previous version
       if: ${{ github.event.inputs.is_stop_previous_version == 'true' }}
       run: |-
-        cd deployments/appengine
+        cd deployments/${{ github.event.inputs.deployment_name }}
         sed -i 's/${PROJECT_ID}/${{ env.PROJECT_ID }}/g' app.yaml
-        sed -i 's/${HOST}/${{ env.HOST }}/g' app.yaml
         gcloud app deploy --quiet

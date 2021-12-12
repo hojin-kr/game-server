@@ -6,7 +6,6 @@ on:
       - main
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  HOST: ${{ secrets.HOST }}
 
 jobs:
   setup-deploy:
@@ -32,7 +31,6 @@ jobs:
     # Deploy - stop previous version
     - name: Deploy - stop previous version
       run: |-
-        cd deployments/appengine
+        cd deployments/test
         sed -i 's/${PROJECT_ID}/${{ env.PROJECT_ID }}/g' app.yaml
-        sed -i 's/${HOST}/${{ env.HOST }}/g' app.yaml
         gcloud app deploy --quiet

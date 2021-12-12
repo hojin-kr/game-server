@@ -19,6 +19,6 @@ instance_class: F1
 # todo secrests setting
 env_variables:
   PROJECT_ID: ${PROJECT_ID}
-  HOST: ${HOST}
+  HOST: indie-game-server-dot-${PROJECT_ID}.du.r.appspot.com
 # deployment target
 main: github.com/hojin-kr/indie-game-server-architecture/cmd
