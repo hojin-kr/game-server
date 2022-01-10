@@ -1,4 +1,4 @@
-module github.com/hojin-kr/indie-game-server-architecture
+module github.com/hojin-kr/game-server
 
 go 1.17
 

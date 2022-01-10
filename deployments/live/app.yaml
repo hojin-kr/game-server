@@ -21,4 +21,4 @@ env_variables:
   PROJECT_ID: ${PROJECT_ID}
   HOST: live-dot-${PROJECT_ID}.du.r.appspot.com
 # deployment target
-main: github.com/hojin-kr/indie-game-server-architecture/cmd
+main: github.com/hojin-kr/game-server/cmd
