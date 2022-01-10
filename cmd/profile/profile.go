@@ -27,7 +27,7 @@ type Wallet struct {
 // @Tags         profile
 // @Param        ID   query      int64  true  "Account ID"
 // @Success      200              {array}  profile.Profile    "ok"
-// @Router       /profile/get [post]
+// @Router       /profile [post]
 func Get(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
@@ -47,7 +47,7 @@ func Get(c *gin.Context) {
 	c.JSON(http.StatusOK, profile)
 }
 
-// getProfile profile set godoc
+// Post profile set godoc
 // @Summary      profile 등록
 // @Description  Account ID로 profile 등록
 // @Accept       json
@@ -55,8 +55,8 @@ func Get(c *gin.Context) {
 // @Param        ID   query      int64  true  "Account ID"
 // @Param        Nickname   query      string  true  "Nickname"
 // @Success      200              {array}  profile.Profile    "ok"
-// @Router       /profile/set [post]
-func Set(c *gin.Context) {
+// @Router       /profile [post]
+func Post(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
 		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())

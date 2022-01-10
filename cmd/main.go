@@ -23,17 +23,11 @@ func main() {
 	r := gin.Default()
 	docs.SwaggerInfo.Host = os.Getenv("HOST")
 	docs.SwaggerInfo.BasePath = "/api/v1"
-	v1 := r.Group("/api/v1")
+	v1 := r.Group("/v1")
 	{
-		account := v1.Group("/account")
-		{
-			account.POST("get", pkgAccount.Get)
-		}
-		profile := v1.Group("/profile")
-		{
-			profile.POST("get", pkgProfile.Get)
-			profile.POST("set", pkgProfile.Set)
-		}
+		v1.GET("account", pkgAccount.Get)
+		v1.GET("profile", pkgProfile.Get)
+		v1.POST("profile", pkgProfile.Post)
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
