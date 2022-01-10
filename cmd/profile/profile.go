@@ -27,7 +27,7 @@ type Wallet struct {
 // @Tags         profile
 // @Param        ID   query      int64  true  "Account ID"
 // @Success      200              {array}  profile.Profile    "ok"
-// @Router       /profile [post]
+// @Router       /profile [get]
 func Get(c *gin.Context) {
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {

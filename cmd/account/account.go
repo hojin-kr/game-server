@@ -27,7 +27,7 @@ type Account struct {
 // @Tags         account
 // @Param        ID   query      int64  true  "ID"
 // @Success      200              {array}  account.Account    "ok"
-// @Router       /account [post]
+// @Router       /account [get]
 func Get(c *gin.Context) {
 	var account Account
 	if err := c.ShouldBind(&account); err != nil {
