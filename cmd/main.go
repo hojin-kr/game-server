@@ -4,9 +4,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	pkgAccount "github.com/hojin-kr/indie-game-server-architecture/cmd/account"
-	docs "github.com/hojin-kr/indie-game-server-architecture/cmd/docs"
-	pkgProfile "github.com/hojin-kr/indie-game-server-architecture/cmd/profile"
+	pkgAccount "github.com/hojin-kr/game-server/cmd/account"
+	docs "github.com/hojin-kr/game-server/cmd/docs"
+	pkgProfile "github.com/hojin-kr/game-server/cmd/profile"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
