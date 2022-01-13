@@ -40,6 +40,7 @@ func Get(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 		return
 	}
+	// ID를 -1로 받으면 신규 아이디 생성
 	if account.ID == -1 {
 		account.RegisterTimestamp = time.Now().Unix()
 		// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
@@ -50,6 +51,7 @@ func Get(c *gin.Context) {
 		}
 		account.ID = key.ID
 	} else {
+		// ID로 Account 정보 조회
 		key := datastore.IDKey("Account", account.ID, nil)
 		err := datastoreClient.Get(c.Request.Context(), datastore.IDKey("Account", account.ID, nil), &account)
 		if err != nil {

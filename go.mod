@@ -1,4 +1,4 @@
-module github.com/hojin-kr/game-server
+module github.com/hojin-kr/tiger
 
 go 1.17
 
