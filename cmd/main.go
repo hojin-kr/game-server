@@ -23,7 +23,7 @@ func main() {
 	// Set this in app.yaml when running in production.
 	r := gin.Default()
 	docs.SwaggerInfo.Host = os.Getenv("HOST")
-	docs.SwaggerInfo.BasePath = "/api/v1"
+	docs.SwaggerInfo.BasePath = "/v1"
 	v1 := r.Group("/v1")
 	{
 		v1.GET("account", pkgAccount.Get)
