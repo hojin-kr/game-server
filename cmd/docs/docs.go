@@ -59,6 +59,82 @@ var doc = `{
                 }
             }
         },
+        "/attack": {
+            "get": {
+                "description": "Account ID로 attack 조회",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "attack"
+                ],
+                "summary": "Account ID로 attack 조회",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "ID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/boss.Attack"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Account ID로 attack 등록",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "attack"
+                ],
+                "summary": "attack 등록",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Account ID",
+                        "name": "ID",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "boss-1",
+                        "name": "BossId",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "100",
+                        "name": "Point",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/boss.Attack"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/profile": {
             "get": {
                 "description": "Account ID로 profile 조회",
@@ -153,6 +229,27 @@ var doc = `{
                     "type": "string"
                 },
                 "registerTimestamp": {
+                    "type": "integer",
+                    "example": 1639056738
+                }
+            }
+        },
+        "boss.Attack": {
+            "type": "object",
+            "properties": {
+                "bossID": {
+                    "type": "string",
+                    "example": "boss-1"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 5373899369873408
+                },
+                "point": {
+                    "type": "integer",
+                    "example": 100
+                },
+                "timestamp": {
                     "type": "integer",
                     "example": 1639056738
                 }

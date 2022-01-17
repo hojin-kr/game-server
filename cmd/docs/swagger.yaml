@@ -18,6 +18,21 @@ definitions:
         example: 1639056738
         type: integer
     type: object
+  boss.Attack:
+    properties:
+      bossID:
+        example: boss-1
+        type: string
+      id:
+        example: 5373899369873408
+        type: integer
+      point:
+        example: 100
+        type: integer
+      timestamp:
+        example: 1639056738
+        type: integer
+    type: object
   profile.Profile:
     properties:
       id:
@@ -57,6 +72,57 @@ paths:
       summary: account 조회 및 생성
       tags:
       - account
+  /attack:
+    get:
+      consumes:
+      - application/json
+      description: Account ID로 attack 조회
+      parameters:
+      - description: ID
+        in: query
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/boss.Attack'
+            type: array
+      summary: Account ID로 attack 조회
+      tags:
+      - attack
+    post:
+      consumes:
+      - application/json
+      description: Account ID로 attack 등록
+      parameters:
+      - description: Account ID
+        in: query
+        name: ID
+        required: true
+        type: integer
+      - description: boss-1
+        in: query
+        name: BossId
+        required: true
+        type: string
+      - description: "100"
+        in: query
+        name: Point
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/boss.Attack'
+            type: array
+      summary: attack 등록
+      tags:
+      - attack
   /profile:
     get:
       consumes:
