@@ -27,8 +27,8 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/account/get": {
-            "post": {
+        "/account": {
+            "get": {
                 "description": "account 조회 및 생성 ID -1 로 요청시 account 생성 후 ID 반환",
                 "consumes": [
                     "application/json"
@@ -59,8 +59,8 @@ var doc = `{
                 }
             }
         },
-        "/profile/get": {
-            "post": {
+        "/profile": {
+            "get": {
                 "description": "Account ID로 profile 조회",
                 "consumes": [
                     "application/json"
@@ -89,9 +89,7 @@ var doc = `{
                         }
                     }
                 }
-            }
-        },
-        "/profile/set": {
+            },
             "post": {
                 "description": "Account ID로 profile 등록",
                 "consumes": [

@@ -4,9 +4,10 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	pkgAccount "github.com/hojin-kr/game-server/cmd/account"
-	docs "github.com/hojin-kr/game-server/cmd/docs"
-	pkgProfile "github.com/hojin-kr/game-server/cmd/profile"
+	pkgAccount "github.com/hojin-kr/haru/cmd/account"
+	docs "github.com/hojin-kr/haru/cmd/docs"
+	pkgProfile "github.com/hojin-kr/haru/cmd/profile"
+	"github.com/hojin-kr/haru/cmd/trace"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -33,6 +34,8 @@ func main() {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	r.GET("/ping", func(c *gin.Context) {
+		tracer := trace.New(os.Stdout)
+		tracer.Trace("Ping")
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})

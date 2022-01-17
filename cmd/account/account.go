@@ -7,6 +7,7 @@ import (
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
+	"github.com/hojin-kr/haru/cmd/trace"
 )
 
 // Account account infomation
@@ -29,6 +30,7 @@ type Account struct {
 // @Success      200              {array}  account.Account    "ok"
 // @Router       /account [get]
 func Get(c *gin.Context) {
+	tracer := trace.New(os.Stdout)
 	var account Account
 	if err := c.ShouldBind(&account); err != nil {
 		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())
@@ -50,6 +52,7 @@ func Get(c *gin.Context) {
 			return
 		}
 		account.ID = key.ID
+		tracer.Trace("Create New Account ID ")
 	} else {
 		// ID로 Account 정보 조회
 		key := datastore.IDKey("Account", account.ID, nil)
@@ -58,6 +61,7 @@ func Get(c *gin.Context) {
 			c.String(http.StatusBadRequest, "Should Not Account get:"+err.Error())
 		}
 		account.ID = key.ID
+		tracer.Trace("Get Account ID ")
 	}
 	c.JSON(http.StatusOK, account)
 }

@@ -6,6 +6,7 @@ import (
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
+	"github.com/hojin-kr/haru/cmd/trace"
 )
 
 // Profile profile inforamtion
@@ -20,7 +21,7 @@ type Wallet struct {
 	ID   int64 `datastore:"-" example:"5373899369873408"`
 }
 
-// getProfile profile get godoc
+// Get profile get godoc
 // @Summary      profile 조회
 // @Description  Account ID로 profile 조회
 // @Accept       json
@@ -29,6 +30,7 @@ type Wallet struct {
 // @Success      200              {array}  profile.Profile    "ok"
 // @Router       /profile [get]
 func Get(c *gin.Context) {
+	tracer := trace.New(os.Stdout)
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
 		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())
@@ -44,6 +46,7 @@ func Get(c *gin.Context) {
 	if err := datastoreClient.Get(c.Request.Context(), key, &profile); err != nil {
 		c.String(http.StatusBadRequest, "Should Not Profile get:"+err.Error())
 	}
+	tracer.Trace("Get Profile")
 	c.JSON(http.StatusOK, profile)
 }
 
@@ -57,6 +60,7 @@ func Get(c *gin.Context) {
 // @Success      200              {array}  profile.Profile    "ok"
 // @Router       /profile [post]
 func Post(c *gin.Context) {
+	tracer := trace.New(os.Stdout)
 	var profile Profile
 	if err := c.ShouldBind(&profile); err != nil {
 		c.String(http.StatusBadRequest, "Should Not Bind:"+err.Error())
@@ -74,5 +78,6 @@ func Post(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Should Not Profile Put:"+err.Error())
 		return
 	}
+	tracer.Trace("Put Profile")
 	c.JSON(http.StatusOK, profile)
 }
