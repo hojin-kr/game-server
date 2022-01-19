@@ -49,7 +49,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: account 조회 및 생성 ID -1 로 요청시 account 생성 후 ID 반환
+      description: account ID 조회, SNS 연동시 SNS ID로 Account ID 조회
       parameters:
       - description: ID
         in: query
@@ -63,7 +63,21 @@ paths:
             items:
               $ref: '#/definitions/account.Account'
             type: array
-      summary: account 조회 및 생성
+      summary: account ID 조회 (현재 SNS 안하니 미사용)
+      tags:
+      - account
+    post:
+      consumes:
+      - application/json
+      description: account ID 생성
+      responses:
+        "200":
+          description: ok
+          schema:
+            items:
+              $ref: '#/definitions/account.Account'
+            type: array
+      summary: account ID 생성
       tags:
       - account
   /boss/attack:

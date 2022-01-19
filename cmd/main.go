@@ -28,6 +28,7 @@ func main() {
 	v1 := r.Group("/v1")
 	{
 		v1.GET("account", pkgAccount.Get)
+		v1.POST("account", pkgAccount.Post)
 		v1.GET("profile", pkgProfile.Get)
 		v1.POST("profile", pkgProfile.Post)
 		v1.GET("boss/attack", pkgEvent.Get)

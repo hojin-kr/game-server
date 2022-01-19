@@ -13,14 +13,14 @@
     "paths": {
         "/account": {
             "get": {
-                "description": "account 조회 및 생성 ID -1 로 요청시 account 생성 후 ID 반환",
+                "description": "account ID 조회, SNS 연동시 SNS ID로 Account ID 조회",
                 "consumes": [
                     "application/json"
                 ],
                 "tags": [
                     "account"
                 ],
-                "summary": "account 조회 및 생성",
+                "summary": "account ID 조회 (현재 SNS 안하니 미사용)",
                 "parameters": [
                     {
                         "type": "integer",
@@ -30,6 +30,27 @@
                         "required": true
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/account.Account"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "account ID 생성",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "account"
+                ],
+                "summary": "account ID 생성",
                 "responses": {
                     "200": {
                         "description": "ok",
