@@ -69,7 +69,7 @@ paths:
       summary: account 조회 및 생성
       tags:
       - account
-  /attack:
+  /boss/attack:
     get:
       consumes:
       - application/json

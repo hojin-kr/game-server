@@ -59,7 +59,7 @@ var doc = `{
                 }
             }
         },
-        "/attack": {
+        "/boss/attack": {
             "get": {
                 "description": "Boss 공격 당한 정보 조회, 공격당한 전체 총합 point",
                 "consumes": [
