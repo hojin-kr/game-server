@@ -31,7 +31,7 @@ func main() {
 		v1.GET("profile", pkgProfile.Get)
 		v1.POST("profile", pkgProfile.Post)
 		v1.GET("boss/attack", pkgEvent.Get)
-		v1.POST("boss/attack", pkgEvent.Post)
+		v1.PUT("boss/attack", pkgEvent.Put)
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

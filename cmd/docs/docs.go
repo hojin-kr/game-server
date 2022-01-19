@@ -61,19 +61,19 @@ var doc = `{
         },
         "/boss/attack": {
             "get": {
-                "description": "Boss 공격 당한 정보 조회, 공격당한 전체 총합 point",
+                "description": "Boss point",
                 "consumes": [
                     "application/json"
                 ],
                 "tags": [
                     "attack"
                 ],
-                "summary": "Boss 공격 당한 정보 조회",
+                "summary": "Boss point",
                 "parameters": [
                     {
                         "type": "integer",
                         "description": "BossID",
-                        "name": "BossID",
+                        "name": "ID",
                         "in": "query",
                         "required": true
                     }
@@ -90,27 +90,20 @@ var doc = `{
                     }
                 }
             },
-            "post": {
-                "description": "attack 등록",
+            "put": {
+                "description": "Boss point incr",
                 "consumes": [
                     "application/json"
                 ],
                 "tags": [
                     "attack"
                 ],
-                "summary": "attack 등록",
+                "summary": "Boss point incr",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Account ID",
+                        "description": "BossID",
                         "name": "ID",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "1",
-                        "name": "BossId",
                         "in": "query",
                         "required": true
                     },
@@ -237,10 +230,6 @@ var doc = `{
         "boss.Attack": {
             "type": "object",
             "properties": {
-                "bossID": {
-                    "type": "integer",
-                    "example": 1
-                },
                 "id": {
                     "type": "integer",
                     "example": 5373899369873408

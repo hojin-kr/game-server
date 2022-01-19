@@ -11,17 +11,16 @@ import (
 
 // Attack attack boss infomation
 type Attack struct {
-	BossID int64 `example:"1"`
-	Point  int64 `example:"100"`
-	ID     int64 `datastore:"-" example:"5373899369873408"`
+	Point int64 `example:"100"`
+	ID    int64 `datastore:"-" example:"5373899369873408"`
 }
 
-// Get Boss가 공격 당한 정보 조회
-// @Summary      Boss 공격 당한 정보 조회
-// @Description  Boss 공격 당한 정보 조회, 공격당한 전체 총합 point
+// Get Boss point
+// @Summary      Boss point
+// @Description  Boss point
 // @Accept       json
 // @Tags         attack
-// @Param        BossID   query      int64  true  "BossID"
+// @Param        ID   query      int64  true  "BossID"
 // @Success      200              {array}  boss.Attack    "ok"
 // @Router       /boss/attack [get]
 func Get(c *gin.Context) {
@@ -37,29 +36,24 @@ func Get(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 		return
 	}
-	var attacks []Attack
-	q := datastore.NewQuery("Attack").Filter("BossID =", attack.BossID)
-	if _, err := datastoreClient.GetAll(c.Request.Context(), q, &attacks); err != nil {
-		c.String(http.StatusBadRequest, "Should Not attack getAll:"+err.Error())
-	}
-	for _, v := range attacks {
-		attack.Point += v.Point
+	key := datastore.IDKey("Attack", attack.ID, nil)
+	if err := datastoreClient.Get(c.Request.Context(), key, &attack); err != nil {
+		c.String(http.StatusBadRequest, "Should Not Attack get:"+err.Error())
 	}
 	tracer.Trace("Get attack ID ")
 	c.JSON(http.StatusOK, attack)
 }
 
-// Post attack 등록
-// @Summary      attack 등록
-// @Description  attack 등록
+// Put Boss point incr
+// @Summary      Boss point incr
+// @Description  Boss point incr
 // @Accept       json
 // @Tags         attack
-// @Param        ID   query      int64  true  "Account ID"
-// @Param        BossId   query      int64  true  "1"
+// @Param        ID   query      int64  true  "BossID"
 // @Param        Point   query      int64  true  "100"
 // @Success      200              {array}  boss.Attack    "ok"
-// @Router       /boss/attack [post]
-func Post(c *gin.Context) {
+// @Router       /boss/attack [put]
+func Put(c *gin.Context) {
 	tracer := trace.New(os.Stdout)
 	var attack Attack
 	if err := c.ShouldBind(&attack); err != nil {
@@ -72,12 +66,17 @@ func Post(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 		return
 	}
-	key := datastore.IncompleteKey("Attack", nil)
-	_, err = datastoreClient.Put(c.Request.Context(), key, &attack)
+	var _attack Attack
+	key := datastore.IDKey("Attack", attack.ID, nil)
+	if err := datastoreClient.Get(c.Request.Context(), key, &_attack); err != nil {
+		c.String(http.StatusBadRequest, "Should Not Attack get:"+err.Error())
+	}
+	_attack.Point += attack.Point
+	_, err = datastoreClient.Put(c.Request.Context(), key, &_attack)
 	if err != nil {
-		c.String(http.StatusBadRequest, "Should Not attack Put:"+err.Error())
+		c.String(http.StatusBadRequest, "Should Not Attack Put:"+err.Error())
 		return
 	}
 	tracer.Trace("Put attack")
-	c.JSON(http.StatusOK, attack)
+	c.JSON(http.StatusOK, _attack)
 }
