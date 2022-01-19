@@ -68,10 +68,9 @@ func Put(c *gin.Context) {
 	}
 	var _attack Attack
 	key := datastore.IDKey("Attack", attack.ID, nil)
-	if err := datastoreClient.Get(c.Request.Context(), key, &_attack); err != nil {
-		c.String(http.StatusBadRequest, "Should Not Attack get:"+err.Error())
-	}
+	_ = datastoreClient.Get(c.Request.Context(), key, &_attack)
 	_attack.Point += attack.Point
+	_attack.ID = attack.ID
 	_, err = datastoreClient.Put(c.Request.Context(), key, &_attack)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Should Not Attack Put:"+err.Error())
