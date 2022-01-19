@@ -45,19 +45,19 @@
         },
         "/attack": {
             "get": {
-                "description": "Account ID로 attack 조회",
+                "description": "Boss 공격 당한 정보 조회, 공격당한 전체 총합 point",
                 "consumes": [
                     "application/json"
                 ],
                 "tags": [
                     "attack"
                 ],
-                "summary": "Account ID로 attack 조회",
+                "summary": "Boss 공격 당한 정보 조회",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "ID",
-                        "name": "ID",
+                        "description": "BossID",
+                        "name": "BossID",
                         "in": "query",
                         "required": true
                     }
@@ -75,7 +75,7 @@
                 }
             },
             "post": {
-                "description": "Account ID로 attack 등록",
+                "description": "attack 등록",
                 "consumes": [
                     "application/json"
                 ],
@@ -92,14 +92,14 @@
                         "required": true
                     },
                     {
-                        "type": "string",
-                        "description": "boss-1",
+                        "type": "integer",
+                        "description": "1",
                         "name": "BossId",
                         "in": "query",
                         "required": true
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "100",
                         "name": "Point",
                         "in": "query",
@@ -222,8 +222,8 @@
             "type": "object",
             "properties": {
                 "bossID": {
-                    "type": "string",
-                    "example": "boss-1"
+                    "type": "integer",
+                    "example": 1
                 },
                 "id": {
                     "type": "integer",
@@ -232,10 +232,6 @@
                 "point": {
                     "type": "integer",
                     "example": 100
-                },
-                "timestamp": {
-                    "type": "integer",
-                    "example": 1639056738
                 }
             }
         },

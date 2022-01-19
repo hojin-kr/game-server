@@ -21,16 +21,13 @@ definitions:
   boss.Attack:
     properties:
       bossID:
-        example: boss-1
-        type: string
+        example: 1
+        type: integer
       id:
         example: 5373899369873408
         type: integer
       point:
         example: 100
-        type: integer
-      timestamp:
-        example: 1639056738
         type: integer
     type: object
   profile.Profile:
@@ -76,11 +73,11 @@ paths:
     get:
       consumes:
       - application/json
-      description: Account ID로 attack 조회
+      description: Boss 공격 당한 정보 조회, 공격당한 전체 총합 point
       parameters:
-      - description: ID
+      - description: BossID
         in: query
-        name: ID
+        name: BossID
         required: true
         type: integer
       responses:
@@ -90,29 +87,29 @@ paths:
             items:
               $ref: '#/definitions/boss.Attack'
             type: array
-      summary: Account ID로 attack 조회
+      summary: Boss 공격 당한 정보 조회
       tags:
       - attack
     post:
       consumes:
       - application/json
-      description: Account ID로 attack 등록
+      description: attack 등록
       parameters:
       - description: Account ID
         in: query
         name: ID
         required: true
         type: integer
-      - description: boss-1
+      - description: "1"
         in: query
         name: BossId
         required: true
-        type: string
+        type: integer
       - description: "100"
         in: query
         name: Point
         required: true
-        type: string
+        type: integer
       responses:
         "200":
           description: ok

@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	pkgAccount "github.com/hojin-kr/haru/cmd/account"
-	pkgEvent "github.com/hojin-kr/haru/cmd/boss"
 	docs "github.com/hojin-kr/haru/cmd/docs"
+	pkgEvent "github.com/hojin-kr/haru/cmd/event/boss"
 	pkgProfile "github.com/hojin-kr/haru/cmd/profile"
 	"github.com/hojin-kr/haru/cmd/trace"
 	swaggerfiles "github.com/swaggo/files"

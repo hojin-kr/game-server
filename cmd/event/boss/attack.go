@@ -3,7 +3,6 @@ package boss
 import (
 	"net/http"
 	"os"
-	"time"
 
 	"cloud.google.com/go/datastore"
 	"github.com/gin-gonic/gin"
@@ -12,18 +11,17 @@ import (
 
 // Attack attack boss infomation
 type Attack struct {
-	BossID    string `example:"boss-1"`
-	Point     int64  `example:"100"`
-	Timestamp int64  `example:"1639056738"`
-	ID        int64  `datastore:"-" example:"5373899369873408"`
+	BossID int64 `example:"1"`
+	Point  int64 `example:"100"`
+	ID     int64 `datastore:"-" example:"5373899369873408"`
 }
 
-// Get 공격 조회
-// @Summary      Account ID로 attack 조회
-// @Description  Account ID로 attack 조회
+// Get Boss가 공격 당한 정보 조회
+// @Summary      Boss 공격 당한 정보 조회
+// @Description  Boss 공격 당한 정보 조회, 공격당한 전체 총합 point
 // @Accept       json
 // @Tags         attack
-// @Param        ID   query      int64  true  "ID"
+// @Param        BossID   query      int64  true  "BossID"
 // @Success      200              {array}  boss.Attack    "ok"
 // @Router       /attack [get]
 func Get(c *gin.Context) {
@@ -39,25 +37,26 @@ func Get(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 		return
 	}
-	// ID로 attack 정보 조회
-	key := datastore.IDKey("attack", attack.ID, nil)
-	err = datastoreClient.Get(c.Request.Context(), datastore.IDKey("attack", attack.ID, nil), &attack)
-	if err != nil {
-		c.String(http.StatusBadRequest, "Should Not attack get:"+err.Error())
+	var attacks []Attack
+	q := datastore.NewQuery("Attack").Filter("BossID =", attack.BossID)
+	if _, err := datastoreClient.GetAll(c.Request.Context(), q, &attacks); err != nil {
+		c.String(http.StatusBadRequest, "Should Not attack getAll:"+err.Error())
 	}
-	attack.ID = key.ID
+	for _, v := range attacks {
+		attack.Point += v.Point
+	}
 	tracer.Trace("Get attack ID ")
 	c.JSON(http.StatusOK, attack)
 }
 
-// Post attack set godoc
+// Post attack 등록
 // @Summary      attack 등록
-// @Description  Account ID로 attack 등록
+// @Description  attack 등록
 // @Accept       json
 // @Tags         attack
 // @Param        ID   query      int64  true  "Account ID"
-// @Param        BossId   query      string  true  "boss-1"
-// @Param        Point   query      string  true  "100"
+// @Param        BossId   query      int64  true  "1"
+// @Param        Point   query      int64  true  "100"
 // @Success      200              {array}  boss.Attack    "ok"
 // @Router       /attack [post]
 func Post(c *gin.Context) {
@@ -73,7 +72,6 @@ func Post(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Should Not Datastore New Client"+err.Error())
 		return
 	}
-	attack.Timestamp = time.Now().Unix()
 	key := datastore.IncompleteKey("Attack", nil)
 	_, err = datastoreClient.Put(c.Request.Context(), key, &attack)
 	if err != nil {
