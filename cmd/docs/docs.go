@@ -80,7 +80,7 @@ var doc = `{
                 }
             }
         },
-        "/boss/attack": {
+        "/event/boss/attack": {
             "get": {
                 "description": "Boss point",
                 "consumes": [
@@ -111,7 +111,7 @@ var doc = `{
                     }
                 }
             },
-            "put": {
+            "post": {
                 "description": "Boss point incr",
                 "consumes": [
                     "application/json"

@@ -80,7 +80,7 @@ paths:
       summary: account ID 생성
       tags:
       - account
-  /boss/attack:
+  /event/boss/attack:
     get:
       consumes:
       - application/json
@@ -101,7 +101,7 @@ paths:
       summary: Boss point
       tags:
       - attack
-    put:
+    post:
       consumes:
       - application/json
       description: Boss point incr

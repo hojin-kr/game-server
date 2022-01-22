@@ -64,7 +64,7 @@
                 }
             }
         },
-        "/boss/attack": {
+        "/event/boss/attack": {
             "get": {
                 "description": "Boss point",
                 "consumes": [
@@ -95,7 +95,7 @@
                     }
                 }
             },
-            "put": {
+            "post": {
                 "description": "Boss point incr",
                 "consumes": [
                     "application/json"
