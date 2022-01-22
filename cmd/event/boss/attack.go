@@ -22,7 +22,7 @@ type Attack struct {
 // @Tags         attack
 // @Param        ID   query      int64  true  "BossID"
 // @Success      200              {array}  boss.Attack    "ok"
-// @Router       /boss/attack [get]
+// @Router       /event/boss/attack [get]
 func Get(c *gin.Context) {
 	tracer := trace.New(os.Stdout)
 	var attack Attack
@@ -52,7 +52,7 @@ func Get(c *gin.Context) {
 // @Param        ID   query      int64  true  "BossID"
 // @Param        Point   query      int64  true  "100"
 // @Success      200              {array}  boss.Attack    "ok"
-// @Router       /boss/attack [put]
+// @Router       /event/boss/attack [post]
 func Put(c *gin.Context) {
 	tracer := trace.New(os.Stdout)
 	var attack Attack
