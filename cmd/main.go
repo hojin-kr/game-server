@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	port = flag.Int("port", 50051, "The server port")
+	port = os.Getenv("PORT")
 )
 
 // server is used to implement UnimplementedServiceServer
@@ -137,7 +137,7 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 
 func main() {
 	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%s", port))
 	if err != nil {
 		log.Printf("failed to listen: %v", err)
 	}

@@ -1,5 +1,11 @@
+# Issue
+main, grpc branch 배포시 AppEngine으로 배포 불가
+-> gRPC서버에 대해 GCP AppEngine에서 지원하지 않음
+-> gRPC서버 대응을 위해 Cloud Run 배포 추가 예정
+
 # 개요
-Google Cloud Platform AppEngine 에 최적화된 확장이 용이한 게임 서버 프레임워크
+Google Cloud Platform AppEngine 에 최적화된 확장이 용이한 게임 서버 프레임워크  
+gRPC 구현
 
 # 특징
 - Google Cloud Platform AppEngine 최적화
@@ -9,7 +15,7 @@ Google Cloud Platform AppEngine 에 최적화된 확장이 용이한 게임 서�
 	- Account
 - stdlogging
 - GitoOps Github Action CI/CD 자동화
-- REST full API
+- gRPC 구현
 - TDD, Unit Test 
 - 적은 서버 초기 비용
 - golang web socket
@@ -35,14 +41,23 @@ https://console.cloud.google.com/datastore
 - --no-stop-previous-version : bool
 ![image](https://user-images.githubusercontent.com/22079767/144077357-0c05438e-87e0-46c0-8ad3-5e1a21380cc3.png)
 
-### Check AppEngine Deploy & Ping Test
-![image](https://user-images.githubusercontent.com/22079767/144080614-745250b4-4acd-421e-920d-52087308bd8d.png)
+### gRPC
+gRPC를 사용합니다. 
+protobuffer 정의 파일 변경후 언어에 맞춰 빌드를 수행
+- Server Go
+- Client Unity (C#) 
 
-https://console.cloud.google.com/appengine/services
+> 참고
+> https://hojin-kr.github.io/2022-02-02-Go-서버와-Unity-클라이언트-gRPC-도입/
 
 ```
-➜  indie-game-server git:(main) curl https://{{YOUR_APPENGINE_ADDRESS}}.appspot.com/ping
-{"message":"pong"}
+#!/bin/bash
+protoc --go_out=./cmd --go_opt=paths=source_relative \
+    --go-grpc_out=./cmd --go-grpc_opt=paths=source_relative \
+    proto/haru.proto
+protoc --csharp_out=./proto/csharp \ 
+    --plugin=protoc-gen-csharp_grpc=/Users/hojin/Work/hojin/haru/proto/plugins/grpc_csharp_plugin \
+    --csharp_grpc_out=./proto/csharp \
+    proto/haru.proto
 ```
-
 
