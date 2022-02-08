@@ -63,7 +63,7 @@ func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 	key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{RegisterTimestamp: in.GetRegisterTimestamp()})
 	if err != nil {
-		log.Fatalf("Should Not Account Put:" + err.Error())
+		log.Printf("Should Not Account Put:" + err.Error())
 	}
 	in.ID = key.ID
 	return &pb.AccountReply{ID: in.GetID(), RegisterTimestamp: in.GetRegisterTimestamp()}, nil
@@ -73,12 +73,12 @@ func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.Pro
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
-		log.Fatalf("Should Not Datastore New Client" + err.Error())
+		log.Printf("Should Not Datastore New Client" + err.Error())
 	}
 	key := datastore.IDKey("Profile", in.GetID(), nil)
 	var profile Profile
 	if err := datastoreClient.Get(ctx, key, &profile); err != nil {
-		log.Fatalf("Should Not Profile get: " + err.Error())
+		log.Printf("Should Not Profile get: " + err.Error())
 	}
 	in.Nickname = profile.Nickname
 	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname()}, nil
@@ -88,7 +88,7 @@ func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
-		log.Fatalf("Should Not Datastore New Client" + err.Error())
+		log.Printf("Should Not Datastore New Client" + err.Error())
 	}
 	var profile Profile
 	profile.ID = in.GetID()
@@ -96,7 +96,7 @@ func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.
 	key := datastore.IDKey("Profile", in.GetID(), nil)
 	_, err = datastoreClient.Put(ctx, key, &profile)
 	if err != nil {
-		log.Fatalf("Should Not Profile get: " + err.Error())
+		log.Printf("Should Not Profile get: " + err.Error())
 	}
 	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname()}, nil
 }
@@ -105,12 +105,12 @@ func (s *server) GetPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointRe
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
-		log.Fatalf("Should Not Datastore New Client" + err.Error())
+		log.Printf("Should Not Datastore New Client" + err.Error())
 	}
 	key := datastore.IDKey("Attack", in.GetID(), nil)
 	var attack Attack
 	if err := datastoreClient.Get(ctx, key, &attack); err != nil {
-		log.Fatalf("Should Not Attack get: " + err.Error())
+		log.Printf("Should Not Attack get: " + err.Error())
 	}
 	in.Point = attack.Point
 	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint()}, nil
@@ -120,7 +120,7 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
-		log.Fatalf("Should Not Datastore New Client" + err.Error())
+		log.Printf("Should Not Datastore New Client" + err.Error())
 	}
 	var attack Attack
 	key := datastore.IDKey("Attack", in.GetID(), nil)
@@ -129,7 +129,7 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 	attack.ID = in.GetID()
 	_, err = datastoreClient.Put(ctx, key, &attack)
 	if err != nil {
-		log.Fatalf("Should Not Incr Boss Pint: " + err.Error())
+		log.Printf("Should Not Incr Boss Pint: " + err.Error())
 	}
 	in.Point = attack.Point
 	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint()}, nil
@@ -139,12 +139,12 @@ func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Printf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
 	pb.RegisterVersion1Server(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		log.Printf("failed to serve: %v", err)
 	}
 }
