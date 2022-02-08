@@ -14,164 +14,240 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// ServiceClient is the client API for Service service.
+// Version1Client is the client API for Version1 service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ServiceClient interface {
-	// Get Account
-	GetAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error)
+type Version1Client interface {
 	// Create Account
 	CreateAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error)
-	// Sends another greeting
-	SayHelloAgain(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error)
+	// GetProfile
+	GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error)
+	// UpdateProfile
+	UpdateProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error)
+	// GetPoint
+	GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
+	// IncrPoint
+	IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
 }
 
-type serviceClient struct {
+type version1Client struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
-	return &serviceClient{cc}
+func NewVersion1Client(cc grpc.ClientConnInterface) Version1Client {
+	return &version1Client{cc}
 }
 
-func (c *serviceClient) GetAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error) {
+func (c *version1Client) CreateAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error) {
 	out := new(AccountReply)
-	err := c.cc.Invoke(ctx, "/haru.Service/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/haru.version1/CreateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) CreateAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error) {
-	out := new(AccountReply)
-	err := c.cc.Invoke(ctx, "/haru.Service/CreateAccount", in, out, opts...)
+func (c *version1Client) GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error) {
+	out := new(ProfileReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) SayHelloAgain(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error) {
-	out := new(AccountReply)
-	err := c.cc.Invoke(ctx, "/haru.Service/SayHelloAgain", in, out, opts...)
+func (c *version1Client) UpdateProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error) {
+	out := new(ProfileReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/UpdateProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ServiceServer is the server API for Service service.
-// All implementations must embed UnimplementedServiceServer
+func (c *version1Client) GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error) {
+	out := new(PointReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetPoint", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error) {
+	out := new(PointReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/IncrPoint", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Version1Server is the server API for Version1 service.
+// All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
-type ServiceServer interface {
-	// Get Account
-	GetAccount(context.Context, *AccountRequest) (*AccountReply, error)
+type Version1Server interface {
 	// Create Account
 	CreateAccount(context.Context, *AccountRequest) (*AccountReply, error)
-	// Sends another greeting
-	SayHelloAgain(context.Context, *AccountRequest) (*AccountReply, error)
-	mustEmbedUnimplementedServiceServer()
+	// GetProfile
+	GetProfile(context.Context, *ProfileRequest) (*ProfileReply, error)
+	// UpdateProfile
+	UpdateProfile(context.Context, *ProfileRequest) (*ProfileReply, error)
+	// GetPoint
+	GetPoint(context.Context, *PointRequest) (*PointReply, error)
+	// IncrPoint
+	IncrPoint(context.Context, *PointRequest) (*PointReply, error)
+	mustEmbedUnimplementedVersion1Server()
 }
 
-// UnimplementedServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedServiceServer struct {
+// UnimplementedVersion1Server must be embedded to have forward compatible implementations.
+type UnimplementedVersion1Server struct {
 }
 
-func (UnimplementedServiceServer) GetAccount(context.Context, *AccountRequest) (*AccountReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
-}
-func (UnimplementedServiceServer) CreateAccount(context.Context, *AccountRequest) (*AccountReply, error) {
+func (UnimplementedVersion1Server) CreateAccount(context.Context, *AccountRequest) (*AccountReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
 }
-func (UnimplementedServiceServer) SayHelloAgain(context.Context, *AccountRequest) (*AccountReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHelloAgain not implemented")
+func (UnimplementedVersion1Server) GetProfile(context.Context, *ProfileRequest) (*ProfileReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
 }
-func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
+func (UnimplementedVersion1Server) UpdateProfile(context.Context, *ProfileRequest) (*ProfileReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
+}
+func (UnimplementedVersion1Server) GetPoint(context.Context, *PointRequest) (*PointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPoint not implemented")
+}
+func (UnimplementedVersion1Server) IncrPoint(context.Context, *PointRequest) (*PointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IncrPoint not implemented")
+}
+func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
-// UnsafeServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ServiceServer will
+// UnsafeVersion1Server may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to Version1Server will
 // result in compilation errors.
-type UnsafeServiceServer interface {
-	mustEmbedUnimplementedServiceServer()
+type UnsafeVersion1Server interface {
+	mustEmbedUnimplementedVersion1Server()
 }
 
-func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
-	s.RegisterService(&Service_ServiceDesc, srv)
+func RegisterVersion1Server(s grpc.ServiceRegistrar, srv Version1Server) {
+	s.RegisterService(&Version1_ServiceDesc, srv)
 }
 
-func _Service_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Version1_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).GetAccount(ctx, in)
+		return srv.(Version1Server).CreateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.Service/GetAccount",
+		FullMethod: "/haru.version1/CreateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).GetAccount(ctx, req.(*AccountRequest))
+		return srv.(Version1Server).CreateAccount(ctx, req.(*AccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AccountRequest)
+func _Version1_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).CreateAccount(ctx, in)
+		return srv.(Version1Server).GetProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.Service/CreateAccount",
+		FullMethod: "/haru.version1/GetProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).CreateAccount(ctx, req.(*AccountRequest))
+		return srv.(Version1Server).GetProfile(ctx, req.(*ProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_SayHelloAgain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AccountRequest)
+func _Version1_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).SayHelloAgain(ctx, in)
+		return srv.(Version1Server).UpdateProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.Service/SayHelloAgain",
+		FullMethod: "/haru.version1/UpdateProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).SayHelloAgain(ctx, req.(*AccountRequest))
+		return srv.(Version1Server).UpdateProfile(ctx, req.(*ProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Service_ServiceDesc is the grpc.ServiceDesc for Service service.
+func _Version1_GetPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PointRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetPoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetPoint",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetPoint(ctx, req.(*PointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_IncrPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PointRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).IncrPoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/IncrPoint",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).IncrPoint(ctx, req.(*PointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Service_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "haru.Service",
-	HandlerType: (*ServiceServer)(nil),
+var Version1_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "haru.version1",
+	HandlerType: (*Version1Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetAccount",
-			Handler:    _Service_GetAccount_Handler,
-		},
-		{
 			MethodName: "CreateAccount",
-			Handler:    _Service_CreateAccount_Handler,
+			Handler:    _Version1_CreateAccount_Handler,
 		},
 		{
-			MethodName: "SayHelloAgain",
-			Handler:    _Service_SayHelloAgain_Handler,
+			MethodName: "GetProfile",
+			Handler:    _Version1_GetProfile_Handler,
+		},
+		{
+			MethodName: "UpdateProfile",
+			Handler:    _Version1_UpdateProfile_Handler,
+		},
+		{
+			MethodName: "GetPoint",
+			Handler:    _Version1_GetPoint_Handler,
+		},
+		{
+			MethodName: "IncrPoint",
+			Handler:    _Version1_IncrPoint_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,26 +22,45 @@ option go_package = "github.com/hojin-kr/haru/cmd/proto";
 package haru;
 
 // Service definition.
-service Service {
-  // Get Account
-  rpc GetAccount (AccountRequest) returns (AccountReply) {}
+service version1 {
   // Create Account
   rpc CreateAccount (AccountRequest) returns (AccountReply) {}
-  // Sends another greeting
-  rpc SayHelloAgain (AccountRequest) returns (AccountReply) {}
+  // GetProfile
+  rpc GetProfile (ProfileRequest) returns (ProfileReply) {}
+  // UpdateProfile
+  rpc UpdateProfile (ProfileRequest) returns (ProfileReply) {}
+  // GetPoint
+  rpc GetPoint (PointRequest) returns (PointReply) {}
+  // IncrPoint
+  rpc IncrPoint (PointRequest) returns (PointReply) {}
 }
 
-// The request message containing the user's name.
 message AccountRequest {
+  int64 ID = 1;
+  int64 RegisterTimestamp = 2;
 }
 
-// The response message containing the greetings
 message AccountReply {
   int64 ID = 1;
-  string DeviceID = 2;
-  string GoogleID = 3;
-  string AppleID = 4;
-  string LineID = 5;
-  string KakaoID = 6;  
-  int64 RegisterTimestamp = 7;
+  int64 RegisterTimestamp = 2;
+}
+
+message ProfileRequest {
+  int64 ID = 1;
+  string Nickname = 2;
+}
+
+message ProfileReply {
+  int64 ID = 1;
+  string Nickname = 2;
+}
+
+message PointRequest {
+  int64 ID = 1;
+  int64 Point = 2;
+}
+
+message PointReply {
+  int64 ID = 1;
+  int64 Point = 2;
 }
