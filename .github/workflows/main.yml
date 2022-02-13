@@ -1,4 +1,4 @@
-name: Deploy to AppEngine Main
+name: Deploy to CloudRun Main
 
 on:
   push:
@@ -31,6 +31,5 @@ jobs:
     # Deploy - stop previous version
     - name: Deploy - stop previous version
       run: |-
-        cd deployments/test
-        sed -i 's/${PROJECT_ID}/${{ env.PROJECT_ID }}/g' app.yaml
-        gcloud app deploy --quiet
+        gcloud builds submit . --tag=gcr.io/${PROJECT_ID}/haru
+        gcloud run services replace deployments/test/cloudrun.yaml --region=asia-northeast1

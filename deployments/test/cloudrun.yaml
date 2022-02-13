@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: haru-test2
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/boss-dungeon/haru
+        ports:
+        - name: h2c
+          containerPort: 50051
+        
