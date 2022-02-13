@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"log"
 	"net"
 	"os"
@@ -12,10 +11,6 @@ import (
 	"cloud.google.com/go/datastore"
 	pb "github.com/hojin-kr/haru/cmd/proto"
 	"google.golang.org/grpc"
-)
-
-var (
-	port = os.Getenv("PORT")
 )
 
 // server is used to implement UnimplementedServiceServer
@@ -137,7 +132,8 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 
 func main() {
 	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
+	port := os.Getenv("PORT")
+	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		log.Printf("failed to listen: %v", err)
 	}
