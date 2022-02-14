@@ -135,6 +135,7 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 
 func main() {
 	flag.Parse()
+	log.Printf("main")
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "50051"

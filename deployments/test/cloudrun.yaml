@@ -9,7 +9,7 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: dreamant@boss-dungeon.iam.gserviceaccount.com
       containers:
-      - image: gcr.io/boss-dungeon/haru@sha256:5f7a2435b41b044aa63491204b0b12069381f3718bb91a20f40ed31ff90c321d
+      - image: gcr.io/boss-dungeon/haru
         ports:
         - name: h2c
           containerPort: 50051
