@@ -12,7 +12,7 @@ spec:
       - image: gcr.io/boss-dungeon/haru
         ports:
         - name: h2c
-          containerPort: 50051
+          containerPort: 80
         resources:
           limits:
             cpu: 1000m
