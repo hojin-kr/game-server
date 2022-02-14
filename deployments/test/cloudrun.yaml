@@ -2,6 +2,8 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: haru
+  annotations:
+    run.googleapis.com/ingress: all
 spec:
   template:
     spec:
@@ -12,7 +14,7 @@ spec:
       - image: gcr.io/boss-dungeon/haru
         ports:
         - name: h2c
-          containerPort: 80
+          containerPort: 50051
         resources:
           limits:
             cpu: 1000m
