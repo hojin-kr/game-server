@@ -10,6 +10,6 @@ COPY cmd ./
 RUN go build -o /app/haru
 
 # ENV PORT=8080
-# EXPOSE 8080
+EXPOSE 50051
 
 CMD [ "/app/haru" ]
