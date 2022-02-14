@@ -133,6 +133,10 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 func main() {
 	flag.Parse()
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "50051"
+		log.Printf("Defaulting to port %s", port)
+	}
 	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		log.Printf("failed to listen: %v", err)
