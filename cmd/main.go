@@ -137,7 +137,7 @@ func (s *server) Ping(ctx context.Context, in *pb.PingRequest) (*pb.PingReply, e
 
 func main() {
 	flag.Parse()
-	port := os.Getenv("PORT")
+	port := os.Getenv("GRPC_PORT")
 	if port == "" {
 		port = "50051"
 		log.Printf("Defaulting to port %s", port)

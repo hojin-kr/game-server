@@ -14,8 +14,10 @@ spec:
       - image: gcr.io/boss-dungeon/haru
         ports:
         - name: h2c
-          containerPort: 50051
+          containerPort: 443
         env:
+        - name: GRPC_PORT
+          value: '50051'
         - name: GRPC_HOST
           value: haru-maeelc6qba-du.a.run.app:443
         - name: GRPC_INSECURE
