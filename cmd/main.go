@@ -156,10 +156,11 @@ var conn *grpc.ClientConn
 func init() {
 	if os.Getenv("GRPC_HOST") != "" {
 		var err error
-		conn, err = NewConn(os.Getenv("GRPC_HOST"), os.Getenv("GRPC_PING_INSECURE") != "")
+		conn, err = NewConn(os.Getenv("GRPC_HOST"), os.Getenv("GRPC_INSECURE") != "")
 		if err != nil {
 			log.Fatal(err)
 		}
+		log.Printf("NewConn")
 	} else {
 		log.Println("Starting without support for SendUpstream: configure with 'GRPC_HOST' environment variable. E.g., example.com:443")
 	}

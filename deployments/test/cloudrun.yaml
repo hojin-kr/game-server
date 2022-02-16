@@ -18,6 +18,8 @@ spec:
         env:
         - name: GRPC_HOST
           value: haru-maeelc6qba-du.a.run.app:443
+        - name: GRPC_INSECURE
+          value: 'true'
         resources:
           limits:
             cpu: 1000m
