@@ -49,21 +49,18 @@ type Attack struct {
 
 // CreateAccount implements CreateAccount
 func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.AccountReply, error) {
-	log.Printf("Incoming CreateAccount")
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Fatalf("Should Not Datastore New Client" + err.Error())
 	}
 	in.RegisterTimestamp = time.Now().Unix()
-	log.Printf("Before New ID Put")
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 	key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{RegisterTimestamp: in.GetRegisterTimestamp()})
 	if err != nil {
 		log.Printf("Should Not Account Put:" + err.Error())
 	}
 	in.ID = key.ID
-	log.Printf("After New ID Put")
 	return &pb.AccountReply{ID: in.GetID(), RegisterTimestamp: in.GetRegisterTimestamp()}, nil
 }
 
@@ -135,7 +132,6 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 
 func main() {
 	flag.Parse()
-	log.Printf("main")
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "50051"
@@ -150,5 +146,20 @@ func main() {
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Printf("failed to serve: %v", err)
+	}
+}
+
+// conn holds an open connection to the ping service.
+var conn *grpc.ClientConn
+
+func init() {
+	if os.Getenv("GRPC_HOST") != "" {
+		var err error
+		conn, err = NewConn(os.Getenv("GRPC_HOST"), os.Getenv("GRPC_PING_INSECURE") != "")
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		log.Println("Starting without support for SendUpstream: configure with 'GRPC_HOST' environment variable. E.g., example.com:443")
 	}
 }
