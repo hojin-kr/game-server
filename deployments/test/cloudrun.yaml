@@ -16,10 +16,8 @@ spec:
         - name: h2c
           containerPort: 50051
         env:
-        - name: GRPC_HOST
-          value: haru-maeelc6qba-du.a.run.app:443
-        - name: GRPC_INSECURE
-          value: 'true'
+        - name: PROJECT_ID
+          value: 'boss-dungeon'
         resources:
           limits:
             cpu: 1000m
