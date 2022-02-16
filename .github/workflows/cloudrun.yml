@@ -40,4 +40,4 @@ jobs:
     - name: Deploy - stop previous version
       run: |-
         gcloud builds submit . --tag=gcr.io/${PROJECT_ID}/haru
-        gcloud run services replace deployments/${{ github.event.inputs.deployment_name }}/cloudrun.yaml --region=${{ github.event.inputs.region }} --namespace=${{ github.event.inputs.deployment_name }}
+        gcloud run services replace deployments/${{ github.event.inputs.deployment_name }}/cloudrun.yaml --region=${{ github.event.inputs.region }}
