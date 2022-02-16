@@ -49,6 +49,7 @@ type Attack struct {
 
 // CreateAccount implements CreateAccount
 func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.AccountReply, error) {
+	log.Printf("CreateAccount")
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
