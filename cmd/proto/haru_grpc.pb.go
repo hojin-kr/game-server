@@ -28,6 +28,8 @@ type Version1Client interface {
 	GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
 	// IncrPoint
 	IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
+	// Ping
+	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingReply, error)
 }
 
 type version1Client struct {
@@ -83,6 +85,15 @@ func (c *version1Client) IncrPoint(ctx context.Context, in *PointRequest, opts .
 	return out, nil
 }
 
+func (c *version1Client) Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingReply, error) {
+	out := new(PingReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -97,6 +108,8 @@ type Version1Server interface {
 	GetPoint(context.Context, *PointRequest) (*PointReply, error)
 	// IncrPoint
 	IncrPoint(context.Context, *PointRequest) (*PointReply, error)
+	// Ping
+	Ping(context.Context, *PingRequest) (*PingReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -118,6 +131,9 @@ func (UnimplementedVersion1Server) GetPoint(context.Context, *PointRequest) (*Po
 }
 func (UnimplementedVersion1Server) IncrPoint(context.Context, *PointRequest) (*PointReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IncrPoint not implemented")
+}
+func (UnimplementedVersion1Server) Ping(context.Context, *PingRequest) (*PingReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -222,6 +238,24 @@ func _Version1_IncrPoint_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).Ping(ctx, req.(*PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +282,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IncrPoint",
 			Handler:    _Version1_IncrPoint_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _Version1_Ping_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

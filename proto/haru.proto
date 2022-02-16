@@ -33,6 +33,16 @@ service version1 {
   rpc GetPoint (PointRequest) returns (PointReply) {}
   // IncrPoint
   rpc IncrPoint (PointRequest) returns (PointReply) {}
+  // Ping
+  rpc Ping (PingRequest) returns (PingReply) {}
+}
+
+message PingRequest {
+
+}
+
+message PingReply{
+  
 }
 
 message AccountRequest {

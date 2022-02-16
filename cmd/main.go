@@ -131,6 +131,10 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint()}, nil
 }
 
+func (s *server) Ping(ctx context.Context, in *pb.PingRequest) (*pb.PingReply, error) {
+	return &pb.PingReply{}, nil
+}
+
 func main() {
 	flag.Parse()
 	port := os.Getenv("PORT")
