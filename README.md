@@ -48,14 +48,14 @@ https://console.cloud.google.com/datastore
 
 ### Deploy gRPC SERVER
 gRPC 서버 배포는 GCP CloudRun을 사용합니다.
-gRPC 서버는 `main` 브랜치에 작업되어있습니다.
+gRPC 서버는 `main` 브랜치에 작업되어있습니다.   
 
-> TODO
-
-1. Dockerfile 정의
-2. [Github Action] docker build
-3. [Github Action] Container를 Github Container Registy에 push
-4. [Github Action] gcloud run 으로 클라우드런에 신규 버전 배포
+```
+# 빌드 및 푸시
+gcloud builds submit . --tag=gcr.io/${PROJECT_ID}/haru
+# test/cloudrun.yaml의 정의에 맞춰 클라우드런에 배포
+gcloud run services replace deployments/test/cloudrun.yaml --region=asia-northeast3
+```
 
 
 # gRPC에 대해서 
@@ -77,8 +77,3 @@ protoc --csharp_out=./proto/csharp \
     --csharp_grpc_out=./proto/csharp \
     proto/haru.proto
 ```
-
-# TODO Issue
-main, grpc branch 배포시 AppEngine으로 배포 불가
--> gRPC서버에 대해 GCP AppEngine에서 지원하지 않음
--> gRPC서버 대응을 위해 Cloud Run 배포 추가 예정

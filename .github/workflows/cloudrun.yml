@@ -1,9 +1,17 @@
 name: Deploy to CloudRun Main
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      deployment_name:
+        description: 'deployment name'
+        default: 'test'
+        required: true
+      region:
+        description: 'region'
+        default: 'asia-northeast3'
+        required: false
+        
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
 
@@ -32,4 +40,4 @@ jobs:
     - name: Deploy - stop previous version
       run: |-
         gcloud builds submit . --tag=gcr.io/${PROJECT_ID}/haru
-        gcloud run services replace deployments/test/cloudrun.yaml --region=asia-northeast3 --namespace=test
+        gcloud run services replace deployments/${{ github.event.inputs.deployment_name }}/cloudrun.yaml --region=${{ github.event.inputs.region }} --namespace=${{ github.event.inputs.deployment_name }}

@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: haru
+  annotations:
+    run.googleapis.com/ingress: all
+spec:
+  template:
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: dreamant@boss-dungeon.iam.gserviceaccount.com
+      containers:
+      - image: gcr.io/boss-dungeon/haru:latest
+        ports:
+        - name: h2c
+          containerPort: 50051
+        env:
+        - name: PROJECT_ID
+          value: 'boss-dungeon'
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
