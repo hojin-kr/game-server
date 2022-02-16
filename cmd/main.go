@@ -137,7 +137,7 @@ func (s *server) Ping(ctx context.Context, in *pb.PingRequest) (*pb.PingReply, e
 
 func main() {
 	flag.Parse()
-	port := os.Getenv("GRPC_PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "50051"
 		log.Printf("Defaulting to port %s", port)
@@ -155,17 +155,17 @@ func main() {
 }
 
 // conn holds an open connection to the ping service.
-var conn *grpc.ClientConn
+// var conn *grpc.ClientConn
 
-func init() {
-	if os.Getenv("GRPC_HOST") != "" {
-		var err error
-		conn, err = NewConn(os.Getenv("GRPC_HOST"), os.Getenv("GRPC_INSECURE") != "")
-		if err != nil {
-			log.Fatal(err)
-		}
-		log.Printf("NewConn")
-	} else {
-		log.Println("Starting without support for SendUpstream: configure with 'GRPC_HOST' environment variable. E.g., example.com:443")
-	}
-}
+// func init() {
+// 	if os.Getenv("GRPC_HOST") != "" {
+// 		var err error
+// 		conn, err = NewConn(os.Getenv("GRPC_HOST"), os.Getenv("GRPC_INSECURE") != "")
+// 		if err != nil {
+// 			log.Fatal(err)
+// 		}
+// 		log.Printf("NewConn")
+// 	} else {
+// 		log.Println("Starting without support for SendUpstream: configure with 'GRPC_HOST' environment variable. E.g., example.com:443")
+// 	}
+// }

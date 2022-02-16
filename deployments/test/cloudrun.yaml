@@ -11,13 +11,11 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: dreamant@boss-dungeon.iam.gserviceaccount.com
       containers:
-      - image: gcr.io/boss-dungeon/haru
+      - image: gcr.io/boss-dungeon/haru@latest
         ports:
         - name: h2c
-          containerPort: 443
+          containerPort: 50051
         env:
-        - name: GRPC_PORT
-          value: '50051'
         - name: GRPC_HOST
           value: haru-maeelc6qba-du.a.run.app:443
         - name: GRPC_INSECURE
