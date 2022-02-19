@@ -1,6 +1,9 @@
 # 개요
 Go 게임 서버 프레임워크 개발
 
+# GCP Architecture Diagram
+![image](https://user-images.githubusercontent.com/22079767/154786972-c1e06d6a-15db-4eec-8c35-cb1e29434541.png)
+
 # 특징
 - 확장성 (비용 0의 개발환경에서 편한 프로덕션 전환)
 - GCP 매니지드 서비스 서버
