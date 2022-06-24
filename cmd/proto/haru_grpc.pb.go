@@ -34,6 +34,8 @@ type Version1Client interface {
 	IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
 	// GetPlaceId
 	GetPlace(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
+	// SetVisit
+	SetVisit(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
 }
 
 type version1Client struct {
@@ -98,6 +100,15 @@ func (c *version1Client) GetPlace(ctx context.Context, in *PlaceRequest, opts ..
 	return out, nil
 }
 
+func (c *version1Client) SetVisit(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error) {
+	out := new(PlaceReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/SetVisit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -114,6 +125,8 @@ type Version1Server interface {
 	IncrPoint(context.Context, *PointRequest) (*PointReply, error)
 	// GetPlaceId
 	GetPlace(context.Context, *PlaceRequest) (*PlaceReply, error)
+	// SetVisit
+	SetVisit(context.Context, *PlaceRequest) (*PlaceReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -138,6 +151,9 @@ func (UnimplementedVersion1Server) IncrPoint(context.Context, *PointRequest) (*P
 }
 func (UnimplementedVersion1Server) GetPlace(context.Context, *PlaceRequest) (*PlaceReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlace not implemented")
+}
+func (UnimplementedVersion1Server) SetVisit(context.Context, *PlaceRequest) (*PlaceReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetVisit not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -260,6 +276,24 @@ func _Version1_GetPlace_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_SetVisit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).SetVisit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/SetVisit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).SetVisit(ctx, req.(*PlaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -290,6 +324,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlace",
 			Handler:    _Version1_GetPlace_Handler,
+		},
+		{
+			MethodName: "SetVisit",
+			Handler:    _Version1_SetVisit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

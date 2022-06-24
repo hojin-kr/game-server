@@ -35,6 +35,8 @@ service version1 {
   rpc IncrPoint (PointRequest) returns (PointReply) {}
   // GetPlaceId
   rpc GetPlace (PlaceRequest) returns (PlaceReply) {}
+  // SetVisit
+  rpc SetVisit (PlaceRequest) returns (PlaceReply) {}
 }
 
 message AccountRequest {
@@ -50,23 +52,26 @@ message AccountReply {
 message ProfileRequest {
   int64 ID = 1;
   string Nickname = 2;
+  string Likes = 3;
 }
 
 message PlaceRequest {
   string Input = 1;
   string Language = 2;
+  string PlaceId = 3;
 }
 
 message ProfileReply {
   int64 ID = 1;
   string Nickname = 2;
+  string Likes = 3;
 }
 
 message PointRequest {
   int64 ID = 1;
   int64 Point = 2;
 }
-
+// 서버 단독 Place 정보들 모델로 정의 포인트, 방문정보등
 message PointReply {
   int64 ID = 1;
   int64 Point = 2;
@@ -79,8 +84,15 @@ message PlaceReply {
   string FormattedPhoneNumber = 3;
   string Icon = 4;
   string PlaceID= 5;
-  string WeekdayText= 6;
-  string Types= 7;
+  repeated string WeekdayText= 6;
+  repeated string Types= 7;
   string Website = 8;
-  string URL = 9;
+  string URL = 9;  
+  float Rating = 10;
+  int64 UserRatingsTotal = 11;
+  repeated string PhotoReferences = 12;
+  repeated string Reviews = 13;
+  string BusinessStatus = 14;
+  string LocationLat = 15;
+  string LocationLng = 16;
 }

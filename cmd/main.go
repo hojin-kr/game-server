@@ -18,7 +18,7 @@ import (
 
 var (
 	port      = flag.Int("port", 50051, "The server port")
-	apiKey    = flag.String("key", "", "API Key for using Google Maps API.")
+	apiKey    = flag.String("key", os.Getenv("APP_KEY"), "API Key for using Google Maps API.")
 	inputType = flag.String("inputtype", "textquery", "The type of input. This can be one of either textquery or phonenumber.")
 )
 
@@ -42,6 +42,7 @@ type Account struct {
 type Profile struct {
 	Nickname string `example:"myNickname"`
 	ID       int64  `datastore:"-" example:"5373899369873408"`
+	Likes    string `example:"ID,ID,ID"`
 }
 
 // Wallet wallet
@@ -86,7 +87,7 @@ func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.Pro
 		log.Printf("Should Not Profile get: " + err.Error())
 	}
 	in.Nickname = profile.Nickname
-	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname()}, nil
+	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: profile.Likes}, nil
 }
 
 func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
@@ -98,12 +99,13 @@ func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.
 	var profile Profile
 	profile.ID = in.GetID()
 	profile.Nickname = in.GetNickname()
+	profile.Likes = in.GetLikes()
 	key := datastore.IDKey("Profile", in.GetID(), nil)
 	_, err = datastoreClient.Put(ctx, key, &profile)
 	if err != nil {
 		log.Printf("Should Not Profile get: " + err.Error())
 	}
-	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname()}, nil
+	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: profile.Likes}, nil
 }
 
 func (s *server) GetPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointReply, error) {
@@ -146,6 +148,14 @@ func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceRe
 	PlaceID := FindPlaceFromText.Find(*apiKey, in.GetInput(), *inputType)
 	// todo cache
 	PlaceDetails := PlaceDetails.Find(*apiKey, PlaceID, in.GetLanguage())
+	var PhotoReferences []string
+	for i := 0; i < len(PlaceDetails.Photos); i++ {
+		PhotoReferences = append(PhotoReferences, PlaceDetails.Photos[i].PhotoReference)
+	}
+	var Reviews []string
+	for i := 0; i < len(PlaceDetails.Reviews); i++ {
+		Reviews = append(Reviews, PlaceDetails.Reviews[i].Text)
+	}
 	return &pb.PlaceReply{
 		Name:                 PlaceDetails.Name,
 		FormattedAddress:     PlaceDetails.FormattedAddress,
@@ -154,6 +164,15 @@ func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceRe
 		PlaceID:              PlaceDetails.PlaceID,
 		Website:              PlaceDetails.Website,
 		URL:                  PlaceDetails.URL,
+		Types:                PlaceDetails.Types,
+		Rating:               PlaceDetails.Rating,
+		UserRatingsTotal:     int64(PlaceDetails.UserRatingsTotal),
+		WeekdayText:          PlaceDetails.OpeningHours.WeekdayText,
+		PhotoReferences:      PhotoReferences,
+		BusinessStatus:       PlaceDetails.BusinessStatus,
+		Reviews:              Reviews,
+		LocationLat:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lat),
+		LocationLng:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lng),
 	}, nil
 }
 
