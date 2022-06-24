@@ -10,12 +10,16 @@ import (
 	"time"
 
 	"cloud.google.com/go/datastore"
+	FindPlaceFromText "github.com/hojin-kr/haru/cmd/places/findplacefromtext"
+	PlaceDetails "github.com/hojin-kr/haru/cmd/places/placedetails"
 	pb "github.com/hojin-kr/haru/cmd/proto"
 	"google.golang.org/grpc"
 )
 
 var (
-	port = flag.Int("port", 50051, "The server port")
+	port      = flag.Int("port", 50051, "The server port")
+	apiKey    = flag.String("key", "", "API Key for using Google Maps API.")
+	inputType = flag.String("inputtype", "textquery", "The type of input. This can be one of either textquery or phonenumber.")
 )
 
 // server is used to implement UnimplementedServiceServer
@@ -46,10 +50,11 @@ type Wallet struct {
 	ID   int64 `datastore:"-" example:"5373899369873408"`
 }
 
-// Attack attack boss infomation
-type Attack struct {
+// Rating rating of place
+type Rating struct {
 	Point int64 `example:"100"`
-	ID    int64 `datastore:"-" example:"5373899369873408"`
+	Count int64 `example:"100"`
+	ID    int64 `datastore:"-" example:"PlaceID"`
 }
 
 // CreateAccount implements CreateAccount
@@ -107,13 +112,13 @@ func (s *server) GetPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointRe
 	if err != nil {
 		log.Printf("Should Not Datastore New Client" + err.Error())
 	}
-	key := datastore.IDKey("Attack", in.GetID(), nil)
-	var attack Attack
-	if err := datastoreClient.Get(ctx, key, &attack); err != nil {
-		log.Printf("Should Not Attack get: " + err.Error())
+	key := datastore.IDKey("Rating", in.GetID(), nil)
+	var rating Rating
+	if err := datastoreClient.Get(ctx, key, &rating); err != nil {
+		log.Printf("Should Not Rating get: " + err.Error())
 	}
-	in.Point = attack.Point
-	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint()}, nil
+	in.Point = rating.Point
+	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint(), Count: rating.Count}, nil
 }
 
 func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointReply, error) {
@@ -122,17 +127,34 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 	if err != nil {
 		log.Printf("Should Not Datastore New Client" + err.Error())
 	}
-	var attack Attack
-	key := datastore.IDKey("Attack", in.GetID(), nil)
-	_ = datastoreClient.Get(ctx, key, &attack)
-	attack.Point += in.GetPoint()
-	attack.ID = in.GetID()
-	_, err = datastoreClient.Put(ctx, key, &attack)
+	var rating Rating
+	key := datastore.IDKey("Rating", in.GetID(), nil)
+	_ = datastoreClient.Get(ctx, key, &rating)
+	rating.Count += 1
+	rating.Point += in.GetPoint()
+	rating.ID = in.GetID()
+	_, err = datastoreClient.Put(ctx, key, &rating)
 	if err != nil {
-		log.Printf("Should Not Incr Boss Pint: " + err.Error())
+		log.Printf("Should Not Incr Rating Point: " + err.Error())
 	}
-	in.Point = attack.Point
-	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint()}, nil
+	in.Point = rating.Point
+	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint(), Count: rating.Count}, nil
+}
+
+func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceReply, error) {
+	// todo cache
+	PlaceID := FindPlaceFromText.Find(*apiKey, in.GetInput(), *inputType)
+	// todo cache
+	PlaceDetails := PlaceDetails.Find(*apiKey, PlaceID, in.GetLanguage())
+	return &pb.PlaceReply{
+		Name:                 PlaceDetails.Name,
+		FormattedAddress:     PlaceDetails.FormattedAddress,
+		FormattedPhoneNumber: PlaceDetails.FormattedPhoneNumber,
+		Icon:                 PlaceDetails.Icon,
+		PlaceID:              PlaceDetails.PlaceID,
+		Website:              PlaceDetails.Website,
+		URL:                  PlaceDetails.URL,
+	}, nil
 }
 
 func main() {
