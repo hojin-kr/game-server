@@ -34,8 +34,8 @@ type Version1Client interface {
 	IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
 	// GetPlaceId
 	GetPlace(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
-	// SetVisit
-	SetVisit(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
+	// UpdatePlaceProfile
+	UpdatePlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error)
 }
 
 type version1Client struct {
@@ -100,9 +100,9 @@ func (c *version1Client) GetPlace(ctx context.Context, in *PlaceRequest, opts ..
 	return out, nil
 }
 
-func (c *version1Client) SetVisit(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error) {
-	out := new(PlaceReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/SetVisit", in, out, opts...)
+func (c *version1Client) UpdatePlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error) {
+	out := new(PlaceProfileReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/UpdatePlaceProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -125,8 +125,8 @@ type Version1Server interface {
 	IncrPoint(context.Context, *PointRequest) (*PointReply, error)
 	// GetPlaceId
 	GetPlace(context.Context, *PlaceRequest) (*PlaceReply, error)
-	// SetVisit
-	SetVisit(context.Context, *PlaceRequest) (*PlaceReply, error)
+	// UpdatePlaceProfile
+	UpdatePlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -152,8 +152,8 @@ func (UnimplementedVersion1Server) IncrPoint(context.Context, *PointRequest) (*P
 func (UnimplementedVersion1Server) GetPlace(context.Context, *PlaceRequest) (*PlaceReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlace not implemented")
 }
-func (UnimplementedVersion1Server) SetVisit(context.Context, *PlaceRequest) (*PlaceReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetVisit not implemented")
+func (UnimplementedVersion1Server) UpdatePlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlaceProfile not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -276,20 +276,20 @@ func _Version1_GetPlace_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_SetVisit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Version1_UpdatePlaceProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PlaceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).SetVisit(ctx, in)
+		return srv.(Version1Server).UpdatePlaceProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/SetVisit",
+		FullMethod: "/haru.version1/UpdatePlaceProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).SetVisit(ctx, req.(*PlaceRequest))
+		return srv.(Version1Server).UpdatePlaceProfile(ctx, req.(*PlaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -326,8 +326,8 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Version1_GetPlace_Handler,
 		},
 		{
-			MethodName: "SetVisit",
-			Handler:    _Version1_SetVisit_Handler,
+			MethodName: "UpdatePlaceProfile",
+			Handler:    _Version1_UpdatePlaceProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

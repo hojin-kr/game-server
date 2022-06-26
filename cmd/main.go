@@ -43,9 +43,9 @@ type Account struct {
 
 // Profile profile inforamtion
 type Profile struct {
-	Nickname string `example:"myNickname"`
-	ID       int64  `datastore:"-" example:"5373899369873408"`
-	Likes    string `example:"ID,ID,ID"`
+	Nickname string   `example:"myNickname"`
+	ID       int64    `datastore:"-" example:"5373899369873408"`
+	Likes    []string `example:"ID,ID,ID"`
 }
 
 // Wallet wallet
@@ -105,6 +105,11 @@ func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.Pro
 
 func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
+	if len(in.GetLikes()) > 1000 {
+		tracer.Trace(time.Now().UTC(), in, "Too Many Likes")
+		ret := &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: in.GetLikes()}
+		return ret, nil
+	}
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
@@ -210,6 +215,40 @@ func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceRe
 		LocationLat:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lat),
 		LocationLng:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lng),
 	}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+type PlaceProifle struct {
+	PlaceID      string
+	Populartimes []int64
+	Likes        int64
+}
+
+// UpdatePlace updatePlace additional info
+func (s *server) UpdatePlaceProfile(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceProfileReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var datastoreClient *datastore.Client
+	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
+	if err != nil {
+		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
+	}
+	var placeProfile PlaceProifle
+	_ = datastoreClient.Get(ctx, datastore.NameKey("Place", in.GetPlaceID(), nil), &placeProfile)
+	if placeProfile.PlaceID == "" {
+		placeProfile.PlaceID = in.GetPlaceID()
+	}
+	if in.IsLike {
+		placeProfile.Likes += 1
+	}
+	// todo 시간대별 방문수 누적
+	_, err = datastoreClient.Put(ctx, datastore.NameKey("Place", in.GetPlaceID(), nil), &placeProfile)
+	if err != nil {
+		log.Printf("Should Not Update Place: " + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Profile get", err.Error())
+	}
+	ret := &pb.PlaceProfileReply{PlaceID: placeProfile.PlaceID, Likes: placeProfile.Likes}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
