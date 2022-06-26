@@ -69,6 +69,9 @@ func Find(apiKey string, input string, inputType string) string {
 
 	resp, err := client.FindPlaceFromText(context.Background(), r)
 	check(err)
+	if len(resp.Candidates) == 0 {
+		return "0"
+	}
 	return resp.Candidates[0].PlaceID
 }
 

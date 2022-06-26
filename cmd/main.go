@@ -13,6 +13,7 @@ import (
 	FindPlaceFromText "github.com/hojin-kr/haru/cmd/places/findplacefromtext"
 	PlaceDetails "github.com/hojin-kr/haru/cmd/places/placedetails"
 	pb "github.com/hojin-kr/haru/cmd/proto"
+	"github.com/hojin-kr/haru/cmd/trace"
 	"google.golang.org/grpc"
 )
 
@@ -21,6 +22,8 @@ var (
 	apiKey    = flag.String("key", os.Getenv("APP_KEY"), "API Key for using Google Maps API.")
 	inputType = flag.String("inputtype", "textquery", "The type of input. This can be one of either textquery or phonenumber.")
 )
+
+var tracer trace.Tracer
 
 // server is used to implement UnimplementedServiceServer
 type server struct {
@@ -60,41 +63,53 @@ type Rating struct {
 
 // CreateAccount implements CreateAccount
 func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.AccountReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Fatalf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
 	}
 	in.RegisterTimestamp = time.Now().Unix()
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 	key, err := datastoreClient.Put(ctx, datastore.IncompleteKey("Account", nil), &Account{RegisterTimestamp: in.GetRegisterTimestamp()})
 	if err != nil {
 		log.Printf("Should Not Account Put:" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Account Put", err.Error())
 	}
 	in.ID = key.ID
-	return &pb.AccountReply{ID: in.GetID(), RegisterTimestamp: in.GetRegisterTimestamp()}, nil
+	ret := &pb.AccountReply{ID: in.GetID(), RegisterTimestamp: in.GetRegisterTimestamp()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
 }
 
 func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
 	}
 	key := datastore.IDKey("Profile", in.GetID(), nil)
 	var profile Profile
 	if err := datastoreClient.Get(ctx, key, &profile); err != nil {
 		log.Printf("Should Not Profile get: " + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Profile get", err.Error())
 	}
 	in.Nickname = profile.Nickname
-	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: profile.Likes}, nil
+	ret := &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: profile.Likes}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
 }
 
 func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
 	}
 	var profile Profile
 	profile.ID = in.GetID()
@@ -104,30 +119,40 @@ func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.
 	_, err = datastoreClient.Put(ctx, key, &profile)
 	if err != nil {
 		log.Printf("Should Not Profile get: " + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Profile get", err.Error())
 	}
-	return &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: profile.Likes}, nil
+	ret := &pb.ProfileReply{ID: in.GetID(), Nickname: in.GetNickname(), Likes: profile.Likes}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
 }
 
 func (s *server) GetPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
 	}
 	key := datastore.IDKey("Rating", in.GetID(), nil)
 	var rating Rating
 	if err := datastoreClient.Get(ctx, key, &rating); err != nil {
 		log.Printf("Should Not Rating get: " + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Rating get", err.Error())
 	}
 	in.Point = rating.Point
-	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint(), Count: rating.Count}, nil
+	ret := &pb.PointReply{ID: in.GetID(), Point: in.GetPoint(), Count: rating.Count}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
 }
 
 func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
 	var datastoreClient *datastore.Client
 	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
 	if err != nil {
 		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
 	}
 	var rating Rating
 	key := datastore.IDKey("Rating", in.GetID(), nil)
@@ -138,15 +163,22 @@ func (s *server) IncrPoint(ctx context.Context, in *pb.PointRequest) (*pb.PointR
 	_, err = datastoreClient.Put(ctx, key, &rating)
 	if err != nil {
 		log.Printf("Should Not Incr Rating Point: " + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Rating get", err.Error())
 	}
 	in.Point = rating.Point
-	return &pb.PointReply{ID: in.GetID(), Point: in.GetPoint(), Count: rating.Count}, nil
+	ret := &pb.PointReply{ID: in.GetID(), Point: in.GetPoint(), Count: rating.Count}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
 }
 
 func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
 	// todo cache
 	PlaceID := FindPlaceFromText.Find(*apiKey, in.GetInput(), *inputType)
 	// todo cache
+	if PlaceID == "0" {
+		return &pb.PlaceReply{PlaceID: "0"}, nil
+	}
 	PlaceDetails := PlaceDetails.Find(*apiKey, PlaceID, in.GetLanguage())
 	var PhotoReferences []string
 	for i := 0; i < len(PlaceDetails.Photos); i++ {
@@ -156,7 +188,11 @@ func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceRe
 	for i := 0; i < len(PlaceDetails.Reviews); i++ {
 		Reviews = append(Reviews, PlaceDetails.Reviews[i].Text)
 	}
-	return &pb.PlaceReply{
+	var WeekdayText []string
+	if PlaceDetails.OpeningHours != nil {
+		WeekdayText = PlaceDetails.OpeningHours.WeekdayText
+	}
+	ret := &pb.PlaceReply{
 		Name:                 PlaceDetails.Name,
 		FormattedAddress:     PlaceDetails.FormattedAddress,
 		FormattedPhoneNumber: PlaceDetails.FormattedPhoneNumber,
@@ -167,17 +203,20 @@ func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceRe
 		Types:                PlaceDetails.Types,
 		Rating:               PlaceDetails.Rating,
 		UserRatingsTotal:     int64(PlaceDetails.UserRatingsTotal),
-		WeekdayText:          PlaceDetails.OpeningHours.WeekdayText,
+		WeekdayText:          WeekdayText,
 		PhotoReferences:      PhotoReferences,
 		BusinessStatus:       PlaceDetails.BusinessStatus,
 		Reviews:              Reviews,
 		LocationLat:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lat),
 		LocationLng:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lng),
-	}, nil
+	}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
 }
 
 func main() {
 	flag.Parse()
+	tracer = trace.New(os.Stdout)
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
 	if err != nil {
 		log.Printf("failed to listen: %v", err)
