@@ -37,6 +37,8 @@ service version1 {
   rpc GetPlace (PlaceRequest) returns (PlaceReply) {}
   // UpdatePlaceProfile
   rpc UpdatePlaceProfile (PlaceRequest) returns (PlaceProfileReply) {}
+  // getNearbySearch
+  rpc GetNearbySearch (PlaceRequest) returns (PlaceReplyList) {}
 }
 
 message AccountRequest {
@@ -61,6 +63,9 @@ message PlaceRequest {
   string PlaceID = 3;
   bool IsVisit = 4;
   bool IsLike = 5;
+  string Location = 6;
+  uint64 Radius = 7;
+  string Keyword = 8;
 }
 
 message ProfileReply {
@@ -81,26 +86,100 @@ message PointReply {
 }
 
 message PlaceReply {
-  string Name = 1;
+  message AddressComponent {
+    string LongName = 1;
+    string ShortName = 2;
+    repeated string Types = 3;
+  }
+  repeated AddressComponent AddressComponents = 1;
   string FormattedAddress = 2;
-  string FormattedPhoneNumber = 3;
-  string Icon = 4;
-  string PlaceID= 5;
-  repeated string WeekdayText= 6;
-  repeated string Types= 7;
-  string Website = 8;
-  string URL = 9;  
+  string AdrAddress = 3;
+  string FormattedPhoneNumber = 4;
+  string InternationalPhoneNumber = 5;
+  AddressGeometry Geometry = 6;
+  string Name = 7;
+  string Icon = 8;
+  string PlaceID = 9;
   float Rating = 10;
   int64 UserRatingsTotal = 11;
-  repeated string PhotoReferences = 12;
-  repeated string Reviews = 13;
-  string BusinessStatus = 14;
-  string LocationLat = 15;
-  string LocationLng = 16;
+  repeated string Types = 12;
+  OpeningHours OpeningHours = 13;
+  repeated Photo Photos = 14;
+  int64 PriceLevel = 15;
+  string Vicinity = 16;
+  bool PermanentlyClosed = 17;
+  string BusinessStatus = 18;
+  repeated PlaceReview Reviews = 19;
+  int64 UTCOffset = 20;
+  string Website = 21;
+  string URL = 22;
+  repeated string HTMLAttributions = 23;
+}
+
+message AddressGeometry {
+  LatLng Location = 1;
+  string LocationType = 2;
+  LatLngBounds Bounds = 3;
+  LatLngBounds Viewport = 4;
+  repeated string Types = 5;
+}
+
+message LatLng {
+  float Lat = 1;
+  float Lng = 2;
+}
+
+message LatLngBounds {
+  LatLng NorthEast = 1;
+  LatLng SoutWest = 2;
+}
+
+message OpeningHours {
+  bool OpenNow = 1;
+  repeated OpeningHoursPeriod Periods = 2;
+  repeated string WeekdayText = 3;
+  bool PermanentlyClosed = 4;
+}
+
+message OpeningHoursPeriod {
+  OpeningHoursOpenClose Open  = 1;
+  OpeningHoursOpenClose Close = 2;
+}
+
+message OpeningHoursOpenClose {
+  int64 Day = 1;
+  string Time = 2;
+}
+
+message Photo {
+  string PhotoReference = 1;
+  int64 Height = 2;
+  int64 Width = 3;
+  repeated string HTMLAttributions = 4;
+}
+
+message PlaceReview {
+  repeated PlaceReviewAspect Aspects = 1;
+  string AuthorName = 2;
+  string AuthorURL = 3;
+  string AuthorProfilePhoto = 4;
+  string Language = 5;
+  int64 Rating = 6;
+  string Text = 7;
+  int64 Time = 8;
+}
+
+message PlaceReviewAspect {
+  int64 Rating = 1;
+  string Type = 2;
 }
 
 message PlaceProfileReply {
   string PlaceID = 1;
   string Populartimes = 2;
   int64 Likes = 3;
+}
+
+message PlaceReplyList {
+  repeated PlaceReply PlaceReplyList = 1;
 }

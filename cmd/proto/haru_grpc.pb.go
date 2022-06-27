@@ -36,6 +36,8 @@ type Version1Client interface {
 	GetPlace(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
 	// UpdatePlaceProfile
 	UpdatePlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error)
+	// getNearbySearch
+	GetNearbySearch(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReplyList, error)
 }
 
 type version1Client struct {
@@ -109,6 +111,15 @@ func (c *version1Client) UpdatePlaceProfile(ctx context.Context, in *PlaceReques
 	return out, nil
 }
 
+func (c *version1Client) GetNearbySearch(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReplyList, error) {
+	out := new(PlaceReplyList)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetNearbySearch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -127,6 +138,8 @@ type Version1Server interface {
 	GetPlace(context.Context, *PlaceRequest) (*PlaceReply, error)
 	// UpdatePlaceProfile
 	UpdatePlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error)
+	// getNearbySearch
+	GetNearbySearch(context.Context, *PlaceRequest) (*PlaceReplyList, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -154,6 +167,9 @@ func (UnimplementedVersion1Server) GetPlace(context.Context, *PlaceRequest) (*Pl
 }
 func (UnimplementedVersion1Server) UpdatePlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlaceProfile not implemented")
+}
+func (UnimplementedVersion1Server) GetNearbySearch(context.Context, *PlaceRequest) (*PlaceReplyList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNearbySearch not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -294,6 +310,24 @@ func _Version1_UpdatePlaceProfile_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_GetNearbySearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetNearbySearch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetNearbySearch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetNearbySearch(ctx, req.(*PlaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -328,6 +362,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdatePlaceProfile",
 			Handler:    _Version1_UpdatePlaceProfile_Handler,
+		},
+		{
+			MethodName: "GetNearbySearch",
+			Handler:    _Version1_GetNearbySearch_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -11,6 +12,7 @@ import (
 
 	"cloud.google.com/go/datastore"
 	FindPlaceFromText "github.com/hojin-kr/haru/cmd/places/findplacefromtext"
+	NearbySearch "github.com/hojin-kr/haru/cmd/places/nearbysearch"
 	PlaceDetails "github.com/hojin-kr/haru/cmd/places/placedetails"
 	pb "github.com/hojin-kr/haru/cmd/proto"
 	"github.com/hojin-kr/haru/cmd/trace"
@@ -21,9 +23,8 @@ var (
 	port      = flag.Int("port", 50051, "The server port")
 	apiKey    = flag.String("key", os.Getenv("APP_KEY"), "API Key for using Google Maps API.")
 	inputType = flag.String("inputtype", "textquery", "The type of input. This can be one of either textquery or phonenumber.")
+	tracer    trace.Tracer
 )
-
-var tracer trace.Tracer
 
 // server is used to implement UnimplementedServiceServer
 type server struct {
@@ -184,39 +185,11 @@ func (s *server) GetPlace(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceRe
 	if PlaceID == "0" {
 		return &pb.PlaceReply{PlaceID: "0"}, nil
 	}
-	PlaceDetails := PlaceDetails.Find(*apiKey, PlaceID, in.GetLanguage())
-	var PhotoReferences []string
-	for i := 0; i < len(PlaceDetails.Photos); i++ {
-		PhotoReferences = append(PhotoReferences, PlaceDetails.Photos[i].PhotoReference)
-	}
-	var Reviews []string
-	for i := 0; i < len(PlaceDetails.Reviews); i++ {
-		Reviews = append(Reviews, PlaceDetails.Reviews[i].Text)
-	}
-	var WeekdayText []string
-	if PlaceDetails.OpeningHours != nil {
-		WeekdayText = PlaceDetails.OpeningHours.WeekdayText
-	}
-	ret := &pb.PlaceReply{
-		Name:                 PlaceDetails.Name,
-		FormattedAddress:     PlaceDetails.FormattedAddress,
-		FormattedPhoneNumber: PlaceDetails.FormattedPhoneNumber,
-		Icon:                 PlaceDetails.Icon,
-		PlaceID:              PlaceDetails.PlaceID,
-		Website:              PlaceDetails.Website,
-		URL:                  PlaceDetails.URL,
-		Types:                PlaceDetails.Types,
-		Rating:               PlaceDetails.Rating,
-		UserRatingsTotal:     int64(PlaceDetails.UserRatingsTotal),
-		WeekdayText:          WeekdayText,
-		PhotoReferences:      PhotoReferences,
-		BusinessStatus:       PlaceDetails.BusinessStatus,
-		Reviews:              Reviews,
-		LocationLat:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lat),
-		LocationLng:          fmt.Sprintf("%f", PlaceDetails.Geometry.Location.Lng),
-	}
-	tracer.Trace(time.Now().UTC(), ret)
-	return ret, nil
+	var placeReply pb.PlaceReply
+	marsharled, _ := json.Marshal(PlaceDetails.Find(*apiKey, PlaceID, in.GetLanguage()))
+	_ = json.Unmarshal(marsharled, &placeReply)
+	tracer.Trace(time.Now().UTC(), &placeReply)
+	return &placeReply, nil
 }
 
 type PlaceProifle struct {
@@ -251,6 +224,15 @@ func (s *server) UpdatePlaceProfile(ctx context.Context, in *pb.PlaceRequest) (*
 	ret := &pb.PlaceProfileReply{PlaceID: placeProfile.PlaceID, Likes: placeProfile.Likes}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
+}
+
+func (s *server) GetNearbySearch(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceReplyList, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var placeReply []pb.PlaceReply
+	marsharled, _ := json.Marshal(NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage()).Results)
+	_ = json.Unmarshal(marsharled, &placeReply)
+	tracer.Trace(time.Now().UTC(), &placeReply)
+	return &pb.PlaceReplyList{}, nil
 }
 
 func main() {

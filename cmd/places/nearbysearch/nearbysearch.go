@@ -14,7 +14,7 @@
 
 // Package main contains a simple command line tool for Places API Text Search
 // Documentation: https://developers.google.com/places/web-service/search#TextSearchRequests
-package main
+package place
 
 import (
 	"context"
@@ -23,12 +23,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/kr/pretty"
 	"googlemaps.github.io/maps"
 )
 
 var (
-	apiKey    = flag.String("key", "", "API Key for using Google Maps API.")
 	clientID  = flag.String("client_id", "", "ClientID for Maps for Work API access.")
 	signature = flag.String("signature", "", "Signature for Maps for Work API access.")
 	location  = flag.String("location", "", "The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude.")
@@ -57,30 +55,23 @@ func check(err error) {
 	}
 }
 
-func main() {
-	flag.Parse()
+func Find(apiKey string, location string, radius uint, keyword string, language string) maps.PlacesSearchResponse {
 
 	var client *maps.Client
 	var err error
-	if *apiKey != "" {
-		client, err = maps.NewClient(maps.WithAPIKey(*apiKey))
-	} else if *clientID != "" || *signature != "" {
-		client, err = maps.NewClient(maps.WithClientIDAndSignature(*clientID, *signature))
-	} else {
-		usageAndExit("Please specify an API Key, or Client ID and Signature.")
-	}
+	client, err = maps.NewClient(maps.WithAPIKey(apiKey))
 	check(err)
 
 	r := &maps.NearbySearchRequest{
-		Radius:    *radius,
-		Keyword:   *keyword,
-		Language:  *language,
+		Radius:    radius,
+		Keyword:   keyword,
+		Language:  language,
 		Name:      *name,
 		OpenNow:   *openNow,
 		PageToken: *pageToken,
 	}
 
-	parseLocation(*location, r)
+	parseLocation(location, r)
 	parsePriceLevels(*minPrice, *maxPrice, r)
 	parseRankBy(*rankBy, r)
 	parsePlaceType(*placeType, r)
@@ -88,7 +79,7 @@ func main() {
 	resp, err := client.NearbySearch(context.Background(), r)
 	check(err)
 
-	pretty.Println(resp)
+	return resp
 }
 
 func parseLocation(location string, r *maps.NearbySearchRequest) {
