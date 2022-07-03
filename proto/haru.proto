@@ -33,8 +33,10 @@ service version1 {
   rpc GetPoint (PointRequest) returns (PointReply) {}
   // IncrPoint
   rpc IncrPoint (PointRequest) returns (PointReply) {}
-  // GetPlaceId
-  rpc GetPlace (PlaceRequest) returns (PlaceReply) {}
+  // GetPlaceByID
+  rpc GetPlaceByID (PlaceRequest) returns (PlaceReply) {}
+  // GetPlaceByInput
+  rpc GetPlaceByInput (PlaceRequest) returns (PlaceReply) {}
   // UpdatePlaceProfile
   rpc UpdatePlaceProfile (PlaceRequest) returns (PlaceProfileReply) {}
   // getNearbySearch
@@ -42,144 +44,153 @@ service version1 {
 }
 
 message AccountRequest {
-  int64 ID = 1;
-  int64 RegisterTimestamp = 2;
+  int64 id = 1;
+  int64 register_timestamp = 2;
 }
 
 message AccountReply {
-  int64 ID = 1;
-  int64 RegisterTimestamp = 2;
+  int64 id = 1;
+  int64 register_timestamp = 2;
 }
 
 message ProfileRequest {
-  int64 ID = 1;
-  string Nickname = 2;
-  repeated string Likes = 3;
+  int64 id = 1;
+  string nickname = 2;
+  repeated string likes = 3;
 }
 
 message PlaceRequest {
-  string Input = 1;
-  string Language = 2;
-  string PlaceID = 3;
-  bool IsVisit = 4;
-  bool IsLike = 5;
-  string Location = 6;
-  uint64 Radius = 7;
+  string input = 1;
+  string language = 2;
+  string place_id = 3;
+  bool is_visit = 4;
+  bool is_like = 5;
+  string location = 6;
+  uint64 radius = 7;
   string Keyword = 8;
 }
 
 message ProfileReply {
-  int64 ID = 1;
-  string Nickname = 2;
-  repeated string Likes = 3;
+  int64 id = 1;
+  string nickname = 2;
+  repeated string likes = 3;
 }
 
 message PointRequest {
-  int64 ID = 1;
-  int64 Point = 2;
+  int64 id = 1;
+  int64 point = 2;
 }
 // 서버 단독 Place 정보들 모델로 정의 포인트, 방문정보등
 message PointReply {
-  int64 ID = 1;
-  int64 Point = 2;
-  int64 Count = 3;
+  int64 id = 1;
+  int64 point = 2;
+  int64 count = 3;
 }
 
 message PlaceReply {
-  message AddressComponent {
-    string LongName = 1;
-    string ShortName = 2;
-    repeated string Types = 3;
-  }
-  repeated AddressComponent AddressComponents = 1;
-  string FormattedAddress = 2;
-  string AdrAddress = 3;
-  string FormattedPhoneNumber = 4;
-  string InternationalPhoneNumber = 5;
-  AddressGeometry Geometry = 6;
-  string Name = 7;
-  string Icon = 8;
-  string PlaceID = 9;
-  float Rating = 10;
-  int64 UserRatingsTotal = 11;
+  repeated AddressComponent address_components = 1;
+  string formatted_address = 2;
+  string adr_address = 3;
+  string formatted_phone_number = 4;
+  string international_phone_number = 5;
+  AddressGeometry geometry = 6;
+  string name = 7;
+  string icon = 8;
+  string place_id = 9;
+  float rating = 10;
+  int64 user_ratings_total = 11;
   repeated string Types = 12;
-  OpeningHours OpeningHours = 13;
-  repeated Photo Photos = 14;
-  int64 PriceLevel = 15;
-  string Vicinity = 16;
-  bool PermanentlyClosed = 17;
-  string BusinessStatus = 18;
-  repeated PlaceReview Reviews = 19;
-  int64 UTCOffset = 20;
-  string Website = 21;
-  string URL = 22;
-  repeated string HTMLAttributions = 23;
+  OpeningHours opening_hours = 13;
+  repeated Photo photos = 14;
+  int64 price_level = 15;
+  string vicinity = 16;
+  bool permanently_closed = 17;
+  string business_status = 18;
+  repeated PlaceReview reviews = 19;
+  int64 utc_offset = 20;
+  string website = 21;
+  string url = 22;
+  repeated string html_attributions = 23;
+}
+
+message AddressComponent {
+  string long_name = 1;
+  string short_name = 2;
+  repeated string types = 3;
 }
 
 message AddressGeometry {
-  LatLng Location = 1;
-  string LocationType = 2;
-  LatLngBounds Bounds = 3;
-  LatLngBounds Viewport = 4;
-  repeated string Types = 5;
+  LatLng location = 1;
+  string location_type = 2;
+  LatLngBounds bounds = 3;
+  LatLngBounds viewport = 4;
+  repeated string types = 5;
 }
 
 message LatLng {
-  float Lat = 1;
-  float Lng = 2;
+  float lat = 1;
+  float lng = 2;
 }
 
 message LatLngBounds {
-  LatLng NorthEast = 1;
-  LatLng SoutWest = 2;
+  LatLng northeast = 1;
+  LatLng southwest = 2;
 }
-
-message OpeningHours {
-  bool OpenNow = 1;
-  repeated OpeningHoursPeriod Periods = 2;
-  repeated string WeekdayText = 3;
-  bool PermanentlyClosed = 4;
-}
-
-message OpeningHoursPeriod {
-  OpeningHoursOpenClose Open  = 1;
-  OpeningHoursOpenClose Close = 2;
-}
-
+  
 message OpeningHoursOpenClose {
-  int64 Day = 1;
-  string Time = 2;
+  int64 day = 1;
+  string time = 2;
 }
 
 message Photo {
-  string PhotoReference = 1;
-  int64 Height = 2;
-  int64 Width = 3;
-  repeated string HTMLAttributions = 4;
+  string photo_reference = 1;
+  int64 height = 2;
+  int64 width = 3;
+  repeated string html_attributions = 4;
 }
 
 message PlaceReview {
-  repeated PlaceReviewAspect Aspects = 1;
-  string AuthorName = 2;
-  string AuthorURL = 3;
-  string AuthorProfilePhoto = 4;
-  string Language = 5;
-  int64 Rating = 6;
-  string Text = 7;
-  int64 Time = 8;
+  repeated PlaceReviewAspect aspects = 1;
+  string author_name = 2;
+  string author_url = 3;
+  string profile_photo_url = 4;
+  string language = 5;
+  int64 rating = 6;
+  string text = 7;
+  int64 time = 8;
 }
 
 message PlaceReviewAspect {
-  int64 Rating = 1;
-  string Type = 2;
+  int64 rating = 1;
+  string type = 2;
+}
+
+message OpeningHours {
+  message OpeningHoursPeriod {
+    OpeningHoursOpenClose open  = 1;
+    OpeningHoursOpenClose close = 2;
+  }
+  message OpeningHoursOpenClose {
+    int64 day = 1;
+    string time = 2;
+  }
+  bool open_now = 1;
+  repeated OpeningHoursPeriod periods = 2;
+  repeated string weekday_text = 3;
+  bool permanently_closed = 4;
 }
 
 message PlaceProfileReply {
-  string PlaceID = 1;
-  string Populartimes = 2;
-  int64 Likes = 3;
+  message Populartimes {
+    int64 weekday = 1;
+    int64 time = 2;
+    int64 count = 3;
+  }
+  string place_id = 1;
+  repeated Populartimes popular_times = 2;
+  int64 likes = 3;
 }
 
 message PlaceReplyList {
-  repeated PlaceReply PlaceReplyList = 1;
+  repeated PlaceReply place_reply_list = 1;
 }
