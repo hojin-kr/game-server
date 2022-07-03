@@ -228,11 +228,12 @@ func (s *server) UpdatePlaceProfile(ctx context.Context, in *pb.PlaceRequest) (*
 
 func (s *server) GetNearbySearch(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceReplyList, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	var placeReply []pb.PlaceReply
-	marsharled, _ := json.Marshal(NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage()).Results)
-	_ = json.Unmarshal(marsharled, &placeReply)
-	tracer.Trace(time.Now().UTC(), &placeReply)
-	return &pb.PlaceReplyList{}, nil
+	places := NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage()).Results
+	marsharled, _ := json.Marshal(places)
+	var placeList = make([]*pb.PlaceReply, len(places))
+	_ = json.Unmarshal(marsharled, &placeList)
+	tracer.Trace(time.Now().UTC(), placeList)
+	return &pb.PlaceReplyList{PlaceReplyList: placeList}, nil
 }
 
 func main() {
