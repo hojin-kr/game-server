@@ -55,7 +55,7 @@ func check(err error) {
 	}
 }
 
-func Find(apiKey string, location string, radius uint, keyword string, language string) maps.PlacesSearchResponse {
+func Find(apiKey string, location string, radius uint, keyword string, language string, pageToken string, openNow bool) maps.PlacesSearchResponse {
 
 	var client *maps.Client
 	var err error
@@ -67,8 +67,8 @@ func Find(apiKey string, location string, radius uint, keyword string, language 
 		Keyword:   keyword,
 		Language:  language,
 		Name:      *name,
-		OpenNow:   *openNow,
-		PageToken: *pageToken,
+		OpenNow:   openNow,
+		PageToken: pageToken,
 	}
 
 	parseLocation(location, r)

@@ -67,7 +67,9 @@ message PlaceRequest {
   bool is_like = 5;
   string location = 6;
   uint64 radius = 7;
-  string Keyword = 8;
+  string keyword = 8;
+  string pageToken = 9;
+  bool OpenNow = 10;
 }
 
 message ProfileReply {

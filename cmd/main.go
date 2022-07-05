@@ -260,7 +260,8 @@ func (s *server) UpdatePlaceProfile(ctx context.Context, in *pb.PlaceRequest) (*
 
 func (s *server) GetNearbySearch(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceReplyList, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	places := NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage()).Results
+	// todo next page token
+	places := NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage(), in.GetPageToken(), in.GetOpenNow()).Results
 	marsharled, _ := json.Marshal(places)
 	var placeList = make([]*pb.PlaceReply, len(places))
 	_ = json.Unmarshal(marsharled, &placeList)
