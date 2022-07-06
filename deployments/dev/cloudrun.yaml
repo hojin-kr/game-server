@@ -1,0 +1,26 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: place
+  annotations:
+    run.googleapis.com/ingress: all
+spec:
+  template:
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: populartimes-354310@appspot.gserviceaccount.com
+      containers:
+      - image: gcr.io/populartimes-354310/haru:latest
+        ports:
+        - name: h2c
+          containerPort: 50051
+        env:
+        - name: PROJECT_ID
+          value: 'populartimes-354310'
+        - name: APP_KEY
+          value: ""
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
