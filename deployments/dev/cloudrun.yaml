@@ -17,7 +17,7 @@ spec:
           containerPort: 50051
         env:
         - name: PROJECT_ID
-          value: 'populartimes-354310'
+          value: populartimes-354310
         - name: APP_KEY
           value: ""
         resources:

@@ -9,7 +9,7 @@ COPY go.sum ./
 COPY cmd ./
 RUN go build -o /app/haru
 
-# ENV PORT=8080
-EXPOSE 50051
+# ENV PORT=50051
+# EXPOSE 50051
 
 CMD [ "/app/haru" ]

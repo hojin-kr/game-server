@@ -272,7 +272,7 @@ func (s *server) GetNearbySearch(ctx context.Context, in *pb.PlaceRequest) (*pb.
 func main() {
 	flag.Parse()
 	tracer = trace.New(os.Stdout)
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", *port))
 	if err != nil {
 		log.Printf("failed to listen: %v", err)
 	}
