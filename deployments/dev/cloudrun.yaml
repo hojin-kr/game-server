@@ -19,7 +19,7 @@ spec:
         - name: PROJECT_ID
           value: populartimes-354310
         - name: APP_KEY
-          value: ""
+          value: "AIzaSyDg1ZT7MRQF-NS8L1wvByWrKQ8-vfWR3Mc"
         resources:
           limits:
             cpu: 1000m

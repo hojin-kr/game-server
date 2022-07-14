@@ -570,6 +570,8 @@ struct Haru_PlaceReplyList {
 
   var placeReplyList: [Haru_PlaceReply] = []
 
+  var nextPageToken: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -1786,6 +1788,7 @@ extension Haru_PlaceReplyList: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   static let protoMessageName: String = _protobuf_package + ".PlaceReplyList"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "place_reply_list"),
+    2: .standard(proto: "next_page_token"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1795,6 +1798,7 @@ extension Haru_PlaceReplyList: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.placeReplyList) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.nextPageToken) }()
       default: break
       }
     }
@@ -1804,11 +1808,15 @@ extension Haru_PlaceReplyList: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if !self.placeReplyList.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.placeReplyList, fieldNumber: 1)
     }
+    if !self.nextPageToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.nextPageToken, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_PlaceReplyList, rhs: Haru_PlaceReplyList) -> Bool {
     if lhs.placeReplyList != rhs.placeReplyList {return false}
+    if lhs.nextPageToken != rhs.nextPageToken {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -39,6 +39,8 @@ service version1 {
   rpc GetPlaceByInput (PlaceRequest) returns (PlaceReply) {}
   // UpdatePlaceProfile
   rpc UpdatePlaceProfile (PlaceRequest) returns (PlaceProfileReply) {}
+  // GetPlaceProfile
+  rpc GetPlaceProfile (PlaceRequest) returns (PlaceProfileReply) {}
   // getNearbySearch
   rpc GetNearbySearch (PlaceRequest) returns (PlaceReplyList) {}
 }
@@ -195,4 +197,5 @@ message PlaceProfileReply {
 
 message PlaceReplyList {
   repeated PlaceReply place_reply_list = 1;
+  string next_page_token = 2;
 }

@@ -73,6 +73,11 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
 
+  func getPlaceProfile(
+    _ request: Haru_PlaceRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
+
   func getNearbySearch(
     _ request: Haru_PlaceRequest,
     callOptions: CallOptions?
@@ -228,6 +233,24 @@ extension Haru_version1ClientProtocol {
     )
   }
 
+  /// GetPlaceProfile
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetPlaceProfile.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getPlaceProfile(
+    _ request: Haru_PlaceRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getPlaceProfile.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? []
+    )
+  }
+
   /// getNearbySearch
   ///
   /// - Parameters:
@@ -353,6 +376,11 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
 
+  func makeGetPlaceProfileCall(
+    _ request: Haru_PlaceRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
+
   func makeGetNearbySearchCall(
     _ request: Haru_PlaceRequest,
     callOptions: CallOptions?
@@ -462,6 +490,18 @@ extension Haru_version1AsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpdatePlaceProfileInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetPlaceProfileCall(
+    _ request: Haru_PlaceRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getPlaceProfile.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? []
     )
   }
 
@@ -576,6 +616,18 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
+  internal func getPlaceProfile(
+    _ request: Haru_PlaceRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_PlaceProfileReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getPlaceProfile.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? []
+    )
+  }
+
   internal func getNearbySearch(
     _ request: Haru_PlaceRequest,
     callOptions: CallOptions? = nil
@@ -634,6 +686,9 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
   /// - Returns: Interceptors to use when invoking 'updatePlaceProfile'.
   func makeUpdatePlaceProfileInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
 
+  /// - Returns: Interceptors to use when invoking 'getPlaceProfile'.
+  func makeGetPlaceProfileInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
+
   /// - Returns: Interceptors to use when invoking 'getNearbySearch'.
   func makeGetNearbySearchInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceReplyList>]
 }
@@ -651,6 +706,7 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.getPlaceByID,
       Haru_version1ClientMetadata.Methods.getPlaceByInput,
       Haru_version1ClientMetadata.Methods.updatePlaceProfile,
+      Haru_version1ClientMetadata.Methods.getPlaceProfile,
       Haru_version1ClientMetadata.Methods.getNearbySearch,
     ]
   )
@@ -704,6 +760,12 @@ internal enum Haru_version1ClientMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let getPlaceProfile = GRPCMethodDescriptor(
+      name: "GetPlaceProfile",
+      path: "/haru.version1/GetPlaceProfile",
+      type: GRPCCallType.unary
+    )
+
     internal static let getNearbySearch = GRPCMethodDescriptor(
       name: "GetNearbySearch",
       path: "/haru.version1/GetNearbySearch",
@@ -741,6 +803,9 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
 
   /// UpdatePlaceProfile
   func updatePlaceProfile(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceProfileReply>
+
+  /// GetPlaceProfile
+  func getPlaceProfile(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceProfileReply>
 
   /// getNearbySearch
   func getNearbySearch(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceReplyList>
@@ -830,6 +895,15 @@ extension Haru_version1Provider {
         userFunction: self.updatePlaceProfile(request:context:)
       )
 
+    case "GetPlaceProfile":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_PlaceProfileReply>(),
+        interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? [],
+        userFunction: self.getPlaceProfile(request:context:)
+      )
+
     case "GetNearbySearch":
       return UnaryServerHandler(
         context: context,
@@ -899,6 +973,12 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
 
   /// UpdatePlaceProfile
   @Sendable func updatePlaceProfile(
+    request: Haru_PlaceRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_PlaceProfileReply
+
+  /// GetPlaceProfile
+  @Sendable func getPlaceProfile(
     request: Haru_PlaceRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_PlaceProfileReply
@@ -1001,6 +1081,15 @@ extension Haru_version1AsyncProvider {
         wrapping: self.updatePlaceProfile(request:context:)
       )
 
+    case "GetPlaceProfile":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_PlaceProfileReply>(),
+        interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? [],
+        wrapping: self.getPlaceProfile(request:context:)
+      )
+
     case "GetNearbySearch":
       return GRPCAsyncServerHandler(
         context: context,
@@ -1052,6 +1141,10 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdatePlaceProfileInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
 
+  /// - Returns: Interceptors to use when handling 'getPlaceProfile'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetPlaceProfileInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
+
   /// - Returns: Interceptors to use when handling 'getNearbySearch'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetNearbySearchInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceReplyList>]
@@ -1070,6 +1163,7 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.getPlaceByID,
       Haru_version1ServerMetadata.Methods.getPlaceByInput,
       Haru_version1ServerMetadata.Methods.updatePlaceProfile,
+      Haru_version1ServerMetadata.Methods.getPlaceProfile,
       Haru_version1ServerMetadata.Methods.getNearbySearch,
     ]
   )
@@ -1120,6 +1214,12 @@ internal enum Haru_version1ServerMetadata {
     internal static let updatePlaceProfile = GRPCMethodDescriptor(
       name: "UpdatePlaceProfile",
       path: "/haru.version1/UpdatePlaceProfile",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getPlaceProfile = GRPCMethodDescriptor(
+      name: "GetPlaceProfile",
+      path: "/haru.version1/GetPlaceProfile",
       type: GRPCCallType.unary
     )
 

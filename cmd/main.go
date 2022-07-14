@@ -258,15 +258,35 @@ func (s *server) UpdatePlaceProfile(ctx context.Context, in *pb.PlaceRequest) (*
 	return &PlaceProfileReply, nil
 }
 
+// GetPlace updatePlace additional info
+func (s *server) GetPlaceProfile(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceProfileReply, error) {
+	// todo 언어 지원
+	tracer.Trace(time.Now().UTC(), in)
+	var datastoreClient *datastore.Client
+	datastoreClient, err := datastore.NewClient(ctx, os.Getenv("PROJECT_ID"))
+	if err != nil {
+		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
+	}
+	var placeProfile PlaceProifle
+	_ = datastoreClient.Get(ctx, datastore.NameKey("Place", in.GetPlaceId(), nil), &placeProfile)
+	var PlaceProfileReply pb.PlaceProfileReply
+	marsharled, _ := json.Marshal(placeProfile)
+	_ = json.Unmarshal(marsharled, &PlaceProfileReply)
+	tracer.Trace(time.Now().UTC(), &PlaceProfileReply)
+	return &PlaceProfileReply, nil
+}
+
 func (s *server) GetNearbySearch(ctx context.Context, in *pb.PlaceRequest) (*pb.PlaceReplyList, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	// todo next page token
-	places := NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage(), in.GetPageToken(), in.GetOpenNow()).Results
+	res := NearbySearch.Find(*apiKey, in.GetLocation(), uint(in.GetRadius()), in.GetKeyword(), in.GetLanguage(), in.GetPageToken(), in.GetOpenNow())
+	places := res.Results
 	marsharled, _ := json.Marshal(places)
 	var placeList = make([]*pb.PlaceReply, len(places))
 	_ = json.Unmarshal(marsharled, &placeList)
 	tracer.Trace(time.Now().UTC(), placeList)
-	return &pb.PlaceReplyList{PlaceReplyList: placeList}, nil
+	return &pb.PlaceReplyList{PlaceReplyList: placeList, NextPageToken: res.NextPageToken}, nil
 }
 
 func main() {
