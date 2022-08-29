@@ -1,5 +1,6 @@
 # 개요
-Go 게임 서버 프레임워크 개발
+Go 게임 서버 프레임워크 개발.  
+Golang REST & gRPC , GCP AppEngine & CloudRun
 
 # GCP Architecture Diagram
 ![image](https://user-images.githubusercontent.com/22079767/154786972-c1e06d6a-15db-4eec-8c35-cb1e29434541.png)
