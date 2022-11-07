@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  go-main:
+    image: test:latest
+    environment:
+      - PROJECT_ID=golf-367911
+      - GOOGLE_APPLICATION_CREDENTIALS=application_default_credentials.json
+      - port=50051
+    ports:
+      - "50051:50051"

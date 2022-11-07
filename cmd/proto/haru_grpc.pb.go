@@ -22,26 +22,12 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type Version1Client interface {
-	// Create Account
 	CreateAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error)
-	// GetProfile
 	GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error)
-	// UpdateProfile
 	UpdateProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error)
-	// GetPoint
-	GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
-	// IncrPoint
-	IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error)
-	// GetPlaceByID
-	GetPlaceByID(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
-	// GetPlaceByInput
-	GetPlaceByInput(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error)
-	// UpdatePlaceProfile
-	UpdatePlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error)
-	// GetPlaceProfile
-	GetPlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error)
-	// getNearbySearch
-	GetNearbySearch(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReplyList, error)
+	CreateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
+	UpdateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
+	GetRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
 }
 
 type version1Client struct {
@@ -79,63 +65,27 @@ func (c *version1Client) UpdateProfile(ctx context.Context, in *ProfileRequest, 
 	return out, nil
 }
 
-func (c *version1Client) GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error) {
-	out := new(PointReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetPoint", in, out, opts...)
+func (c *version1Client) CreateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error) {
+	out := new(RoundReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/CreateRound", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *version1Client) IncrPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointReply, error) {
-	out := new(PointReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/IncrPoint", in, out, opts...)
+func (c *version1Client) UpdateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error) {
+	out := new(RoundReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/UpdateRound", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *version1Client) GetPlaceByID(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error) {
-	out := new(PlaceReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetPlaceByID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *version1Client) GetPlaceByInput(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReply, error) {
-	out := new(PlaceReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetPlaceByInput", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *version1Client) UpdatePlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error) {
-	out := new(PlaceProfileReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/UpdatePlaceProfile", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *version1Client) GetPlaceProfile(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceProfileReply, error) {
-	out := new(PlaceProfileReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetPlaceProfile", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *version1Client) GetNearbySearch(ctx context.Context, in *PlaceRequest, opts ...grpc.CallOption) (*PlaceReplyList, error) {
-	out := new(PlaceReplyList)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetNearbySearch", in, out, opts...)
+func (c *version1Client) GetRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error) {
+	out := new(RoundReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetRound", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -146,26 +96,12 @@ func (c *version1Client) GetNearbySearch(ctx context.Context, in *PlaceRequest, 
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
 type Version1Server interface {
-	// Create Account
 	CreateAccount(context.Context, *AccountRequest) (*AccountReply, error)
-	// GetProfile
 	GetProfile(context.Context, *ProfileRequest) (*ProfileReply, error)
-	// UpdateProfile
 	UpdateProfile(context.Context, *ProfileRequest) (*ProfileReply, error)
-	// GetPoint
-	GetPoint(context.Context, *PointRequest) (*PointReply, error)
-	// IncrPoint
-	IncrPoint(context.Context, *PointRequest) (*PointReply, error)
-	// GetPlaceByID
-	GetPlaceByID(context.Context, *PlaceRequest) (*PlaceReply, error)
-	// GetPlaceByInput
-	GetPlaceByInput(context.Context, *PlaceRequest) (*PlaceReply, error)
-	// UpdatePlaceProfile
-	UpdatePlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error)
-	// GetPlaceProfile
-	GetPlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error)
-	// getNearbySearch
-	GetNearbySearch(context.Context, *PlaceRequest) (*PlaceReplyList, error)
+	CreateRound(context.Context, *RoundRequest) (*RoundReply, error)
+	UpdateRound(context.Context, *RoundRequest) (*RoundReply, error)
+	GetRound(context.Context, *RoundRequest) (*RoundReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -182,26 +118,14 @@ func (UnimplementedVersion1Server) GetProfile(context.Context, *ProfileRequest) 
 func (UnimplementedVersion1Server) UpdateProfile(context.Context, *ProfileRequest) (*ProfileReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
 }
-func (UnimplementedVersion1Server) GetPoint(context.Context, *PointRequest) (*PointReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPoint not implemented")
+func (UnimplementedVersion1Server) CreateRound(context.Context, *RoundRequest) (*RoundReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRound not implemented")
 }
-func (UnimplementedVersion1Server) IncrPoint(context.Context, *PointRequest) (*PointReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IncrPoint not implemented")
+func (UnimplementedVersion1Server) UpdateRound(context.Context, *RoundRequest) (*RoundReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRound not implemented")
 }
-func (UnimplementedVersion1Server) GetPlaceByID(context.Context, *PlaceRequest) (*PlaceReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPlaceByID not implemented")
-}
-func (UnimplementedVersion1Server) GetPlaceByInput(context.Context, *PlaceRequest) (*PlaceReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPlaceByInput not implemented")
-}
-func (UnimplementedVersion1Server) UpdatePlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlaceProfile not implemented")
-}
-func (UnimplementedVersion1Server) GetPlaceProfile(context.Context, *PlaceRequest) (*PlaceProfileReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPlaceProfile not implemented")
-}
-func (UnimplementedVersion1Server) GetNearbySearch(context.Context, *PlaceRequest) (*PlaceReplyList, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetNearbySearch not implemented")
+func (UnimplementedVersion1Server) GetRound(context.Context, *RoundRequest) (*RoundReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRound not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -270,128 +194,56 @@ func _Version1_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_GetPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PointRequest)
+func _Version1_CreateRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoundRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).GetPoint(ctx, in)
+		return srv.(Version1Server).CreateRound(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/GetPoint",
+		FullMethod: "/haru.version1/CreateRound",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetPoint(ctx, req.(*PointRequest))
+		return srv.(Version1Server).CreateRound(ctx, req.(*RoundRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_IncrPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PointRequest)
+func _Version1_UpdateRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoundRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).IncrPoint(ctx, in)
+		return srv.(Version1Server).UpdateRound(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/IncrPoint",
+		FullMethod: "/haru.version1/UpdateRound",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).IncrPoint(ctx, req.(*PointRequest))
+		return srv.(Version1Server).UpdateRound(ctx, req.(*RoundRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_GetPlaceByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlaceRequest)
+func _Version1_GetRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoundRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).GetPlaceByID(ctx, in)
+		return srv.(Version1Server).GetRound(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/GetPlaceByID",
+		FullMethod: "/haru.version1/GetRound",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetPlaceByID(ctx, req.(*PlaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Version1_GetPlaceByInput_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(Version1Server).GetPlaceByInput(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/haru.version1/GetPlaceByInput",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetPlaceByInput(ctx, req.(*PlaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Version1_UpdatePlaceProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(Version1Server).UpdatePlaceProfile(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/haru.version1/UpdatePlaceProfile",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).UpdatePlaceProfile(ctx, req.(*PlaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Version1_GetPlaceProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(Version1Server).GetPlaceProfile(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/haru.version1/GetPlaceProfile",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetPlaceProfile(ctx, req.(*PlaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Version1_GetNearbySearch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(Version1Server).GetNearbySearch(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/haru.version1/GetNearbySearch",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetNearbySearch(ctx, req.(*PlaceRequest))
+		return srv.(Version1Server).GetRound(ctx, req.(*RoundRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -416,32 +268,16 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Version1_UpdateProfile_Handler,
 		},
 		{
-			MethodName: "GetPoint",
-			Handler:    _Version1_GetPoint_Handler,
+			MethodName: "CreateRound",
+			Handler:    _Version1_CreateRound_Handler,
 		},
 		{
-			MethodName: "IncrPoint",
-			Handler:    _Version1_IncrPoint_Handler,
+			MethodName: "UpdateRound",
+			Handler:    _Version1_UpdateRound_Handler,
 		},
 		{
-			MethodName: "GetPlaceByID",
-			Handler:    _Version1_GetPlaceByID_Handler,
-		},
-		{
-			MethodName: "GetPlaceByInput",
-			Handler:    _Version1_GetPlaceByInput_Handler,
-		},
-		{
-			MethodName: "UpdatePlaceProfile",
-			Handler:    _Version1_UpdatePlaceProfile_Handler,
-		},
-		{
-			MethodName: "GetPlaceProfile",
-			Handler:    _Version1_GetPlaceProfile_Handler,
-		},
-		{
-			MethodName: "GetNearbySearch",
-			Handler:    _Version1_GetNearbySearch_Handler,
+			MethodName: "GetRound",
+			Handler:    _Version1_GetRound_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

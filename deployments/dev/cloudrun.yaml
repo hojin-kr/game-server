@@ -9,7 +9,7 @@ spec:
     spec:
       containerConcurrency: 80
       timeoutSeconds: 300
-      serviceAccountName: populartimes-354310@appspot.gserviceaccount.com
+      serviceAccountName: golf-367911@appspot.gserviceaccount.com
       containers:
       - image: gcr.io/populartimes-354310/haru:latest
         ports:
@@ -17,9 +17,9 @@ spec:
           containerPort: 50051
         env:
         - name: PROJECT_ID
-          value: populartimes-354310
+          value: golf-367911
         - name: APP_KEY
-          value: "AIzaSyDg1ZT7MRQF-NS8L1wvByWrKQ8-vfWR3Mc"
+          value: ""
         resources:
           limits:
             cpu: 1000m

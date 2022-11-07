@@ -23,26 +23,12 @@ package haru;
 
 // Service definition.
 service version1 {
-  // Create Account
   rpc CreateAccount (AccountRequest) returns (AccountReply) {}
-  // GetProfile
   rpc GetProfile (ProfileRequest) returns (ProfileReply) {}
-  // UpdateProfile
   rpc UpdateProfile (ProfileRequest) returns (ProfileReply) {}
-  // GetPoint
-  rpc GetPoint (PointRequest) returns (PointReply) {}
-  // IncrPoint
-  rpc IncrPoint (PointRequest) returns (PointReply) {}
-  // GetPlaceByID
-  rpc GetPlaceByID (PlaceRequest) returns (PlaceReply) {}
-  // GetPlaceByInput
-  rpc GetPlaceByInput (PlaceRequest) returns (PlaceReply) {}
-  // UpdatePlaceProfile
-  rpc UpdatePlaceProfile (PlaceRequest) returns (PlaceProfileReply) {}
-  // GetPlaceProfile
-  rpc GetPlaceProfile (PlaceRequest) returns (PlaceProfileReply) {}
-  // getNearbySearch
-  rpc GetNearbySearch (PlaceRequest) returns (PlaceReplyList) {}
+  rpc CreateRound (RoundRequest) returns (RoundReply) {}
+  rpc UpdateRound (RoundRequest) returns (RoundReply) {}
+  rpc GetRound (RoundRequest) returns (RoundReply) {}
 }
 
 message AccountRequest {
@@ -58,144 +44,75 @@ message AccountReply {
 message ProfileRequest {
   int64 id = 1;
   string nickname = 2;
-  repeated string likes = 3;
-}
-
-message PlaceRequest {
-  string input = 1;
-  string language = 2;
-  string place_id = 3;
-  bool is_visit = 4;
-  bool is_like = 5;
-  string location = 6;
-  uint64 radius = 7;
-  string keyword = 8;
-  string pageToken = 9;
-  bool OpenNow = 10;
+  int64 age = 3;
+  int64 sex = 7;
+  int64 score_of_gross = 8;
+  int64 experience_of_years = 9;
+  repeated string rounds = 10;
 }
 
 message ProfileReply {
   int64 id = 1;
   string nickname = 2;
-  repeated string likes = 3;
+  int64 age = 3;
+  int64 sex = 7;
+  int64 score_of_gross = 8;
+  int64 experience_of_years = 9;
+  repeated string rounds = 10;
+  string desc = 11;
 }
 
-message PointRequest {
+message RoundRequest {
+  Round round = 1;
+  Place place = 2;
+  Attend attend = 3;
+}
+
+message RoundReply {
+  Round round = 1;
+  Place place = 2;
+  Attend attend = 3;
+}
+
+message Round {
   int64 id = 1;
-  int64 point = 2;
+  int64 host = 2;
+  int64 time = 3;
+  int64 price = 4;
+  // type 으로 상황별 구분해서 사용 ex ) 0 : 필드 18홀, 1 : 필드 9홀, 2 : 스크린 9홀 ...
+  int64 type_play = 5;
+  int64 type_age = 6;
+  int64 type_sex = 7;
+  int64 type_score_of_gross = 8;
+  int64 type_experience_of_years = 9;
+  string place_id = 10;
+  string place_name = 11;
+  string place_address = 12;
+  // 탐색용 키
+  string short_address = 13;
+  string lat = 14;
+  string long = 15;
+  int64 updated = 16;
 }
-// 서버 단독 Place 정보들 모델로 정의 포인트, 방문정보등
-message PointReply {
+
+message Place {
   int64 id = 1;
-  int64 point = 2;
-  int64 count = 3;
+  string name = 2;
+  string location = 3;
+  string lat = 4;
+  string long = 5;
+  string photo = 6;
 }
 
-message PlaceReply {
-  repeated AddressComponent address_components = 1;
-  string formatted_address = 2;
-  string adr_address = 3;
-  string formatted_phone_number = 4;
-  string international_phone_number = 5;
-  AddressGeometry geometry = 6;
-  string name = 7;
-  string icon = 8;
-  string place_id = 9;
-  float rating = 10;
-  int64 user_ratings_total = 11;
-  repeated string Types = 12;
-  OpeningHours opening_hours = 13;
-  repeated Photo photos = 14;
-  int64 price_level = 15;
-  string vicinity = 16;
-  bool permanently_closed = 17;
-  string business_status = 18;
-  repeated PlaceReview reviews = 19;
-  int64 utc_offset = 20;
-  string website = 21;
-  string url = 22;
-  repeated string html_attributions = 23;
+message Attend {
+  int64 id = 1;
+  repeated int64 ids = 2;
+  int64 updated = 3;
 }
 
-message AddressComponent {
-  string long_name = 1;
-  string short_name = 2;
-  repeated string types = 3;
-}
-
-message AddressGeometry {
-  LatLng location = 1;
-  string location_type = 2;
-  LatLngBounds bounds = 3;
-  LatLngBounds viewport = 4;
-  repeated string types = 5;
-}
-
-message LatLng {
-  float lat = 1;
-  float lng = 2;
-}
-
-message LatLngBounds {
-  LatLng northeast = 1;
-  LatLng southwest = 2;
-}
-  
-message OpeningHoursOpenClose {
-  int64 day = 1;
-  string time = 2;
-}
-
-message Photo {
-  string photo_reference = 1;
-  int64 height = 2;
-  int64 width = 3;
-  repeated string html_attributions = 4;
-}
-
-message PlaceReview {
-  repeated PlaceReviewAspect aspects = 1;
-  string author_name = 2;
-  string author_url = 3;
-  string profile_photo_url = 4;
-  string language = 5;
-  int64 rating = 6;
-  string text = 7;
-  int64 time = 8;
-}
-
-message PlaceReviewAspect {
-  int64 rating = 1;
-  string type = 2;
-}
-
-message OpeningHours {
-  message OpeningHoursPeriod {
-    OpeningHoursOpenClose open  = 1;
-    OpeningHoursOpenClose close = 2;
-  }
-  message OpeningHoursOpenClose {
-    int64 day = 1;
-    string time = 2;
-  }
-  bool open_now = 1;
-  repeated OpeningHoursPeriod periods = 2;
-  repeated string weekday_text = 3;
-  bool permanently_closed = 4;
-}
-
-message PlaceProfileReply {
-  message Populartimes {
-    int64 weekday = 1;
-    int64 time = 2;
-    int64 count = 3;
-  }
-  string place_id = 1;
-  repeated Populartimes popular_times = 2;
-  int64 likes = 3;
-}
-
-message PlaceReplyList {
-  repeated PlaceReply place_reply_list = 1;
-  string next_page_token = 2;
+message Review {
+  int64 id = 1;
+  repeated int64 ids = 2;
+  repeated string reviews = 3;
+  int64 updated = 4;
 }
