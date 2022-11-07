@@ -29,6 +29,7 @@ service version1 {
   rpc CreateRound (RoundRequest) returns (RoundReply) {}
   rpc UpdateRound (RoundRequest) returns (RoundReply) {}
   rpc GetRound (RoundRequest) returns (RoundReply) {}
+  rpc GetFilterdRounds (FilterdRoundsRequest) returns (FilterdRoundsReply) {}
 }
 
 message AccountRequest {
@@ -115,4 +116,20 @@ message Review {
   repeated int64 ids = 2;
   repeated string reviews = 3;
   int64 updated = 4;
+}
+
+message FilterdRoundsRequest {
+  bool is_init =1;
+  int64 time_min = 2;
+  int64 time_max = 3;
+  int64 page = 4;
+  int64 type_play = 5;
+  int64 type_age = 6;
+  int64 type_sex = 7;
+  int64 type_score_of_gross = 8;
+  int64 type_experience_of_years = 9;
+}
+
+message FilterdRoundsReply {
+  repeated Round Rounds = 1;
 }

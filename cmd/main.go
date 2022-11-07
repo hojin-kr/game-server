@@ -115,8 +115,8 @@ func (s *server) CreateRound(ctx context.Context, in *pb.RoundRequest) (*pb.Roun
 		PlaceName:             in.Round.GetPlaceName(),
 		PlaceAddress:          in.Round.GetPlaceAddress(),
 		ShortAddress:          in.Round.GetShortAddress(),
-		Lat:                   in.Place.GetLat(),
-		Long:                  in.Place.GetLong(),
+		Lat:                   in.Round.GetLat(),
+		Long:                  in.Round.GetLong(),
 		Updated:               time.Now().Unix(),
 	}
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
@@ -127,6 +127,44 @@ func (s *server) CreateRound(ctx context.Context, in *pb.RoundRequest) (*pb.Roun
 	}
 	round.Id = key.ID
 	ret := &pb.RoundReply{Round: &round, Place: in.GetPlace(), Attend: in.GetAttend()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetRound(ctx context.Context, in *pb.RoundRequest) (*pb.RoundReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var datastoreClient *datastore.Client
+	datastoreClient, err := datastore.NewClient(ctx, *project_id)
+	if err != nil {
+		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
+	}
+	key := datastore.IDKey("Round", in.Round.GetId(), nil)
+	if err := datastoreClient.Get(ctx, key, in.Round); err != nil {
+		log.Printf("Should Not Profile get: " + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Profile get", err.Error())
+	}
+	ret := &pb.RoundReply{Round: in.GetRound(), Place: in.GetPlace(), Attend: in.GetAttend()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetFilterdRounds(ctx context.Context, in *pb.FilterdRoundsRequest) (*pb.FilterdRoundsReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var datastoreClient *datastore.Client
+	datastoreClient, err := datastore.NewClient(ctx, *project_id)
+	if err != nil {
+		log.Printf("Should Not Datastore New Client" + err.Error())
+		tracer.Trace(time.Now().UTC(), in, "Should Not Datastore New Client", err.Error())
+	}
+
+	var rounds []*pb.Round
+	q := datastore.NewQuery("Round").Limit(30)
+	// q := datastore.NewQuery("Round").Filter("A =", 12).Limit(30)
+	if _, err := datastoreClient.GetAll(ctx, q, &rounds); err != nil {
+		// Handle error
+	}
+	ret := &pb.FilterdRoundsReply{Rounds: rounds}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
