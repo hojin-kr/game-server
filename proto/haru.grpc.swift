@@ -48,40 +48,25 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_ProfileRequest, Haru_ProfileReply>
 
-  func getPoint(
-    _ request: Haru_PointRequest,
+  func createRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PointRequest, Haru_PointReply>
+  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply>
 
-  func incrPoint(
-    _ request: Haru_PointRequest,
+  func updateRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PointRequest, Haru_PointReply>
+  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply>
 
-  func getPlaceByID(
-    _ request: Haru_PlaceRequest,
+  func getRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceReply>
+  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply>
 
-  func getPlaceByInput(
-    _ request: Haru_PlaceRequest,
+  func getFilterdRounds(
+    _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceReply>
-
-  func updatePlaceProfile(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
-
-  func getPlaceProfile(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
-
-  func getNearbySearch(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceReplyList>
+  ) -> UnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>
 }
 
 extension Haru_version1ClientProtocol {
@@ -89,7 +74,7 @@ extension Haru_version1ClientProtocol {
     return "haru.version1"
   }
 
-  /// Create Account
+  /// Unary call to CreateAccount
   ///
   /// - Parameters:
   ///   - request: Request to send to CreateAccount.
@@ -107,7 +92,7 @@ extension Haru_version1ClientProtocol {
     )
   }
 
-  /// GetProfile
+  /// Unary call to GetProfile
   ///
   /// - Parameters:
   ///   - request: Request to send to GetProfile.
@@ -125,7 +110,7 @@ extension Haru_version1ClientProtocol {
     )
   }
 
-  /// UpdateProfile
+  /// Unary call to UpdateProfile
   ///
   /// - Parameters:
   ///   - request: Request to send to UpdateProfile.
@@ -143,129 +128,75 @@ extension Haru_version1ClientProtocol {
     )
   }
 
-  /// GetPoint
+  /// Unary call to CreateRound
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetPoint.
+  ///   - request: Request to send to CreateRound.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getPoint(
-    _ request: Haru_PointRequest,
+  internal func createRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PointRequest, Haru_PointReply> {
+  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPoint.path,
+      path: Haru_version1ClientMetadata.Methods.createRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPointInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? []
     )
   }
 
-  /// IncrPoint
+  /// Unary call to UpdateRound
   ///
   /// - Parameters:
-  ///   - request: Request to send to IncrPoint.
+  ///   - request: Request to send to UpdateRound.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func incrPoint(
-    _ request: Haru_PointRequest,
+  internal func updateRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PointRequest, Haru_PointReply> {
+  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.incrPoint.path,
+      path: Haru_version1ClientMetadata.Methods.updateRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeIncrPointInterceptors() ?? []
+      interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? []
     )
   }
 
-  /// GetPlaceByID
+  /// Unary call to GetRound
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetPlaceByID.
+  ///   - request: Request to send to GetRound.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getPlaceByID(
-    _ request: Haru_PlaceRequest,
+  internal func getRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceReply> {
+  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceByID.path,
+      path: Haru_version1ClientMetadata.Methods.getRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceByIDInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetRoundInterceptors() ?? []
     )
   }
 
-  /// GetPlaceByInput
+  /// Unary call to GetFilterdRounds
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetPlaceByInput.
+  ///   - request: Request to send to GetFilterdRounds.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getPlaceByInput(
-    _ request: Haru_PlaceRequest,
+  internal func getFilterdRounds(
+    _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceReply> {
+  ) -> UnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceByInput.path,
+      path: Haru_version1ClientMetadata.Methods.getFilterdRounds.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceByInputInterceptors() ?? []
-    )
-  }
-
-  /// UpdatePlaceProfile
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to UpdatePlaceProfile.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func updatePlaceProfile(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply> {
-    return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.updatePlaceProfile.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUpdatePlaceProfileInterceptors() ?? []
-    )
-  }
-
-  /// GetPlaceProfile
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to GetPlaceProfile.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getPlaceProfile(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply> {
-    return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceProfile.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? []
-    )
-  }
-
-  /// getNearbySearch
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to GetNearbySearch.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getNearbySearch(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_PlaceRequest, Haru_PlaceReplyList> {
-    return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getNearbySearch.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetNearbySearchInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
     )
   }
 }
@@ -351,40 +282,25 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_ProfileRequest, Haru_ProfileReply>
 
-  func makeGetPointCall(
-    _ request: Haru_PointRequest,
+  func makeCreateRoundCall(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PointRequest, Haru_PointReply>
+  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply>
 
-  func makeIncrPointCall(
-    _ request: Haru_PointRequest,
+  func makeUpdateRoundCall(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PointRequest, Haru_PointReply>
+  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply>
 
-  func makeGetPlaceByIDCall(
-    _ request: Haru_PlaceRequest,
+  func makeGetRoundCall(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceReply>
+  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply>
 
-  func makeGetPlaceByInputCall(
-    _ request: Haru_PlaceRequest,
+  func makeGetFilterdRoundsCall(
+    _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceReply>
-
-  func makeUpdatePlaceProfileCall(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
-
-  func makeGetPlaceProfileCall(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply>
-
-  func makeGetNearbySearchCall(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceReplyList>
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -433,87 +349,51 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
-  internal func makeGetPointCall(
-    _ request: Haru_PointRequest,
+  internal func makeCreateRoundCall(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PointRequest, Haru_PointReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPoint.path,
+      path: Haru_version1ClientMetadata.Methods.createRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPointInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? []
     )
   }
 
-  internal func makeIncrPointCall(
-    _ request: Haru_PointRequest,
+  internal func makeUpdateRoundCall(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PointRequest, Haru_PointReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.incrPoint.path,
+      path: Haru_version1ClientMetadata.Methods.updateRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeIncrPointInterceptors() ?? []
+      interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? []
     )
   }
 
-  internal func makeGetPlaceByIDCall(
-    _ request: Haru_PlaceRequest,
+  internal func makeGetRoundCall(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceByID.path,
+      path: Haru_version1ClientMetadata.Methods.getRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceByIDInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetRoundInterceptors() ?? []
     )
   }
 
-  internal func makeGetPlaceByInputCall(
-    _ request: Haru_PlaceRequest,
+  internal func makeGetFilterdRoundsCall(
+    _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceByInput.path,
+      path: Haru_version1ClientMetadata.Methods.getFilterdRounds.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceByInputInterceptors() ?? []
-    )
-  }
-
-  internal func makeUpdatePlaceProfileCall(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply> {
-    return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.updatePlaceProfile.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUpdatePlaceProfileInterceptors() ?? []
-    )
-  }
-
-  internal func makeGetPlaceProfileCall(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceProfileReply> {
-    return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceProfile.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? []
-    )
-  }
-
-  internal func makeGetNearbySearchCall(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_PlaceRequest, Haru_PlaceReplyList> {
-    return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getNearbySearch.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetNearbySearchInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
     )
   }
 }
@@ -556,87 +436,51 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
-  internal func getPoint(
-    _ request: Haru_PointRequest,
+  internal func createRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_PointReply {
+  ) async throws -> Haru_RoundReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPoint.path,
+      path: Haru_version1ClientMetadata.Methods.createRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPointInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? []
     )
   }
 
-  internal func incrPoint(
-    _ request: Haru_PointRequest,
+  internal func updateRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_PointReply {
+  ) async throws -> Haru_RoundReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.incrPoint.path,
+      path: Haru_version1ClientMetadata.Methods.updateRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeIncrPointInterceptors() ?? []
+      interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? []
     )
   }
 
-  internal func getPlaceByID(
-    _ request: Haru_PlaceRequest,
+  internal func getRound(
+    _ request: Haru_RoundRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_PlaceReply {
+  ) async throws -> Haru_RoundReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceByID.path,
+      path: Haru_version1ClientMetadata.Methods.getRound.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceByIDInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetRoundInterceptors() ?? []
     )
   }
 
-  internal func getPlaceByInput(
-    _ request: Haru_PlaceRequest,
+  internal func getFilterdRounds(
+    _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_PlaceReply {
+  ) async throws -> Haru_FilterdRoundsReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceByInput.path,
+      path: Haru_version1ClientMetadata.Methods.getFilterdRounds.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceByInputInterceptors() ?? []
-    )
-  }
-
-  internal func updatePlaceProfile(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Haru_PlaceProfileReply {
-    return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.updatePlaceProfile.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUpdatePlaceProfileInterceptors() ?? []
-    )
-  }
-
-  internal func getPlaceProfile(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Haru_PlaceProfileReply {
-    return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getPlaceProfile.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? []
-    )
-  }
-
-  internal func getNearbySearch(
-    _ request: Haru_PlaceRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Haru_PlaceReplyList {
-    return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getNearbySearch.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetNearbySearchInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
     )
   }
 }
@@ -671,26 +515,17 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
   /// - Returns: Interceptors to use when invoking 'updateProfile'.
   func makeUpdateProfileInterceptors() -> [ClientInterceptor<Haru_ProfileRequest, Haru_ProfileReply>]
 
-  /// - Returns: Interceptors to use when invoking 'getPoint'.
-  func makeGetPointInterceptors() -> [ClientInterceptor<Haru_PointRequest, Haru_PointReply>]
+  /// - Returns: Interceptors to use when invoking 'createRound'.
+  func makeCreateRoundInterceptors() -> [ClientInterceptor<Haru_RoundRequest, Haru_RoundReply>]
 
-  /// - Returns: Interceptors to use when invoking 'incrPoint'.
-  func makeIncrPointInterceptors() -> [ClientInterceptor<Haru_PointRequest, Haru_PointReply>]
+  /// - Returns: Interceptors to use when invoking 'updateRound'.
+  func makeUpdateRoundInterceptors() -> [ClientInterceptor<Haru_RoundRequest, Haru_RoundReply>]
 
-  /// - Returns: Interceptors to use when invoking 'getPlaceByID'.
-  func makeGetPlaceByIDInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceReply>]
+  /// - Returns: Interceptors to use when invoking 'getRound'.
+  func makeGetRoundInterceptors() -> [ClientInterceptor<Haru_RoundRequest, Haru_RoundReply>]
 
-  /// - Returns: Interceptors to use when invoking 'getPlaceByInput'.
-  func makeGetPlaceByInputInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceReply>]
-
-  /// - Returns: Interceptors to use when invoking 'updatePlaceProfile'.
-  func makeUpdatePlaceProfileInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
-
-  /// - Returns: Interceptors to use when invoking 'getPlaceProfile'.
-  func makeGetPlaceProfileInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
-
-  /// - Returns: Interceptors to use when invoking 'getNearbySearch'.
-  func makeGetNearbySearchInterceptors() -> [ClientInterceptor<Haru_PlaceRequest, Haru_PlaceReplyList>]
+  /// - Returns: Interceptors to use when invoking 'getFilterdRounds'.
+  func makeGetFilterdRoundsInterceptors() -> [ClientInterceptor<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -701,13 +536,10 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.createAccount,
       Haru_version1ClientMetadata.Methods.getProfile,
       Haru_version1ClientMetadata.Methods.updateProfile,
-      Haru_version1ClientMetadata.Methods.getPoint,
-      Haru_version1ClientMetadata.Methods.incrPoint,
-      Haru_version1ClientMetadata.Methods.getPlaceByID,
-      Haru_version1ClientMetadata.Methods.getPlaceByInput,
-      Haru_version1ClientMetadata.Methods.updatePlaceProfile,
-      Haru_version1ClientMetadata.Methods.getPlaceProfile,
-      Haru_version1ClientMetadata.Methods.getNearbySearch,
+      Haru_version1ClientMetadata.Methods.createRound,
+      Haru_version1ClientMetadata.Methods.updateRound,
+      Haru_version1ClientMetadata.Methods.getRound,
+      Haru_version1ClientMetadata.Methods.getFilterdRounds,
     ]
   )
 
@@ -730,45 +562,27 @@ internal enum Haru_version1ClientMetadata {
       type: GRPCCallType.unary
     )
 
-    internal static let getPoint = GRPCMethodDescriptor(
-      name: "GetPoint",
-      path: "/haru.version1/GetPoint",
+    internal static let createRound = GRPCMethodDescriptor(
+      name: "CreateRound",
+      path: "/haru.version1/CreateRound",
       type: GRPCCallType.unary
     )
 
-    internal static let incrPoint = GRPCMethodDescriptor(
-      name: "IncrPoint",
-      path: "/haru.version1/IncrPoint",
+    internal static let updateRound = GRPCMethodDescriptor(
+      name: "UpdateRound",
+      path: "/haru.version1/UpdateRound",
       type: GRPCCallType.unary
     )
 
-    internal static let getPlaceByID = GRPCMethodDescriptor(
-      name: "GetPlaceByID",
-      path: "/haru.version1/GetPlaceByID",
+    internal static let getRound = GRPCMethodDescriptor(
+      name: "GetRound",
+      path: "/haru.version1/GetRound",
       type: GRPCCallType.unary
     )
 
-    internal static let getPlaceByInput = GRPCMethodDescriptor(
-      name: "GetPlaceByInput",
-      path: "/haru.version1/GetPlaceByInput",
-      type: GRPCCallType.unary
-    )
-
-    internal static let updatePlaceProfile = GRPCMethodDescriptor(
-      name: "UpdatePlaceProfile",
-      path: "/haru.version1/UpdatePlaceProfile",
-      type: GRPCCallType.unary
-    )
-
-    internal static let getPlaceProfile = GRPCMethodDescriptor(
-      name: "GetPlaceProfile",
-      path: "/haru.version1/GetPlaceProfile",
-      type: GRPCCallType.unary
-    )
-
-    internal static let getNearbySearch = GRPCMethodDescriptor(
-      name: "GetNearbySearch",
-      path: "/haru.version1/GetNearbySearch",
+    internal static let getFilterdRounds = GRPCMethodDescriptor(
+      name: "GetFilterdRounds",
+      path: "/haru.version1/GetFilterdRounds",
       type: GRPCCallType.unary
     )
   }
@@ -780,35 +594,19 @@ internal enum Haru_version1ClientMetadata {
 internal protocol Haru_version1Provider: CallHandlerProvider {
   var interceptors: Haru_version1ServerInterceptorFactoryProtocol? { get }
 
-  /// Create Account
   func createAccount(request: Haru_AccountRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_AccountReply>
 
-  /// GetProfile
   func getProfile(request: Haru_ProfileRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ProfileReply>
 
-  /// UpdateProfile
   func updateProfile(request: Haru_ProfileRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ProfileReply>
 
-  /// GetPoint
-  func getPoint(request: Haru_PointRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PointReply>
+  func createRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
 
-  /// IncrPoint
-  func incrPoint(request: Haru_PointRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PointReply>
+  func updateRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
 
-  /// GetPlaceByID
-  func getPlaceByID(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceReply>
+  func getRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
 
-  /// GetPlaceByInput
-  func getPlaceByInput(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceReply>
-
-  /// UpdatePlaceProfile
-  func updatePlaceProfile(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceProfileReply>
-
-  /// GetPlaceProfile
-  func getPlaceProfile(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceProfileReply>
-
-  /// getNearbySearch
-  func getNearbySearch(request: Haru_PlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_PlaceReplyList>
+  func getFilterdRounds(request: Haru_FilterdRoundsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdRoundsReply>
 }
 
 extension Haru_version1Provider {
@@ -850,67 +648,40 @@ extension Haru_version1Provider {
         userFunction: self.updateProfile(request:context:)
       )
 
-    case "GetPoint":
+    case "CreateRound":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PointRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PointReply>(),
-        interceptors: self.interceptors?.makeGetPointInterceptors() ?? [],
-        userFunction: self.getPoint(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
+        interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? [],
+        userFunction: self.createRound(request:context:)
       )
 
-    case "IncrPoint":
+    case "UpdateRound":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PointRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PointReply>(),
-        interceptors: self.interceptors?.makeIncrPointInterceptors() ?? [],
-        userFunction: self.incrPoint(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
+        interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? [],
+        userFunction: self.updateRound(request:context:)
       )
 
-    case "GetPlaceByID":
+    case "GetRound":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceReply>(),
-        interceptors: self.interceptors?.makeGetPlaceByIDInterceptors() ?? [],
-        userFunction: self.getPlaceByID(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
+        interceptors: self.interceptors?.makeGetRoundInterceptors() ?? [],
+        userFunction: self.getRound(request:context:)
       )
 
-    case "GetPlaceByInput":
+    case "GetFilterdRounds":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceReply>(),
-        interceptors: self.interceptors?.makeGetPlaceByInputInterceptors() ?? [],
-        userFunction: self.getPlaceByInput(request:context:)
-      )
-
-    case "UpdatePlaceProfile":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceProfileReply>(),
-        interceptors: self.interceptors?.makeUpdatePlaceProfileInterceptors() ?? [],
-        userFunction: self.updatePlaceProfile(request:context:)
-      )
-
-    case "GetPlaceProfile":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceProfileReply>(),
-        interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? [],
-        userFunction: self.getPlaceProfile(request:context:)
-      )
-
-    case "GetNearbySearch":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceReplyList>(),
-        interceptors: self.interceptors?.makeGetNearbySearchInterceptors() ?? [],
-        userFunction: self.getNearbySearch(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdRoundsRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdRoundsReply>(),
+        interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? [],
+        userFunction: self.getFilterdRounds(request:context:)
       )
 
     default:
@@ -929,65 +700,40 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
   static var serviceDescriptor: GRPCServiceDescriptor { get }
   var interceptors: Haru_version1ServerInterceptorFactoryProtocol? { get }
 
-  /// Create Account
   @Sendable func createAccount(
     request: Haru_AccountRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_AccountReply
 
-  /// GetProfile
   @Sendable func getProfile(
     request: Haru_ProfileRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_ProfileReply
 
-  /// UpdateProfile
   @Sendable func updateProfile(
     request: Haru_ProfileRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_ProfileReply
 
-  /// GetPoint
-  @Sendable func getPoint(
-    request: Haru_PointRequest,
+  @Sendable func createRound(
+    request: Haru_RoundRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PointReply
+  ) async throws -> Haru_RoundReply
 
-  /// IncrPoint
-  @Sendable func incrPoint(
-    request: Haru_PointRequest,
+  @Sendable func updateRound(
+    request: Haru_RoundRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PointReply
+  ) async throws -> Haru_RoundReply
 
-  /// GetPlaceByID
-  @Sendable func getPlaceByID(
-    request: Haru_PlaceRequest,
+  @Sendable func getRound(
+    request: Haru_RoundRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PlaceReply
+  ) async throws -> Haru_RoundReply
 
-  /// GetPlaceByInput
-  @Sendable func getPlaceByInput(
-    request: Haru_PlaceRequest,
+  @Sendable func getFilterdRounds(
+    request: Haru_FilterdRoundsRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PlaceReply
-
-  /// UpdatePlaceProfile
-  @Sendable func updatePlaceProfile(
-    request: Haru_PlaceRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PlaceProfileReply
-
-  /// GetPlaceProfile
-  @Sendable func getPlaceProfile(
-    request: Haru_PlaceRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PlaceProfileReply
-
-  /// getNearbySearch
-  @Sendable func getNearbySearch(
-    request: Haru_PlaceRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_PlaceReplyList
+  ) async throws -> Haru_FilterdRoundsReply
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1036,67 +782,40 @@ extension Haru_version1AsyncProvider {
         wrapping: self.updateProfile(request:context:)
       )
 
-    case "GetPoint":
+    case "CreateRound":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PointRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PointReply>(),
-        interceptors: self.interceptors?.makeGetPointInterceptors() ?? [],
-        wrapping: self.getPoint(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
+        interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? [],
+        wrapping: self.createRound(request:context:)
       )
 
-    case "IncrPoint":
+    case "UpdateRound":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PointRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PointReply>(),
-        interceptors: self.interceptors?.makeIncrPointInterceptors() ?? [],
-        wrapping: self.incrPoint(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
+        interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? [],
+        wrapping: self.updateRound(request:context:)
       )
 
-    case "GetPlaceByID":
+    case "GetRound":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceReply>(),
-        interceptors: self.interceptors?.makeGetPlaceByIDInterceptors() ?? [],
-        wrapping: self.getPlaceByID(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
+        interceptors: self.interceptors?.makeGetRoundInterceptors() ?? [],
+        wrapping: self.getRound(request:context:)
       )
 
-    case "GetPlaceByInput":
+    case "GetFilterdRounds":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceReply>(),
-        interceptors: self.interceptors?.makeGetPlaceByInputInterceptors() ?? [],
-        wrapping: self.getPlaceByInput(request:context:)
-      )
-
-    case "UpdatePlaceProfile":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceProfileReply>(),
-        interceptors: self.interceptors?.makeUpdatePlaceProfileInterceptors() ?? [],
-        wrapping: self.updatePlaceProfile(request:context:)
-      )
-
-    case "GetPlaceProfile":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceProfileReply>(),
-        interceptors: self.interceptors?.makeGetPlaceProfileInterceptors() ?? [],
-        wrapping: self.getPlaceProfile(request:context:)
-      )
-
-    case "GetNearbySearch":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_PlaceRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_PlaceReplyList>(),
-        interceptors: self.interceptors?.makeGetNearbySearchInterceptors() ?? [],
-        wrapping: self.getNearbySearch(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdRoundsRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdRoundsReply>(),
+        interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? [],
+        wrapping: self.getFilterdRounds(request:context:)
       )
 
     default:
@@ -1121,33 +840,21 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdateProfileInterceptors() -> [ServerInterceptor<Haru_ProfileRequest, Haru_ProfileReply>]
 
-  /// - Returns: Interceptors to use when handling 'getPoint'.
+  /// - Returns: Interceptors to use when handling 'createRound'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetPointInterceptors() -> [ServerInterceptor<Haru_PointRequest, Haru_PointReply>]
+  func makeCreateRoundInterceptors() -> [ServerInterceptor<Haru_RoundRequest, Haru_RoundReply>]
 
-  /// - Returns: Interceptors to use when handling 'incrPoint'.
+  /// - Returns: Interceptors to use when handling 'updateRound'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeIncrPointInterceptors() -> [ServerInterceptor<Haru_PointRequest, Haru_PointReply>]
+  func makeUpdateRoundInterceptors() -> [ServerInterceptor<Haru_RoundRequest, Haru_RoundReply>]
 
-  /// - Returns: Interceptors to use when handling 'getPlaceByID'.
+  /// - Returns: Interceptors to use when handling 'getRound'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetPlaceByIDInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceReply>]
+  func makeGetRoundInterceptors() -> [ServerInterceptor<Haru_RoundRequest, Haru_RoundReply>]
 
-  /// - Returns: Interceptors to use when handling 'getPlaceByInput'.
+  /// - Returns: Interceptors to use when handling 'getFilterdRounds'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetPlaceByInputInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceReply>]
-
-  /// - Returns: Interceptors to use when handling 'updatePlaceProfile'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeUpdatePlaceProfileInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
-
-  /// - Returns: Interceptors to use when handling 'getPlaceProfile'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetPlaceProfileInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceProfileReply>]
-
-  /// - Returns: Interceptors to use when handling 'getNearbySearch'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetNearbySearchInterceptors() -> [ServerInterceptor<Haru_PlaceRequest, Haru_PlaceReplyList>]
+  func makeGetFilterdRoundsInterceptors() -> [ServerInterceptor<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -1158,13 +865,10 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.createAccount,
       Haru_version1ServerMetadata.Methods.getProfile,
       Haru_version1ServerMetadata.Methods.updateProfile,
-      Haru_version1ServerMetadata.Methods.getPoint,
-      Haru_version1ServerMetadata.Methods.incrPoint,
-      Haru_version1ServerMetadata.Methods.getPlaceByID,
-      Haru_version1ServerMetadata.Methods.getPlaceByInput,
-      Haru_version1ServerMetadata.Methods.updatePlaceProfile,
-      Haru_version1ServerMetadata.Methods.getPlaceProfile,
-      Haru_version1ServerMetadata.Methods.getNearbySearch,
+      Haru_version1ServerMetadata.Methods.createRound,
+      Haru_version1ServerMetadata.Methods.updateRound,
+      Haru_version1ServerMetadata.Methods.getRound,
+      Haru_version1ServerMetadata.Methods.getFilterdRounds,
     ]
   )
 
@@ -1187,45 +891,27 @@ internal enum Haru_version1ServerMetadata {
       type: GRPCCallType.unary
     )
 
-    internal static let getPoint = GRPCMethodDescriptor(
-      name: "GetPoint",
-      path: "/haru.version1/GetPoint",
+    internal static let createRound = GRPCMethodDescriptor(
+      name: "CreateRound",
+      path: "/haru.version1/CreateRound",
       type: GRPCCallType.unary
     )
 
-    internal static let incrPoint = GRPCMethodDescriptor(
-      name: "IncrPoint",
-      path: "/haru.version1/IncrPoint",
+    internal static let updateRound = GRPCMethodDescriptor(
+      name: "UpdateRound",
+      path: "/haru.version1/UpdateRound",
       type: GRPCCallType.unary
     )
 
-    internal static let getPlaceByID = GRPCMethodDescriptor(
-      name: "GetPlaceByID",
-      path: "/haru.version1/GetPlaceByID",
+    internal static let getRound = GRPCMethodDescriptor(
+      name: "GetRound",
+      path: "/haru.version1/GetRound",
       type: GRPCCallType.unary
     )
 
-    internal static let getPlaceByInput = GRPCMethodDescriptor(
-      name: "GetPlaceByInput",
-      path: "/haru.version1/GetPlaceByInput",
-      type: GRPCCallType.unary
-    )
-
-    internal static let updatePlaceProfile = GRPCMethodDescriptor(
-      name: "UpdatePlaceProfile",
-      path: "/haru.version1/UpdatePlaceProfile",
-      type: GRPCCallType.unary
-    )
-
-    internal static let getPlaceProfile = GRPCMethodDescriptor(
-      name: "GetPlaceProfile",
-      path: "/haru.version1/GetPlaceProfile",
-      type: GRPCCallType.unary
-    )
-
-    internal static let getNearbySearch = GRPCMethodDescriptor(
-      name: "GetNearbySearch",
-      path: "/haru.version1/GetNearbySearch",
+    internal static let getFilterdRounds = GRPCMethodDescriptor(
+      name: "GetFilterdRounds",
+      path: "/haru.version1/GetFilterdRounds",
       type: GRPCCallType.unary
     )
   }
