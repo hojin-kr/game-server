@@ -67,27 +67,11 @@ func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.
 func (s *server) CreateRound(ctx context.Context, in *pb.RoundRequest) (*pb.RoundReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	// Round 생성
-	var round = pb.Round{
-		Host:                  in.Round.GetHost(),
-		Time:                  in.Round.GetTime(),
-		Price:                 in.Round.GetPrice(),
-		TypePlay:              in.Round.GetTypePlay(),
-		TypeAge:               in.Round.GetTypeAge(),
-		TypeSex:               in.Round.GetTypeSex(),
-		TypeScoreOfGross:      in.Round.GetTypeScoreOfGross(),
-		TypeExperienceOfYears: in.Round.GetTypeExperienceOfYears(),
-		PlaceId:               in.Round.GetPlaceId(),
-		PlaceName:             in.Round.GetPlaceName(),
-		PlaceAddress:          in.Round.GetPlaceAddress(),
-		ShortAddress:          in.Round.GetShortAddress(),
-		Lat:                   in.Round.GetLat(),
-		Long:                  in.Round.GetLong(),
-		Updated:               time.Now().Unix(),
-	}
+	var round = in.Round
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 	key := ds.Put(ctx, datastore.IncompleteKey("Round", nil), &round)
 	round.Id = key.ID
-	ret := &pb.RoundReply{Round: &round, Place: in.GetPlace(), Attend: in.GetAttend()}
+	ret := &pb.RoundReply{Round: round, Place: in.GetPlace(), Attend: in.GetAttend()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -101,6 +85,7 @@ func (s *server) GetRound(ctx context.Context, in *pb.RoundRequest) (*pb.RoundRe
 	return ret, nil
 }
 
+// filterdRounds에서는 Round 목록만 반환하고 GetRound에서는 attend, place 부가 정보 반환
 func (s *server) GetFilterdRounds(ctx context.Context, in *pb.FilterdRoundsRequest) (*pb.FilterdRoundsReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	// q := datastore.NewQuery("Round").Filter("A =", 12).Limit(30)

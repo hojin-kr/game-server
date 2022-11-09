@@ -94,6 +94,10 @@ message Round {
   string lat = 14;
   string long = 15;
   int64 updated = 16;
+  string place_img = 17;
+  int64 type_hole = 18;
+  int64 person_full = 19;
+  int64 person = 20;
 }
 
 message Place {

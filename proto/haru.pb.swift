@@ -118,37 +118,39 @@ struct Haru_RoundRequest {
   // methods supported on all messages.
 
   var round: Haru_Round {
-    get {return _storage._round ?? Haru_Round()}
-    set {_uniqueStorage()._round = newValue}
+    get {return _round ?? Haru_Round()}
+    set {_round = newValue}
   }
   /// Returns true if `round` has been explicitly set.
-  var hasRound: Bool {return _storage._round != nil}
+  var hasRound: Bool {return self._round != nil}
   /// Clears the value of `round`. Subsequent reads from it will return its default value.
-  mutating func clearRound() {_uniqueStorage()._round = nil}
+  mutating func clearRound() {self._round = nil}
 
   var place: Haru_Place {
-    get {return _storage._place ?? Haru_Place()}
-    set {_uniqueStorage()._place = newValue}
+    get {return _place ?? Haru_Place()}
+    set {_place = newValue}
   }
   /// Returns true if `place` has been explicitly set.
-  var hasPlace: Bool {return _storage._place != nil}
+  var hasPlace: Bool {return self._place != nil}
   /// Clears the value of `place`. Subsequent reads from it will return its default value.
-  mutating func clearPlace() {_uniqueStorage()._place = nil}
+  mutating func clearPlace() {self._place = nil}
 
   var attend: Haru_Attend {
-    get {return _storage._attend ?? Haru_Attend()}
-    set {_uniqueStorage()._attend = newValue}
+    get {return _attend ?? Haru_Attend()}
+    set {_attend = newValue}
   }
   /// Returns true if `attend` has been explicitly set.
-  var hasAttend: Bool {return _storage._attend != nil}
+  var hasAttend: Bool {return self._attend != nil}
   /// Clears the value of `attend`. Subsequent reads from it will return its default value.
-  mutating func clearAttend() {_uniqueStorage()._attend = nil}
+  mutating func clearAttend() {self._attend = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _storage = _StorageClass.defaultInstance
+  fileprivate var _round: Haru_Round? = nil
+  fileprivate var _place: Haru_Place? = nil
+  fileprivate var _attend: Haru_Attend? = nil
 }
 
 struct Haru_RoundReply {
@@ -157,37 +159,39 @@ struct Haru_RoundReply {
   // methods supported on all messages.
 
   var round: Haru_Round {
-    get {return _storage._round ?? Haru_Round()}
-    set {_uniqueStorage()._round = newValue}
+    get {return _round ?? Haru_Round()}
+    set {_round = newValue}
   }
   /// Returns true if `round` has been explicitly set.
-  var hasRound: Bool {return _storage._round != nil}
+  var hasRound: Bool {return self._round != nil}
   /// Clears the value of `round`. Subsequent reads from it will return its default value.
-  mutating func clearRound() {_uniqueStorage()._round = nil}
+  mutating func clearRound() {self._round = nil}
 
   var place: Haru_Place {
-    get {return _storage._place ?? Haru_Place()}
-    set {_uniqueStorage()._place = newValue}
+    get {return _place ?? Haru_Place()}
+    set {_place = newValue}
   }
   /// Returns true if `place` has been explicitly set.
-  var hasPlace: Bool {return _storage._place != nil}
+  var hasPlace: Bool {return self._place != nil}
   /// Clears the value of `place`. Subsequent reads from it will return its default value.
-  mutating func clearPlace() {_uniqueStorage()._place = nil}
+  mutating func clearPlace() {self._place = nil}
 
   var attend: Haru_Attend {
-    get {return _storage._attend ?? Haru_Attend()}
-    set {_uniqueStorage()._attend = newValue}
+    get {return _attend ?? Haru_Attend()}
+    set {_attend = newValue}
   }
   /// Returns true if `attend` has been explicitly set.
-  var hasAttend: Bool {return _storage._attend != nil}
+  var hasAttend: Bool {return self._attend != nil}
   /// Clears the value of `attend`. Subsequent reads from it will return its default value.
-  mutating func clearAttend() {_uniqueStorage()._attend = nil}
+  mutating func clearAttend() {self._attend = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _storage = _StorageClass.defaultInstance
+  fileprivate var _round: Haru_Round? = nil
+  fileprivate var _place: Haru_Place? = nil
+  fileprivate var _attend: Haru_Attend? = nil
 }
 
 struct Haru_Round {
@@ -195,43 +199,113 @@ struct Haru_Round {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: Int64 = 0
+  var id: Int64 {
+    get {return _storage._id}
+    set {_uniqueStorage()._id = newValue}
+  }
 
-  var host: Int64 = 0
+  var host: Int64 {
+    get {return _storage._host}
+    set {_uniqueStorage()._host = newValue}
+  }
 
-  var time: Int64 = 0
+  var time: Int64 {
+    get {return _storage._time}
+    set {_uniqueStorage()._time = newValue}
+  }
 
-  var price: Int64 = 0
+  var price: Int64 {
+    get {return _storage._price}
+    set {_uniqueStorage()._price = newValue}
+  }
 
   /// type 으로 상황별 구분해서 사용 ex ) 0 : 필드 18홀, 1 : 필드 9홀, 2 : 스크린 9홀 ...
-  var typePlay: Int64 = 0
+  var typePlay: Int64 {
+    get {return _storage._typePlay}
+    set {_uniqueStorage()._typePlay = newValue}
+  }
 
-  var typeAge: Int64 = 0
+  var typeAge: Int64 {
+    get {return _storage._typeAge}
+    set {_uniqueStorage()._typeAge = newValue}
+  }
 
-  var typeSex: Int64 = 0
+  var typeSex: Int64 {
+    get {return _storage._typeSex}
+    set {_uniqueStorage()._typeSex = newValue}
+  }
 
-  var typeScoreOfGross: Int64 = 0
+  var typeScoreOfGross: Int64 {
+    get {return _storage._typeScoreOfGross}
+    set {_uniqueStorage()._typeScoreOfGross = newValue}
+  }
 
-  var typeExperienceOfYears: Int64 = 0
+  var typeExperienceOfYears: Int64 {
+    get {return _storage._typeExperienceOfYears}
+    set {_uniqueStorage()._typeExperienceOfYears = newValue}
+  }
 
-  var placeID: String = String()
+  var placeID: String {
+    get {return _storage._placeID}
+    set {_uniqueStorage()._placeID = newValue}
+  }
 
-  var placeName: String = String()
+  var placeName: String {
+    get {return _storage._placeName}
+    set {_uniqueStorage()._placeName = newValue}
+  }
 
-  var placeAddress: String = String()
+  var placeAddress: String {
+    get {return _storage._placeAddress}
+    set {_uniqueStorage()._placeAddress = newValue}
+  }
 
   /// 탐색용 키
-  var shortAddress: String = String()
+  var shortAddress: String {
+    get {return _storage._shortAddress}
+    set {_uniqueStorage()._shortAddress = newValue}
+  }
 
-  var lat: String = String()
+  var lat: String {
+    get {return _storage._lat}
+    set {_uniqueStorage()._lat = newValue}
+  }
 
-  var long: String = String()
+  var long: String {
+    get {return _storage._long}
+    set {_uniqueStorage()._long = newValue}
+  }
 
-  var updated: Int64 = 0
+  var updated: Int64 {
+    get {return _storage._updated}
+    set {_uniqueStorage()._updated = newValue}
+  }
+
+  var placeImg: String {
+    get {return _storage._placeImg}
+    set {_uniqueStorage()._placeImg = newValue}
+  }
+
+  var typeHole: Int64 {
+    get {return _storage._typeHole}
+    set {_uniqueStorage()._typeHole = newValue}
+  }
+
+  var personFull: Int64 {
+    get {return _storage._personFull}
+    set {_uniqueStorage()._personFull = newValue}
+  }
+
+  var person: Int64 {
+    get {return _storage._person}
+    set {_uniqueStorage()._person = newValue}
+  }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 struct Haru_Place {
@@ -575,77 +649,41 @@ extension Haru_RoundRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     3: .same(proto: "attend"),
   ]
 
-  fileprivate class _StorageClass {
-    var _round: Haru_Round? = nil
-    var _place: Haru_Place? = nil
-    var _attend: Haru_Attend? = nil
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _round = source._round
-      _place = source._place
-      _attend = source._attend
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        // The use of inline closures is to circumvent an issue where the compiler
-        // allocates stack space for every case branch when no optimizations are
-        // enabled. https://github.com/apple/swift-protobuf/issues/1034
-        switch fieldNumber {
-        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._round) }()
-        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._place) }()
-        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._attend) }()
-        default: break
-        }
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._round) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._place) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._attend) }()
+      default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every if/case branch local when no optimizations
-      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-      // https://github.com/apple/swift-protobuf/issues/1182
-      try { if let v = _storage._round {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      } }()
-      try { if let v = _storage._place {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      } }()
-      try { if let v = _storage._attend {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-      } }()
-    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._round {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._place {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._attend {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_RoundRequest, rhs: Haru_RoundRequest) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._round != rhs_storage._round {return false}
-        if _storage._place != rhs_storage._place {return false}
-        if _storage._attend != rhs_storage._attend {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs._round != rhs._round {return false}
+    if lhs._place != rhs._place {return false}
+    if lhs._attend != rhs._attend {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -659,77 +697,41 @@ extension Haru_RoundReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     3: .same(proto: "attend"),
   ]
 
-  fileprivate class _StorageClass {
-    var _round: Haru_Round? = nil
-    var _place: Haru_Place? = nil
-    var _attend: Haru_Attend? = nil
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _round = source._round
-      _place = source._place
-      _attend = source._attend
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        // The use of inline closures is to circumvent an issue where the compiler
-        // allocates stack space for every case branch when no optimizations are
-        // enabled. https://github.com/apple/swift-protobuf/issues/1034
-        switch fieldNumber {
-        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._round) }()
-        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._place) }()
-        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._attend) }()
-        default: break
-        }
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._round) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._place) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._attend) }()
+      default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every if/case branch local when no optimizations
-      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-      // https://github.com/apple/swift-protobuf/issues/1182
-      try { if let v = _storage._round {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      } }()
-      try { if let v = _storage._place {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      } }()
-      try { if let v = _storage._attend {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-      } }()
-    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._round {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._place {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._attend {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_RoundReply, rhs: Haru_RoundReply) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._round != rhs_storage._round {return false}
-        if _storage._place != rhs_storage._place {return false}
-        if _storage._attend != rhs_storage._attend {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs._round != rhs._round {return false}
+    if lhs._place != rhs._place {return false}
+    if lhs._attend != rhs._attend {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -754,104 +756,198 @@ extension Haru_Round: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     14: .same(proto: "lat"),
     15: .same(proto: "long"),
     16: .same(proto: "updated"),
+    17: .standard(proto: "place_img"),
+    18: .standard(proto: "type_hole"),
+    19: .standard(proto: "person_full"),
+    20: .same(proto: "person"),
   ]
 
+  fileprivate class _StorageClass {
+    var _id: Int64 = 0
+    var _host: Int64 = 0
+    var _time: Int64 = 0
+    var _price: Int64 = 0
+    var _typePlay: Int64 = 0
+    var _typeAge: Int64 = 0
+    var _typeSex: Int64 = 0
+    var _typeScoreOfGross: Int64 = 0
+    var _typeExperienceOfYears: Int64 = 0
+    var _placeID: String = String()
+    var _placeName: String = String()
+    var _placeAddress: String = String()
+    var _shortAddress: String = String()
+    var _lat: String = String()
+    var _long: String = String()
+    var _updated: Int64 = 0
+    var _placeImg: String = String()
+    var _typeHole: Int64 = 0
+    var _personFull: Int64 = 0
+    var _person: Int64 = 0
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _id = source._id
+      _host = source._host
+      _time = source._time
+      _price = source._price
+      _typePlay = source._typePlay
+      _typeAge = source._typeAge
+      _typeSex = source._typeSex
+      _typeScoreOfGross = source._typeScoreOfGross
+      _typeExperienceOfYears = source._typeExperienceOfYears
+      _placeID = source._placeID
+      _placeName = source._placeName
+      _placeAddress = source._placeAddress
+      _shortAddress = source._shortAddress
+      _lat = source._lat
+      _long = source._long
+      _updated = source._updated
+      _placeImg = source._placeImg
+      _typeHole = source._typeHole
+      _personFull = source._personFull
+      _person = source._person
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
-      case 2: try { try decoder.decodeSingularInt64Field(value: &self.host) }()
-      case 3: try { try decoder.decodeSingularInt64Field(value: &self.time) }()
-      case 4: try { try decoder.decodeSingularInt64Field(value: &self.price) }()
-      case 5: try { try decoder.decodeSingularInt64Field(value: &self.typePlay) }()
-      case 6: try { try decoder.decodeSingularInt64Field(value: &self.typeAge) }()
-      case 7: try { try decoder.decodeSingularInt64Field(value: &self.typeSex) }()
-      case 8: try { try decoder.decodeSingularInt64Field(value: &self.typeScoreOfGross) }()
-      case 9: try { try decoder.decodeSingularInt64Field(value: &self.typeExperienceOfYears) }()
-      case 10: try { try decoder.decodeSingularStringField(value: &self.placeID) }()
-      case 11: try { try decoder.decodeSingularStringField(value: &self.placeName) }()
-      case 12: try { try decoder.decodeSingularStringField(value: &self.placeAddress) }()
-      case 13: try { try decoder.decodeSingularStringField(value: &self.shortAddress) }()
-      case 14: try { try decoder.decodeSingularStringField(value: &self.lat) }()
-      case 15: try { try decoder.decodeSingularStringField(value: &self.long) }()
-      case 16: try { try decoder.decodeSingularInt64Field(value: &self.updated) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularInt64Field(value: &_storage._id) }()
+        case 2: try { try decoder.decodeSingularInt64Field(value: &_storage._host) }()
+        case 3: try { try decoder.decodeSingularInt64Field(value: &_storage._time) }()
+        case 4: try { try decoder.decodeSingularInt64Field(value: &_storage._price) }()
+        case 5: try { try decoder.decodeSingularInt64Field(value: &_storage._typePlay) }()
+        case 6: try { try decoder.decodeSingularInt64Field(value: &_storage._typeAge) }()
+        case 7: try { try decoder.decodeSingularInt64Field(value: &_storage._typeSex) }()
+        case 8: try { try decoder.decodeSingularInt64Field(value: &_storage._typeScoreOfGross) }()
+        case 9: try { try decoder.decodeSingularInt64Field(value: &_storage._typeExperienceOfYears) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._placeID) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._placeName) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._placeAddress) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._shortAddress) }()
+        case 14: try { try decoder.decodeSingularStringField(value: &_storage._lat) }()
+        case 15: try { try decoder.decodeSingularStringField(value: &_storage._long) }()
+        case 16: try { try decoder.decodeSingularInt64Field(value: &_storage._updated) }()
+        case 17: try { try decoder.decodeSingularStringField(value: &_storage._placeImg) }()
+        case 18: try { try decoder.decodeSingularInt64Field(value: &_storage._typeHole) }()
+        case 19: try { try decoder.decodeSingularInt64Field(value: &_storage._personFull) }()
+        case 20: try { try decoder.decodeSingularInt64Field(value: &_storage._person) }()
+        default: break
+        }
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.id != 0 {
-      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
-    }
-    if self.host != 0 {
-      try visitor.visitSingularInt64Field(value: self.host, fieldNumber: 2)
-    }
-    if self.time != 0 {
-      try visitor.visitSingularInt64Field(value: self.time, fieldNumber: 3)
-    }
-    if self.price != 0 {
-      try visitor.visitSingularInt64Field(value: self.price, fieldNumber: 4)
-    }
-    if self.typePlay != 0 {
-      try visitor.visitSingularInt64Field(value: self.typePlay, fieldNumber: 5)
-    }
-    if self.typeAge != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeAge, fieldNumber: 6)
-    }
-    if self.typeSex != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeSex, fieldNumber: 7)
-    }
-    if self.typeScoreOfGross != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeScoreOfGross, fieldNumber: 8)
-    }
-    if self.typeExperienceOfYears != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeExperienceOfYears, fieldNumber: 9)
-    }
-    if !self.placeID.isEmpty {
-      try visitor.visitSingularStringField(value: self.placeID, fieldNumber: 10)
-    }
-    if !self.placeName.isEmpty {
-      try visitor.visitSingularStringField(value: self.placeName, fieldNumber: 11)
-    }
-    if !self.placeAddress.isEmpty {
-      try visitor.visitSingularStringField(value: self.placeAddress, fieldNumber: 12)
-    }
-    if !self.shortAddress.isEmpty {
-      try visitor.visitSingularStringField(value: self.shortAddress, fieldNumber: 13)
-    }
-    if !self.lat.isEmpty {
-      try visitor.visitSingularStringField(value: self.lat, fieldNumber: 14)
-    }
-    if !self.long.isEmpty {
-      try visitor.visitSingularStringField(value: self.long, fieldNumber: 15)
-    }
-    if self.updated != 0 {
-      try visitor.visitSingularInt64Field(value: self.updated, fieldNumber: 16)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._id != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._id, fieldNumber: 1)
+      }
+      if _storage._host != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._host, fieldNumber: 2)
+      }
+      if _storage._time != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._time, fieldNumber: 3)
+      }
+      if _storage._price != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._price, fieldNumber: 4)
+      }
+      if _storage._typePlay != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._typePlay, fieldNumber: 5)
+      }
+      if _storage._typeAge != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._typeAge, fieldNumber: 6)
+      }
+      if _storage._typeSex != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._typeSex, fieldNumber: 7)
+      }
+      if _storage._typeScoreOfGross != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._typeScoreOfGross, fieldNumber: 8)
+      }
+      if _storage._typeExperienceOfYears != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._typeExperienceOfYears, fieldNumber: 9)
+      }
+      if !_storage._placeID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeID, fieldNumber: 10)
+      }
+      if !_storage._placeName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeName, fieldNumber: 11)
+      }
+      if !_storage._placeAddress.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeAddress, fieldNumber: 12)
+      }
+      if !_storage._shortAddress.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._shortAddress, fieldNumber: 13)
+      }
+      if !_storage._lat.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._lat, fieldNumber: 14)
+      }
+      if !_storage._long.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._long, fieldNumber: 15)
+      }
+      if _storage._updated != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._updated, fieldNumber: 16)
+      }
+      if !_storage._placeImg.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeImg, fieldNumber: 17)
+      }
+      if _storage._typeHole != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._typeHole, fieldNumber: 18)
+      }
+      if _storage._personFull != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._personFull, fieldNumber: 19)
+      }
+      if _storage._person != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._person, fieldNumber: 20)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_Round, rhs: Haru_Round) -> Bool {
-    if lhs.id != rhs.id {return false}
-    if lhs.host != rhs.host {return false}
-    if lhs.time != rhs.time {return false}
-    if lhs.price != rhs.price {return false}
-    if lhs.typePlay != rhs.typePlay {return false}
-    if lhs.typeAge != rhs.typeAge {return false}
-    if lhs.typeSex != rhs.typeSex {return false}
-    if lhs.typeScoreOfGross != rhs.typeScoreOfGross {return false}
-    if lhs.typeExperienceOfYears != rhs.typeExperienceOfYears {return false}
-    if lhs.placeID != rhs.placeID {return false}
-    if lhs.placeName != rhs.placeName {return false}
-    if lhs.placeAddress != rhs.placeAddress {return false}
-    if lhs.shortAddress != rhs.shortAddress {return false}
-    if lhs.lat != rhs.lat {return false}
-    if lhs.long != rhs.long {return false}
-    if lhs.updated != rhs.updated {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._id != rhs_storage._id {return false}
+        if _storage._host != rhs_storage._host {return false}
+        if _storage._time != rhs_storage._time {return false}
+        if _storage._price != rhs_storage._price {return false}
+        if _storage._typePlay != rhs_storage._typePlay {return false}
+        if _storage._typeAge != rhs_storage._typeAge {return false}
+        if _storage._typeSex != rhs_storage._typeSex {return false}
+        if _storage._typeScoreOfGross != rhs_storage._typeScoreOfGross {return false}
+        if _storage._typeExperienceOfYears != rhs_storage._typeExperienceOfYears {return false}
+        if _storage._placeID != rhs_storage._placeID {return false}
+        if _storage._placeName != rhs_storage._placeName {return false}
+        if _storage._placeAddress != rhs_storage._placeAddress {return false}
+        if _storage._shortAddress != rhs_storage._shortAddress {return false}
+        if _storage._lat != rhs_storage._lat {return false}
+        if _storage._long != rhs_storage._long {return false}
+        if _storage._updated != rhs_storage._updated {return false}
+        if _storage._placeImg != rhs_storage._placeImg {return false}
+        if _storage._typeHole != rhs_storage._typeHole {return false}
+        if _storage._personFull != rhs_storage._personFull {return false}
+        if _storage._person != rhs_storage._person {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: place
+  name: golf
   annotations:
     run.googleapis.com/ingress: all
 spec:
@@ -11,7 +11,7 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: golf-367911@appspot.gserviceaccount.com
       containers:
-      - image: gcr.io/populartimes-354310/haru:latest
+      - image: gcr.io/golf-367911/haru:0.0.2
         ports:
         - name: h2c
           containerPort: 50051
