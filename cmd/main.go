@@ -42,23 +42,22 @@ func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.
 
 func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	key := datastore.IDKey("Profile", in.GetId(), nil)
-	ds.Get(ctx, key, in)
-	ret := &pb.ProfileReply{Id: in.GetId(), Nickname: in.GetNickname()}
+	key := datastore.IDKey("Profile", in.Profile.GetId(), nil)
+	ds.Get(ctx, key, in.Profile)
+	ret := &pb.ProfileReply{Profile: in.GetProfile()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
 func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	if in.GetId() == 0 {
+	if in.Profile.GetId() == 0 {
 		tracer.Trace(time.Now().UTC(), in, "ID is 0")
-		ret := &pb.ProfileReply{Id: in.GetId(), Nickname: in.GetNickname()}
+		ret := &pb.ProfileReply{Profile: in.GetProfile()}
 		return ret, nil
 	}
-	key := datastore.IDKey("Profile", in.GetId(), nil)
-	ds.Put(ctx, key, in)
-	ret := &pb.ProfileReply{Id: in.GetId(), Nickname: in.GetNickname()}
+	ds.Put(ctx, datastore.IDKey("Profile", in.Profile.GetId(), nil), in.Profile)
+	ret := &pb.ProfileReply{Profile: in.GetProfile()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -92,16 +91,17 @@ func (s *server) CreateRound(ctx context.Context, in *pb.RoundRequest) (*pb.Roun
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 	key := ds.Put(ctx, datastore.IncompleteKey("Round", nil), &round)
 	round.Id = key.ID
-	ret := &pb.RoundReply{Round: &round, Place: in.GetPlace(), Attend: in.GetAttend()}
+	_ = ds.Put(ctx, datastore.IDKey("Round", round.GetId(), nil), &round)
+	ret := &pb.RoundReply{Round: &round, Place: in.GetPlace(), Join: in.GetJoin()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
 func (s *server) GetRound(ctx context.Context, in *pb.RoundRequest) (*pb.RoundReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	key := datastore.IDKey("Round", in.Round.GetId(), nil)
-	ds.Get(ctx, key, in.Round)
-	ret := &pb.RoundReply{Round: in.GetRound(), Place: in.GetPlace(), Attend: in.GetAttend()}
+	ds.Get(ctx, datastore.IDKey("Round", in.Round.GetId(), nil), in.Round)
+	ds.Get(ctx, datastore.IDKey("Join", in.Round.GetId(), nil), in.Join)
+	ret := &pb.RoundReply{Round: in.GetRound(), Place: in.GetPlace(), Join: in.GetJoin()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -114,6 +114,31 @@ func (s *server) GetFilterdRounds(ctx context.Context, in *pb.FilterdRoundsReque
 	q := datastore.NewQuery("Round").Limit(30)
 	ds.GetAll(ctx, q, &rounds)
 	ret := &pb.FilterdRoundsReply{Rounds: rounds}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) JoinRound(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	if in.Join.GetId() == 0 {
+		tracer.Trace(time.Now().UTC(), in, "ID is 0")
+		ret := &pb.JoinReply{Join: &pb.Join{Id: in.Join.GetId()}}
+		return ret, nil
+	}
+	// put join
+	key := datastore.IDKey("Join", in.Join.GetId(), nil)
+	ds.Get(ctx, key, in.Join)
+	if in.Join == nil {
+		in.Join.Id = in.Join.GetId()
+	}
+	// todo check round's person limit
+	in.Join.Ids = append(in.Join.Ids, in.Join.GetUserId())
+	ds.Put(ctx, key, in.Join)
+	// input my profiles
+	ds.Get(ctx, datastore.IDKey("Profile", in.Join.GetUserId(), nil), in.Profile)
+	in.Profile.Rounds = append(in.Profile.Rounds, in.Join.GetId())
+	ds.Put(ctx, datastore.IDKey("Profile", in.Join.GetUserId(), nil), in.Profile)
+	ret := &pb.JoinReply{Join: in.Join}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }

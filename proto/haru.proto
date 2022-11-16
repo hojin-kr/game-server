@@ -30,6 +30,7 @@ service version1 {
   rpc UpdateRound (RoundRequest) returns (RoundReply) {}
   rpc GetRound (RoundRequest) returns (RoundReply) {}
   rpc GetFilterdRounds (FilterdRoundsRequest) returns (FilterdRoundsReply) {}
+  rpc JoinRound (JoinRequest) returns (JoinReply) {}
 }
 
 message AccountRequest {
@@ -43,36 +44,43 @@ message AccountReply {
 }
 
 message ProfileRequest {
-  int64 id = 1;
-  string nickname = 2;
-  int64 age = 3;
-  int64 sex = 7;
-  int64 score_of_gross = 8;
-  int64 experience_of_years = 9;
-  repeated string rounds = 10;
+  Profile profile = 1;
 }
 
 message ProfileReply {
+  Profile profile = 1;
+}
+
+message JoinRequest {
+  Join join = 1;
+  Profile profile = 2;
+}
+
+message JoinReply {
+  Join join = 1;
+}
+
+message Profile {
   int64 id = 1;
   string nickname = 2;
   int64 age = 3;
-  int64 sex = 7;
-  int64 score_of_gross = 8;
-  int64 experience_of_years = 9;
-  repeated string rounds = 10;
-  string desc = 11;
+  int64 sex = 4;
+  int64 gross = 5;
+  int64 years = 6;
+  repeated int64 rounds = 7;
+  string desc = 8;
 }
 
 message RoundRequest {
   Round round = 1;
   Place place = 2;
-  Attend attend = 3;
+  Join join = 3;
 }
 
 message RoundReply {
   Round round = 1;
   Place place = 2;
-  Attend attend = 3;
+  Join join = 3;
 }
 
 message Round {
@@ -109,10 +117,10 @@ message Place {
   string photo = 6;
 }
 
-message Attend {
-  int64 id = 1;
-  repeated int64 ids = 2;
-  int64 updated = 3;
+message Join {
+  int64 id = 1; // roundID
+  int64 user_id = 2;
+  repeated int64 ids = 3;
 }
 
 message Review {

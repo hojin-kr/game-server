@@ -34,8 +34,12 @@ namespace Haru {
     static readonly grpc::Marshaller<global::Haru.AccountReply> __Marshaller_haru_AccountReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.AccountReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.ProfileRequest> __Marshaller_haru_ProfileRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ProfileRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.ProfileReply> __Marshaller_haru_ProfileReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ProfileReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Haru.PointRequest> __Marshaller_haru_PointRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.PointRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Haru.PointReply> __Marshaller_haru_PointReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.PointReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.RoundRequest> __Marshaller_haru_RoundRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.RoundRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.RoundReply> __Marshaller_haru_RoundReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.RoundReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.FilterdRoundsRequest> __Marshaller_haru_FilterdRoundsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdRoundsRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.FilterdRoundsReply> __Marshaller_haru_FilterdRoundsReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdRoundsReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.JoinRequest> __Marshaller_haru_JoinRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.JoinReply> __Marshaller_haru_JoinReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Haru.AccountRequest, global::Haru.AccountReply> __Method_CreateAccount = new grpc::Method<global::Haru.AccountRequest, global::Haru.AccountReply>(
         grpc::MethodType.Unary,
@@ -58,19 +62,40 @@ namespace Haru {
         __Marshaller_haru_ProfileRequest,
         __Marshaller_haru_ProfileReply);
 
-    static readonly grpc::Method<global::Haru.PointRequest, global::Haru.PointReply> __Method_GetPoint = new grpc::Method<global::Haru.PointRequest, global::Haru.PointReply>(
+    static readonly grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply> __Method_CreateRound = new grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "GetPoint",
-        __Marshaller_haru_PointRequest,
-        __Marshaller_haru_PointReply);
+        "CreateRound",
+        __Marshaller_haru_RoundRequest,
+        __Marshaller_haru_RoundReply);
 
-    static readonly grpc::Method<global::Haru.PointRequest, global::Haru.PointReply> __Method_IncrPoint = new grpc::Method<global::Haru.PointRequest, global::Haru.PointReply>(
+    static readonly grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply> __Method_UpdateRound = new grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "IncrPoint",
-        __Marshaller_haru_PointRequest,
-        __Marshaller_haru_PointReply);
+        "UpdateRound",
+        __Marshaller_haru_RoundRequest,
+        __Marshaller_haru_RoundReply);
+
+    static readonly grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply> __Method_GetRound = new grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetRound",
+        __Marshaller_haru_RoundRequest,
+        __Marshaller_haru_RoundReply);
+
+    static readonly grpc::Method<global::Haru.FilterdRoundsRequest, global::Haru.FilterdRoundsReply> __Method_GetFilterdRounds = new grpc::Method<global::Haru.FilterdRoundsRequest, global::Haru.FilterdRoundsReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetFilterdRounds",
+        __Marshaller_haru_FilterdRoundsRequest,
+        __Marshaller_haru_FilterdRoundsReply);
+
+    static readonly grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply> __Method_JoinRound = new grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "JoinRound",
+        __Marshaller_haru_JoinRequest,
+        __Marshaller_haru_JoinReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -82,57 +107,42 @@ namespace Haru {
     [grpc::BindServiceMethod(typeof(version1), "BindService")]
     public abstract partial class version1Base
     {
-      /// <summary>
-      /// Create Account
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Haru.AccountReply> CreateAccount(global::Haru.AccountRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      /// <summary>
-      /// GetProfile
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Haru.ProfileReply> GetProfile(global::Haru.ProfileRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      /// <summary>
-      /// UpdateProfile
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Haru.ProfileReply> UpdateProfile(global::Haru.ProfileRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      /// <summary>
-      /// GetPoint
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Haru.PointReply> GetPoint(global::Haru.PointRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.RoundReply> CreateRound(global::Haru.RoundRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      /// <summary>
-      /// IncrPoint
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Haru.PointReply> IncrPoint(global::Haru.PointRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.RoundReply> UpdateRound(global::Haru.RoundRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.RoundReply> GetRound(global::Haru.RoundRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.FilterdRoundsReply> GetFilterdRounds(global::Haru.FilterdRoundsRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> JoinRound(global::Haru.JoinRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -162,225 +172,133 @@ namespace Haru {
       {
       }
 
-      /// <summary>
-      /// Create Account
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Haru.AccountReply CreateAccount(global::Haru.AccountRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateAccount(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// Create Account
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Haru.AccountReply CreateAccount(global::Haru.AccountRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CreateAccount, null, options, request);
       }
-      /// <summary>
-      /// Create Account
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Haru.AccountReply> CreateAccountAsync(global::Haru.AccountRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CreateAccountAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// Create Account
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Haru.AccountReply> CreateAccountAsync(global::Haru.AccountRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CreateAccount, null, options, request);
       }
-      /// <summary>
-      /// GetProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Haru.ProfileReply GetProfile(global::Haru.ProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetProfile(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// GetProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Haru.ProfileReply GetProfile(global::Haru.ProfileRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetProfile, null, options, request);
       }
-      /// <summary>
-      /// GetProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Haru.ProfileReply> GetProfileAsync(global::Haru.ProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetProfileAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// GetProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Haru.ProfileReply> GetProfileAsync(global::Haru.ProfileRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetProfile, null, options, request);
       }
-      /// <summary>
-      /// UpdateProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Haru.ProfileReply UpdateProfile(global::Haru.ProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return UpdateProfile(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// UpdateProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Haru.ProfileReply UpdateProfile(global::Haru.ProfileRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_UpdateProfile, null, options, request);
       }
-      /// <summary>
-      /// UpdateProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Haru.ProfileReply> UpdateProfileAsync(global::Haru.ProfileRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return UpdateProfileAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// UpdateProfile
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Haru.ProfileReply> UpdateProfileAsync(global::Haru.ProfileRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_UpdateProfile, null, options, request);
       }
-      /// <summary>
-      /// GetPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::Haru.PointReply GetPoint(global::Haru.PointRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.RoundReply CreateRound(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetPoint(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// GetPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::Haru.PointReply GetPoint(global::Haru.PointRequest request, grpc::CallOptions options)
+      public virtual global::Haru.RoundReply CreateRound(global::Haru.RoundRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_GetPoint, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_CreateRound, null, options, request);
       }
-      /// <summary>
-      /// GetPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Haru.PointReply> GetPointAsync(global::Haru.PointRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> CreateRoundAsync(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetPointAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// GetPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Haru.PointReply> GetPointAsync(global::Haru.PointRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> CreateRoundAsync(global::Haru.RoundRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_GetPoint, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_CreateRound, null, options, request);
       }
-      /// <summary>
-      /// IncrPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::Haru.PointReply IncrPoint(global::Haru.PointRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.RoundReply UpdateRound(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return IncrPoint(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return UpdateRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// IncrPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
-      public virtual global::Haru.PointReply IncrPoint(global::Haru.PointRequest request, grpc::CallOptions options)
+      public virtual global::Haru.RoundReply UpdateRound(global::Haru.RoundRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_IncrPoint, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateRound, null, options, request);
       }
-      /// <summary>
-      /// IncrPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Haru.PointReply> IncrPointAsync(global::Haru.PointRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> UpdateRoundAsync(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return IncrPointAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return UpdateRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      /// IncrPoint
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Haru.PointReply> IncrPointAsync(global::Haru.PointRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> UpdateRoundAsync(global::Haru.RoundRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_IncrPoint, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateRound, null, options, request);
+      }
+      public virtual global::Haru.RoundReply GetRound(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.RoundReply GetRound(global::Haru.RoundRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetRound, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> GetRoundAsync(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> GetRoundAsync(global::Haru.RoundRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetRound, null, options, request);
+      }
+      public virtual global::Haru.FilterdRoundsReply GetFilterdRounds(global::Haru.FilterdRoundsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetFilterdRounds(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.FilterdRoundsReply GetFilterdRounds(global::Haru.FilterdRoundsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetFilterdRounds, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.FilterdRoundsReply> GetFilterdRoundsAsync(global::Haru.FilterdRoundsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetFilterdRoundsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.FilterdRoundsReply> GetFilterdRoundsAsync(global::Haru.FilterdRoundsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetFilterdRounds, null, options, request);
+      }
+      public virtual global::Haru.JoinReply JoinRound(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return JoinRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.JoinReply JoinRound(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_JoinRound, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> JoinRoundAsync(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return JoinRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> JoinRoundAsync(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_JoinRound, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override version1Client NewInstance(ClientBaseConfiguration configuration)
@@ -397,8 +315,11 @@ namespace Haru {
           .AddMethod(__Method_CreateAccount, serviceImpl.CreateAccount)
           .AddMethod(__Method_GetProfile, serviceImpl.GetProfile)
           .AddMethod(__Method_UpdateProfile, serviceImpl.UpdateProfile)
-          .AddMethod(__Method_GetPoint, serviceImpl.GetPoint)
-          .AddMethod(__Method_IncrPoint, serviceImpl.IncrPoint).Build();
+          .AddMethod(__Method_CreateRound, serviceImpl.CreateRound)
+          .AddMethod(__Method_UpdateRound, serviceImpl.UpdateRound)
+          .AddMethod(__Method_GetRound, serviceImpl.GetRound)
+          .AddMethod(__Method_GetFilterdRounds, serviceImpl.GetFilterdRounds)
+          .AddMethod(__Method_JoinRound, serviceImpl.JoinRound).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -410,8 +331,11 @@ namespace Haru {
       serviceBinder.AddMethod(__Method_CreateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.AccountRequest, global::Haru.AccountReply>(serviceImpl.CreateAccount));
       serviceBinder.AddMethod(__Method_GetProfile, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ProfileRequest, global::Haru.ProfileReply>(serviceImpl.GetProfile));
       serviceBinder.AddMethod(__Method_UpdateProfile, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ProfileRequest, global::Haru.ProfileReply>(serviceImpl.UpdateProfile));
-      serviceBinder.AddMethod(__Method_GetPoint, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.PointRequest, global::Haru.PointReply>(serviceImpl.GetPoint));
-      serviceBinder.AddMethod(__Method_IncrPoint, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.PointRequest, global::Haru.PointReply>(serviceImpl.IncrPoint));
+      serviceBinder.AddMethod(__Method_CreateRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.RoundRequest, global::Haru.RoundReply>(serviceImpl.CreateRound));
+      serviceBinder.AddMethod(__Method_UpdateRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.RoundRequest, global::Haru.RoundReply>(serviceImpl.UpdateRound));
+      serviceBinder.AddMethod(__Method_GetRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.RoundRequest, global::Haru.RoundReply>(serviceImpl.GetRound));
+      serviceBinder.AddMethod(__Method_GetFilterdRounds, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.FilterdRoundsRequest, global::Haru.FilterdRoundsReply>(serviceImpl.GetFilterdRounds));
+      serviceBinder.AddMethod(__Method_JoinRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.JoinRound));
     }
 
   }

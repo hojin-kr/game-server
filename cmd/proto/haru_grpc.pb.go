@@ -29,6 +29,7 @@ type Version1Client interface {
 	UpdateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
 	GetRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
 	GetFilterdRounds(ctx context.Context, in *FilterdRoundsRequest, opts ...grpc.CallOption) (*FilterdRoundsReply, error)
+	JoinRound(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 }
 
 type version1Client struct {
@@ -102,6 +103,15 @@ func (c *version1Client) GetFilterdRounds(ctx context.Context, in *FilterdRounds
 	return out, nil
 }
 
+func (c *version1Client) JoinRound(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error) {
+	out := new(JoinReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/JoinRound", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -113,6 +123,7 @@ type Version1Server interface {
 	UpdateRound(context.Context, *RoundRequest) (*RoundReply, error)
 	GetRound(context.Context, *RoundRequest) (*RoundReply, error)
 	GetFilterdRounds(context.Context, *FilterdRoundsRequest) (*FilterdRoundsReply, error)
+	JoinRound(context.Context, *JoinRequest) (*JoinReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -140,6 +151,9 @@ func (UnimplementedVersion1Server) GetRound(context.Context, *RoundRequest) (*Ro
 }
 func (UnimplementedVersion1Server) GetFilterdRounds(context.Context, *FilterdRoundsRequest) (*FilterdRoundsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFilterdRounds not implemented")
+}
+func (UnimplementedVersion1Server) JoinRound(context.Context, *JoinRequest) (*JoinReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinRound not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -280,6 +294,24 @@ func _Version1_GetFilterdRounds_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_JoinRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).JoinRound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/JoinRound",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).JoinRound(ctx, req.(*JoinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -314,6 +346,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFilterdRounds",
 			Handler:    _Version1_GetFilterdRounds_Handler,
+		},
+		{
+			MethodName: "JoinRound",
+			Handler:    _Version1_JoinRound_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
