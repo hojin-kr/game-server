@@ -67,6 +67,11 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>
+
+  func joinRound(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
 }
 
 extension Haru_version1ClientProtocol {
@@ -199,6 +204,24 @@ extension Haru_version1ClientProtocol {
       interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
     )
   }
+
+  /// Unary call to JoinRound
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to JoinRound.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func joinRound(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.joinRound.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? []
+    )
+  }
 }
 
 #if compiler(>=5.6)
@@ -301,6 +324,11 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     _ request: Haru_FilterdRoundsRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>
+
+  func makeJoinRoundCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -396,6 +424,18 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
     )
   }
+
+  internal func makeJoinRoundCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.joinRound.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -483,6 +523,18 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
     )
   }
+
+  internal func joinRound(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_JoinReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.joinRound.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -526,6 +578,9 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
 
   /// - Returns: Interceptors to use when invoking 'getFilterdRounds'.
   func makeGetFilterdRoundsInterceptors() -> [ClientInterceptor<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>]
+
+  /// - Returns: Interceptors to use when invoking 'joinRound'.
+  func makeJoinRoundInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -540,6 +595,7 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.updateRound,
       Haru_version1ClientMetadata.Methods.getRound,
       Haru_version1ClientMetadata.Methods.getFilterdRounds,
+      Haru_version1ClientMetadata.Methods.joinRound,
     ]
   )
 
@@ -585,6 +641,12 @@ internal enum Haru_version1ClientMetadata {
       path: "/haru.version1/GetFilterdRounds",
       type: GRPCCallType.unary
     )
+
+    internal static let joinRound = GRPCMethodDescriptor(
+      name: "JoinRound",
+      path: "/haru.version1/JoinRound",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -607,6 +669,8 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func getRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
 
   func getFilterdRounds(request: Haru_FilterdRoundsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdRoundsReply>
+
+  func joinRound(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 }
 
 extension Haru_version1Provider {
@@ -684,6 +748,15 @@ extension Haru_version1Provider {
         userFunction: self.getFilterdRounds(request:context:)
       )
 
+    case "JoinRound":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? [],
+        userFunction: self.joinRound(request:context:)
+      )
+
     default:
       return nil
     }
@@ -734,6 +807,11 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
     request: Haru_FilterdRoundsRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_FilterdRoundsReply
+
+  @Sendable func joinRound(
+    request: Haru_JoinRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_JoinReply
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -818,6 +896,15 @@ extension Haru_version1AsyncProvider {
         wrapping: self.getFilterdRounds(request:context:)
       )
 
+    case "JoinRound":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? [],
+        wrapping: self.joinRound(request:context:)
+      )
+
     default:
       return nil
     }
@@ -855,6 +942,10 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'getFilterdRounds'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetFilterdRoundsInterceptors() -> [ServerInterceptor<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>]
+
+  /// - Returns: Interceptors to use when handling 'joinRound'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeJoinRoundInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -869,6 +960,7 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.updateRound,
       Haru_version1ServerMetadata.Methods.getRound,
       Haru_version1ServerMetadata.Methods.getFilterdRounds,
+      Haru_version1ServerMetadata.Methods.joinRound,
     ]
   )
 
@@ -912,6 +1004,12 @@ internal enum Haru_version1ServerMetadata {
     internal static let getFilterdRounds = GRPCMethodDescriptor(
       name: "GetFilterdRounds",
       path: "/haru.version1/GetFilterdRounds",
+      type: GRPCCallType.unary
+    )
+
+    internal static let joinRound = GRPCMethodDescriptor(
+      name: "JoinRound",
+      path: "/haru.version1/JoinRound",
       type: GRPCCallType.unary
     )
   }

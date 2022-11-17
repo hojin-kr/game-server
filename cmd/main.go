@@ -125,13 +125,15 @@ func (s *server) JoinRound(ctx context.Context, in *pb.JoinRequest) (*pb.JoinRep
 		ret := &pb.JoinReply{Join: &pb.Join{Id: in.Join.GetId()}}
 		return ret, nil
 	}
+	// TODO check list
+	// - end time of round
+	// - person limit of round
 	// put join
 	key := datastore.IDKey("Join", in.Join.GetId(), nil)
 	ds.Get(ctx, key, in.Join)
 	if in.Join == nil {
 		in.Join.Id = in.Join.GetId()
 	}
-	// todo check round's person limit
 	in.Join.Ids = append(in.Join.Ids, in.Join.GetUserId())
 	ds.Put(ctx, key, in.Join)
 	// input my profiles
