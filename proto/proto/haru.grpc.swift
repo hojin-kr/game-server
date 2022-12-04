@@ -48,27 +48,27 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_ProfileRequest, Haru_ProfileReply>
 
-  func createRound(
-    _ request: Haru_RoundRequest,
+  func createGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply>
+  ) -> UnaryCall<Haru_GameRequest, Haru_GameReply>
 
-  func updateRound(
-    _ request: Haru_RoundRequest,
+  func updateGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply>
+  ) -> UnaryCall<Haru_GameRequest, Haru_GameReply>
 
-  func getRound(
-    _ request: Haru_RoundRequest,
+  func getGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply>
+  ) -> UnaryCall<Haru_GameRequest, Haru_GameReply>
 
-  func getFilterdRounds(
-    _ request: Haru_FilterdRoundsRequest,
+  func getFilterdGames(
+    _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>
+  ) -> UnaryCall<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>
 
-  func joinRound(
+  func join(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
@@ -133,93 +133,93 @@ extension Haru_version1ClientProtocol {
     )
   }
 
-  /// Unary call to CreateRound
+  /// Unary call to CreateGame
   ///
   /// - Parameters:
-  ///   - request: Request to send to CreateRound.
+  ///   - request: Request to send to CreateGame.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func createRound(
-    _ request: Haru_RoundRequest,
+  internal func createGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply> {
+  ) -> UnaryCall<Haru_GameRequest, Haru_GameReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.createRound.path,
+      path: Haru_version1ClientMetadata.Methods.createGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateGameInterceptors() ?? []
     )
   }
 
-  /// Unary call to UpdateRound
+  /// Unary call to UpdateGame
   ///
   /// - Parameters:
-  ///   - request: Request to send to UpdateRound.
+  ///   - request: Request to send to UpdateGame.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func updateRound(
-    _ request: Haru_RoundRequest,
+  internal func updateGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply> {
+  ) -> UnaryCall<Haru_GameRequest, Haru_GameReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.updateRound.path,
+      path: Haru_version1ClientMetadata.Methods.updateGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeUpdateGameInterceptors() ?? []
     )
   }
 
-  /// Unary call to GetRound
+  /// Unary call to GetGame
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetRound.
+  ///   - request: Request to send to GetGame.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getRound(
-    _ request: Haru_RoundRequest,
+  internal func getGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_RoundRequest, Haru_RoundReply> {
+  ) -> UnaryCall<Haru_GameRequest, Haru_GameReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getRound.path,
+      path: Haru_version1ClientMetadata.Methods.getGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetGameInterceptors() ?? []
     )
   }
 
-  /// Unary call to GetFilterdRounds
+  /// Unary call to GetFilterdGames
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetFilterdRounds.
+  ///   - request: Request to send to GetFilterdGames.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getFilterdRounds(
-    _ request: Haru_FilterdRoundsRequest,
+  internal func getFilterdGames(
+    _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply> {
+  ) -> UnaryCall<Haru_FilterdGamesRequest, Haru_FilterdGamesReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getFilterdRounds.path,
+      path: Haru_version1ClientMetadata.Methods.getFilterdGames.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetFilterdGamesInterceptors() ?? []
     )
   }
 
-  /// Unary call to JoinRound
+  /// Unary call to Join
   ///
   /// - Parameters:
-  ///   - request: Request to send to JoinRound.
+  ///   - request: Request to send to Join.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func joinRound(
+  internal func join(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions? = nil
   ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply> {
     return self.makeUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.joinRound.path,
+      path: Haru_version1ClientMetadata.Methods.join.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeJoinInterceptors() ?? []
     )
   }
 }
@@ -305,27 +305,27 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_ProfileRequest, Haru_ProfileReply>
 
-  func makeCreateRoundCall(
-    _ request: Haru_RoundRequest,
+  func makeCreateGameCall(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply>
+  ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply>
 
-  func makeUpdateRoundCall(
-    _ request: Haru_RoundRequest,
+  func makeUpdateGameCall(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply>
+  ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply>
 
-  func makeGetRoundCall(
-    _ request: Haru_RoundRequest,
+  func makeGetGameCall(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply>
+  ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply>
 
-  func makeGetFilterdRoundsCall(
-    _ request: Haru_FilterdRoundsRequest,
+  func makeGetFilterdGamesCall(
+    _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>
 
-  func makeJoinRoundCall(
+  func makeJoinCall(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
@@ -377,63 +377,63 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
-  internal func makeCreateRoundCall(
-    _ request: Haru_RoundRequest,
+  internal func makeCreateGameCall(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.createRound.path,
+      path: Haru_version1ClientMetadata.Methods.createGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateGameInterceptors() ?? []
     )
   }
 
-  internal func makeUpdateRoundCall(
-    _ request: Haru_RoundRequest,
+  internal func makeUpdateGameCall(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.updateRound.path,
+      path: Haru_version1ClientMetadata.Methods.updateGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeUpdateGameInterceptors() ?? []
     )
   }
 
-  internal func makeGetRoundCall(
-    _ request: Haru_RoundRequest,
+  internal func makeGetGameCall(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_RoundRequest, Haru_RoundReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getRound.path,
+      path: Haru_version1ClientMetadata.Methods.getGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetGameInterceptors() ?? []
     )
   }
 
-  internal func makeGetFilterdRoundsCall(
-    _ request: Haru_FilterdRoundsRequest,
+  internal func makeGetFilterdGamesCall(
+    _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply> {
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdGamesRequest, Haru_FilterdGamesReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getFilterdRounds.path,
+      path: Haru_version1ClientMetadata.Methods.getFilterdGames.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetFilterdGamesInterceptors() ?? []
     )
   }
 
-  internal func makeJoinRoundCall(
+  internal func makeJoinCall(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions? = nil
   ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply> {
     return self.makeAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.joinRound.path,
+      path: Haru_version1ClientMetadata.Methods.join.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeJoinInterceptors() ?? []
     )
   }
 }
@@ -476,63 +476,63 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
-  internal func createRound(
-    _ request: Haru_RoundRequest,
+  internal func createGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_RoundReply {
+  ) async throws -> Haru_GameReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.createRound.path,
+      path: Haru_version1ClientMetadata.Methods.createGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateGameInterceptors() ?? []
     )
   }
 
-  internal func updateRound(
-    _ request: Haru_RoundRequest,
+  internal func updateGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_RoundReply {
+  ) async throws -> Haru_GameReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.updateRound.path,
+      path: Haru_version1ClientMetadata.Methods.updateGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeUpdateGameInterceptors() ?? []
     )
   }
 
-  internal func getRound(
-    _ request: Haru_RoundRequest,
+  internal func getGame(
+    _ request: Haru_GameRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_RoundReply {
+  ) async throws -> Haru_GameReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getRound.path,
+      path: Haru_version1ClientMetadata.Methods.getGame.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetGameInterceptors() ?? []
     )
   }
 
-  internal func getFilterdRounds(
-    _ request: Haru_FilterdRoundsRequest,
+  internal func getFilterdGames(
+    _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Haru_FilterdRoundsReply {
+  ) async throws -> Haru_FilterdGamesReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.getFilterdRounds.path,
+      path: Haru_version1ClientMetadata.Methods.getFilterdGames.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? []
+      interceptors: self.interceptors?.makeGetFilterdGamesInterceptors() ?? []
     )
   }
 
-  internal func joinRound(
+  internal func join(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions? = nil
   ) async throws -> Haru_JoinReply {
     return try await self.performAsyncUnaryCall(
-      path: Haru_version1ClientMetadata.Methods.joinRound.path,
+      path: Haru_version1ClientMetadata.Methods.join.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? []
+      interceptors: self.interceptors?.makeJoinInterceptors() ?? []
     )
   }
 }
@@ -567,20 +567,20 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
   /// - Returns: Interceptors to use when invoking 'updateProfile'.
   func makeUpdateProfileInterceptors() -> [ClientInterceptor<Haru_ProfileRequest, Haru_ProfileReply>]
 
-  /// - Returns: Interceptors to use when invoking 'createRound'.
-  func makeCreateRoundInterceptors() -> [ClientInterceptor<Haru_RoundRequest, Haru_RoundReply>]
+  /// - Returns: Interceptors to use when invoking 'createGame'.
+  func makeCreateGameInterceptors() -> [ClientInterceptor<Haru_GameRequest, Haru_GameReply>]
 
-  /// - Returns: Interceptors to use when invoking 'updateRound'.
-  func makeUpdateRoundInterceptors() -> [ClientInterceptor<Haru_RoundRequest, Haru_RoundReply>]
+  /// - Returns: Interceptors to use when invoking 'updateGame'.
+  func makeUpdateGameInterceptors() -> [ClientInterceptor<Haru_GameRequest, Haru_GameReply>]
 
-  /// - Returns: Interceptors to use when invoking 'getRound'.
-  func makeGetRoundInterceptors() -> [ClientInterceptor<Haru_RoundRequest, Haru_RoundReply>]
+  /// - Returns: Interceptors to use when invoking 'getGame'.
+  func makeGetGameInterceptors() -> [ClientInterceptor<Haru_GameRequest, Haru_GameReply>]
 
-  /// - Returns: Interceptors to use when invoking 'getFilterdRounds'.
-  func makeGetFilterdRoundsInterceptors() -> [ClientInterceptor<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>]
+  /// - Returns: Interceptors to use when invoking 'getFilterdGames'.
+  func makeGetFilterdGamesInterceptors() -> [ClientInterceptor<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>]
 
-  /// - Returns: Interceptors to use when invoking 'joinRound'.
-  func makeJoinRoundInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+  /// - Returns: Interceptors to use when invoking 'join'.
+  func makeJoinInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -591,11 +591,11 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.createAccount,
       Haru_version1ClientMetadata.Methods.getProfile,
       Haru_version1ClientMetadata.Methods.updateProfile,
-      Haru_version1ClientMetadata.Methods.createRound,
-      Haru_version1ClientMetadata.Methods.updateRound,
-      Haru_version1ClientMetadata.Methods.getRound,
-      Haru_version1ClientMetadata.Methods.getFilterdRounds,
-      Haru_version1ClientMetadata.Methods.joinRound,
+      Haru_version1ClientMetadata.Methods.createGame,
+      Haru_version1ClientMetadata.Methods.updateGame,
+      Haru_version1ClientMetadata.Methods.getGame,
+      Haru_version1ClientMetadata.Methods.getFilterdGames,
+      Haru_version1ClientMetadata.Methods.join,
     ]
   )
 
@@ -618,33 +618,33 @@ internal enum Haru_version1ClientMetadata {
       type: GRPCCallType.unary
     )
 
-    internal static let createRound = GRPCMethodDescriptor(
-      name: "CreateRound",
-      path: "/haru.version1/CreateRound",
+    internal static let createGame = GRPCMethodDescriptor(
+      name: "CreateGame",
+      path: "/haru.version1/CreateGame",
       type: GRPCCallType.unary
     )
 
-    internal static let updateRound = GRPCMethodDescriptor(
-      name: "UpdateRound",
-      path: "/haru.version1/UpdateRound",
+    internal static let updateGame = GRPCMethodDescriptor(
+      name: "UpdateGame",
+      path: "/haru.version1/UpdateGame",
       type: GRPCCallType.unary
     )
 
-    internal static let getRound = GRPCMethodDescriptor(
-      name: "GetRound",
-      path: "/haru.version1/GetRound",
+    internal static let getGame = GRPCMethodDescriptor(
+      name: "GetGame",
+      path: "/haru.version1/GetGame",
       type: GRPCCallType.unary
     )
 
-    internal static let getFilterdRounds = GRPCMethodDescriptor(
-      name: "GetFilterdRounds",
-      path: "/haru.version1/GetFilterdRounds",
+    internal static let getFilterdGames = GRPCMethodDescriptor(
+      name: "GetFilterdGames",
+      path: "/haru.version1/GetFilterdGames",
       type: GRPCCallType.unary
     )
 
-    internal static let joinRound = GRPCMethodDescriptor(
-      name: "JoinRound",
-      path: "/haru.version1/JoinRound",
+    internal static let join = GRPCMethodDescriptor(
+      name: "Join",
+      path: "/haru.version1/Join",
       type: GRPCCallType.unary
     )
   }
@@ -662,15 +662,15 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
 
   func updateProfile(request: Haru_ProfileRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ProfileReply>
 
-  func createRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
+  func createGame(request: Haru_GameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_GameReply>
 
-  func updateRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
+  func updateGame(request: Haru_GameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_GameReply>
 
-  func getRound(request: Haru_RoundRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_RoundReply>
+  func getGame(request: Haru_GameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_GameReply>
 
-  func getFilterdRounds(request: Haru_FilterdRoundsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdRoundsReply>
+  func getFilterdGames(request: Haru_FilterdGamesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdGamesReply>
 
-  func joinRound(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
+  func join(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 }
 
 extension Haru_version1Provider {
@@ -712,49 +712,49 @@ extension Haru_version1Provider {
         userFunction: self.updateProfile(request:context:)
       )
 
-    case "CreateRound":
+    case "CreateGame":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
-        interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? [],
-        userFunction: self.createRound(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_GameRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameReply>(),
+        interceptors: self.interceptors?.makeCreateGameInterceptors() ?? [],
+        userFunction: self.createGame(request:context:)
       )
 
-    case "UpdateRound":
+    case "UpdateGame":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
-        interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? [],
-        userFunction: self.updateRound(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_GameRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameReply>(),
+        interceptors: self.interceptors?.makeUpdateGameInterceptors() ?? [],
+        userFunction: self.updateGame(request:context:)
       )
 
-    case "GetRound":
+    case "GetGame":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
-        interceptors: self.interceptors?.makeGetRoundInterceptors() ?? [],
-        userFunction: self.getRound(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_GameRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameReply>(),
+        interceptors: self.interceptors?.makeGetGameInterceptors() ?? [],
+        userFunction: self.getGame(request:context:)
       )
 
-    case "GetFilterdRounds":
+    case "GetFilterdGames":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_FilterdRoundsRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_FilterdRoundsReply>(),
-        interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? [],
-        userFunction: self.getFilterdRounds(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdGamesRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdGamesReply>(),
+        interceptors: self.interceptors?.makeGetFilterdGamesInterceptors() ?? [],
+        userFunction: self.getFilterdGames(request:context:)
       )
 
-    case "JoinRound":
+    case "Join":
       return UnaryServerHandler(
         context: context,
         requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
         responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
-        interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? [],
-        userFunction: self.joinRound(request:context:)
+        interceptors: self.interceptors?.makeJoinInterceptors() ?? [],
+        userFunction: self.join(request:context:)
       )
 
     default:
@@ -788,27 +788,27 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_ProfileReply
 
-  @Sendable func createRound(
-    request: Haru_RoundRequest,
+  @Sendable func createGame(
+    request: Haru_GameRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_RoundReply
+  ) async throws -> Haru_GameReply
 
-  @Sendable func updateRound(
-    request: Haru_RoundRequest,
+  @Sendable func updateGame(
+    request: Haru_GameRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_RoundReply
+  ) async throws -> Haru_GameReply
 
-  @Sendable func getRound(
-    request: Haru_RoundRequest,
+  @Sendable func getGame(
+    request: Haru_GameRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_RoundReply
+  ) async throws -> Haru_GameReply
 
-  @Sendable func getFilterdRounds(
-    request: Haru_FilterdRoundsRequest,
+  @Sendable func getFilterdGames(
+    request: Haru_FilterdGamesRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Haru_FilterdRoundsReply
+  ) async throws -> Haru_FilterdGamesReply
 
-  @Sendable func joinRound(
+  @Sendable func join(
     request: Haru_JoinRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_JoinReply
@@ -860,49 +860,49 @@ extension Haru_version1AsyncProvider {
         wrapping: self.updateProfile(request:context:)
       )
 
-    case "CreateRound":
+    case "CreateGame":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
-        interceptors: self.interceptors?.makeCreateRoundInterceptors() ?? [],
-        wrapping: self.createRound(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_GameRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameReply>(),
+        interceptors: self.interceptors?.makeCreateGameInterceptors() ?? [],
+        wrapping: self.createGame(request:context:)
       )
 
-    case "UpdateRound":
+    case "UpdateGame":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
-        interceptors: self.interceptors?.makeUpdateRoundInterceptors() ?? [],
-        wrapping: self.updateRound(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_GameRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameReply>(),
+        interceptors: self.interceptors?.makeUpdateGameInterceptors() ?? [],
+        wrapping: self.updateGame(request:context:)
       )
 
-    case "GetRound":
+    case "GetGame":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_RoundRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_RoundReply>(),
-        interceptors: self.interceptors?.makeGetRoundInterceptors() ?? [],
-        wrapping: self.getRound(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_GameRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameReply>(),
+        interceptors: self.interceptors?.makeGetGameInterceptors() ?? [],
+        wrapping: self.getGame(request:context:)
       )
 
-    case "GetFilterdRounds":
+    case "GetFilterdGames":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Haru_FilterdRoundsRequest>(),
-        responseSerializer: ProtobufSerializer<Haru_FilterdRoundsReply>(),
-        interceptors: self.interceptors?.makeGetFilterdRoundsInterceptors() ?? [],
-        wrapping: self.getFilterdRounds(request:context:)
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdGamesRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdGamesReply>(),
+        interceptors: self.interceptors?.makeGetFilterdGamesInterceptors() ?? [],
+        wrapping: self.getFilterdGames(request:context:)
       )
 
-    case "JoinRound":
+    case "Join":
       return GRPCAsyncServerHandler(
         context: context,
         requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
         responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
-        interceptors: self.interceptors?.makeJoinRoundInterceptors() ?? [],
-        wrapping: self.joinRound(request:context:)
+        interceptors: self.interceptors?.makeJoinInterceptors() ?? [],
+        wrapping: self.join(request:context:)
       )
 
     default:
@@ -927,25 +927,25 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdateProfileInterceptors() -> [ServerInterceptor<Haru_ProfileRequest, Haru_ProfileReply>]
 
-  /// - Returns: Interceptors to use when handling 'createRound'.
+  /// - Returns: Interceptors to use when handling 'createGame'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeCreateRoundInterceptors() -> [ServerInterceptor<Haru_RoundRequest, Haru_RoundReply>]
+  func makeCreateGameInterceptors() -> [ServerInterceptor<Haru_GameRequest, Haru_GameReply>]
 
-  /// - Returns: Interceptors to use when handling 'updateRound'.
+  /// - Returns: Interceptors to use when handling 'updateGame'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeUpdateRoundInterceptors() -> [ServerInterceptor<Haru_RoundRequest, Haru_RoundReply>]
+  func makeUpdateGameInterceptors() -> [ServerInterceptor<Haru_GameRequest, Haru_GameReply>]
 
-  /// - Returns: Interceptors to use when handling 'getRound'.
+  /// - Returns: Interceptors to use when handling 'getGame'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetRoundInterceptors() -> [ServerInterceptor<Haru_RoundRequest, Haru_RoundReply>]
+  func makeGetGameInterceptors() -> [ServerInterceptor<Haru_GameRequest, Haru_GameReply>]
 
-  /// - Returns: Interceptors to use when handling 'getFilterdRounds'.
+  /// - Returns: Interceptors to use when handling 'getFilterdGames'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetFilterdRoundsInterceptors() -> [ServerInterceptor<Haru_FilterdRoundsRequest, Haru_FilterdRoundsReply>]
+  func makeGetFilterdGamesInterceptors() -> [ServerInterceptor<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>]
 
-  /// - Returns: Interceptors to use when handling 'joinRound'.
+  /// - Returns: Interceptors to use when handling 'join'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeJoinRoundInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+  func makeJoinInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -956,11 +956,11 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.createAccount,
       Haru_version1ServerMetadata.Methods.getProfile,
       Haru_version1ServerMetadata.Methods.updateProfile,
-      Haru_version1ServerMetadata.Methods.createRound,
-      Haru_version1ServerMetadata.Methods.updateRound,
-      Haru_version1ServerMetadata.Methods.getRound,
-      Haru_version1ServerMetadata.Methods.getFilterdRounds,
-      Haru_version1ServerMetadata.Methods.joinRound,
+      Haru_version1ServerMetadata.Methods.createGame,
+      Haru_version1ServerMetadata.Methods.updateGame,
+      Haru_version1ServerMetadata.Methods.getGame,
+      Haru_version1ServerMetadata.Methods.getFilterdGames,
+      Haru_version1ServerMetadata.Methods.join,
     ]
   )
 
@@ -983,33 +983,33 @@ internal enum Haru_version1ServerMetadata {
       type: GRPCCallType.unary
     )
 
-    internal static let createRound = GRPCMethodDescriptor(
-      name: "CreateRound",
-      path: "/haru.version1/CreateRound",
+    internal static let createGame = GRPCMethodDescriptor(
+      name: "CreateGame",
+      path: "/haru.version1/CreateGame",
       type: GRPCCallType.unary
     )
 
-    internal static let updateRound = GRPCMethodDescriptor(
-      name: "UpdateRound",
-      path: "/haru.version1/UpdateRound",
+    internal static let updateGame = GRPCMethodDescriptor(
+      name: "UpdateGame",
+      path: "/haru.version1/UpdateGame",
       type: GRPCCallType.unary
     )
 
-    internal static let getRound = GRPCMethodDescriptor(
-      name: "GetRound",
-      path: "/haru.version1/GetRound",
+    internal static let getGame = GRPCMethodDescriptor(
+      name: "GetGame",
+      path: "/haru.version1/GetGame",
       type: GRPCCallType.unary
     )
 
-    internal static let getFilterdRounds = GRPCMethodDescriptor(
-      name: "GetFilterdRounds",
-      path: "/haru.version1/GetFilterdRounds",
+    internal static let getFilterdGames = GRPCMethodDescriptor(
+      name: "GetFilterdGames",
+      path: "/haru.version1/GetFilterdGames",
       type: GRPCCallType.unary
     )
 
-    internal static let joinRound = GRPCMethodDescriptor(
-      name: "JoinRound",
-      path: "/haru.version1/JoinRound",
+    internal static let join = GRPCMethodDescriptor(
+      name: "Join",
+      path: "/haru.version1/Join",
       type: GRPCCallType.unary
     )
   }

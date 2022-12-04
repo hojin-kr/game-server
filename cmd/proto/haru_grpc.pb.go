@@ -25,11 +25,11 @@ type Version1Client interface {
 	CreateAccount(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*AccountReply, error)
 	GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error)
 	UpdateProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*ProfileReply, error)
-	CreateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
-	UpdateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
-	GetRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error)
-	GetFilterdRounds(ctx context.Context, in *FilterdRoundsRequest, opts ...grpc.CallOption) (*FilterdRoundsReply, error)
-	JoinRound(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
+	CreateGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error)
+	UpdateGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error)
+	GetGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error)
+	GetFilterdGames(ctx context.Context, in *FilterdGamesRequest, opts ...grpc.CallOption) (*FilterdGamesReply, error)
+	Join(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 }
 
 type version1Client struct {
@@ -67,45 +67,45 @@ func (c *version1Client) UpdateProfile(ctx context.Context, in *ProfileRequest, 
 	return out, nil
 }
 
-func (c *version1Client) CreateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error) {
-	out := new(RoundReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/CreateRound", in, out, opts...)
+func (c *version1Client) CreateGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error) {
+	out := new(GameReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/CreateGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *version1Client) UpdateRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error) {
-	out := new(RoundReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/UpdateRound", in, out, opts...)
+func (c *version1Client) UpdateGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error) {
+	out := new(GameReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/UpdateGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *version1Client) GetRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*RoundReply, error) {
-	out := new(RoundReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetRound", in, out, opts...)
+func (c *version1Client) GetGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error) {
+	out := new(GameReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *version1Client) GetFilterdRounds(ctx context.Context, in *FilterdRoundsRequest, opts ...grpc.CallOption) (*FilterdRoundsReply, error) {
-	out := new(FilterdRoundsReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/GetFilterdRounds", in, out, opts...)
+func (c *version1Client) GetFilterdGames(ctx context.Context, in *FilterdGamesRequest, opts ...grpc.CallOption) (*FilterdGamesReply, error) {
+	out := new(FilterdGamesReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetFilterdGames", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *version1Client) JoinRound(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error) {
+func (c *version1Client) Join(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error) {
 	out := new(JoinReply)
-	err := c.cc.Invoke(ctx, "/haru.version1/JoinRound", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/haru.version1/Join", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -119,11 +119,11 @@ type Version1Server interface {
 	CreateAccount(context.Context, *AccountRequest) (*AccountReply, error)
 	GetProfile(context.Context, *ProfileRequest) (*ProfileReply, error)
 	UpdateProfile(context.Context, *ProfileRequest) (*ProfileReply, error)
-	CreateRound(context.Context, *RoundRequest) (*RoundReply, error)
-	UpdateRound(context.Context, *RoundRequest) (*RoundReply, error)
-	GetRound(context.Context, *RoundRequest) (*RoundReply, error)
-	GetFilterdRounds(context.Context, *FilterdRoundsRequest) (*FilterdRoundsReply, error)
-	JoinRound(context.Context, *JoinRequest) (*JoinReply, error)
+	CreateGame(context.Context, *GameRequest) (*GameReply, error)
+	UpdateGame(context.Context, *GameRequest) (*GameReply, error)
+	GetGame(context.Context, *GameRequest) (*GameReply, error)
+	GetFilterdGames(context.Context, *FilterdGamesRequest) (*FilterdGamesReply, error)
+	Join(context.Context, *JoinRequest) (*JoinReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -140,20 +140,20 @@ func (UnimplementedVersion1Server) GetProfile(context.Context, *ProfileRequest) 
 func (UnimplementedVersion1Server) UpdateProfile(context.Context, *ProfileRequest) (*ProfileReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
 }
-func (UnimplementedVersion1Server) CreateRound(context.Context, *RoundRequest) (*RoundReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateRound not implemented")
+func (UnimplementedVersion1Server) CreateGame(context.Context, *GameRequest) (*GameReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGame not implemented")
 }
-func (UnimplementedVersion1Server) UpdateRound(context.Context, *RoundRequest) (*RoundReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateRound not implemented")
+func (UnimplementedVersion1Server) UpdateGame(context.Context, *GameRequest) (*GameReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGame not implemented")
 }
-func (UnimplementedVersion1Server) GetRound(context.Context, *RoundRequest) (*RoundReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRound not implemented")
+func (UnimplementedVersion1Server) GetGame(context.Context, *GameRequest) (*GameReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGame not implemented")
 }
-func (UnimplementedVersion1Server) GetFilterdRounds(context.Context, *FilterdRoundsRequest) (*FilterdRoundsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFilterdRounds not implemented")
+func (UnimplementedVersion1Server) GetFilterdGames(context.Context, *FilterdGamesRequest) (*FilterdGamesReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFilterdGames not implemented")
 }
-func (UnimplementedVersion1Server) JoinRound(context.Context, *JoinRequest) (*JoinReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JoinRound not implemented")
+func (UnimplementedVersion1Server) Join(context.Context, *JoinRequest) (*JoinReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Join not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -222,92 +222,92 @@ func _Version1_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_CreateRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoundRequest)
+func _Version1_CreateGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).CreateRound(ctx, in)
+		return srv.(Version1Server).CreateGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/CreateRound",
+		FullMethod: "/haru.version1/CreateGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).CreateRound(ctx, req.(*RoundRequest))
+		return srv.(Version1Server).CreateGame(ctx, req.(*GameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_UpdateRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoundRequest)
+func _Version1_UpdateGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).UpdateRound(ctx, in)
+		return srv.(Version1Server).UpdateGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/UpdateRound",
+		FullMethod: "/haru.version1/UpdateGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).UpdateRound(ctx, req.(*RoundRequest))
+		return srv.(Version1Server).UpdateGame(ctx, req.(*GameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_GetRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RoundRequest)
+func _Version1_GetGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).GetRound(ctx, in)
+		return srv.(Version1Server).GetGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/GetRound",
+		FullMethod: "/haru.version1/GetGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetRound(ctx, req.(*RoundRequest))
+		return srv.(Version1Server).GetGame(ctx, req.(*GameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_GetFilterdRounds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FilterdRoundsRequest)
+func _Version1_GetFilterdGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FilterdGamesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).GetFilterdRounds(ctx, in)
+		return srv.(Version1Server).GetFilterdGames(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/GetFilterdRounds",
+		FullMethod: "/haru.version1/GetFilterdGames",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).GetFilterdRounds(ctx, req.(*FilterdRoundsRequest))
+		return srv.(Version1Server).GetFilterdGames(ctx, req.(*FilterdGamesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Version1_JoinRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Version1_Join_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JoinRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Version1Server).JoinRound(ctx, in)
+		return srv.(Version1Server).Join(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/haru.version1/JoinRound",
+		FullMethod: "/haru.version1/Join",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Version1Server).JoinRound(ctx, req.(*JoinRequest))
+		return srv.(Version1Server).Join(ctx, req.(*JoinRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -332,24 +332,24 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Version1_UpdateProfile_Handler,
 		},
 		{
-			MethodName: "CreateRound",
-			Handler:    _Version1_CreateRound_Handler,
+			MethodName: "CreateGame",
+			Handler:    _Version1_CreateGame_Handler,
 		},
 		{
-			MethodName: "UpdateRound",
-			Handler:    _Version1_UpdateRound_Handler,
+			MethodName: "UpdateGame",
+			Handler:    _Version1_UpdateGame_Handler,
 		},
 		{
-			MethodName: "GetRound",
-			Handler:    _Version1_GetRound_Handler,
+			MethodName: "GetGame",
+			Handler:    _Version1_GetGame_Handler,
 		},
 		{
-			MethodName: "GetFilterdRounds",
-			Handler:    _Version1_GetFilterdRounds_Handler,
+			MethodName: "GetFilterdGames",
+			Handler:    _Version1_GetFilterdGames_Handler,
 		},
 		{
-			MethodName: "JoinRound",
-			Handler:    _Version1_JoinRound_Handler,
+			MethodName: "Join",
+			Handler:    _Version1_Join_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

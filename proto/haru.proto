@@ -26,21 +26,37 @@ service version1 {
   rpc CreateAccount (AccountRequest) returns (AccountReply) {}
   rpc GetProfile (ProfileRequest) returns (ProfileReply) {}
   rpc UpdateProfile (ProfileRequest) returns (ProfileReply) {}
-  rpc CreateRound (RoundRequest) returns (RoundReply) {}
-  rpc UpdateRound (RoundRequest) returns (RoundReply) {}
-  rpc GetRound (RoundRequest) returns (RoundReply) {}
-  rpc GetFilterdRounds (FilterdRoundsRequest) returns (FilterdRoundsReply) {}
-  rpc JoinRound (JoinRequest) returns (JoinReply) {}
+  rpc CreateGame (GameRequest) returns (GameReply) {}
+  rpc UpdateGame (GameRequest) returns (GameReply) {}
+  rpc GetGame (GameRequest) returns (GameReply) {}
+  rpc GetFilterdGames (FilterdGamesRequest) returns (FilterdGamesReply) {}
+  rpc Join (JoinRequest) returns (JoinReply) {}
+}
+
+message Account {
+  int64 id = 1;
+  string platform_id = 2;
+  string platform = 3;
+  int64 register_timestamp = 4;
 }
 
 message AccountRequest {
-  int64 id = 1;
-  int64 register_timestamp = 2;
+  Account account = 1;
 }
 
 message AccountReply {
-  int64 id = 1;
-  int64 register_timestamp = 2;
+  Account account = 1;
+}
+
+message Profile {
+  int64 account_id = 1;
+  string name = 2;
+  int64 age = 3;
+  int64 sex = 4;
+  int64 score = 5;
+  int64 years = 6;
+  repeated int64 games = 7;
+  string desc = 8;
 }
 
 message ProfileRequest {
@@ -51,86 +67,54 @@ message ProfileReply {
   Profile profile = 1;
 }
 
+message Join {
+  int64 game_id = 1;
+  int64 account_id = 2;
+  int64 status = 3;
+}
+
 message JoinRequest {
   Join join = 1;
-  Profile profile = 2;
 }
 
 message JoinReply {
   Join join = 1;
 }
 
-message Profile {
+message Game {
   int64 id = 1;
-  string nickname = 2;
-  int64 age = 3;
-  int64 sex = 4;
-  int64 gross = 5;
-  int64 years = 6;
-  repeated int64 rounds = 7;
-  string desc = 8;
-}
-
-message RoundRequest {
-  Round round = 1;
-  Place place = 2;
-  Join join = 3;
-}
-
-message RoundReply {
-  Round round = 1;
-  Place place = 2;
-  Join join = 3;
-}
-
-message Round {
-  int64 id = 1;
-  int64 host = 2;
+  int64 host_account_id = 2;
   int64 time = 3;
   int64 price = 4;
-  // type 으로 상황별 구분해서 사용 ex ) 0 : 필드 18홀, 1 : 필드 9홀, 2 : 스크린 9홀 ...
   int64 type_play = 5;
   int64 type_age = 6;
   int64 type_sex = 7;
-  int64 type_score_of_gross = 8;
-  int64 type_experience_of_years = 9;
-  string place_id = 10;
-  string place_name = 11;
-  string place_address = 12;
-  // 탐색용 키
-  string short_address = 13;
-  string lat = 14;
-  string long = 15;
-  int64 updated = 16;
-  string place_img = 17;
-  int64 type_hole = 18;
-  int64 person_full = 19;
-  int64 person = 20;
+  int64 type_score = 8;
+  int64 type_years = 9;
+  int64 type_hole = 10;
+  int64 person_max = 11;
+  int64 person = 12;
+  string decs = 13;
+  Place place = 14;
 }
 
 message Place {
-  int64 id = 1;
-  string name = 2;
-  string location = 3;
-  string lat = 4;
-  string long = 5;
-  string photo = 6;
+  string name = 1;
+  string address = 2;
+  string short_address = 3;
 }
 
-message Join {
-  int64 id = 1; // roundID
-  int64 user_id = 2;
-  repeated int64 ids = 3;
+message GameRequest {
+  Game game = 1;
+  Join join = 2;
 }
 
-message Review {
-  int64 id = 1;
-  repeated int64 ids = 2;
-  repeated string reviews = 3;
-  int64 updated = 4;
+message GameReply {
+  Game game = 1;
+  Join join = 2;
 }
 
-message FilterdRoundsRequest {
+message FilterdGamesRequest {
   bool is_init =1;
   int64 time_min = 2;
   int64 time_max = 3;
@@ -138,10 +122,10 @@ message FilterdRoundsRequest {
   int64 type_play = 5;
   int64 type_age = 6;
   int64 type_sex = 7;
-  int64 type_score_of_gross = 8;
-  int64 type_experience_of_years = 9;
+  int64 type_score = 8;
+  int64 type_years = 9;
 }
 
-message FilterdRoundsReply {
-  repeated Round Rounds = 1;
+message FilterdGamesReply {
+  repeated Game games = 1;
 }

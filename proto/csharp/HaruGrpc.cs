@@ -34,10 +34,10 @@ namespace Haru {
     static readonly grpc::Marshaller<global::Haru.AccountReply> __Marshaller_haru_AccountReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.AccountReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.ProfileRequest> __Marshaller_haru_ProfileRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ProfileRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.ProfileReply> __Marshaller_haru_ProfileReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ProfileReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Haru.RoundRequest> __Marshaller_haru_RoundRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.RoundRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Haru.RoundReply> __Marshaller_haru_RoundReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.RoundReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Haru.FilterdRoundsRequest> __Marshaller_haru_FilterdRoundsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdRoundsRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Haru.FilterdRoundsReply> __Marshaller_haru_FilterdRoundsReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdRoundsReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.GameRequest> __Marshaller_haru_GameRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.GameRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.GameReply> __Marshaller_haru_GameReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.GameReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.FilterdGamesRequest> __Marshaller_haru_FilterdGamesRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdGamesRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.FilterdGamesReply> __Marshaller_haru_FilterdGamesReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdGamesReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.JoinRequest> __Marshaller_haru_JoinRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.JoinReply> __Marshaller_haru_JoinReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinReply.Parser.ParseFrom);
 
@@ -62,38 +62,38 @@ namespace Haru {
         __Marshaller_haru_ProfileRequest,
         __Marshaller_haru_ProfileReply);
 
-    static readonly grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply> __Method_CreateRound = new grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply>(
+    static readonly grpc::Method<global::Haru.GameRequest, global::Haru.GameReply> __Method_CreateGame = new grpc::Method<global::Haru.GameRequest, global::Haru.GameReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "CreateRound",
-        __Marshaller_haru_RoundRequest,
-        __Marshaller_haru_RoundReply);
+        "CreateGame",
+        __Marshaller_haru_GameRequest,
+        __Marshaller_haru_GameReply);
 
-    static readonly grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply> __Method_UpdateRound = new grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply>(
+    static readonly grpc::Method<global::Haru.GameRequest, global::Haru.GameReply> __Method_UpdateGame = new grpc::Method<global::Haru.GameRequest, global::Haru.GameReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "UpdateRound",
-        __Marshaller_haru_RoundRequest,
-        __Marshaller_haru_RoundReply);
+        "UpdateGame",
+        __Marshaller_haru_GameRequest,
+        __Marshaller_haru_GameReply);
 
-    static readonly grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply> __Method_GetRound = new grpc::Method<global::Haru.RoundRequest, global::Haru.RoundReply>(
+    static readonly grpc::Method<global::Haru.GameRequest, global::Haru.GameReply> __Method_GetGame = new grpc::Method<global::Haru.GameRequest, global::Haru.GameReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "GetRound",
-        __Marshaller_haru_RoundRequest,
-        __Marshaller_haru_RoundReply);
+        "GetGame",
+        __Marshaller_haru_GameRequest,
+        __Marshaller_haru_GameReply);
 
-    static readonly grpc::Method<global::Haru.FilterdRoundsRequest, global::Haru.FilterdRoundsReply> __Method_GetFilterdRounds = new grpc::Method<global::Haru.FilterdRoundsRequest, global::Haru.FilterdRoundsReply>(
+    static readonly grpc::Method<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply> __Method_GetFilterdGames = new grpc::Method<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "GetFilterdRounds",
-        __Marshaller_haru_FilterdRoundsRequest,
-        __Marshaller_haru_FilterdRoundsReply);
+        "GetFilterdGames",
+        __Marshaller_haru_FilterdGamesRequest,
+        __Marshaller_haru_FilterdGamesReply);
 
-    static readonly grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply> __Method_JoinRound = new grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply>(
+    static readonly grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply> __Method_Join = new grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "JoinRound",
+        "Join",
         __Marshaller_haru_JoinRequest,
         __Marshaller_haru_JoinReply);
 
@@ -122,27 +122,27 @@ namespace Haru {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Haru.RoundReply> CreateRound(global::Haru.RoundRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.GameReply> CreateGame(global::Haru.GameRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Haru.RoundReply> UpdateRound(global::Haru.RoundRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.GameReply> UpdateGame(global::Haru.GameRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Haru.RoundReply> GetRound(global::Haru.RoundRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.GameReply> GetGame(global::Haru.GameRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Haru.FilterdRoundsReply> GetFilterdRounds(global::Haru.FilterdRoundsRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.FilterdGamesReply> GetFilterdGames(global::Haru.FilterdGamesRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> JoinRound(global::Haru.JoinRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> Join(global::Haru.JoinRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -220,85 +220,85 @@ namespace Haru {
       {
         return CallInvoker.AsyncUnaryCall(__Method_UpdateProfile, null, options, request);
       }
-      public virtual global::Haru.RoundReply CreateRound(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.GameReply CreateGame(global::Haru.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return CreateRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateGame(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Haru.RoundReply CreateRound(global::Haru.RoundRequest request, grpc::CallOptions options)
+      public virtual global::Haru.GameReply CreateGame(global::Haru.GameRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_CreateRound, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_CreateGame, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> CreateRoundAsync(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameReply> CreateGameAsync(global::Haru.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return CreateRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return CreateGameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> CreateRoundAsync(global::Haru.RoundRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameReply> CreateGameAsync(global::Haru.GameRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_CreateRound, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_CreateGame, null, options, request);
       }
-      public virtual global::Haru.RoundReply UpdateRound(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.GameReply UpdateGame(global::Haru.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return UpdateRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return UpdateGame(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Haru.RoundReply UpdateRound(global::Haru.RoundRequest request, grpc::CallOptions options)
+      public virtual global::Haru.GameReply UpdateGame(global::Haru.GameRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_UpdateRound, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateGame, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> UpdateRoundAsync(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameReply> UpdateGameAsync(global::Haru.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return UpdateRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return UpdateGameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> UpdateRoundAsync(global::Haru.RoundRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameReply> UpdateGameAsync(global::Haru.GameRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_UpdateRound, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateGame, null, options, request);
       }
-      public virtual global::Haru.RoundReply GetRound(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.GameReply GetGame(global::Haru.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetGame(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Haru.RoundReply GetRound(global::Haru.RoundRequest request, grpc::CallOptions options)
+      public virtual global::Haru.GameReply GetGame(global::Haru.GameRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_GetRound, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_GetGame, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> GetRoundAsync(global::Haru.RoundRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameReply> GetGameAsync(global::Haru.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetGameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.RoundReply> GetRoundAsync(global::Haru.RoundRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameReply> GetGameAsync(global::Haru.GameRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_GetRound, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_GetGame, null, options, request);
       }
-      public virtual global::Haru.FilterdRoundsReply GetFilterdRounds(global::Haru.FilterdRoundsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.FilterdGamesReply GetFilterdGames(global::Haru.FilterdGamesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetFilterdRounds(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetFilterdGames(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Haru.FilterdRoundsReply GetFilterdRounds(global::Haru.FilterdRoundsRequest request, grpc::CallOptions options)
+      public virtual global::Haru.FilterdGamesReply GetFilterdGames(global::Haru.FilterdGamesRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_GetFilterdRounds, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_GetFilterdGames, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.FilterdRoundsReply> GetFilterdRoundsAsync(global::Haru.FilterdRoundsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.FilterdGamesReply> GetFilterdGamesAsync(global::Haru.FilterdGamesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return GetFilterdRoundsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetFilterdGamesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.FilterdRoundsReply> GetFilterdRoundsAsync(global::Haru.FilterdRoundsRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.FilterdGamesReply> GetFilterdGamesAsync(global::Haru.FilterdGamesRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_GetFilterdRounds, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_GetFilterdGames, null, options, request);
       }
-      public virtual global::Haru.JoinReply JoinRound(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Haru.JoinReply Join(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return JoinRound(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return Join(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Haru.JoinReply JoinRound(global::Haru.JoinRequest request, grpc::CallOptions options)
+      public virtual global::Haru.JoinReply Join(global::Haru.JoinRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_JoinRound, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_Join, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> JoinRoundAsync(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> JoinAsync(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return JoinRoundAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return JoinAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> JoinRoundAsync(global::Haru.JoinRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> JoinAsync(global::Haru.JoinRequest request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_JoinRound, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_Join, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override version1Client NewInstance(ClientBaseConfiguration configuration)
@@ -315,11 +315,11 @@ namespace Haru {
           .AddMethod(__Method_CreateAccount, serviceImpl.CreateAccount)
           .AddMethod(__Method_GetProfile, serviceImpl.GetProfile)
           .AddMethod(__Method_UpdateProfile, serviceImpl.UpdateProfile)
-          .AddMethod(__Method_CreateRound, serviceImpl.CreateRound)
-          .AddMethod(__Method_UpdateRound, serviceImpl.UpdateRound)
-          .AddMethod(__Method_GetRound, serviceImpl.GetRound)
-          .AddMethod(__Method_GetFilterdRounds, serviceImpl.GetFilterdRounds)
-          .AddMethod(__Method_JoinRound, serviceImpl.JoinRound).Build();
+          .AddMethod(__Method_CreateGame, serviceImpl.CreateGame)
+          .AddMethod(__Method_UpdateGame, serviceImpl.UpdateGame)
+          .AddMethod(__Method_GetGame, serviceImpl.GetGame)
+          .AddMethod(__Method_GetFilterdGames, serviceImpl.GetFilterdGames)
+          .AddMethod(__Method_Join, serviceImpl.Join).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -331,11 +331,11 @@ namespace Haru {
       serviceBinder.AddMethod(__Method_CreateAccount, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.AccountRequest, global::Haru.AccountReply>(serviceImpl.CreateAccount));
       serviceBinder.AddMethod(__Method_GetProfile, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ProfileRequest, global::Haru.ProfileReply>(serviceImpl.GetProfile));
       serviceBinder.AddMethod(__Method_UpdateProfile, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ProfileRequest, global::Haru.ProfileReply>(serviceImpl.UpdateProfile));
-      serviceBinder.AddMethod(__Method_CreateRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.RoundRequest, global::Haru.RoundReply>(serviceImpl.CreateRound));
-      serviceBinder.AddMethod(__Method_UpdateRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.RoundRequest, global::Haru.RoundReply>(serviceImpl.UpdateRound));
-      serviceBinder.AddMethod(__Method_GetRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.RoundRequest, global::Haru.RoundReply>(serviceImpl.GetRound));
-      serviceBinder.AddMethod(__Method_GetFilterdRounds, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.FilterdRoundsRequest, global::Haru.FilterdRoundsReply>(serviceImpl.GetFilterdRounds));
-      serviceBinder.AddMethod(__Method_JoinRound, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.JoinRound));
+      serviceBinder.AddMethod(__Method_CreateGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.CreateGame));
+      serviceBinder.AddMethod(__Method_UpdateGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.UpdateGame));
+      serviceBinder.AddMethod(__Method_GetGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.GetGame));
+      serviceBinder.AddMethod(__Method_GetFilterdGames, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply>(serviceImpl.GetFilterdGames));
+      serviceBinder.AddMethod(__Method_Join, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.Join));
     }
 
   }

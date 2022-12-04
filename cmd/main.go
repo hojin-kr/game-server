@@ -34,15 +34,15 @@ func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.
 	tracer.Trace(time.Now().Unix(), in)
 	tm := time.Now().Unix()
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
-	key := ds.Put(ctx, datastore.IncompleteKey("Account", nil), &pb.AccountRequest{RegisterTimestamp: tm})
-	ret := &pb.AccountReply{Id: key.ID, RegisterTimestamp: tm}
+	key := ds.Put(ctx, datastore.IncompleteKey("Account", nil), &pb.AccountRequest{Account: &pb.Account{RegisterTimestamp: tm}})
+	ret := &pb.AccountReply{Account: &pb.Account{Id: key.ID, RegisterTimestamp: tm}}
 	tracer.Trace(time.Now().Unix(), ret)
 	return ret, nil
 }
 
 func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	key := datastore.IDKey("Profile", in.Profile.GetId(), nil)
+	key := datastore.IDKey("Profile", in.Profile.GetAccountId(), nil)
 	ds.Get(ctx, key, in.Profile)
 	ret := &pb.ProfileReply{Profile: in.GetProfile()}
 	tracer.Trace(time.Now().UTC(), ret)
@@ -51,109 +51,60 @@ func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.Pro
 
 func (s *server) UpdateProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.ProfileReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	if in.Profile.GetId() == 0 {
+	if in.Profile.GetAccountId() == 0 {
 		tracer.Trace(time.Now().UTC(), in, "ID is 0")
 		ret := &pb.ProfileReply{Profile: in.GetProfile()}
 		return ret, nil
 	}
-	ds.Put(ctx, datastore.IDKey("Profile", in.Profile.GetId(), nil), in.Profile)
+	ds.Put(ctx, datastore.IDKey("Profile", in.Profile.GetAccountId(), nil), in.Profile)
 	ret := &pb.ProfileReply{Profile: in.GetProfile()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
-// CreateRound
-func (s *server) CreateRound(ctx context.Context, in *pb.RoundRequest) (*pb.RoundReply, error) {
+func (s *server) CreateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	// Round 생성
-	var round = pb.Round{
-
-		Host:                  in.Round.GetHost(),
-		Time:                  in.Round.GetTime(),
-		Price:                 in.Round.GetPrice(),
-		TypePlay:              in.Round.GetTypePlay(),
-		TypeAge:               in.Round.GetTypeAge(),
-		TypeSex:               in.Round.GetTypeSex(),
-		TypeScoreOfGross:      in.Round.GetTypeScoreOfGross(),
-		TypeExperienceOfYears: in.Round.GetTypeExperienceOfYears(),
-		PlaceId:               in.Round.GetPlaceId(),
-		PlaceName:             in.Round.GetPlaceName(),
-		PlaceAddress:          in.Round.GetPlaceAddress(),
-		ShortAddress:          in.Round.GetShortAddress(),
-		Lat:                   in.Round.GetLat(),
-		Long:                  in.Round.GetLong(),
-		Updated:               time.Now().Unix(),
-		PersonFull:            in.Round.GetPersonFull(),
-		Person:                in.Round.GetPerson(),
-		PlaceImg:              in.Round.GetPlaceImg(),
-		TypeHole:              in.Round.GetTypeHole(),
-	}
-	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
-	key := ds.Put(ctx, datastore.IncompleteKey("Round", nil), &round)
-	round.Id = key.ID
-	_ = ds.Put(ctx, datastore.IDKey("Round", round.GetId(), nil), &round)
-	keyJoin := datastore.IDKey("Join", key.ID, nil)
-	ds.Get(ctx, keyJoin, in.Join)
-	in.Join.Id = key.ID
-	in.Join.UserId = in.Round.Host
-	in.Join.Ids = append(in.Join.Ids, in.Round.Host)
-	// todo 내가 만들고 내 프로필에도 넣어야함
-	// join, profile
-
-	ret := &pb.RoundReply{Round: &round, Place: in.GetPlace(), Join: in.GetJoin()}
+	// Game 생성
+	var game = in.Game
+	key := ds.Put(ctx, datastore.IncompleteKey("Game", nil), &game)
+	game.Id = key.ID
+	_ = ds.Put(ctx, datastore.IDKey("Game", key.ID, nil), &game)
+	ret := &pb.GameReply{Game: game}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
-func (s *server) GetRound(ctx context.Context, in *pb.RoundRequest) (*pb.RoundReply, error) {
+func (s *server) GetGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	ds.Get(ctx, datastore.IDKey("Round", in.Round.GetId(), nil), in.Round)
-	ds.Get(ctx, datastore.IDKey("Join", in.Round.GetId(), nil), in.Join)
-	ret := &pb.RoundReply{Round: in.GetRound(), Place: in.GetPlace(), Join: in.GetJoin()}
+	ds.Get(ctx, datastore.IDKey("Game", in.Game.GetId(), nil), in.Game)
+	ret := &pb.GameReply{Game: in.GetGame()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
-// filterdRounds에서는 Round 목록만 반환하고 GetRound에서는 attend, place 부가 정보 반환
-func (s *server) GetFilterdRounds(ctx context.Context, in *pb.FilterdRoundsRequest) (*pb.FilterdRoundsReply, error) {
+// filterdGames에서는 Game 목록만 반환하고 GetGame에서는 attend, place 부가 정보 반환
+func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest) (*pb.FilterdGamesReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	// q := datastore.NewQuery("Round").Filter("A =", 12).Limit(30)
-	var rounds []*pb.Round
-	q := datastore.NewQuery("Round").Limit(30)
+	// q := datastore.NewQuery("Game").Filter("A =", 12).Limit(30)
+	var rounds []*pb.Game
+	q := datastore.NewQuery("Game").Limit(30)
 	ds.GetAll(ctx, q, &rounds)
-	ret := &pb.FilterdRoundsReply{Rounds: rounds}
+	ret := &pb.FilterdGamesReply{Games: rounds}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
-func (s *server) JoinRound(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
-	tracer.Trace(time.Now().UTC(), in)
-	if in.Join.GetId() == 0 {
-		tracer.Trace(time.Now().UTC(), in, "ID is 0")
-		ret := &pb.JoinReply{Join: &pb.Join{Id: in.Join.GetId()}}
-		return ret, nil
-	}
-	// TODO check list
-	// - end time of round
-	// - person limit of round
-	// put join
-	userId := in.Join.GetUserId()
-	roundId := in.Join.GetId()
-	key := datastore.IDKey("Join", roundId, nil)
-	ds.Get(ctx, key, in.Join)
-	in.Join.Ids = append(in.Join.Ids, userId)
-	ds.Put(ctx, key, in.Join)
-	// input my profiles
-	ds.Get(ctx, datastore.IDKey("Profile", userId, nil), in.Profile)
-	if in.Profile.Id != userId {
-		in.Profile.Id = userId
-	}
-	in.Profile.Rounds = append(in.Profile.Rounds, roundId)
-	ds.Put(ctx, datastore.IDKey("Profile", userId, nil), in.Profile)
-	ret := &pb.JoinReply{Join: in.Join}
-	tracer.Trace(time.Now().UTC(), ret)
-	return ret, nil
-}
+// func (s *server) JoinGame(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+// 	tracer.Trace(time.Now().UTC(), in)
+// 	if in.Join.GetId() == 0 {
+// 		tracer.Trace(time.Now().UTC(), in, "ID is 0")
+// 		ret := &pb.JoinReply{Join: &pb.Join{Id: in.Join.GetId()}}
+// 		return ret, nil
+// 	}
+
+// 	// tracer.Trace(time.Now().UTC(), ret)
+// 	return in, nil
+// }
 
 func main() {
 	flag.Parse()
