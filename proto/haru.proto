@@ -31,6 +31,9 @@ service version1 {
   rpc GetGame (GameRequest) returns (GameReply) {}
   rpc GetFilterdGames (FilterdGamesRequest) returns (FilterdGamesReply) {}
   rpc Join (JoinRequest) returns (JoinReply) {}
+  rpc GetMyJoins (JoinRequest) returns (JoinReply) {}
+  rpc GetGameJoins (JoinRequest) returns (JoinReply) {}
+  rpc UpdateJoin (JoinRequest) returns (JoinReply) {}
 }
 
 message Account {
@@ -79,6 +82,7 @@ message JoinRequest {
 
 message JoinReply {
   Join join = 1;
+  repeated Join joins = 2;
 }
 
 message Game {
@@ -96,12 +100,15 @@ message Game {
   int64 person = 12;
   string decs = 13;
   Place place = 14;
+  string short_address = 15;    // for filter
+  repeated int64 accept_account_ids = 16;
+  repeated int64 reject_account_ids = 17;
 }
 
 message Place {
   string name = 1;
   string address = 2;
-  string short_address = 3;
+  string place_id = 3;
 }
 
 message GameRequest {

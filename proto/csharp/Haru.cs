@@ -36,34 +36,40 @@ namespace Haru {
             "ZXBseRIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIjsKBEpvaW4S",
             "DwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg4KBnN0YXR1",
             "cxgDIAEoAyInCgtKb2luUmVxdWVzdBIYCgRqb2luGAEgASgLMgouaGFydS5K",
-            "b2luIiUKCUpvaW5SZXBseRIYCgRqb2luGAEgASgLMgouaGFydS5Kb2luIogC",
-            "CgRHYW1lEgoKAmlkGAEgASgDEhcKD2hvc3RfYWNjb3VudF9pZBgCIAEoAxIM",
-            "CgR0aW1lGAMgASgDEg0KBXByaWNlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEo",
-            "AxIQCgh0eXBlX2FnZRgGIAEoAxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBl",
-            "X3Njb3JlGAggASgDEhIKCnR5cGVfeWVhcnMYCSABKAMSEQoJdHlwZV9ob2xl",
-            "GAogASgDEhIKCnBlcnNvbl9tYXgYCyABKAMSDgoGcGVyc29uGAwgASgDEgwK",
-            "BGRlY3MYDSABKAkSGgoFcGxhY2UYDiABKAsyCy5oYXJ1LlBsYWNlIj0KBVBs",
-            "YWNlEgwKBG5hbWUYASABKAkSDwoHYWRkcmVzcxgCIAEoCRIVCg1zaG9ydF9h",
-            "ZGRyZXNzGAMgASgJIkEKC0dhbWVSZXF1ZXN0EhgKBGdhbWUYASABKAsyCi5o",
-            "YXJ1LkdhbWUSGAoEam9pbhgCIAEoCzIKLmhhcnUuSm9pbiI/CglHYW1lUmVw",
-            "bHkSGAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgou",
-            "aGFydS5Kb2luIrcBChNGaWx0ZXJkR2FtZXNSZXF1ZXN0Eg8KB2lzX2luaXQY",
-            "ASABKAgSEAoIdGltZV9taW4YAiABKAMSEAoIdGltZV9tYXgYAyABKAMSDAoE",
-            "cGFnZRgEIAEoAxIRCgl0eXBlX3BsYXkYBSABKAMSEAoIdHlwZV9hZ2UYBiAB",
-            "KAMSEAoIdHlwZV9zZXgYByABKAMSEgoKdHlwZV9zY29yZRgIIAEoAxISCgp0",
-            "eXBlX3llYXJzGAkgASgDIi4KEUZpbHRlcmRHYW1lc1JlcGx5EhkKBWdhbWVz",
-            "GAEgAygLMgouaGFydS5HYW1lMs4DCgh2ZXJzaW9uMRI7Cg1DcmVhdGVBY2Nv",
-            "dW50EhQuaGFydS5BY2NvdW50UmVxdWVzdBoSLmhhcnUuQWNjb3VudFJlcGx5",
-            "IgASOAoKR2V0UHJvZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1",
-            "LlByb2ZpbGVSZXBseSIAEjsKDVVwZGF0ZVByb2ZpbGUSFC5oYXJ1LlByb2Zp",
-            "bGVSZXF1ZXN0GhIuaGFydS5Qcm9maWxlUmVwbHkiABIyCgpDcmVhdGVHYW1l",
-            "EhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUuR2FtZVJlcGx5IgASMgoKVXBk",
-            "YXRlR2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIA",
-            "Ei8KB0dldEdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5HYW1lUmVw",
-            "bHkiABJHCg9HZXRGaWx0ZXJkR2FtZXMSGS5oYXJ1LkZpbHRlcmRHYW1lc1Jl",
-            "cXVlc3QaFy5oYXJ1LkZpbHRlcmRHYW1lc1JlcGx5IgASLAoESm9pbhIRLmhh",
-            "cnUuSm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBseSIAQiRaImdpdGh1Yi5j",
-            "b20vaG9qaW4ta3IvaGFydS9jbWQvcHJvdG9iBnByb3RvMw=="));
+            "b2luIkAKCUpvaW5SZXBseRIYCgRqb2luGAEgASgLMgouaGFydS5Kb2luEhkK",
+            "BWpvaW5zGAIgAygLMgouaGFydS5Kb2luItcCCgRHYW1lEgoKAmlkGAEgASgD",
+            "EhcKD2hvc3RfYWNjb3VudF9pZBgCIAEoAxIMCgR0aW1lGAMgASgDEg0KBXBy",
+            "aWNlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEoAxIQCgh0eXBlX2FnZRgGIAEo",
+            "AxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBlX3Njb3JlGAggASgDEhIKCnR5",
+            "cGVfeWVhcnMYCSABKAMSEQoJdHlwZV9ob2xlGAogASgDEhIKCnBlcnNvbl9t",
+            "YXgYCyABKAMSDgoGcGVyc29uGAwgASgDEgwKBGRlY3MYDSABKAkSGgoFcGxh",
+            "Y2UYDiABKAsyCy5oYXJ1LlBsYWNlEhUKDXNob3J0X2FkZHJlc3MYDyABKAkS",
+            "GgoSYWNjZXB0X2FjY291bnRfaWRzGBAgAygDEhoKEnJlamVjdF9hY2NvdW50",
+            "X2lkcxgRIAMoAyI4CgVQbGFjZRIMCgRuYW1lGAEgASgJEg8KB2FkZHJlc3MY",
+            "AiABKAkSEAoIcGxhY2VfaWQYAyABKAkiQQoLR2FtZVJlcXVlc3QSGAoEZ2Ft",
+            "ZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgouaGFydS5Kb2lu",
+            "Ij8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgouaGFydS5HYW1lEhgKBGpv",
+            "aW4YAiABKAsyCi5oYXJ1LkpvaW4itwEKE0ZpbHRlcmRHYW1lc1JlcXVlc3QS",
+            "DwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgCIAEoAxIQCgh0aW1lX21h",
+            "eBgDIAEoAxIMCgRwYWdlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEoAxIQCgh0",
+            "eXBlX2FnZRgGIAEoAxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBlX3Njb3Jl",
+            "GAggASgDEhIKCnR5cGVfeWVhcnMYCSABKAMiLgoRRmlsdGVyZEdhbWVzUmVw",
+            "bHkSGQoFZ2FtZXMYASADKAsyCi5oYXJ1LkdhbWUy7AQKCHZlcnNpb24xEjsK",
+            "DUNyZWF0ZUFjY291bnQSFC5oYXJ1LkFjY291bnRSZXF1ZXN0GhIuaGFydS5B",
+            "Y2NvdW50UmVwbHkiABI4CgpHZXRQcm9maWxlEhQuaGFydS5Qcm9maWxlUmVx",
+            "dWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASOwoNVXBkYXRlUHJvZmlsZRIU",
+            "LmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1LlByb2ZpbGVSZXBseSIAEjIK",
+            "CkNyZWF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5HYW1lUmVw",
+            "bHkiABIyCgpVcGRhdGVHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUu",
+            "R2FtZVJlcGx5IgASLwoHR2V0R2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5o",
+            "YXJ1LkdhbWVSZXBseSIAEkcKD0dldEZpbHRlcmRHYW1lcxIZLmhhcnUuRmls",
+            "dGVyZEdhbWVzUmVxdWVzdBoXLmhhcnUuRmlsdGVyZEdhbWVzUmVwbHkiABIs",
+            "CgRKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgAS",
+            "MgoKR2V0TXlKb2lucxIRLmhhcnUuSm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5S",
+            "ZXBseSIAEjQKDEdldEdhbWVKb2lucxIRLmhhcnUuSm9pblJlcXVlc3QaDy5o",
+            "YXJ1LkpvaW5SZXBseSIAEjIKClVwZGF0ZUpvaW4SES5oYXJ1LkpvaW5SZXF1",
+            "ZXN0Gg8uaGFydS5Kb2luUmVwbHkiAEIkWiJnaXRodWIuY29tL2hvamluLWty",
+            "L2hhcnUvY21kL3Byb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -75,9 +81,9 @@ namespace Haru {
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ProfileReply), global::Haru.ProfileReply.Parser, new[]{ "Profile" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Join), global::Haru.Join.Parser, new[]{ "GameId", "AccountId", "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.JoinRequest), global::Haru.JoinRequest.Parser, new[]{ "Join" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.JoinReply), global::Haru.JoinReply.Parser, new[]{ "Join" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Game), global::Haru.Game.Parser, new[]{ "Id", "HostAccountId", "Time", "Price", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears", "TypeHole", "PersonMax", "Person", "Decs", "Place" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Place), global::Haru.Place.Parser, new[]{ "Name", "Address", "ShortAddress" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.JoinReply), global::Haru.JoinReply.Parser, new[]{ "Join", "Joins" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Game), global::Haru.Game.Parser, new[]{ "Id", "HostAccountId", "Time", "Price", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears", "TypeHole", "PersonMax", "Person", "Decs", "Place", "ShortAddress", "AcceptAccountIds", "RejectAccountIds" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Place), global::Haru.Place.Parser, new[]{ "Name", "Address", "PlaceId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameRequest), global::Haru.GameRequest.Parser, new[]{ "Game", "Join" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameReply), global::Haru.GameReply.Parser, new[]{ "Game", "Join" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesRequest), global::Haru.FilterdGamesRequest.Parser, new[]{ "IsInit", "TimeMin", "TimeMax", "Page", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears" }, null, null, null, null),
@@ -2115,6 +2121,7 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public JoinReply(JoinReply other) : this() {
       join_ = other.join_ != null ? other.join_.Clone() : null;
+      joins_ = other.joins_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2136,6 +2143,17 @@ namespace Haru {
       }
     }
 
+    /// <summary>Field number for the "joins" field.</summary>
+    public const int JoinsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Haru.Join> _repeated_joins_codec
+        = pb::FieldCodec.ForMessage(18, global::Haru.Join.Parser);
+    private readonly pbc::RepeatedField<global::Haru.Join> joins_ = new pbc::RepeatedField<global::Haru.Join>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Haru.Join> Joins {
+      get { return joins_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2152,6 +2170,7 @@ namespace Haru {
         return true;
       }
       if (!object.Equals(Join, other.Join)) return false;
+      if(!joins_.Equals(other.joins_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2160,6 +2179,7 @@ namespace Haru {
     public override int GetHashCode() {
       int hash = 1;
       if (join_ != null) hash ^= Join.GetHashCode();
+      hash ^= joins_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2182,6 +2202,7 @@ namespace Haru {
         output.WriteRawTag(10);
         output.WriteMessage(Join);
       }
+      joins_.WriteTo(output, _repeated_joins_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2196,6 +2217,7 @@ namespace Haru {
         output.WriteRawTag(10);
         output.WriteMessage(Join);
       }
+      joins_.WriteTo(ref output, _repeated_joins_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2209,6 +2231,7 @@ namespace Haru {
       if (join_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Join);
       }
+      size += joins_.CalculateSize(_repeated_joins_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2227,6 +2250,7 @@ namespace Haru {
         }
         Join.MergeFrom(other.Join);
       }
+      joins_.Add(other.joins_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2249,6 +2273,10 @@ namespace Haru {
             input.ReadMessage(Join);
             break;
           }
+          case 18: {
+            joins_.AddEntriesFrom(input, _repeated_joins_codec);
+            break;
+          }
         }
       }
     #endif
@@ -2269,6 +2297,10 @@ namespace Haru {
               Join = new global::Haru.Join();
             }
             input.ReadMessage(Join);
+            break;
+          }
+          case 18: {
+            joins_.AddEntriesFrom(ref input, _repeated_joins_codec);
             break;
           }
         }
@@ -2326,6 +2358,9 @@ namespace Haru {
       person_ = other.person_;
       decs_ = other.decs_;
       place_ = other.place_ != null ? other.place_.Clone() : null;
+      shortAddress_ = other.shortAddress_;
+      acceptAccountIds_ = other.acceptAccountIds_.Clone();
+      rejectAccountIds_ = other.rejectAccountIds_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2503,6 +2538,43 @@ namespace Haru {
       }
     }
 
+    /// <summary>Field number for the "short_address" field.</summary>
+    public const int ShortAddressFieldNumber = 15;
+    private string shortAddress_ = "";
+    /// <summary>
+    /// for filter
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ShortAddress {
+      get { return shortAddress_; }
+      set {
+        shortAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "accept_account_ids" field.</summary>
+    public const int AcceptAccountIdsFieldNumber = 16;
+    private static readonly pb::FieldCodec<long> _repeated_acceptAccountIds_codec
+        = pb::FieldCodec.ForInt64(130);
+    private readonly pbc::RepeatedField<long> acceptAccountIds_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<long> AcceptAccountIds {
+      get { return acceptAccountIds_; }
+    }
+
+    /// <summary>Field number for the "reject_account_ids" field.</summary>
+    public const int RejectAccountIdsFieldNumber = 17;
+    private static readonly pb::FieldCodec<long> _repeated_rejectAccountIds_codec
+        = pb::FieldCodec.ForInt64(138);
+    private readonly pbc::RepeatedField<long> rejectAccountIds_ = new pbc::RepeatedField<long>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<long> RejectAccountIds {
+      get { return rejectAccountIds_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2532,6 +2604,9 @@ namespace Haru {
       if (Person != other.Person) return false;
       if (Decs != other.Decs) return false;
       if (!object.Equals(Place, other.Place)) return false;
+      if (ShortAddress != other.ShortAddress) return false;
+      if(!acceptAccountIds_.Equals(other.acceptAccountIds_)) return false;
+      if(!rejectAccountIds_.Equals(other.rejectAccountIds_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2553,6 +2628,9 @@ namespace Haru {
       if (Person != 0L) hash ^= Person.GetHashCode();
       if (Decs.Length != 0) hash ^= Decs.GetHashCode();
       if (place_ != null) hash ^= Place.GetHashCode();
+      if (ShortAddress.Length != 0) hash ^= ShortAddress.GetHashCode();
+      hash ^= acceptAccountIds_.GetHashCode();
+      hash ^= rejectAccountIds_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2627,6 +2705,12 @@ namespace Haru {
         output.WriteRawTag(114);
         output.WriteMessage(Place);
       }
+      if (ShortAddress.Length != 0) {
+        output.WriteRawTag(122);
+        output.WriteString(ShortAddress);
+      }
+      acceptAccountIds_.WriteTo(output, _repeated_acceptAccountIds_codec);
+      rejectAccountIds_.WriteTo(output, _repeated_rejectAccountIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2693,6 +2777,12 @@ namespace Haru {
         output.WriteRawTag(114);
         output.WriteMessage(Place);
       }
+      if (ShortAddress.Length != 0) {
+        output.WriteRawTag(122);
+        output.WriteString(ShortAddress);
+      }
+      acceptAccountIds_.WriteTo(ref output, _repeated_acceptAccountIds_codec);
+      rejectAccountIds_.WriteTo(ref output, _repeated_rejectAccountIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2745,6 +2835,11 @@ namespace Haru {
       if (place_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Place);
       }
+      if (ShortAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ShortAddress);
+      }
+      size += acceptAccountIds_.CalculateSize(_repeated_acceptAccountIds_codec);
+      size += rejectAccountIds_.CalculateSize(_repeated_rejectAccountIds_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2802,6 +2897,11 @@ namespace Haru {
         }
         Place.MergeFrom(other.Place);
       }
+      if (other.ShortAddress.Length != 0) {
+        ShortAddress = other.ShortAddress;
+      }
+      acceptAccountIds_.Add(other.acceptAccountIds_);
+      rejectAccountIds_.Add(other.rejectAccountIds_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2876,6 +2976,20 @@ namespace Haru {
             input.ReadMessage(Place);
             break;
           }
+          case 122: {
+            ShortAddress = input.ReadString();
+            break;
+          }
+          case 130:
+          case 128: {
+            acceptAccountIds_.AddEntriesFrom(input, _repeated_acceptAccountIds_codec);
+            break;
+          }
+          case 138:
+          case 136: {
+            rejectAccountIds_.AddEntriesFrom(input, _repeated_rejectAccountIds_codec);
+            break;
+          }
         }
       }
     #endif
@@ -2948,6 +3062,20 @@ namespace Haru {
               Place = new global::Haru.Place();
             }
             input.ReadMessage(Place);
+            break;
+          }
+          case 122: {
+            ShortAddress = input.ReadString();
+            break;
+          }
+          case 130:
+          case 128: {
+            acceptAccountIds_.AddEntriesFrom(ref input, _repeated_acceptAccountIds_codec);
+            break;
+          }
+          case 138:
+          case 136: {
+            rejectAccountIds_.AddEntriesFrom(ref input, _repeated_rejectAccountIds_codec);
             break;
           }
         }
@@ -2993,7 +3121,7 @@ namespace Haru {
     public Place(Place other) : this() {
       name_ = other.name_;
       address_ = other.address_;
-      shortAddress_ = other.shortAddress_;
+      placeId_ = other.placeId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3027,15 +3155,15 @@ namespace Haru {
       }
     }
 
-    /// <summary>Field number for the "short_address" field.</summary>
-    public const int ShortAddressFieldNumber = 3;
-    private string shortAddress_ = "";
+    /// <summary>Field number for the "place_id" field.</summary>
+    public const int PlaceIdFieldNumber = 3;
+    private string placeId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ShortAddress {
-      get { return shortAddress_; }
+    public string PlaceId {
+      get { return placeId_; }
       set {
-        shortAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        placeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -3056,7 +3184,7 @@ namespace Haru {
       }
       if (Name != other.Name) return false;
       if (Address != other.Address) return false;
-      if (ShortAddress != other.ShortAddress) return false;
+      if (PlaceId != other.PlaceId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3066,7 +3194,7 @@ namespace Haru {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Address.Length != 0) hash ^= Address.GetHashCode();
-      if (ShortAddress.Length != 0) hash ^= ShortAddress.GetHashCode();
+      if (PlaceId.Length != 0) hash ^= PlaceId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3093,9 +3221,9 @@ namespace Haru {
         output.WriteRawTag(18);
         output.WriteString(Address);
       }
-      if (ShortAddress.Length != 0) {
+      if (PlaceId.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteString(ShortAddress);
+        output.WriteString(PlaceId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3115,9 +3243,9 @@ namespace Haru {
         output.WriteRawTag(18);
         output.WriteString(Address);
       }
-      if (ShortAddress.Length != 0) {
+      if (PlaceId.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteString(ShortAddress);
+        output.WriteString(PlaceId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -3135,8 +3263,8 @@ namespace Haru {
       if (Address.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Address);
       }
-      if (ShortAddress.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ShortAddress);
+      if (PlaceId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlaceId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3156,8 +3284,8 @@ namespace Haru {
       if (other.Address.Length != 0) {
         Address = other.Address;
       }
-      if (other.ShortAddress.Length != 0) {
-        ShortAddress = other.ShortAddress;
+      if (other.PlaceId.Length != 0) {
+        PlaceId = other.PlaceId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3183,7 +3311,7 @@ namespace Haru {
             break;
           }
           case 26: {
-            ShortAddress = input.ReadString();
+            PlaceId = input.ReadString();
             break;
           }
         }
@@ -3210,7 +3338,7 @@ namespace Haru {
             break;
           }
           case 26: {
-            ShortAddress = input.ReadString();
+            PlaceId = input.ReadString();
             break;
           }
         }

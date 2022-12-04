@@ -97,6 +97,27 @@ namespace Haru {
         __Marshaller_haru_JoinRequest,
         __Marshaller_haru_JoinReply);
 
+    static readonly grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply> __Method_GetMyJoins = new grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetMyJoins",
+        __Marshaller_haru_JoinRequest,
+        __Marshaller_haru_JoinReply);
+
+    static readonly grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply> __Method_GetGameJoins = new grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetGameJoins",
+        __Marshaller_haru_JoinRequest,
+        __Marshaller_haru_JoinReply);
+
+    static readonly grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply> __Method_UpdateJoin = new grpc::Method<global::Haru.JoinRequest, global::Haru.JoinReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateJoin",
+        __Marshaller_haru_JoinRequest,
+        __Marshaller_haru_JoinReply);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -143,6 +164,21 @@ namespace Haru {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> Join(global::Haru.JoinRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> GetMyJoins(global::Haru.JoinRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> GetGameJoins(global::Haru.JoinRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> UpdateJoin(global::Haru.JoinRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -300,6 +336,54 @@ namespace Haru {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Join, null, options, request);
       }
+      public virtual global::Haru.JoinReply GetMyJoins(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetMyJoins(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.JoinReply GetMyJoins(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetMyJoins, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> GetMyJoinsAsync(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetMyJoinsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> GetMyJoinsAsync(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetMyJoins, null, options, request);
+      }
+      public virtual global::Haru.JoinReply GetGameJoins(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameJoins(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.JoinReply GetGameJoins(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetGameJoins, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> GetGameJoinsAsync(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameJoinsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> GetGameJoinsAsync(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetGameJoins, null, options, request);
+      }
+      public virtual global::Haru.JoinReply UpdateJoin(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateJoin(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.JoinReply UpdateJoin(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateJoin, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> UpdateJoinAsync(global::Haru.JoinRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateJoinAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.JoinReply> UpdateJoinAsync(global::Haru.JoinRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateJoin, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override version1Client NewInstance(ClientBaseConfiguration configuration)
       {
@@ -319,7 +403,10 @@ namespace Haru {
           .AddMethod(__Method_UpdateGame, serviceImpl.UpdateGame)
           .AddMethod(__Method_GetGame, serviceImpl.GetGame)
           .AddMethod(__Method_GetFilterdGames, serviceImpl.GetFilterdGames)
-          .AddMethod(__Method_Join, serviceImpl.Join).Build();
+          .AddMethod(__Method_Join, serviceImpl.Join)
+          .AddMethod(__Method_GetMyJoins, serviceImpl.GetMyJoins)
+          .AddMethod(__Method_GetGameJoins, serviceImpl.GetGameJoins)
+          .AddMethod(__Method_UpdateJoin, serviceImpl.UpdateJoin).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -336,6 +423,9 @@ namespace Haru {
       serviceBinder.AddMethod(__Method_GetGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.GetGame));
       serviceBinder.AddMethod(__Method_GetFilterdGames, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply>(serviceImpl.GetFilterdGames));
       serviceBinder.AddMethod(__Method_Join, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.Join));
+      serviceBinder.AddMethod(__Method_GetMyJoins, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.GetMyJoins));
+      serviceBinder.AddMethod(__Method_GetGameJoins, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.GetGameJoins));
+      serviceBinder.AddMethod(__Method_UpdateJoin, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.UpdateJoin));
     }
 
   }

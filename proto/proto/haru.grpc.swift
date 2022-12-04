@@ -72,6 +72,21 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func getMyJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func getGameJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func updateJoin(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
 }
 
 extension Haru_version1ClientProtocol {
@@ -222,6 +237,60 @@ extension Haru_version1ClientProtocol {
       interceptors: self.interceptors?.makeJoinInterceptors() ?? []
     )
   }
+
+  /// Unary call to GetMyJoins
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetMyJoins.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getMyJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getMyJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetMyJoinsInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to GetGameJoins
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetGameJoins.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getGameJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getGameJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetGameJoinsInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdateJoin
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateJoin.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateJoin(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateJoin.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? []
+    )
+  }
 }
 
 #if compiler(>=5.6)
@@ -326,6 +395,21 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
   ) -> GRPCAsyncUnaryCall<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>
 
   func makeJoinCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func makeGetMyJoinsCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func makeGetGameJoinsCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func makeUpdateJoinCall(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
@@ -436,6 +520,42 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeJoinInterceptors() ?? []
     )
   }
+
+  internal func makeGetMyJoinsCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getMyJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetMyJoinsInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetGameJoinsCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getGameJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetGameJoinsInterceptors() ?? []
+    )
+  }
+
+  internal func makeUpdateJoinCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateJoin.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -535,6 +655,42 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeJoinInterceptors() ?? []
     )
   }
+
+  internal func getMyJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_JoinReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getMyJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetMyJoinsInterceptors() ?? []
+    )
+  }
+
+  internal func getGameJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_JoinReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getGameJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetGameJoinsInterceptors() ?? []
+    )
+  }
+
+  internal func updateJoin(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_JoinReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateJoin.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -581,6 +737,15 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
 
   /// - Returns: Interceptors to use when invoking 'join'.
   func makeJoinInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getMyJoins'.
+  func makeGetMyJoinsInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getGameJoins'.
+  func makeGetGameJoinsInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when invoking 'updateJoin'.
+  func makeUpdateJoinInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -596,6 +761,9 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.getGame,
       Haru_version1ClientMetadata.Methods.getFilterdGames,
       Haru_version1ClientMetadata.Methods.join,
+      Haru_version1ClientMetadata.Methods.getMyJoins,
+      Haru_version1ClientMetadata.Methods.getGameJoins,
+      Haru_version1ClientMetadata.Methods.updateJoin,
     ]
   )
 
@@ -647,6 +815,24 @@ internal enum Haru_version1ClientMetadata {
       path: "/haru.version1/Join",
       type: GRPCCallType.unary
     )
+
+    internal static let getMyJoins = GRPCMethodDescriptor(
+      name: "GetMyJoins",
+      path: "/haru.version1/GetMyJoins",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getGameJoins = GRPCMethodDescriptor(
+      name: "GetGameJoins",
+      path: "/haru.version1/GetGameJoins",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateJoin = GRPCMethodDescriptor(
+      name: "UpdateJoin",
+      path: "/haru.version1/UpdateJoin",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -671,6 +857,12 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func getFilterdGames(request: Haru_FilterdGamesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdGamesReply>
 
   func join(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
+
+  func getMyJoins(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
+
+  func getGameJoins(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
+
+  func updateJoin(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 }
 
 extension Haru_version1Provider {
@@ -757,6 +949,33 @@ extension Haru_version1Provider {
         userFunction: self.join(request:context:)
       )
 
+    case "GetMyJoins":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeGetMyJoinsInterceptors() ?? [],
+        userFunction: self.getMyJoins(request:context:)
+      )
+
+    case "GetGameJoins":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeGetGameJoinsInterceptors() ?? [],
+        userFunction: self.getGameJoins(request:context:)
+      )
+
+    case "UpdateJoin":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? [],
+        userFunction: self.updateJoin(request:context:)
+      )
+
     default:
       return nil
     }
@@ -809,6 +1028,21 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
   ) async throws -> Haru_FilterdGamesReply
 
   @Sendable func join(
+    request: Haru_JoinRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_JoinReply
+
+  @Sendable func getMyJoins(
+    request: Haru_JoinRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_JoinReply
+
+  @Sendable func getGameJoins(
+    request: Haru_JoinRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_JoinReply
+
+  @Sendable func updateJoin(
     request: Haru_JoinRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_JoinReply
@@ -905,6 +1139,33 @@ extension Haru_version1AsyncProvider {
         wrapping: self.join(request:context:)
       )
 
+    case "GetMyJoins":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeGetMyJoinsInterceptors() ?? [],
+        wrapping: self.getMyJoins(request:context:)
+      )
+
+    case "GetGameJoins":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeGetGameJoinsInterceptors() ?? [],
+        wrapping: self.getGameJoins(request:context:)
+      )
+
+    case "UpdateJoin":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? [],
+        wrapping: self.updateJoin(request:context:)
+      )
+
     default:
       return nil
     }
@@ -946,6 +1207,18 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'join'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeJoinInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when handling 'getMyJoins'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetMyJoinsInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when handling 'getGameJoins'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetGameJoinsInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when handling 'updateJoin'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateJoinInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -961,6 +1234,9 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.getGame,
       Haru_version1ServerMetadata.Methods.getFilterdGames,
       Haru_version1ServerMetadata.Methods.join,
+      Haru_version1ServerMetadata.Methods.getMyJoins,
+      Haru_version1ServerMetadata.Methods.getGameJoins,
+      Haru_version1ServerMetadata.Methods.updateJoin,
     ]
   )
 
@@ -1010,6 +1286,24 @@ internal enum Haru_version1ServerMetadata {
     internal static let join = GRPCMethodDescriptor(
       name: "Join",
       path: "/haru.version1/Join",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getMyJoins = GRPCMethodDescriptor(
+      name: "GetMyJoins",
+      path: "/haru.version1/GetMyJoins",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getGameJoins = GRPCMethodDescriptor(
+      name: "GetGameJoins",
+      path: "/haru.version1/GetGameJoins",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateJoin = GRPCMethodDescriptor(
+      name: "UpdateJoin",
+      path: "/haru.version1/UpdateJoin",
       type: GRPCCallType.unary
     )
   }

@@ -66,9 +66,9 @@ func (s *server) CreateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameRe
 	tracer.Trace(time.Now().UTC(), in)
 	// Game 생성
 	var game = in.Game
-	key := ds.Put(ctx, datastore.IncompleteKey("Game", nil), &game)
+	key := ds.Put(ctx, datastore.IncompleteKey("Game", nil), game)
 	game.Id = key.ID
-	_ = ds.Put(ctx, datastore.IDKey("Game", key.ID, nil), &game)
+	_ = ds.Put(ctx, datastore.IDKey("Game", key.ID, nil), game)
 	ret := &pb.GameReply{Game: game}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
@@ -86,25 +86,55 @@ func (s *server) GetGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply
 func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest) (*pb.FilterdGamesReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	// q := datastore.NewQuery("Game").Filter("A =", 12).Limit(30)
-	var rounds []*pb.Game
+	var games []*pb.Game
 	q := datastore.NewQuery("Game").Limit(30)
-	ds.GetAll(ctx, q, &rounds)
-	ret := &pb.FilterdGamesReply{Games: rounds}
+	ds.GetAll(ctx, q, &games)
+	ret := &pb.FilterdGamesReply{Games: games}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
-// func (s *server) JoinGame(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
-// 	tracer.Trace(time.Now().UTC(), in)
-// 	if in.Join.GetId() == 0 {
-// 		tracer.Trace(time.Now().UTC(), in, "ID is 0")
-// 		ret := &pb.JoinReply{Join: &pb.Join{Id: in.Join.GetId()}}
-// 		return ret, nil
-// 	}
+func (s *server) Join(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var join = in.Join
+	_ = ds.Put(ctx, datastore.IncompleteKey("Join", nil), join)
+	ret := &pb.JoinReply{Join: join}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
 
-// 	// tracer.Trace(time.Now().UTC(), ret)
-// 	return in, nil
-// }
+func (s *server) UpdateJoin(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	if in.Join.GetAccountId() == 0 {
+		tracer.Trace(time.Now().UTC(), in, "ID is 0")
+		ret := &pb.JoinReply{Join: in.GetJoin()}
+		return ret, nil
+	}
+	ds.Put(ctx, datastore.IDKey("Join", in.Join.GetAccountId(), nil), in.Join)
+	ret := &pb.JoinReply{Join: in.GetJoin()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetMyJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var joins []*pb.Join
+	q := datastore.NewQuery("Join").Filter("AccountId =", in.Join.GetAccountId()).Limit(100)
+	ds.GetAll(ctx, q, &joins)
+	ret := &pb.JoinReply{Joins: joins}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetGameJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var joins []*pb.Join
+	q := datastore.NewQuery("Join").Filter("GameId =", in.Join.GetAccountId()).Limit(100)
+	ds.GetAll(ctx, q, &joins)
+	ret := &pb.JoinReply{Joins: joins}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
 
 func main() {
 	flag.Parse()
