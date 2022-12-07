@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"strconv"
 	"time"
 
 	"cloud.google.com/go/datastore"
@@ -36,6 +37,12 @@ func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
 	key := ds.Put(ctx, datastore.IncompleteKey("Account", nil), &pb.AccountRequest{Account: &pb.Account{RegisterTimestamp: tm}})
 	ret := &pb.AccountReply{Account: &pb.Account{Id: key.ID, RegisterTimestamp: tm}}
+	// profile update
+	var profile = &pb.Profile{
+		AccountId: key.ID,
+		Name:      "골퍼" + strconv.Itoa(int(key.ID))[0:4],
+	}
+	ds.Put(ctx, datastore.IDKey("Profile", key.ID, nil), profile)
 	tracer.Trace(time.Now().Unix(), ret)
 	return ret, nil
 }
@@ -77,6 +84,14 @@ func (s *server) CreateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameRe
 func (s *server) GetGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	ds.Get(ctx, datastore.IDKey("Game", in.Game.GetId(), nil), in.Game)
+	ret := &pb.GameReply{Game: in.GetGame()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) UpdateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	_ = ds.Put(ctx, datastore.IDKey("Game", in.Game.GetId(), nil), in.Game)
 	ret := &pb.GameReply{Game: in.GetGame()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
@@ -129,7 +144,7 @@ func (s *server) GetMyJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinRe
 func (s *server) GetGameJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	var joins []*pb.Join
-	q := datastore.NewQuery("Join").Filter("GameId =", in.Join.GetAccountId()).Limit(100)
+	q := datastore.NewQuery("Join").Filter("GameId =", in.Join.GetGameId()).Limit(100)
 	ds.GetAll(ctx, q, &joins)
 	ret := &pb.JoinReply{Joins: joins}
 	tracer.Trace(time.Now().UTC(), ret)
