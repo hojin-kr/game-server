@@ -11,7 +11,7 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: golf-367911@appspot.gserviceaccount.com
       containers:
-      - image: gcr.io/golf-367911/haru:0.0.11
+      - image: gcr.io/golf-367911/haru:0.0.15
         ports:
         - name: h2c
           containerPort: 50051

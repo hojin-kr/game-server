@@ -34,6 +34,8 @@ service version1 {
   rpc GetMyJoins (JoinRequest) returns (JoinReply) {}
   rpc GetGameJoins (JoinRequest) returns (JoinReply) {}
   rpc UpdateJoin (JoinRequest) returns (JoinReply) {}
+  rpc GetChat (ChatRequest) returns (ChatReply) {}
+  rpc AddChatMessage (ChatMessageRequest) returns (ChatReply) {}
 }
 
 message Account {
@@ -74,6 +76,8 @@ message Join {
   int64 game_id = 1;
   int64 account_id = 2;
   int64 status = 3;
+  int64 created = 4; // for order
+  int64 updated = 5;
 }
 
 message JoinRequest {
@@ -83,6 +87,34 @@ message JoinRequest {
 message JoinReply {
   Join join = 1;
   repeated Join joins = 2;
+}
+
+message Chat {
+  int64 game_id = 1;
+  int64 account_id = 2;
+  int64 created = 3;
+  int64 updated = 4;
+  repeated ChatMessage chat_messages = 5;
+}
+
+message ChatMessage {
+  int64 created = 1;
+  string message = 2;
+  int64 account_id = 3;
+}
+
+message ChatMessageRequest {
+  int64 game_id = 1;
+  int64 account_id = 2;
+  ChatMessage chat_message = 3;
+}
+
+message ChatRequest {
+  Chat chat = 1;
+}
+
+message ChatReply {
+  repeated Chat chats = 1;
 }
 
 message Game {
@@ -103,6 +135,8 @@ message Game {
   string short_address = 15;    // for filter
   repeated int64 accept_account_ids = 16;
   repeated int64 reject_account_ids = 17;
+  int64 created = 18; // for dorder
+  int64 updated = 19;
 }
 
 message Place {

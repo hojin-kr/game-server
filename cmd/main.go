@@ -75,6 +75,7 @@ func (s *server) CreateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameRe
 	var game = in.Game
 	key := ds.Put(ctx, datastore.IncompleteKey("Game", nil), game)
 	game.Id = key.ID
+	game.Created = time.Now().UTC().Unix()
 	_ = ds.Put(ctx, datastore.IDKey("Game", key.ID, nil), game)
 	ret := &pb.GameReply{Game: game}
 	tracer.Trace(time.Now().UTC(), ret)
@@ -91,6 +92,7 @@ func (s *server) GetGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply
 
 func (s *server) UpdateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
+	in.Game.Updated = time.Now().UTC().Unix()
 	_ = ds.Put(ctx, datastore.IDKey("Game", in.Game.GetId(), nil), in.Game)
 	ret := &pb.GameReply{Game: in.GetGame()}
 	tracer.Trace(time.Now().UTC(), ret)
@@ -147,6 +149,47 @@ func (s *server) GetGameJoins(ctx context.Context, in *pb.JoinRequest) (*pb.Join
 	q := datastore.NewQuery("Join").Filter("GameId =", in.Join.GetGameId()).Limit(100)
 	ds.GetAll(ctx, q, &joins)
 	ret := &pb.JoinReply{Joins: joins}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetChat(ctx context.Context, in *pb.ChatRequest) (*pb.ChatReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var chats []*pb.Chat
+	q := datastore.NewQuery("Chat").Filter("GameId =", in.Chat.GetGameId()).Limit(100)
+	log.Printf(strconv.FormatInt(in.Chat.GetGameId(), 10))
+	ds.GetAll(ctx, q, &chats)
+	ret := &pb.ChatReply{Chats: chats}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+// update my chat
+func (s *server) AddChatMessage(ctx context.Context, in *pb.ChatMessageRequest) (*pb.ChatReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var Chat pb.Chat
+	// get
+	key := datastore.NameKey("Chat", strconv.FormatInt(in.GetGameId()+in.GetAccountId(), 10), nil)
+	ds.Get(ctx, key, &Chat)
+	// append & put
+	Chat.AccountId = in.GetAccountId()
+	Chat.GameId = in.GetGameId()
+
+	NowUnix := time.Now().UTC().Unix()
+	Chat.Updated = NowUnix
+	if Chat.GetCreated() == 0 {
+		Chat.Created = NowUnix
+	}
+	in.ChatMessage.Created = NowUnix
+	in.ChatMessage.AccountId = in.GetAccountId()
+	Chat.ChatMessages = append(Chat.ChatMessages, in.ChatMessage)
+	ds.Put(ctx, key, &Chat)
+	// return all chats
+	var chats []*pb.Chat
+	q := datastore.NewQuery("Chat").Filter("GameId =", in.GetGameId()).Limit(100)
+	ds.GetAll(ctx, q, &chats)
+	log.Printf(strconv.FormatInt(in.GetGameId(), 10))
+	ret := &pb.ChatReply{Chats: chats}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }

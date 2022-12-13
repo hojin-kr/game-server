@@ -87,6 +87,16 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func getChat(
+    _ request: Haru_ChatRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_ChatRequest, Haru_ChatReply>
+
+  func addChatMessage(
+    _ request: Haru_ChatMessageRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_ChatMessageRequest, Haru_ChatReply>
 }
 
 extension Haru_version1ClientProtocol {
@@ -291,6 +301,42 @@ extension Haru_version1ClientProtocol {
       interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? []
     )
   }
+
+  /// Unary call to GetChat
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetChat.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getChat(
+    _ request: Haru_ChatRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_ChatRequest, Haru_ChatReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getChat.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetChatInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to AddChatMessage
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AddChatMessage.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func addChatMessage(
+    _ request: Haru_ChatMessageRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_ChatMessageRequest, Haru_ChatReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.addChatMessage.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
+    )
+  }
 }
 
 #if compiler(>=5.6)
@@ -413,6 +459,16 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
+  func makeGetChatCall(
+    _ request: Haru_ChatRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_ChatRequest, Haru_ChatReply>
+
+  func makeAddChatMessageCall(
+    _ request: Haru_ChatMessageRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_ChatMessageRequest, Haru_ChatReply>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -556,6 +612,30 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? []
     )
   }
+
+  internal func makeGetChatCall(
+    _ request: Haru_ChatRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_ChatRequest, Haru_ChatReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getChat.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetChatInterceptors() ?? []
+    )
+  }
+
+  internal func makeAddChatMessageCall(
+    _ request: Haru_ChatMessageRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_ChatMessageRequest, Haru_ChatReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.addChatMessage.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -691,6 +771,30 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateJoinInterceptors() ?? []
     )
   }
+
+  internal func getChat(
+    _ request: Haru_ChatRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_ChatReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getChat.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetChatInterceptors() ?? []
+    )
+  }
+
+  internal func addChatMessage(
+    _ request: Haru_ChatMessageRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_ChatReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.addChatMessage.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -746,6 +850,12 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
 
   /// - Returns: Interceptors to use when invoking 'updateJoin'.
   func makeUpdateJoinInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getChat'.
+  func makeGetChatInterceptors() -> [ClientInterceptor<Haru_ChatRequest, Haru_ChatReply>]
+
+  /// - Returns: Interceptors to use when invoking 'addChatMessage'.
+  func makeAddChatMessageInterceptors() -> [ClientInterceptor<Haru_ChatMessageRequest, Haru_ChatReply>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -764,6 +874,8 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.getMyJoins,
       Haru_version1ClientMetadata.Methods.getGameJoins,
       Haru_version1ClientMetadata.Methods.updateJoin,
+      Haru_version1ClientMetadata.Methods.getChat,
+      Haru_version1ClientMetadata.Methods.addChatMessage,
     ]
   )
 
@@ -833,6 +945,18 @@ internal enum Haru_version1ClientMetadata {
       path: "/haru.version1/UpdateJoin",
       type: GRPCCallType.unary
     )
+
+    internal static let getChat = GRPCMethodDescriptor(
+      name: "GetChat",
+      path: "/haru.version1/GetChat",
+      type: GRPCCallType.unary
+    )
+
+    internal static let addChatMessage = GRPCMethodDescriptor(
+      name: "AddChatMessage",
+      path: "/haru.version1/AddChatMessage",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -863,6 +987,10 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func getGameJoins(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 
   func updateJoin(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
+
+  func getChat(request: Haru_ChatRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ChatReply>
+
+  func addChatMessage(request: Haru_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ChatReply>
 }
 
 extension Haru_version1Provider {
@@ -976,6 +1104,24 @@ extension Haru_version1Provider {
         userFunction: self.updateJoin(request:context:)
       )
 
+    case "GetChat":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ChatRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ChatReply>(),
+        interceptors: self.interceptors?.makeGetChatInterceptors() ?? [],
+        userFunction: self.getChat(request:context:)
+      )
+
+    case "AddChatMessage":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ChatMessageRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ChatReply>(),
+        interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? [],
+        userFunction: self.addChatMessage(request:context:)
+      )
+
     default:
       return nil
     }
@@ -1046,6 +1192,16 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
     request: Haru_JoinRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_JoinReply
+
+  @Sendable func getChat(
+    request: Haru_ChatRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_ChatReply
+
+  @Sendable func addChatMessage(
+    request: Haru_ChatMessageRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_ChatReply
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1166,6 +1322,24 @@ extension Haru_version1AsyncProvider {
         wrapping: self.updateJoin(request:context:)
       )
 
+    case "GetChat":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ChatRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ChatReply>(),
+        interceptors: self.interceptors?.makeGetChatInterceptors() ?? [],
+        wrapping: self.getChat(request:context:)
+      )
+
+    case "AddChatMessage":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ChatMessageRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ChatReply>(),
+        interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? [],
+        wrapping: self.addChatMessage(request:context:)
+      )
+
     default:
       return nil
     }
@@ -1219,6 +1393,14 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'updateJoin'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpdateJoinInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
+  /// - Returns: Interceptors to use when handling 'getChat'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetChatInterceptors() -> [ServerInterceptor<Haru_ChatRequest, Haru_ChatReply>]
+
+  /// - Returns: Interceptors to use when handling 'addChatMessage'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeAddChatMessageInterceptors() -> [ServerInterceptor<Haru_ChatMessageRequest, Haru_ChatReply>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -1237,6 +1419,8 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.getMyJoins,
       Haru_version1ServerMetadata.Methods.getGameJoins,
       Haru_version1ServerMetadata.Methods.updateJoin,
+      Haru_version1ServerMetadata.Methods.getChat,
+      Haru_version1ServerMetadata.Methods.addChatMessage,
     ]
   )
 
@@ -1304,6 +1488,18 @@ internal enum Haru_version1ServerMetadata {
     internal static let updateJoin = GRPCMethodDescriptor(
       name: "UpdateJoin",
       path: "/haru.version1/UpdateJoin",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getChat = GRPCMethodDescriptor(
+      name: "GetChat",
+      path: "/haru.version1/GetChat",
+      type: GRPCCallType.unary
+    )
+
+    internal static let addChatMessage = GRPCMethodDescriptor(
+      name: "AddChatMessage",
+      path: "/haru.version1/AddChatMessage",
       type: GRPCCallType.unary
     )
   }

@@ -173,6 +173,11 @@ struct Haru_Join {
 
   var status: Int64 = 0
 
+  /// for order
+  var created: Int64 = 0
+
+  var updated: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -220,6 +225,100 @@ struct Haru_JoinReply {
   init() {}
 
   fileprivate var _join: Haru_Join? = nil
+}
+
+struct Haru_Chat {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var gameID: Int64 = 0
+
+  var accountID: Int64 = 0
+
+  var created: Int64 = 0
+
+  var updated: Int64 = 0
+
+  var chatMessages: [Haru_ChatMessage] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_ChatMessage {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var created: Int64 = 0
+
+  var message: String = String()
+
+  var accountID: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_ChatMessageRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var gameID: Int64 = 0
+
+  var accountID: Int64 = 0
+
+  var chatMessage: Haru_ChatMessage {
+    get {return _chatMessage ?? Haru_ChatMessage()}
+    set {_chatMessage = newValue}
+  }
+  /// Returns true if `chatMessage` has been explicitly set.
+  var hasChatMessage: Bool {return self._chatMessage != nil}
+  /// Clears the value of `chatMessage`. Subsequent reads from it will return its default value.
+  mutating func clearChatMessage() {self._chatMessage = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _chatMessage: Haru_ChatMessage? = nil
+}
+
+struct Haru_ChatRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var chat: Haru_Chat {
+    get {return _chat ?? Haru_Chat()}
+    set {_chat = newValue}
+  }
+  /// Returns true if `chat` has been explicitly set.
+  var hasChat: Bool {return self._chat != nil}
+  /// Clears the value of `chat`. Subsequent reads from it will return its default value.
+  mutating func clearChat() {self._chat = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _chat: Haru_Chat? = nil
+}
+
+struct Haru_ChatReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var chats: [Haru_Chat] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
 }
 
 struct Haru_Game {
@@ -315,6 +414,17 @@ struct Haru_Game {
   var rejectAccountIds: [Int64] {
     get {return _storage._rejectAccountIds}
     set {_uniqueStorage()._rejectAccountIds = newValue}
+  }
+
+  /// for dorder
+  var created: Int64 {
+    get {return _storage._created}
+    set {_uniqueStorage()._created = newValue}
+  }
+
+  var updated: Int64 {
+    get {return _storage._updated}
+    set {_uniqueStorage()._updated = newValue}
   }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -452,6 +562,11 @@ extension Haru_ProfileReply: @unchecked Sendable {}
 extension Haru_Join: @unchecked Sendable {}
 extension Haru_JoinRequest: @unchecked Sendable {}
 extension Haru_JoinReply: @unchecked Sendable {}
+extension Haru_Chat: @unchecked Sendable {}
+extension Haru_ChatMessage: @unchecked Sendable {}
+extension Haru_ChatMessageRequest: @unchecked Sendable {}
+extension Haru_ChatRequest: @unchecked Sendable {}
+extension Haru_ChatReply: @unchecked Sendable {}
 extension Haru_Game: @unchecked Sendable {}
 extension Haru_Place: @unchecked Sendable {}
 extension Haru_GameRequest: @unchecked Sendable {}
@@ -738,6 +853,8 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     1: .standard(proto: "game_id"),
     2: .standard(proto: "account_id"),
     3: .same(proto: "status"),
+    4: .same(proto: "created"),
+    5: .same(proto: "updated"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -749,6 +866,8 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.gameID) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
       case 3: try { try decoder.decodeSingularInt64Field(value: &self.status) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.updated) }()
       default: break
       }
     }
@@ -764,6 +883,12 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if self.status != 0 {
       try visitor.visitSingularInt64Field(value: self.status, fieldNumber: 3)
     }
+    if self.created != 0 {
+      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 4)
+    }
+    if self.updated != 0 {
+      try visitor.visitSingularInt64Field(value: self.updated, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -771,6 +896,8 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if lhs.gameID != rhs.gameID {return false}
     if lhs.accountID != rhs.accountID {return false}
     if lhs.status != rhs.status {return false}
+    if lhs.created != rhs.created {return false}
+    if lhs.updated != rhs.updated {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -854,6 +981,222 @@ extension Haru_JoinReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   }
 }
 
+extension Haru_Chat: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Chat"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "game_id"),
+    2: .standard(proto: "account_id"),
+    3: .same(proto: "created"),
+    4: .same(proto: "updated"),
+    5: .standard(proto: "chat_messages"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.gameID) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.updated) }()
+      case 5: try { try decoder.decodeRepeatedMessageField(value: &self.chatMessages) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.gameID != 0 {
+      try visitor.visitSingularInt64Field(value: self.gameID, fieldNumber: 1)
+    }
+    if self.accountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 2)
+    }
+    if self.created != 0 {
+      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 3)
+    }
+    if self.updated != 0 {
+      try visitor.visitSingularInt64Field(value: self.updated, fieldNumber: 4)
+    }
+    if !self.chatMessages.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.chatMessages, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_Chat, rhs: Haru_Chat) -> Bool {
+    if lhs.gameID != rhs.gameID {return false}
+    if lhs.accountID != rhs.accountID {return false}
+    if lhs.created != rhs.created {return false}
+    if lhs.updated != rhs.updated {return false}
+    if lhs.chatMessages != rhs.chatMessages {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_ChatMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ChatMessage"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "created"),
+    2: .same(proto: "message"),
+    3: .standard(proto: "account_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.created != 0 {
+      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    if self.accountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_ChatMessage, rhs: Haru_ChatMessage) -> Bool {
+    if lhs.created != rhs.created {return false}
+    if lhs.message != rhs.message {return false}
+    if lhs.accountID != rhs.accountID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_ChatMessageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ChatMessageRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "game_id"),
+    2: .standard(proto: "account_id"),
+    3: .standard(proto: "chat_message"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.gameID) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._chatMessage) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.gameID != 0 {
+      try visitor.visitSingularInt64Field(value: self.gameID, fieldNumber: 1)
+    }
+    if self.accountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 2)
+    }
+    try { if let v = self._chatMessage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_ChatMessageRequest, rhs: Haru_ChatMessageRequest) -> Bool {
+    if lhs.gameID != rhs.gameID {return false}
+    if lhs.accountID != rhs.accountID {return false}
+    if lhs._chatMessage != rhs._chatMessage {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_ChatRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ChatRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "chat"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._chat) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._chat {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_ChatRequest, rhs: Haru_ChatRequest) -> Bool {
+    if lhs._chat != rhs._chat {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_ChatReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ChatReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "chats"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.chats) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.chats.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.chats, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_ChatReply, rhs: Haru_ChatReply) -> Bool {
+    if lhs.chats != rhs.chats {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Game"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -874,6 +1217,8 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     15: .standard(proto: "short_address"),
     16: .standard(proto: "accept_account_ids"),
     17: .standard(proto: "reject_account_ids"),
+    18: .same(proto: "created"),
+    19: .same(proto: "updated"),
   ]
 
   fileprivate class _StorageClass {
@@ -894,6 +1239,8 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     var _shortAddress: String = String()
     var _acceptAccountIds: [Int64] = []
     var _rejectAccountIds: [Int64] = []
+    var _created: Int64 = 0
+    var _updated: Int64 = 0
 
     static let defaultInstance = _StorageClass()
 
@@ -917,6 +1264,8 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       _shortAddress = source._shortAddress
       _acceptAccountIds = source._acceptAccountIds
       _rejectAccountIds = source._rejectAccountIds
+      _created = source._created
+      _updated = source._updated
     }
   }
 
@@ -952,6 +1301,8 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
         case 15: try { try decoder.decodeSingularStringField(value: &_storage._shortAddress) }()
         case 16: try { try decoder.decodeRepeatedInt64Field(value: &_storage._acceptAccountIds) }()
         case 17: try { try decoder.decodeRepeatedInt64Field(value: &_storage._rejectAccountIds) }()
+        case 18: try { try decoder.decodeSingularInt64Field(value: &_storage._created) }()
+        case 19: try { try decoder.decodeSingularInt64Field(value: &_storage._updated) }()
         default: break
         }
       }
@@ -1015,6 +1366,12 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       if !_storage._rejectAccountIds.isEmpty {
         try visitor.visitPackedInt64Field(value: _storage._rejectAccountIds, fieldNumber: 17)
       }
+      if _storage._created != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._created, fieldNumber: 18)
+      }
+      if _storage._updated != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._updated, fieldNumber: 19)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1041,6 +1398,8 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
         if _storage._shortAddress != rhs_storage._shortAddress {return false}
         if _storage._acceptAccountIds != rhs_storage._acceptAccountIds {return false}
         if _storage._rejectAccountIds != rhs_storage._rejectAccountIds {return false}
+        if _storage._created != rhs_storage._created {return false}
+        if _storage._updated != rhs_storage._updated {return false}
         return true
       }
       if !storagesAreEqual {return false}

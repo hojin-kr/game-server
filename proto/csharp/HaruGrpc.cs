@@ -40,6 +40,9 @@ namespace Haru {
     static readonly grpc::Marshaller<global::Haru.FilterdGamesReply> __Marshaller_haru_FilterdGamesReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdGamesReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.JoinRequest> __Marshaller_haru_JoinRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.JoinReply> __Marshaller_haru_JoinReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.ChatRequest> __Marshaller_haru_ChatRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ChatRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.ChatReply> __Marshaller_haru_ChatReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ChatReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.ChatMessageRequest> __Marshaller_haru_ChatMessageRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ChatMessageRequest.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Haru.AccountRequest, global::Haru.AccountReply> __Method_CreateAccount = new grpc::Method<global::Haru.AccountRequest, global::Haru.AccountReply>(
         grpc::MethodType.Unary,
@@ -118,6 +121,20 @@ namespace Haru {
         __Marshaller_haru_JoinRequest,
         __Marshaller_haru_JoinReply);
 
+    static readonly grpc::Method<global::Haru.ChatRequest, global::Haru.ChatReply> __Method_GetChat = new grpc::Method<global::Haru.ChatRequest, global::Haru.ChatReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetChat",
+        __Marshaller_haru_ChatRequest,
+        __Marshaller_haru_ChatReply);
+
+    static readonly grpc::Method<global::Haru.ChatMessageRequest, global::Haru.ChatReply> __Method_AddChatMessage = new grpc::Method<global::Haru.ChatMessageRequest, global::Haru.ChatReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddChatMessage",
+        __Marshaller_haru_ChatMessageRequest,
+        __Marshaller_haru_ChatReply);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -179,6 +196,16 @@ namespace Haru {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Haru.JoinReply> UpdateJoin(global::Haru.JoinRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.ChatReply> GetChat(global::Haru.ChatRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.ChatReply> AddChatMessage(global::Haru.ChatMessageRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -384,6 +411,38 @@ namespace Haru {
       {
         return CallInvoker.AsyncUnaryCall(__Method_UpdateJoin, null, options, request);
       }
+      public virtual global::Haru.ChatReply GetChat(global::Haru.ChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetChat(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.ChatReply GetChat(global::Haru.ChatRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetChat, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.ChatReply> GetChatAsync(global::Haru.ChatRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetChatAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.ChatReply> GetChatAsync(global::Haru.ChatRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetChat, null, options, request);
+      }
+      public virtual global::Haru.ChatReply AddChatMessage(global::Haru.ChatMessageRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddChatMessage(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.ChatReply AddChatMessage(global::Haru.ChatMessageRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AddChatMessage, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.ChatReply> AddChatMessageAsync(global::Haru.ChatMessageRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddChatMessageAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.ChatReply> AddChatMessageAsync(global::Haru.ChatMessageRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AddChatMessage, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override version1Client NewInstance(ClientBaseConfiguration configuration)
       {
@@ -406,7 +465,9 @@ namespace Haru {
           .AddMethod(__Method_Join, serviceImpl.Join)
           .AddMethod(__Method_GetMyJoins, serviceImpl.GetMyJoins)
           .AddMethod(__Method_GetGameJoins, serviceImpl.GetGameJoins)
-          .AddMethod(__Method_UpdateJoin, serviceImpl.UpdateJoin).Build();
+          .AddMethod(__Method_UpdateJoin, serviceImpl.UpdateJoin)
+          .AddMethod(__Method_GetChat, serviceImpl.GetChat)
+          .AddMethod(__Method_AddChatMessage, serviceImpl.AddChatMessage).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -426,6 +487,8 @@ namespace Haru {
       serviceBinder.AddMethod(__Method_GetMyJoins, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.GetMyJoins));
       serviceBinder.AddMethod(__Method_GetGameJoins, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.GetGameJoins));
       serviceBinder.AddMethod(__Method_UpdateJoin, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.UpdateJoin));
+      serviceBinder.AddMethod(__Method_GetChat, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ChatRequest, global::Haru.ChatReply>(serviceImpl.GetChat));
+      serviceBinder.AddMethod(__Method_AddChatMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ChatMessageRequest, global::Haru.ChatReply>(serviceImpl.AddChatMessage));
     }
 
   }

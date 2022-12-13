@@ -33,6 +33,8 @@ type Version1Client interface {
 	GetMyJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	GetGameJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	UpdateJoin(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
+	GetChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatReply, error)
+	AddChatMessage(ctx context.Context, in *ChatMessageRequest, opts ...grpc.CallOption) (*ChatReply, error)
 }
 
 type version1Client struct {
@@ -142,6 +144,24 @@ func (c *version1Client) UpdateJoin(ctx context.Context, in *JoinRequest, opts .
 	return out, nil
 }
 
+func (c *version1Client) GetChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatReply, error) {
+	out := new(ChatReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetChat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) AddChatMessage(ctx context.Context, in *ChatMessageRequest, opts ...grpc.CallOption) (*ChatReply, error) {
+	out := new(ChatReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/AddChatMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -157,6 +177,8 @@ type Version1Server interface {
 	GetMyJoins(context.Context, *JoinRequest) (*JoinReply, error)
 	GetGameJoins(context.Context, *JoinRequest) (*JoinReply, error)
 	UpdateJoin(context.Context, *JoinRequest) (*JoinReply, error)
+	GetChat(context.Context, *ChatRequest) (*ChatReply, error)
+	AddChatMessage(context.Context, *ChatMessageRequest) (*ChatReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -196,6 +218,12 @@ func (UnimplementedVersion1Server) GetGameJoins(context.Context, *JoinRequest) (
 }
 func (UnimplementedVersion1Server) UpdateJoin(context.Context, *JoinRequest) (*JoinReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateJoin not implemented")
+}
+func (UnimplementedVersion1Server) GetChat(context.Context, *ChatRequest) (*ChatReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChat not implemented")
+}
+func (UnimplementedVersion1Server) AddChatMessage(context.Context, *ChatMessageRequest) (*ChatReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddChatMessage not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -408,6 +436,42 @@ func _Version1_UpdateJoin_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_GetChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetChat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetChat(ctx, req.(*ChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_AddChatMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChatMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).AddChatMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/AddChatMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).AddChatMessage(ctx, req.(*ChatMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -458,6 +522,14 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateJoin",
 			Handler:    _Version1_UpdateJoin_Handler,
+		},
+		{
+			MethodName: "GetChat",
+			Handler:    _Version1_GetChat_Handler,
+		},
+		{
+			MethodName: "AddChatMessage",
+			Handler:    _Version1_AddChatMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
