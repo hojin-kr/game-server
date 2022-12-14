@@ -78,6 +78,7 @@ message Join {
   int64 status = 3;
   int64 created = 4; // for order
   int64 updated = 5;
+  int64 join_id = 6;
 }
 
 message JoinRequest {

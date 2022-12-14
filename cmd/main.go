@@ -114,7 +114,9 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 func (s *server) Join(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	var join = in.Join
-	_ = ds.Put(ctx, datastore.IncompleteKey("Join", nil), join)
+	key := ds.Put(ctx, datastore.IncompleteKey("Join", nil), join)
+	join.JoinId = key.ID
+	_ = ds.Put(ctx, datastore.IDKey("Join", key.ID, nil), join)
 	ret := &pb.JoinReply{Join: join}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
@@ -127,7 +129,8 @@ func (s *server) UpdateJoin(ctx context.Context, in *pb.JoinRequest) (*pb.JoinRe
 		ret := &pb.JoinReply{Join: in.GetJoin()}
 		return ret, nil
 	}
-	ds.Put(ctx, datastore.IDKey("Join", in.Join.GetAccountId(), nil), in.Join)
+	in.Join.Updated = time.Now().Unix()
+	ds.Put(ctx, datastore.IDKey("Join", in.Join.GetJoinId(), nil), in.Join)
 	ret := &pb.JoinReply{Join: in.GetJoin()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil

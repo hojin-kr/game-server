@@ -33,55 +33,56 @@ namespace Haru {
             "AxILCgNzZXgYBCABKAMSDQoFc2NvcmUYBSABKAMSDQoFeWVhcnMYBiABKAMS",
             "DQoFZ2FtZXMYByADKAMSDAoEZGVzYxgIIAEoCSIwCg5Qcm9maWxlUmVxdWVz",
             "dBIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIi4KDFByb2ZpbGVS",
-            "ZXBseRIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIl0KBEpvaW4S",
+            "ZXBseRIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIm4KBEpvaW4S",
             "DwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg4KBnN0YXR1",
-            "cxgDIAEoAxIPCgdjcmVhdGVkGAQgASgDEg8KB3VwZGF0ZWQYBSABKAMiJwoL",
-            "Sm9pblJlcXVlc3QSGAoEam9pbhgBIAEoCzIKLmhhcnUuSm9pbiJACglKb2lu",
-            "UmVwbHkSGAoEam9pbhgBIAEoCzIKLmhhcnUuSm9pbhIZCgVqb2lucxgCIAMo",
-            "CzIKLmhhcnUuSm9pbiJ3CgRDaGF0Eg8KB2dhbWVfaWQYASABKAMSEgoKYWNj",
-            "b3VudF9pZBgCIAEoAxIPCgdjcmVhdGVkGAMgASgDEg8KB3VwZGF0ZWQYBCAB",
-            "KAMSKAoNY2hhdF9tZXNzYWdlcxgFIAMoCzIRLmhhcnUuQ2hhdE1lc3NhZ2Ui",
-            "QwoLQ2hhdE1lc3NhZ2USDwoHY3JlYXRlZBgBIAEoAxIPCgdtZXNzYWdlGAIg",
-            "ASgJEhIKCmFjY291bnRfaWQYAyABKAMiYgoSQ2hhdE1lc3NhZ2VSZXF1ZXN0",
-            "Eg8KB2dhbWVfaWQYASABKAMSEgoKYWNjb3VudF9pZBgCIAEoAxInCgxjaGF0",
-            "X21lc3NhZ2UYAyABKAsyES5oYXJ1LkNoYXRNZXNzYWdlIicKC0NoYXRSZXF1",
-            "ZXN0EhgKBGNoYXQYASABKAsyCi5oYXJ1LkNoYXQiJgoJQ2hhdFJlcGx5EhkK",
-            "BWNoYXRzGAEgAygLMgouaGFydS5DaGF0IvkCCgRHYW1lEgoKAmlkGAEgASgD",
-            "EhcKD2hvc3RfYWNjb3VudF9pZBgCIAEoAxIMCgR0aW1lGAMgASgDEg0KBXBy",
-            "aWNlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEoAxIQCgh0eXBlX2FnZRgGIAEo",
-            "AxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBlX3Njb3JlGAggASgDEhIKCnR5",
-            "cGVfeWVhcnMYCSABKAMSEQoJdHlwZV9ob2xlGAogASgDEhIKCnBlcnNvbl9t",
-            "YXgYCyABKAMSDgoGcGVyc29uGAwgASgDEgwKBGRlY3MYDSABKAkSGgoFcGxh",
-            "Y2UYDiABKAsyCy5oYXJ1LlBsYWNlEhUKDXNob3J0X2FkZHJlc3MYDyABKAkS",
-            "GgoSYWNjZXB0X2FjY291bnRfaWRzGBAgAygDEhoKEnJlamVjdF9hY2NvdW50",
-            "X2lkcxgRIAMoAxIPCgdjcmVhdGVkGBIgASgDEg8KB3VwZGF0ZWQYEyABKAMi",
-            "OAoFUGxhY2USDAoEbmFtZRgBIAEoCRIPCgdhZGRyZXNzGAIgASgJEhAKCHBs",
-            "YWNlX2lkGAMgASgJIkEKC0dhbWVSZXF1ZXN0EhgKBGdhbWUYASABKAsyCi5o",
-            "YXJ1LkdhbWUSGAoEam9pbhgCIAEoCzIKLmhhcnUuSm9pbiI/CglHYW1lUmVw",
-            "bHkSGAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgou",
-            "aGFydS5Kb2luIrcBChNGaWx0ZXJkR2FtZXNSZXF1ZXN0Eg8KB2lzX2luaXQY",
-            "ASABKAgSEAoIdGltZV9taW4YAiABKAMSEAoIdGltZV9tYXgYAyABKAMSDAoE",
-            "cGFnZRgEIAEoAxIRCgl0eXBlX3BsYXkYBSABKAMSEAoIdHlwZV9hZ2UYBiAB",
-            "KAMSEAoIdHlwZV9zZXgYByABKAMSEgoKdHlwZV9zY29yZRgIIAEoAxISCgp0",
-            "eXBlX3llYXJzGAkgASgDIi4KEUZpbHRlcmRHYW1lc1JlcGx5EhkKBWdhbWVz",
-            "GAEgAygLMgouaGFydS5HYW1lMtwFCgh2ZXJzaW9uMRI7Cg1DcmVhdGVBY2Nv",
-            "dW50EhQuaGFydS5BY2NvdW50UmVxdWVzdBoSLmhhcnUuQWNjb3VudFJlcGx5",
-            "IgASOAoKR2V0UHJvZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1",
-            "LlByb2ZpbGVSZXBseSIAEjsKDVVwZGF0ZVByb2ZpbGUSFC5oYXJ1LlByb2Zp",
-            "bGVSZXF1ZXN0GhIuaGFydS5Qcm9maWxlUmVwbHkiABIyCgpDcmVhdGVHYW1l",
-            "EhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUuR2FtZVJlcGx5IgASMgoKVXBk",
-            "YXRlR2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIA",
-            "Ei8KB0dldEdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5HYW1lUmVw",
-            "bHkiABJHCg9HZXRGaWx0ZXJkR2FtZXMSGS5oYXJ1LkZpbHRlcmRHYW1lc1Jl",
-            "cXVlc3QaFy5oYXJ1LkZpbHRlcmRHYW1lc1JlcGx5IgASLAoESm9pbhIRLmhh",
-            "cnUuSm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBseSIAEjIKCkdldE15Sm9p",
-            "bnMSES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABI0CgxH",
-            "ZXRHYW1lSm9pbnMSES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVw",
-            "bHkiABIyCgpVcGRhdGVKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUu",
-            "Sm9pblJlcGx5IgASLwoHR2V0Q2hhdBIRLmhhcnUuQ2hhdFJlcXVlc3QaDy5o",
-            "YXJ1LkNoYXRSZXBseSIAEj0KDkFkZENoYXRNZXNzYWdlEhguaGFydS5DaGF0",
-            "TWVzc2FnZVJlcXVlc3QaDy5oYXJ1LkNoYXRSZXBseSIAQiRaImdpdGh1Yi5j",
-            "b20vaG9qaW4ta3IvaGFydS9jbWQvcHJvdG9iBnByb3RvMw=="));
+            "cxgDIAEoAxIPCgdjcmVhdGVkGAQgASgDEg8KB3VwZGF0ZWQYBSABKAMSDwoH",
+            "am9pbl9pZBgGIAEoAyInCgtKb2luUmVxdWVzdBIYCgRqb2luGAEgASgLMgou",
+            "aGFydS5Kb2luIkAKCUpvaW5SZXBseRIYCgRqb2luGAEgASgLMgouaGFydS5K",
+            "b2luEhkKBWpvaW5zGAIgAygLMgouaGFydS5Kb2luIncKBENoYXQSDwoHZ2Ft",
+            "ZV9pZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg8KB2NyZWF0ZWQYAyAB",
+            "KAMSDwoHdXBkYXRlZBgEIAEoAxIoCg1jaGF0X21lc3NhZ2VzGAUgAygLMhEu",
+            "aGFydS5DaGF0TWVzc2FnZSJDCgtDaGF0TWVzc2FnZRIPCgdjcmVhdGVkGAEg",
+            "ASgDEg8KB21lc3NhZ2UYAiABKAkSEgoKYWNjb3VudF9pZBgDIAEoAyJiChJD",
+            "aGF0TWVzc2FnZVJlcXVlc3QSDwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50",
+            "X2lkGAIgASgDEicKDGNoYXRfbWVzc2FnZRgDIAEoCzIRLmhhcnUuQ2hhdE1l",
+            "c3NhZ2UiJwoLQ2hhdFJlcXVlc3QSGAoEY2hhdBgBIAEoCzIKLmhhcnUuQ2hh",
+            "dCImCglDaGF0UmVwbHkSGQoFY2hhdHMYASADKAsyCi5oYXJ1LkNoYXQi+QIK",
+            "BEdhbWUSCgoCaWQYASABKAMSFwoPaG9zdF9hY2NvdW50X2lkGAIgASgDEgwK",
+            "BHRpbWUYAyABKAMSDQoFcHJpY2UYBCABKAMSEQoJdHlwZV9wbGF5GAUgASgD",
+            "EhAKCHR5cGVfYWdlGAYgASgDEhAKCHR5cGVfc2V4GAcgASgDEhIKCnR5cGVf",
+            "c2NvcmUYCCABKAMSEgoKdHlwZV95ZWFycxgJIAEoAxIRCgl0eXBlX2hvbGUY",
+            "CiABKAMSEgoKcGVyc29uX21heBgLIAEoAxIOCgZwZXJzb24YDCABKAMSDAoE",
+            "ZGVjcxgNIAEoCRIaCgVwbGFjZRgOIAEoCzILLmhhcnUuUGxhY2USFQoNc2hv",
+            "cnRfYWRkcmVzcxgPIAEoCRIaChJhY2NlcHRfYWNjb3VudF9pZHMYECADKAMS",
+            "GgoScmVqZWN0X2FjY291bnRfaWRzGBEgAygDEg8KB2NyZWF0ZWQYEiABKAMS",
+            "DwoHdXBkYXRlZBgTIAEoAyI4CgVQbGFjZRIMCgRuYW1lGAEgASgJEg8KB2Fk",
+            "ZHJlc3MYAiABKAkSEAoIcGxhY2VfaWQYAyABKAkiQQoLR2FtZVJlcXVlc3QS",
+            "GAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgouaGFy",
+            "dS5Kb2luIj8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgouaGFydS5HYW1l",
+            "EhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4itwEKE0ZpbHRlcmRHYW1lc1Jl",
+            "cXVlc3QSDwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgCIAEoAxIQCgh0",
+            "aW1lX21heBgDIAEoAxIMCgRwYWdlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEo",
+            "AxIQCgh0eXBlX2FnZRgGIAEoAxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBl",
+            "X3Njb3JlGAggASgDEhIKCnR5cGVfeWVhcnMYCSABKAMiLgoRRmlsdGVyZEdh",
+            "bWVzUmVwbHkSGQoFZ2FtZXMYASADKAsyCi5oYXJ1LkdhbWUy3AUKCHZlcnNp",
+            "b24xEjsKDUNyZWF0ZUFjY291bnQSFC5oYXJ1LkFjY291bnRSZXF1ZXN0GhIu",
+            "aGFydS5BY2NvdW50UmVwbHkiABI4CgpHZXRQcm9maWxlEhQuaGFydS5Qcm9m",
+            "aWxlUmVxdWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASOwoNVXBkYXRlUHJv",
+            "ZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1LlByb2ZpbGVSZXBs",
+            "eSIAEjIKCkNyZWF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5H",
+            "YW1lUmVwbHkiABIyCgpVcGRhdGVHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoP",
+            "LmhhcnUuR2FtZVJlcGx5IgASLwoHR2V0R2FtZRIRLmhhcnUuR2FtZVJlcXVl",
+            "c3QaDy5oYXJ1LkdhbWVSZXBseSIAEkcKD0dldEZpbHRlcmRHYW1lcxIZLmhh",
+            "cnUuRmlsdGVyZEdhbWVzUmVxdWVzdBoXLmhhcnUuRmlsdGVyZEdhbWVzUmVw",
+            "bHkiABIsCgRKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJl",
+            "cGx5IgASMgoKR2V0TXlKb2lucxIRLmhhcnUuSm9pblJlcXVlc3QaDy5oYXJ1",
+            "LkpvaW5SZXBseSIAEjQKDEdldEdhbWVKb2lucxIRLmhhcnUuSm9pblJlcXVl",
+            "c3QaDy5oYXJ1LkpvaW5SZXBseSIAEjIKClVwZGF0ZUpvaW4SES5oYXJ1Lkpv",
+            "aW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIvCgdHZXRDaGF0EhEuaGFy",
+            "dS5DaGF0UmVxdWVzdBoPLmhhcnUuQ2hhdFJlcGx5IgASPQoOQWRkQ2hhdE1l",
+            "c3NhZ2USGC5oYXJ1LkNoYXRNZXNzYWdlUmVxdWVzdBoPLmhhcnUuQ2hhdFJl",
+            "cGx5IgBCJFoiZ2l0aHViLmNvbS9ob2ppbi1rci9oYXJ1L2NtZC9wcm90b2IG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -91,7 +92,7 @@ namespace Haru {
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Profile), global::Haru.Profile.Parser, new[]{ "AccountId", "Name", "Age", "Sex", "Score", "Years", "Games", "Desc" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ProfileRequest), global::Haru.ProfileRequest.Parser, new[]{ "Profile" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ProfileReply), global::Haru.ProfileReply.Parser, new[]{ "Profile" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Join), global::Haru.Join.Parser, new[]{ "GameId", "AccountId", "Status", "Created", "Updated" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Join), global::Haru.Join.Parser, new[]{ "GameId", "AccountId", "Status", "Created", "Updated", "JoinId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.JoinRequest), global::Haru.JoinRequest.Parser, new[]{ "Join" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.JoinReply), global::Haru.JoinReply.Parser, new[]{ "Join", "Joins" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Chat), global::Haru.Chat.Parser, new[]{ "GameId", "AccountId", "Created", "Updated", "ChatMessages" }, null, null, null, null),
@@ -1681,6 +1682,7 @@ namespace Haru {
       status_ = other.status_;
       created_ = other.created_;
       updated_ = other.updated_;
+      joinId_ = other.joinId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1753,6 +1755,18 @@ namespace Haru {
       }
     }
 
+    /// <summary>Field number for the "join_id" field.</summary>
+    public const int JoinIdFieldNumber = 6;
+    private long joinId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long JoinId {
+      get { return joinId_; }
+      set {
+        joinId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1773,6 +1787,7 @@ namespace Haru {
       if (Status != other.Status) return false;
       if (Created != other.Created) return false;
       if (Updated != other.Updated) return false;
+      if (JoinId != other.JoinId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1785,6 +1800,7 @@ namespace Haru {
       if (Status != 0L) hash ^= Status.GetHashCode();
       if (Created != 0L) hash ^= Created.GetHashCode();
       if (Updated != 0L) hash ^= Updated.GetHashCode();
+      if (JoinId != 0L) hash ^= JoinId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1823,6 +1839,10 @@ namespace Haru {
         output.WriteRawTag(40);
         output.WriteInt64(Updated);
       }
+      if (JoinId != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(JoinId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1853,6 +1873,10 @@ namespace Haru {
         output.WriteRawTag(40);
         output.WriteInt64(Updated);
       }
+      if (JoinId != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(JoinId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1877,6 +1901,9 @@ namespace Haru {
       }
       if (Updated != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Updated);
+      }
+      if (JoinId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(JoinId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1904,6 +1931,9 @@ namespace Haru {
       }
       if (other.Updated != 0L) {
         Updated = other.Updated;
+      }
+      if (other.JoinId != 0L) {
+        JoinId = other.JoinId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1940,6 +1970,10 @@ namespace Haru {
             Updated = input.ReadInt64();
             break;
           }
+          case 48: {
+            JoinId = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -1973,6 +2007,10 @@ namespace Haru {
           }
           case 40: {
             Updated = input.ReadInt64();
+            break;
+          }
+          case 48: {
+            JoinId = input.ReadInt64();
             break;
           }
         }
