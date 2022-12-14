@@ -116,6 +116,7 @@ func (s *server) Join(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, e
 	var join = in.Join
 	key := ds.Put(ctx, datastore.IncompleteKey("Join", nil), join)
 	join.JoinId = key.ID
+	join.Created = time.Now().UTC().Unix()
 	_ = ds.Put(ctx, datastore.IDKey("Join", key.ID, nil), join)
 	ret := &pb.JoinReply{Join: join}
 	tracer.Trace(time.Now().UTC(), ret)
