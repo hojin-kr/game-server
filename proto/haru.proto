@@ -166,8 +166,10 @@ message FilterdGamesRequest {
   int64 type_sex = 7;
   int64 type_score = 8;
   int64 type_years = 9;
+  string cursor = 10;
 }
 
 message FilterdGamesReply {
   repeated Game games = 1;
+  string cursor = 2;
 }

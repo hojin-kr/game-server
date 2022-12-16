@@ -59,30 +59,30 @@ namespace Haru {
             "ZHJlc3MYAiABKAkSEAoIcGxhY2VfaWQYAyABKAkiQQoLR2FtZVJlcXVlc3QS",
             "GAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgouaGFy",
             "dS5Kb2luIj8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgouaGFydS5HYW1l",
-            "EhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4itwEKE0ZpbHRlcmRHYW1lc1Jl",
+            "EhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4ixwEKE0ZpbHRlcmRHYW1lc1Jl",
             "cXVlc3QSDwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgCIAEoAxIQCgh0",
             "aW1lX21heBgDIAEoAxIMCgRwYWdlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEo",
             "AxIQCgh0eXBlX2FnZRgGIAEoAxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBl",
-            "X3Njb3JlGAggASgDEhIKCnR5cGVfeWVhcnMYCSABKAMiLgoRRmlsdGVyZEdh",
-            "bWVzUmVwbHkSGQoFZ2FtZXMYASADKAsyCi5oYXJ1LkdhbWUy3AUKCHZlcnNp",
-            "b24xEjsKDUNyZWF0ZUFjY291bnQSFC5oYXJ1LkFjY291bnRSZXF1ZXN0GhIu",
-            "aGFydS5BY2NvdW50UmVwbHkiABI4CgpHZXRQcm9maWxlEhQuaGFydS5Qcm9m",
-            "aWxlUmVxdWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASOwoNVXBkYXRlUHJv",
-            "ZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1LlByb2ZpbGVSZXBs",
-            "eSIAEjIKCkNyZWF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5H",
-            "YW1lUmVwbHkiABIyCgpVcGRhdGVHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoP",
-            "LmhhcnUuR2FtZVJlcGx5IgASLwoHR2V0R2FtZRIRLmhhcnUuR2FtZVJlcXVl",
-            "c3QaDy5oYXJ1LkdhbWVSZXBseSIAEkcKD0dldEZpbHRlcmRHYW1lcxIZLmhh",
-            "cnUuRmlsdGVyZEdhbWVzUmVxdWVzdBoXLmhhcnUuRmlsdGVyZEdhbWVzUmVw",
-            "bHkiABIsCgRKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJl",
-            "cGx5IgASMgoKR2V0TXlKb2lucxIRLmhhcnUuSm9pblJlcXVlc3QaDy5oYXJ1",
-            "LkpvaW5SZXBseSIAEjQKDEdldEdhbWVKb2lucxIRLmhhcnUuSm9pblJlcXVl",
-            "c3QaDy5oYXJ1LkpvaW5SZXBseSIAEjIKClVwZGF0ZUpvaW4SES5oYXJ1Lkpv",
-            "aW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIvCgdHZXRDaGF0EhEuaGFy",
-            "dS5DaGF0UmVxdWVzdBoPLmhhcnUuQ2hhdFJlcGx5IgASPQoOQWRkQ2hhdE1l",
-            "c3NhZ2USGC5oYXJ1LkNoYXRNZXNzYWdlUmVxdWVzdBoPLmhhcnUuQ2hhdFJl",
-            "cGx5IgBCJFoiZ2l0aHViLmNvbS9ob2ppbi1rci9oYXJ1L2NtZC9wcm90b2IG",
-            "cHJvdG8z"));
+            "X3Njb3JlGAggASgDEhIKCnR5cGVfeWVhcnMYCSABKAMSDgoGY3Vyc29yGAog",
+            "ASgJIj4KEUZpbHRlcmRHYW1lc1JlcGx5EhkKBWdhbWVzGAEgAygLMgouaGFy",
+            "dS5HYW1lEg4KBmN1cnNvchgCIAEoCTLcBQoIdmVyc2lvbjESOwoNQ3JlYXRl",
+            "QWNjb3VudBIULmhhcnUuQWNjb3VudFJlcXVlc3QaEi5oYXJ1LkFjY291bnRS",
+            "ZXBseSIAEjgKCkdldFByb2ZpbGUSFC5oYXJ1LlByb2ZpbGVSZXF1ZXN0GhIu",
+            "aGFydS5Qcm9maWxlUmVwbHkiABI7Cg1VcGRhdGVQcm9maWxlEhQuaGFydS5Q",
+            "cm9maWxlUmVxdWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASMgoKQ3JlYXRl",
+            "R2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIAEjIK",
+            "ClVwZGF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5HYW1lUmVw",
+            "bHkiABIvCgdHZXRHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUuR2Ft",
+            "ZVJlcGx5IgASRwoPR2V0RmlsdGVyZEdhbWVzEhkuaGFydS5GaWx0ZXJkR2Ft",
+            "ZXNSZXF1ZXN0GhcuaGFydS5GaWx0ZXJkR2FtZXNSZXBseSIAEiwKBEpvaW4S",
+            "ES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIyCgpHZXRN",
+            "eUpvaW5zEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgAS",
+            "NAoMR2V0R2FtZUpvaW5zEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9p",
+            "blJlcGx5IgASMgoKVXBkYXRlSm9pbhIRLmhhcnUuSm9pblJlcXVlc3QaDy5o",
+            "YXJ1LkpvaW5SZXBseSIAEi8KB0dldENoYXQSES5oYXJ1LkNoYXRSZXF1ZXN0",
+            "Gg8uaGFydS5DaGF0UmVwbHkiABI9Cg5BZGRDaGF0TWVzc2FnZRIYLmhhcnUu",
+            "Q2hhdE1lc3NhZ2VSZXF1ZXN0Gg8uaGFydS5DaGF0UmVwbHkiAEIkWiJnaXRo",
+            "dWIuY29tL2hvamluLWtyL2hhcnUvY21kL3Byb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -104,8 +104,8 @@ namespace Haru {
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Place), global::Haru.Place.Parser, new[]{ "Name", "Address", "PlaceId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameRequest), global::Haru.GameRequest.Parser, new[]{ "Game", "Join" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameReply), global::Haru.GameReply.Parser, new[]{ "Game", "Join" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesRequest), global::Haru.FilterdGamesRequest.Parser, new[]{ "IsInit", "TimeMin", "TimeMax", "Page", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesReply), global::Haru.FilterdGamesReply.Parser, new[]{ "Games" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesRequest), global::Haru.FilterdGamesRequest.Parser, new[]{ "IsInit", "TimeMin", "TimeMax", "Page", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears", "Cursor" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesReply), global::Haru.FilterdGamesReply.Parser, new[]{ "Games", "Cursor" }, null, null, null, null)
           }));
     }
     #endregion
@@ -5325,6 +5325,7 @@ namespace Haru {
       typeSex_ = other.typeSex_;
       typeScore_ = other.typeScore_;
       typeYears_ = other.typeYears_;
+      cursor_ = other.cursor_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5442,6 +5443,18 @@ namespace Haru {
       }
     }
 
+    /// <summary>Field number for the "cursor" field.</summary>
+    public const int CursorFieldNumber = 10;
+    private string cursor_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Cursor {
+      get { return cursor_; }
+      set {
+        cursor_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5466,6 +5479,7 @@ namespace Haru {
       if (TypeSex != other.TypeSex) return false;
       if (TypeScore != other.TypeScore) return false;
       if (TypeYears != other.TypeYears) return false;
+      if (Cursor != other.Cursor) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5482,6 +5496,7 @@ namespace Haru {
       if (TypeSex != 0L) hash ^= TypeSex.GetHashCode();
       if (TypeScore != 0L) hash ^= TypeScore.GetHashCode();
       if (TypeYears != 0L) hash ^= TypeYears.GetHashCode();
+      if (Cursor.Length != 0) hash ^= Cursor.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5536,6 +5551,10 @@ namespace Haru {
         output.WriteRawTag(72);
         output.WriteInt64(TypeYears);
       }
+      if (Cursor.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Cursor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5582,6 +5601,10 @@ namespace Haru {
         output.WriteRawTag(72);
         output.WriteInt64(TypeYears);
       }
+      if (Cursor.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Cursor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5618,6 +5641,9 @@ namespace Haru {
       }
       if (TypeYears != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeYears);
+      }
+      if (Cursor.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Cursor);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -5657,6 +5683,9 @@ namespace Haru {
       }
       if (other.TypeYears != 0L) {
         TypeYears = other.TypeYears;
+      }
+      if (other.Cursor.Length != 0) {
+        Cursor = other.Cursor;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5709,6 +5738,10 @@ namespace Haru {
             TypeYears = input.ReadInt64();
             break;
           }
+          case 82: {
+            Cursor = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -5758,6 +5791,10 @@ namespace Haru {
           }
           case 72: {
             TypeYears = input.ReadInt64();
+            break;
+          }
+          case 82: {
+            Cursor = input.ReadString();
             break;
           }
         }
@@ -5802,6 +5839,7 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FilterdGamesReply(FilterdGamesReply other) : this() {
       games_ = other.games_.Clone();
+      cursor_ = other.cursor_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5822,6 +5860,18 @@ namespace Haru {
       get { return games_; }
     }
 
+    /// <summary>Field number for the "cursor" field.</summary>
+    public const int CursorFieldNumber = 2;
+    private string cursor_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Cursor {
+      get { return cursor_; }
+      set {
+        cursor_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5838,6 +5888,7 @@ namespace Haru {
         return true;
       }
       if(!games_.Equals(other.games_)) return false;
+      if (Cursor != other.Cursor) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5846,6 +5897,7 @@ namespace Haru {
     public override int GetHashCode() {
       int hash = 1;
       hash ^= games_.GetHashCode();
+      if (Cursor.Length != 0) hash ^= Cursor.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5865,6 +5917,10 @@ namespace Haru {
       output.WriteRawMessage(this);
     #else
       games_.WriteTo(output, _repeated_games_codec);
+      if (Cursor.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Cursor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5876,6 +5932,10 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       games_.WriteTo(ref output, _repeated_games_codec);
+      if (Cursor.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Cursor);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5887,6 +5947,9 @@ namespace Haru {
     public int CalculateSize() {
       int size = 0;
       size += games_.CalculateSize(_repeated_games_codec);
+      if (Cursor.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Cursor);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5900,6 +5963,9 @@ namespace Haru {
         return;
       }
       games_.Add(other.games_);
+      if (other.Cursor.Length != 0) {
+        Cursor = other.Cursor;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5919,6 +5985,10 @@ namespace Haru {
             games_.AddEntriesFrom(input, _repeated_games_codec);
             break;
           }
+          case 18: {
+            Cursor = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -5936,6 +6006,10 @@ namespace Haru {
             break;
           case 10: {
             games_.AddEntriesFrom(ref input, _repeated_games_codec);
+            break;
+          }
+          case 18: {
+            Cursor = input.ReadString();
             break;
           }
         }

@@ -14,6 +14,7 @@ import (
 	ds "github.com/hojin-kr/haru/cmd/ds"
 	pb "github.com/hojin-kr/haru/cmd/proto"
 	"github.com/hojin-kr/haru/cmd/trace"
+	"google.golang.org/api/iterator"
 	"google.golang.org/grpc"
 )
 
@@ -102,11 +103,40 @@ func (s *server) UpdateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameRe
 // filterdGames에서는 Game 목록만 반환하고 GetGame에서는 attend, place 부가 정보 반환
 func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest) (*pb.FilterdGamesReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	// q := datastore.NewQuery("Game").Filter("A =", 12).Limit(30)
+	client := ds.GetClient(ctx)
+
+	cursorStr := in.Cursor
+	log.Print(cursorStr)
+	const pageSize = 20
+	query := datastore.NewQuery("Game").Limit(pageSize)
+	if cursorStr != "" {
+		cursor, err := datastore.DecodeCursor(cursorStr)
+		if err != nil {
+			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
+		}
+		query = query.Start(cursor)
+	}
+	// Read the games.
 	var games []*pb.Game
-	q := datastore.NewQuery("Game").Limit(30)
-	ds.GetAll(ctx, q, &games)
-	ret := &pb.FilterdGamesReply{Games: games}
+	var game pb.Game
+	it := client.Run(ctx, query)
+	_, err := it.Next(&game)
+	for err == nil {
+		games = append(games, &game)
+		_, err = it.Next(&game)
+	}
+	if err != iterator.Done {
+		log.Fatalf("Failed fetching results: %v", err)
+	}
+
+	// Get the cursor for the next page of results.
+	// nextCursor.String can be used as the next page's token.
+	nextCursor, err := it.Cursor()
+	// [END datastore_cursor_paging]
+	_ = err        // Check the error.
+	_ = nextCursor // Use nextCursor.String as the next page's token.
+	log.Printf(nextCursor.String())
+	ret := &pb.FilterdGamesReply{Games: games, Cursor: nextCursor.String()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }

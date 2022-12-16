@@ -12,7 +12,7 @@ var (
 	project_id = os.Getenv("PROJECT_ID")
 )
 
-func getClient(ctx context.Context) *datastore.Client {
+func GetClient(ctx context.Context) *datastore.Client {
 	var client *datastore.Client
 	client, err := datastore.NewClient(ctx, project_id)
 	if err != nil {
@@ -22,7 +22,7 @@ func getClient(ctx context.Context) *datastore.Client {
 }
 
 func Get(ctx context.Context, key *datastore.Key, dst interface{}) (err error) {
-	client := getClient(ctx)
+	client := GetClient(ctx)
 	if err := client.Get(ctx, key, dst); err != nil {
 		log.Printf("get ds" + err.Error())
 	}
@@ -30,7 +30,7 @@ func Get(ctx context.Context, key *datastore.Key, dst interface{}) (err error) {
 }
 
 func Put(ctx context.Context, key *datastore.Key, src interface{}) (_key *datastore.Key) {
-	client := getClient(ctx)
+	client := GetClient(ctx)
 	key, err := client.Put(ctx, key, src)
 	if err != nil {
 		log.Printf("put ds" + err.Error())
@@ -39,7 +39,7 @@ func Put(ctx context.Context, key *datastore.Key, src interface{}) (_key *datast
 }
 
 func GetAll(ctx context.Context, query *datastore.Query, dst interface{}) (keys []*datastore.Key, err error) {
-	client := getClient(ctx)
+	client := GetClient(ctx)
 	keys, err = client.GetAll(ctx, query, dst)
 	if err != nil {
 		log.Printf("query ds" + err.Error())

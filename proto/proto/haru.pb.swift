@@ -537,6 +537,8 @@ struct Haru_FilterdGamesRequest {
 
   var typeYears: Int64 = 0
 
+  var cursor: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -548,6 +550,8 @@ struct Haru_FilterdGamesReply {
   // methods supported on all messages.
 
   var games: [Haru_Game] = []
+
+  var cursor: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -1557,6 +1561,7 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     7: .standard(proto: "type_sex"),
     8: .standard(proto: "type_score"),
     9: .standard(proto: "type_years"),
+    10: .same(proto: "cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1574,6 +1579,7 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 7: try { try decoder.decodeSingularInt64Field(value: &self.typeSex) }()
       case 8: try { try decoder.decodeSingularInt64Field(value: &self.typeScore) }()
       case 9: try { try decoder.decodeSingularInt64Field(value: &self.typeYears) }()
+      case 10: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1607,6 +1613,9 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if self.typeYears != 0 {
       try visitor.visitSingularInt64Field(value: self.typeYears, fieldNumber: 9)
     }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 10)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1620,6 +1629,7 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.typeSex != rhs.typeSex {return false}
     if lhs.typeScore != rhs.typeScore {return false}
     if lhs.typeYears != rhs.typeYears {return false}
+    if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1629,6 +1639,7 @@ extension Haru_FilterdGamesReply: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   static let protoMessageName: String = _protobuf_package + ".FilterdGamesReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "games"),
+    2: .same(proto: "cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1638,6 +1649,7 @@ extension Haru_FilterdGamesReply: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.games) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1647,11 +1659,15 @@ extension Haru_FilterdGamesReply: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if !self.games.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.games, fieldNumber: 1)
     }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_FilterdGamesReply, rhs: Haru_FilterdGamesReply) -> Bool {
     if lhs.games != rhs.games {return false}
+    if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
