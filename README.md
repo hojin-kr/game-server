@@ -1,5 +1,5 @@
 # 개요
-Google Cloud Platform AppEngine 에 최적화된 확장이 용이한 게임 서버 프레임워크
+Google Cloud Platform CloudRun&AppEngine 에 최적화된 확장이 용이한 서버 프레임워크
 
 # 특징
 - Google Cloud Platform AppEngine 최적화
@@ -10,7 +10,7 @@ Google Cloud Platform AppEngine 에 최적화된 확장이 용이한 게임 서�
 - stdlogging
 - GitoOps Github Action CI/CD 자동화
 - REST full API
-- TDD, Unit Test 
+- TDD, Unit Test
 - 적은 서버 초기 비용
 - golang web socket
 ---
@@ -46,3 +46,8 @@ https://console.cloud.google.com/appengine/services
 ```
 
 
+### build submit & run
+```
+gcloud builds submit -t gcr.io/{project_id}/haru:0.1.0 .
+gcloud run services replace deployments/dev/cloudrun.yaml --region=asia-northeast3
+```
