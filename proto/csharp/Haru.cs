@@ -59,30 +59,29 @@ namespace Haru {
             "ZHJlc3MYAiABKAkSEAoIcGxhY2VfaWQYAyABKAkiQQoLR2FtZVJlcXVlc3QS",
             "GAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgouaGFy",
             "dS5Kb2luIj8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgouaGFydS5HYW1l",
-            "EhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4ixwEKE0ZpbHRlcmRHYW1lc1Jl",
+            "EhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4igwEKE0ZpbHRlcmRHYW1lc1Jl",
             "cXVlc3QSDwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgCIAEoAxIQCgh0",
-            "aW1lX21heBgDIAEoAxIMCgRwYWdlGAQgASgDEhEKCXR5cGVfcGxheRgFIAEo",
-            "AxIQCgh0eXBlX2FnZRgGIAEoAxIQCgh0eXBlX3NleBgHIAEoAxISCgp0eXBl",
-            "X3Njb3JlGAggASgDEhIKCnR5cGVfeWVhcnMYCSABKAMSDgoGY3Vyc29yGAog",
-            "ASgJIj4KEUZpbHRlcmRHYW1lc1JlcGx5EhkKBWdhbWVzGAEgAygLMgouaGFy",
-            "dS5HYW1lEg4KBmN1cnNvchgCIAEoCTLcBQoIdmVyc2lvbjESOwoNQ3JlYXRl",
-            "QWNjb3VudBIULmhhcnUuQWNjb3VudFJlcXVlc3QaEi5oYXJ1LkFjY291bnRS",
-            "ZXBseSIAEjgKCkdldFByb2ZpbGUSFC5oYXJ1LlByb2ZpbGVSZXF1ZXN0GhIu",
-            "aGFydS5Qcm9maWxlUmVwbHkiABI7Cg1VcGRhdGVQcm9maWxlEhQuaGFydS5Q",
-            "cm9maWxlUmVxdWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASMgoKQ3JlYXRl",
-            "R2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIAEjIK",
-            "ClVwZGF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5HYW1lUmVw",
-            "bHkiABIvCgdHZXRHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUuR2Ft",
-            "ZVJlcGx5IgASRwoPR2V0RmlsdGVyZEdhbWVzEhkuaGFydS5GaWx0ZXJkR2Ft",
-            "ZXNSZXF1ZXN0GhcuaGFydS5GaWx0ZXJkR2FtZXNSZXBseSIAEiwKBEpvaW4S",
-            "ES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIyCgpHZXRN",
-            "eUpvaW5zEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgAS",
-            "NAoMR2V0R2FtZUpvaW5zEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9p",
-            "blJlcGx5IgASMgoKVXBkYXRlSm9pbhIRLmhhcnUuSm9pblJlcXVlc3QaDy5o",
-            "YXJ1LkpvaW5SZXBseSIAEi8KB0dldENoYXQSES5oYXJ1LkNoYXRSZXF1ZXN0",
-            "Gg8uaGFydS5DaGF0UmVwbHkiABI9Cg5BZGRDaGF0TWVzc2FnZRIYLmhhcnUu",
-            "Q2hhdE1lc3NhZ2VSZXF1ZXN0Gg8uaGFydS5DaGF0UmVwbHkiAEIkWiJnaXRo",
-            "dWIuY29tL2hvamluLWtyL2hhcnUvY21kL3Byb3RvYgZwcm90bzM="));
+            "aW1lX21heBgDIAEoAxISCgp0eXBlX29yZGVyGAQgASgDEhMKC3R5cGVfZmls",
+            "dGVyGAUgASgDEg4KBmN1cnNvchgGIAEoCSI+ChFGaWx0ZXJkR2FtZXNSZXBs",
+            "eRIZCgVnYW1lcxgBIAMoCzIKLmhhcnUuR2FtZRIOCgZjdXJzb3IYAiABKAky",
+            "3AUKCHZlcnNpb24xEjsKDUNyZWF0ZUFjY291bnQSFC5oYXJ1LkFjY291bnRS",
+            "ZXF1ZXN0GhIuaGFydS5BY2NvdW50UmVwbHkiABI4CgpHZXRQcm9maWxlEhQu",
+            "aGFydS5Qcm9maWxlUmVxdWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASOwoN",
+            "VXBkYXRlUHJvZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1LlBy",
+            "b2ZpbGVSZXBseSIAEjIKCkNyZWF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0",
+            "Gg8uaGFydS5HYW1lUmVwbHkiABIyCgpVcGRhdGVHYW1lEhEuaGFydS5HYW1l",
+            "UmVxdWVzdBoPLmhhcnUuR2FtZVJlcGx5IgASLwoHR2V0R2FtZRIRLmhhcnUu",
+            "R2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIAEkcKD0dldEZpbHRlcmRH",
+            "YW1lcxIZLmhhcnUuRmlsdGVyZEdhbWVzUmVxdWVzdBoXLmhhcnUuRmlsdGVy",
+            "ZEdhbWVzUmVwbHkiABIsCgRKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhh",
+            "cnUuSm9pblJlcGx5IgASMgoKR2V0TXlKb2lucxIRLmhhcnUuSm9pblJlcXVl",
+            "c3QaDy5oYXJ1LkpvaW5SZXBseSIAEjQKDEdldEdhbWVKb2lucxIRLmhhcnUu",
+            "Sm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBseSIAEjIKClVwZGF0ZUpvaW4S",
+            "ES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIvCgdHZXRD",
+            "aGF0EhEuaGFydS5DaGF0UmVxdWVzdBoPLmhhcnUuQ2hhdFJlcGx5IgASPQoO",
+            "QWRkQ2hhdE1lc3NhZ2USGC5oYXJ1LkNoYXRNZXNzYWdlUmVxdWVzdBoPLmhh",
+            "cnUuQ2hhdFJlcGx5IgBCJFoiZ2l0aHViLmNvbS9ob2ppbi1rci9oYXJ1L2Nt",
+            "ZC9wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -104,7 +103,7 @@ namespace Haru {
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Place), global::Haru.Place.Parser, new[]{ "Name", "Address", "PlaceId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameRequest), global::Haru.GameRequest.Parser, new[]{ "Game", "Join" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameReply), global::Haru.GameReply.Parser, new[]{ "Game", "Join" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesRequest), global::Haru.FilterdGamesRequest.Parser, new[]{ "IsInit", "TimeMin", "TimeMax", "Page", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears", "Cursor" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesRequest), global::Haru.FilterdGamesRequest.Parser, new[]{ "IsInit", "TimeMin", "TimeMax", "TypeOrder", "TypeFilter", "Cursor" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.FilterdGamesReply), global::Haru.FilterdGamesReply.Parser, new[]{ "Games", "Cursor" }, null, null, null, null)
           }));
     }
@@ -5319,12 +5318,8 @@ namespace Haru {
       isInit_ = other.isInit_;
       timeMin_ = other.timeMin_;
       timeMax_ = other.timeMax_;
-      page_ = other.page_;
-      typePlay_ = other.typePlay_;
-      typeAge_ = other.typeAge_;
-      typeSex_ = other.typeSex_;
-      typeScore_ = other.typeScore_;
-      typeYears_ = other.typeYears_;
+      typeOrder_ = other.typeOrder_;
+      typeFilter_ = other.typeFilter_;
       cursor_ = other.cursor_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -5371,80 +5366,32 @@ namespace Haru {
       }
     }
 
-    /// <summary>Field number for the "page" field.</summary>
-    public const int PageFieldNumber = 4;
-    private long page_;
+    /// <summary>Field number for the "type_order" field.</summary>
+    public const int TypeOrderFieldNumber = 4;
+    private long typeOrder_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Page {
-      get { return page_; }
+    public long TypeOrder {
+      get { return typeOrder_; }
       set {
-        page_ = value;
+        typeOrder_ = value;
       }
     }
 
-    /// <summary>Field number for the "type_play" field.</summary>
-    public const int TypePlayFieldNumber = 5;
-    private long typePlay_;
+    /// <summary>Field number for the "type_filter" field.</summary>
+    public const int TypeFilterFieldNumber = 5;
+    private long typeFilter_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TypePlay {
-      get { return typePlay_; }
+    public long TypeFilter {
+      get { return typeFilter_; }
       set {
-        typePlay_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "type_age" field.</summary>
-    public const int TypeAgeFieldNumber = 6;
-    private long typeAge_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TypeAge {
-      get { return typeAge_; }
-      set {
-        typeAge_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "type_sex" field.</summary>
-    public const int TypeSexFieldNumber = 7;
-    private long typeSex_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TypeSex {
-      get { return typeSex_; }
-      set {
-        typeSex_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "type_score" field.</summary>
-    public const int TypeScoreFieldNumber = 8;
-    private long typeScore_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TypeScore {
-      get { return typeScore_; }
-      set {
-        typeScore_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "type_years" field.</summary>
-    public const int TypeYearsFieldNumber = 9;
-    private long typeYears_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TypeYears {
-      get { return typeYears_; }
-      set {
-        typeYears_ = value;
+        typeFilter_ = value;
       }
     }
 
     /// <summary>Field number for the "cursor" field.</summary>
-    public const int CursorFieldNumber = 10;
+    public const int CursorFieldNumber = 6;
     private string cursor_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5473,12 +5420,8 @@ namespace Haru {
       if (IsInit != other.IsInit) return false;
       if (TimeMin != other.TimeMin) return false;
       if (TimeMax != other.TimeMax) return false;
-      if (Page != other.Page) return false;
-      if (TypePlay != other.TypePlay) return false;
-      if (TypeAge != other.TypeAge) return false;
-      if (TypeSex != other.TypeSex) return false;
-      if (TypeScore != other.TypeScore) return false;
-      if (TypeYears != other.TypeYears) return false;
+      if (TypeOrder != other.TypeOrder) return false;
+      if (TypeFilter != other.TypeFilter) return false;
       if (Cursor != other.Cursor) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -5490,12 +5433,8 @@ namespace Haru {
       if (IsInit != false) hash ^= IsInit.GetHashCode();
       if (TimeMin != 0L) hash ^= TimeMin.GetHashCode();
       if (TimeMax != 0L) hash ^= TimeMax.GetHashCode();
-      if (Page != 0L) hash ^= Page.GetHashCode();
-      if (TypePlay != 0L) hash ^= TypePlay.GetHashCode();
-      if (TypeAge != 0L) hash ^= TypeAge.GetHashCode();
-      if (TypeSex != 0L) hash ^= TypeSex.GetHashCode();
-      if (TypeScore != 0L) hash ^= TypeScore.GetHashCode();
-      if (TypeYears != 0L) hash ^= TypeYears.GetHashCode();
+      if (TypeOrder != 0L) hash ^= TypeOrder.GetHashCode();
+      if (TypeFilter != 0L) hash ^= TypeFilter.GetHashCode();
       if (Cursor.Length != 0) hash ^= Cursor.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5527,32 +5466,16 @@ namespace Haru {
         output.WriteRawTag(24);
         output.WriteInt64(TimeMax);
       }
-      if (Page != 0L) {
+      if (TypeOrder != 0L) {
         output.WriteRawTag(32);
-        output.WriteInt64(Page);
+        output.WriteInt64(TypeOrder);
       }
-      if (TypePlay != 0L) {
+      if (TypeFilter != 0L) {
         output.WriteRawTag(40);
-        output.WriteInt64(TypePlay);
-      }
-      if (TypeAge != 0L) {
-        output.WriteRawTag(48);
-        output.WriteInt64(TypeAge);
-      }
-      if (TypeSex != 0L) {
-        output.WriteRawTag(56);
-        output.WriteInt64(TypeSex);
-      }
-      if (TypeScore != 0L) {
-        output.WriteRawTag(64);
-        output.WriteInt64(TypeScore);
-      }
-      if (TypeYears != 0L) {
-        output.WriteRawTag(72);
-        output.WriteInt64(TypeYears);
+        output.WriteInt64(TypeFilter);
       }
       if (Cursor.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(50);
         output.WriteString(Cursor);
       }
       if (_unknownFields != null) {
@@ -5577,32 +5500,16 @@ namespace Haru {
         output.WriteRawTag(24);
         output.WriteInt64(TimeMax);
       }
-      if (Page != 0L) {
+      if (TypeOrder != 0L) {
         output.WriteRawTag(32);
-        output.WriteInt64(Page);
+        output.WriteInt64(TypeOrder);
       }
-      if (TypePlay != 0L) {
+      if (TypeFilter != 0L) {
         output.WriteRawTag(40);
-        output.WriteInt64(TypePlay);
-      }
-      if (TypeAge != 0L) {
-        output.WriteRawTag(48);
-        output.WriteInt64(TypeAge);
-      }
-      if (TypeSex != 0L) {
-        output.WriteRawTag(56);
-        output.WriteInt64(TypeSex);
-      }
-      if (TypeScore != 0L) {
-        output.WriteRawTag(64);
-        output.WriteInt64(TypeScore);
-      }
-      if (TypeYears != 0L) {
-        output.WriteRawTag(72);
-        output.WriteInt64(TypeYears);
+        output.WriteInt64(TypeFilter);
       }
       if (Cursor.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(50);
         output.WriteString(Cursor);
       }
       if (_unknownFields != null) {
@@ -5624,23 +5531,11 @@ namespace Haru {
       if (TimeMax != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeMax);
       }
-      if (Page != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Page);
+      if (TypeOrder != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeOrder);
       }
-      if (TypePlay != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypePlay);
-      }
-      if (TypeAge != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeAge);
-      }
-      if (TypeSex != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeSex);
-      }
-      if (TypeScore != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeScore);
-      }
-      if (TypeYears != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeYears);
+      if (TypeFilter != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TypeFilter);
       }
       if (Cursor.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Cursor);
@@ -5666,23 +5561,11 @@ namespace Haru {
       if (other.TimeMax != 0L) {
         TimeMax = other.TimeMax;
       }
-      if (other.Page != 0L) {
-        Page = other.Page;
+      if (other.TypeOrder != 0L) {
+        TypeOrder = other.TypeOrder;
       }
-      if (other.TypePlay != 0L) {
-        TypePlay = other.TypePlay;
-      }
-      if (other.TypeAge != 0L) {
-        TypeAge = other.TypeAge;
-      }
-      if (other.TypeSex != 0L) {
-        TypeSex = other.TypeSex;
-      }
-      if (other.TypeScore != 0L) {
-        TypeScore = other.TypeScore;
-      }
-      if (other.TypeYears != 0L) {
-        TypeYears = other.TypeYears;
+      if (other.TypeFilter != 0L) {
+        TypeFilter = other.TypeFilter;
       }
       if (other.Cursor.Length != 0) {
         Cursor = other.Cursor;
@@ -5715,30 +5598,14 @@ namespace Haru {
             break;
           }
           case 32: {
-            Page = input.ReadInt64();
+            TypeOrder = input.ReadInt64();
             break;
           }
           case 40: {
-            TypePlay = input.ReadInt64();
+            TypeFilter = input.ReadInt64();
             break;
           }
-          case 48: {
-            TypeAge = input.ReadInt64();
-            break;
-          }
-          case 56: {
-            TypeSex = input.ReadInt64();
-            break;
-          }
-          case 64: {
-            TypeScore = input.ReadInt64();
-            break;
-          }
-          case 72: {
-            TypeYears = input.ReadInt64();
-            break;
-          }
-          case 82: {
+          case 50: {
             Cursor = input.ReadString();
             break;
           }
@@ -5770,30 +5637,14 @@ namespace Haru {
             break;
           }
           case 32: {
-            Page = input.ReadInt64();
+            TypeOrder = input.ReadInt64();
             break;
           }
           case 40: {
-            TypePlay = input.ReadInt64();
+            TypeFilter = input.ReadInt64();
             break;
           }
-          case 48: {
-            TypeAge = input.ReadInt64();
-            break;
-          }
-          case 56: {
-            TypeSex = input.ReadInt64();
-            break;
-          }
-          case 64: {
-            TypeScore = input.ReadInt64();
-            break;
-          }
-          case 72: {
-            TypeYears = input.ReadInt64();
-            break;
-          }
-          case 82: {
+          case 50: {
             Cursor = input.ReadString();
             break;
           }

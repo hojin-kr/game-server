@@ -525,17 +525,9 @@ struct Haru_FilterdGamesRequest {
 
   var timeMax: Int64 = 0
 
-  var page: Int64 = 0
+  var typeOrder: Int64 = 0
 
-  var typePlay: Int64 = 0
-
-  var typeAge: Int64 = 0
-
-  var typeSex: Int64 = 0
-
-  var typeScore: Int64 = 0
-
-  var typeYears: Int64 = 0
+  var typeFilter: Int64 = 0
 
   var cursor: String = String()
 
@@ -1555,13 +1547,9 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     1: .standard(proto: "is_init"),
     2: .standard(proto: "time_min"),
     3: .standard(proto: "time_max"),
-    4: .same(proto: "page"),
-    5: .standard(proto: "type_play"),
-    6: .standard(proto: "type_age"),
-    7: .standard(proto: "type_sex"),
-    8: .standard(proto: "type_score"),
-    9: .standard(proto: "type_years"),
-    10: .same(proto: "cursor"),
+    4: .standard(proto: "type_order"),
+    5: .standard(proto: "type_filter"),
+    6: .same(proto: "cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1573,13 +1561,9 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 1: try { try decoder.decodeSingularBoolField(value: &self.isInit) }()
       case 2: try { try decoder.decodeSingularInt64Field(value: &self.timeMin) }()
       case 3: try { try decoder.decodeSingularInt64Field(value: &self.timeMax) }()
-      case 4: try { try decoder.decodeSingularInt64Field(value: &self.page) }()
-      case 5: try { try decoder.decodeSingularInt64Field(value: &self.typePlay) }()
-      case 6: try { try decoder.decodeSingularInt64Field(value: &self.typeAge) }()
-      case 7: try { try decoder.decodeSingularInt64Field(value: &self.typeSex) }()
-      case 8: try { try decoder.decodeSingularInt64Field(value: &self.typeScore) }()
-      case 9: try { try decoder.decodeSingularInt64Field(value: &self.typeYears) }()
-      case 10: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.typeOrder) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.typeFilter) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1595,26 +1579,14 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if self.timeMax != 0 {
       try visitor.visitSingularInt64Field(value: self.timeMax, fieldNumber: 3)
     }
-    if self.page != 0 {
-      try visitor.visitSingularInt64Field(value: self.page, fieldNumber: 4)
+    if self.typeOrder != 0 {
+      try visitor.visitSingularInt64Field(value: self.typeOrder, fieldNumber: 4)
     }
-    if self.typePlay != 0 {
-      try visitor.visitSingularInt64Field(value: self.typePlay, fieldNumber: 5)
-    }
-    if self.typeAge != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeAge, fieldNumber: 6)
-    }
-    if self.typeSex != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeSex, fieldNumber: 7)
-    }
-    if self.typeScore != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeScore, fieldNumber: 8)
-    }
-    if self.typeYears != 0 {
-      try visitor.visitSingularInt64Field(value: self.typeYears, fieldNumber: 9)
+    if self.typeFilter != 0 {
+      try visitor.visitSingularInt64Field(value: self.typeFilter, fieldNumber: 5)
     }
     if !self.cursor.isEmpty {
-      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 10)
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1623,12 +1595,8 @@ extension Haru_FilterdGamesRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.isInit != rhs.isInit {return false}
     if lhs.timeMin != rhs.timeMin {return false}
     if lhs.timeMax != rhs.timeMax {return false}
-    if lhs.page != rhs.page {return false}
-    if lhs.typePlay != rhs.typePlay {return false}
-    if lhs.typeAge != rhs.typeAge {return false}
-    if lhs.typeSex != rhs.typeSex {return false}
-    if lhs.typeScore != rhs.typeScore {return false}
-    if lhs.typeYears != rhs.typeYears {return false}
+    if lhs.typeOrder != rhs.typeOrder {return false}
+    if lhs.typeFilter != rhs.typeFilter {return false}
     if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

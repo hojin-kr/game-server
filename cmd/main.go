@@ -104,11 +104,28 @@ func (s *server) UpdateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameRe
 func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest) (*pb.FilterdGamesReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	client := ds.GetClient(ctx)
-
 	cursorStr := in.Cursor
-	log.Print(cursorStr)
-	const pageSize = 20
-	query := datastore.NewQuery("Game").Limit(pageSize)
+	const pageSize = 50
+	var orderTypes = map[int64]string{
+		0: "Created",
+		1: "-Created",
+		2: "Time",
+		3: "-Time",
+		4: "Price",
+		5: "-Price",
+	}
+	var filterTypes = map[int64]string{
+		0: "TypePlay",
+		1: "-TypePlay",
+		2: "TypeScore",
+		3: "-TypeScore",
+	}
+	queryBase := datastore.NewQuery("Game")
+	query := queryBase.Order(orderTypes[in.TypeOrder]).Limit(pageSize)
+	if in.TypeFilter != -1 {
+		query = queryBase.Order(orderTypes[in.TypeOrder]).Order(filterTypes[in.TypeFilter]).Limit(pageSize)
+	}
+
 	if cursorStr != "" {
 		cursor, err := datastore.DecodeCursor(cursorStr)
 		if err != nil {
@@ -117,12 +134,12 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 		query = query.Start(cursor)
 	}
 	// Read the games.
-	var games []*pb.Game
+	var games []pb.Game
 	var game pb.Game
 	it := client.Run(ctx, query)
 	_, err := it.Next(&game)
 	for err == nil {
-		games = append(games, &game)
+		games = append(games, game)
 		_, err = it.Next(&game)
 	}
 	if err != iterator.Done {
@@ -135,8 +152,11 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 	// [END datastore_cursor_paging]
 	_ = err        // Check the error.
 	_ = nextCursor // Use nextCursor.String as the next page's token.
-	log.Printf(nextCursor.String())
-	ret := &pb.FilterdGamesReply{Games: games, Cursor: nextCursor.String()}
+	var _games []*pb.Game
+	for i := 0; i < len(games); i++ {
+		_games = append(_games, &games[i])
+	}
+	ret := &pb.FilterdGamesReply{Games: _games, Cursor: nextCursor.String()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }

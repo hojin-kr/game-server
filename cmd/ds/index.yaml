@@ -1,0 +1,31 @@
+indexes:
+
+- kind: Game
+  properties:
+  - name: Created
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Price
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Created
+  - name: TypeScore
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypeScore
+
+- kind: Game
+  properties:
+  - name: Price
+  - name: TypeScore
