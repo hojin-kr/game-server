@@ -1,3 +1,4 @@
+
 indexes:
 
 - kind: Game
@@ -18,14 +19,62 @@ indexes:
 - kind: Game
   properties:
   - name: Created
-  - name: TypeScore
+  - name: TypePlay
+    direction: desc
 
 - kind: Game
   properties:
   - name: Time
-  - name: TypeScore
+  - name: TypePlay
+    direction: desc
 
 - kind: Game
   properties:
   - name: Price
-  - name: TypeScore
+  - name: TypePlay
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Created
+    direction: desc
+  - name: TypePlay
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+    direction: desc
+  - name: TypePlay
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Price
+    direction: desc
+  - name: TypePlay
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Created
+    direction: desc
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Time
+    direction: desc
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Price
+    direction: desc
+  - name: TypePlay
+
+# indexing
+# gcloud datastore indexes cleanup
+# gcloud datastore indexes create
+# gcloud datastore indexes describe
+# gcloud datastore indexes list

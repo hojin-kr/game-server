@@ -105,7 +105,8 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 	tracer.Trace(time.Now().UTC(), in)
 	client := ds.GetClient(ctx)
 	cursorStr := in.Cursor
-	const pageSize = 50
+	// todo pageSize Incr
+	const pageSize = 10
 	var orderTypes = map[int64]string{
 		0: "Created",
 		1: "-Created",
@@ -117,8 +118,6 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 	var filterTypes = map[int64]string{
 		0: "TypePlay",
 		1: "-TypePlay",
-		2: "TypeScore",
-		3: "-TypeScore",
 	}
 	queryBase := datastore.NewQuery("Game")
 	query := queryBase.Order(orderTypes[in.TypeOrder]).Limit(pageSize)
