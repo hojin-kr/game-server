@@ -128,8 +128,8 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 		Limit(pageSize)
 	if in.TypeFilter != 0 {
 		query = queryBase.
-			Order(orderTypes[in.TypeOrder]).
 			Order(filterTypes[in.TypeFilter]).
+			Order(orderTypes[in.TypeOrder]).
 			Limit(pageSize)
 	}
 

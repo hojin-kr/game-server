@@ -7,61 +7,61 @@ indexes:
 # gcloud datastore indexes list
 - kind: GameList
   properties:
+  - name: TypePlay
   - name: Created
     direction: desc
-  - name: TypePlay
 
 - kind: GameList
   properties:
+  - name: TypePlay
   - name: Time
-  - name: TypePlay
 
 - kind: GameList
   properties:
+  - name: TypePlay
   - name: Time
     direction: desc
-  - name: TypePlay
 
 - kind: GameList
   properties:
+  - name: TypePlay
   - name: Price
-  - name: TypePlay
 
 - kind: GameList
   properties:
+  - name: TypePlay
   - name: Price
     direction: desc
-  - name: TypePlay
 
 - kind: GameList
   properties:
+  - name: TypePlay
+    direction: desc
   - name: Created
     direction: desc
-  - name: TypePlay
-    direction: desc
 
 - kind: GameList
   properties:
+  - name: TypePlay
+    direction: desc
   - name: Time
-  - name: TypePlay
-    direction: desc
 
 - kind: GameList
   properties:
+  - name: TypePlay
+    direction: desc
   - name: Time
     direction: desc
-  - name: TypePlay
-    direction: desc
 
 - kind: GameList
   properties:
-  - name: Price
   - name: TypePlay
     direction: desc
+  - name: Price
 
 - kind: GameList
   properties:
-  - name: Price
-    direction: desc
   - name: TypePlay
+    direction: desc
+  - name: Price
     direction: desc
