@@ -78,6 +78,7 @@ func (s *server) CreateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameRe
 	game.Id = key.ID
 	game.Created = time.Now().UTC().Unix()
 	_ = ds.Put(ctx, datastore.IDKey("Game", key.ID, nil), game)
+	ds.Put(ctx, datastore.IDKey("GameList", key.ID, nil), game) // 리스트에 뿌려주는 용도이며 TTL 세팅해서 지워지게
 	ret := &pb.GameReply{Game: game}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
@@ -116,13 +117,19 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 		5: "-Price",
 	}
 	var filterTypes = map[int64]string{
-		0: "TypePlay",
-		1: "-TypePlay",
+		0: "",
+		1: "TypePlay",
+		2: "-TypePlay",
 	}
-	queryBase := datastore.NewQuery("Game")
-	query := queryBase.Order(orderTypes[in.TypeOrder]).Limit(pageSize)
-	if in.TypeFilter != -1 {
-		query = queryBase.Order(orderTypes[in.TypeOrder]).Order(filterTypes[in.TypeFilter]).Limit(pageSize)
+	// 이미 종료된 게임은 조회하지 않도록
+	queryBase := datastore.NewQuery("GameList")
+	query := queryBase.
+		Order(orderTypes[in.TypeOrder]).
+		Limit(pageSize)
+	if in.TypeFilter != 0 {
+		query = queryBase.
+			Order(filterTypes[in.TypeFilter]).
+			Limit(pageSize)
 	}
 
 	if cursorStr != "" {
@@ -139,6 +146,7 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 	_, err := it.Next(&game)
 	for err == nil {
 		games = append(games, game)
+		log.Print(game.Price)
 		_, err = it.Next(&game)
 	}
 	if err != iterator.Done {

@@ -46,7 +46,7 @@ namespace Haru {
             "aGF0TWVzc2FnZVJlcXVlc3QSDwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50",
             "X2lkGAIgASgDEicKDGNoYXRfbWVzc2FnZRgDIAEoCzIRLmhhcnUuQ2hhdE1l",
             "c3NhZ2UiJwoLQ2hhdFJlcXVlc3QSGAoEY2hhdBgBIAEoCzIKLmhhcnUuQ2hh",
-            "dCImCglDaGF0UmVwbHkSGQoFY2hhdHMYASADKAsyCi5oYXJ1LkNoYXQi+QIK",
+            "dCImCglDaGF0UmVwbHkSGQoFY2hhdHMYASADKAsyCi5oYXJ1LkNoYXQitgMK",
             "BEdhbWUSCgoCaWQYASABKAMSFwoPaG9zdF9hY2NvdW50X2lkGAIgASgDEgwK",
             "BHRpbWUYAyABKAMSDQoFcHJpY2UYBCABKAMSEQoJdHlwZV9wbGF5GAUgASgD",
             "EhAKCHR5cGVfYWdlGAYgASgDEhAKCHR5cGVfc2V4GAcgASgDEhIKCnR5cGVf",
@@ -55,33 +55,34 @@ namespace Haru {
             "ZGVjcxgNIAEoCRIaCgVwbGFjZRgOIAEoCzILLmhhcnUuUGxhY2USFQoNc2hv",
             "cnRfYWRkcmVzcxgPIAEoCRIaChJhY2NlcHRfYWNjb3VudF9pZHMYECADKAMS",
             "GgoScmVqZWN0X2FjY291bnRfaWRzGBEgAygDEg8KB2NyZWF0ZWQYEiABKAMS",
-            "DwoHdXBkYXRlZBgTIAEoAyI4CgVQbGFjZRIMCgRuYW1lGAEgASgJEg8KB2Fk",
-            "ZHJlc3MYAiABKAkSEAoIcGxhY2VfaWQYAyABKAkiQQoLR2FtZVJlcXVlc3QS",
-            "GAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgouaGFy",
-            "dS5Kb2luIj8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgouaGFydS5HYW1l",
-            "EhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4igwEKE0ZpbHRlcmRHYW1lc1Jl",
-            "cXVlc3QSDwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgCIAEoAxIQCgh0",
-            "aW1lX21heBgDIAEoAxISCgp0eXBlX29yZGVyGAQgASgDEhMKC3R5cGVfZmls",
-            "dGVyGAUgASgDEg4KBmN1cnNvchgGIAEoCSI+ChFGaWx0ZXJkR2FtZXNSZXBs",
-            "eRIZCgVnYW1lcxgBIAMoCzIKLmhhcnUuR2FtZRIOCgZjdXJzb3IYAiABKAky",
-            "3AUKCHZlcnNpb24xEjsKDUNyZWF0ZUFjY291bnQSFC5oYXJ1LkFjY291bnRS",
-            "ZXF1ZXN0GhIuaGFydS5BY2NvdW50UmVwbHkiABI4CgpHZXRQcm9maWxlEhQu",
-            "aGFydS5Qcm9maWxlUmVxdWVzdBoSLmhhcnUuUHJvZmlsZVJlcGx5IgASOwoN",
-            "VXBkYXRlUHJvZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1LlBy",
-            "b2ZpbGVSZXBseSIAEjIKCkNyZWF0ZUdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0",
-            "Gg8uaGFydS5HYW1lUmVwbHkiABIyCgpVcGRhdGVHYW1lEhEuaGFydS5HYW1l",
-            "UmVxdWVzdBoPLmhhcnUuR2FtZVJlcGx5IgASLwoHR2V0R2FtZRIRLmhhcnUu",
-            "R2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIAEkcKD0dldEZpbHRlcmRH",
-            "YW1lcxIZLmhhcnUuRmlsdGVyZEdhbWVzUmVxdWVzdBoXLmhhcnUuRmlsdGVy",
-            "ZEdhbWVzUmVwbHkiABIsCgRKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhh",
-            "cnUuSm9pblJlcGx5IgASMgoKR2V0TXlKb2lucxIRLmhhcnUuSm9pblJlcXVl",
-            "c3QaDy5oYXJ1LkpvaW5SZXBseSIAEjQKDEdldEdhbWVKb2lucxIRLmhhcnUu",
-            "Sm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBseSIAEjIKClVwZGF0ZUpvaW4S",
-            "ES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIvCgdHZXRD",
-            "aGF0EhEuaGFydS5DaGF0UmVxdWVzdBoPLmhhcnUuQ2hhdFJlcGx5IgASPQoO",
-            "QWRkQ2hhdE1lc3NhZ2USGC5oYXJ1LkNoYXRNZXNzYWdlUmVxdWVzdBoPLmhh",
-            "cnUuQ2hhdFJlcGx5IgBCJFoiZ2l0aHViLmNvbS9ob2ppbi1rci9oYXJ1L2Nt",
-            "ZC9wcm90b2IGcHJvdG8z"));
+            "DwoHdXBkYXRlZBgTIAEoAxISCgpwbGFjZV9uYW1lGBQgASgJEhUKDXBsYWNl",
+            "X2FkZHJlc3MYFSABKAkSEAoIcGxhY2VfaWQYFiABKAkiOAoFUGxhY2USDAoE",
+            "bmFtZRgBIAEoCRIPCgdhZGRyZXNzGAIgASgJEhAKCHBsYWNlX2lkGAMgASgJ",
+            "IkEKC0dhbWVSZXF1ZXN0EhgKBGdhbWUYASABKAsyCi5oYXJ1LkdhbWUSGAoE",
+            "am9pbhgCIAEoCzIKLmhhcnUuSm9pbiI/CglHYW1lUmVwbHkSGAoEZ2FtZRgB",
+            "IAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgLMgouaGFydS5Kb2luIoMB",
+            "ChNGaWx0ZXJkR2FtZXNSZXF1ZXN0Eg8KB2lzX2luaXQYASABKAgSEAoIdGlt",
+            "ZV9taW4YAiABKAMSEAoIdGltZV9tYXgYAyABKAMSEgoKdHlwZV9vcmRlchgE",
+            "IAEoAxITCgt0eXBlX2ZpbHRlchgFIAEoAxIOCgZjdXJzb3IYBiABKAkiPgoR",
+            "RmlsdGVyZEdhbWVzUmVwbHkSGQoFZ2FtZXMYASADKAsyCi5oYXJ1LkdhbWUS",
+            "DgoGY3Vyc29yGAIgASgJMtwFCgh2ZXJzaW9uMRI7Cg1DcmVhdGVBY2NvdW50",
+            "EhQuaGFydS5BY2NvdW50UmVxdWVzdBoSLmhhcnUuQWNjb3VudFJlcGx5IgAS",
+            "OAoKR2V0UHJvZmlsZRIULmhhcnUuUHJvZmlsZVJlcXVlc3QaEi5oYXJ1LlBy",
+            "b2ZpbGVSZXBseSIAEjsKDVVwZGF0ZVByb2ZpbGUSFC5oYXJ1LlByb2ZpbGVS",
+            "ZXF1ZXN0GhIuaGFydS5Qcm9maWxlUmVwbHkiABIyCgpDcmVhdGVHYW1lEhEu",
+            "aGFydS5HYW1lUmVxdWVzdBoPLmhhcnUuR2FtZVJlcGx5IgASMgoKVXBkYXRl",
+            "R2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5oYXJ1LkdhbWVSZXBseSIAEi8K",
+            "B0dldEdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0Gg8uaGFydS5HYW1lUmVwbHki",
+            "ABJHCg9HZXRGaWx0ZXJkR2FtZXMSGS5oYXJ1LkZpbHRlcmRHYW1lc1JlcXVl",
+            "c3QaFy5oYXJ1LkZpbHRlcmRHYW1lc1JlcGx5IgASLAoESm9pbhIRLmhhcnUu",
+            "Sm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBseSIAEjIKCkdldE15Sm9pbnMS",
+            "ES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABI0CgxHZXRH",
+            "YW1lSm9pbnMSES5oYXJ1LkpvaW5SZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHki",
+            "ABIyCgpVcGRhdGVKb2luEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9p",
+            "blJlcGx5IgASLwoHR2V0Q2hhdBIRLmhhcnUuQ2hhdFJlcXVlc3QaDy5oYXJ1",
+            "LkNoYXRSZXBseSIAEj0KDkFkZENoYXRNZXNzYWdlEhguaGFydS5DaGF0TWVz",
+            "c2FnZVJlcXVlc3QaDy5oYXJ1LkNoYXRSZXBseSIAQiRaImdpdGh1Yi5jb20v",
+            "aG9qaW4ta3IvaGFydS9jbWQvcHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -99,7 +100,7 @@ namespace Haru {
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ChatMessageRequest), global::Haru.ChatMessageRequest.Parser, new[]{ "GameId", "AccountId", "ChatMessage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ChatRequest), global::Haru.ChatRequest.Parser, new[]{ "Chat" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ChatReply), global::Haru.ChatReply.Parser, new[]{ "Chats" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Game), global::Haru.Game.Parser, new[]{ "Id", "HostAccountId", "Time", "Price", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears", "TypeHole", "PersonMax", "Person", "Decs", "Place", "ShortAddress", "AcceptAccountIds", "RejectAccountIds", "Created", "Updated" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Game), global::Haru.Game.Parser, new[]{ "Id", "HostAccountId", "Time", "Price", "TypePlay", "TypeAge", "TypeSex", "TypeScore", "TypeYears", "TypeHole", "PersonMax", "Person", "Decs", "Place", "ShortAddress", "AcceptAccountIds", "RejectAccountIds", "Created", "Updated", "PlaceName", "PlaceAddress", "PlaceId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Place), global::Haru.Place.Parser, new[]{ "Name", "Address", "PlaceId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameRequest), global::Haru.GameRequest.Parser, new[]{ "Game", "Join" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.GameReply), global::Haru.GameReply.Parser, new[]{ "Game", "Join" }, null, null, null, null),
@@ -3731,6 +3732,9 @@ namespace Haru {
       rejectAccountIds_ = other.rejectAccountIds_.Clone();
       created_ = other.created_;
       updated_ = other.updated_;
+      placeName_ = other.placeName_;
+      placeAddress_ = other.placeAddress_;
+      placeId_ = other.placeId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3972,6 +3976,42 @@ namespace Haru {
       }
     }
 
+    /// <summary>Field number for the "place_name" field.</summary>
+    public const int PlaceNameFieldNumber = 20;
+    private string placeName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string PlaceName {
+      get { return placeName_; }
+      set {
+        placeName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "place_address" field.</summary>
+    public const int PlaceAddressFieldNumber = 21;
+    private string placeAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string PlaceAddress {
+      get { return placeAddress_; }
+      set {
+        placeAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "place_id" field.</summary>
+    public const int PlaceIdFieldNumber = 22;
+    private string placeId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string PlaceId {
+      get { return placeId_; }
+      set {
+        placeId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4006,6 +4046,9 @@ namespace Haru {
       if(!rejectAccountIds_.Equals(other.rejectAccountIds_)) return false;
       if (Created != other.Created) return false;
       if (Updated != other.Updated) return false;
+      if (PlaceName != other.PlaceName) return false;
+      if (PlaceAddress != other.PlaceAddress) return false;
+      if (PlaceId != other.PlaceId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4032,6 +4075,9 @@ namespace Haru {
       hash ^= rejectAccountIds_.GetHashCode();
       if (Created != 0L) hash ^= Created.GetHashCode();
       if (Updated != 0L) hash ^= Updated.GetHashCode();
+      if (PlaceName.Length != 0) hash ^= PlaceName.GetHashCode();
+      if (PlaceAddress.Length != 0) hash ^= PlaceAddress.GetHashCode();
+      if (PlaceId.Length != 0) hash ^= PlaceId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4120,6 +4166,18 @@ namespace Haru {
         output.WriteRawTag(152, 1);
         output.WriteInt64(Updated);
       }
+      if (PlaceName.Length != 0) {
+        output.WriteRawTag(162, 1);
+        output.WriteString(PlaceName);
+      }
+      if (PlaceAddress.Length != 0) {
+        output.WriteRawTag(170, 1);
+        output.WriteString(PlaceAddress);
+      }
+      if (PlaceId.Length != 0) {
+        output.WriteRawTag(178, 1);
+        output.WriteString(PlaceId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4200,6 +4258,18 @@ namespace Haru {
         output.WriteRawTag(152, 1);
         output.WriteInt64(Updated);
       }
+      if (PlaceName.Length != 0) {
+        output.WriteRawTag(162, 1);
+        output.WriteString(PlaceName);
+      }
+      if (PlaceAddress.Length != 0) {
+        output.WriteRawTag(170, 1);
+        output.WriteString(PlaceAddress);
+      }
+      if (PlaceId.Length != 0) {
+        output.WriteRawTag(178, 1);
+        output.WriteString(PlaceId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4262,6 +4332,15 @@ namespace Haru {
       }
       if (Updated != 0L) {
         size += 2 + pb::CodedOutputStream.ComputeInt64Size(Updated);
+      }
+      if (PlaceName.Length != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(PlaceName);
+      }
+      if (PlaceAddress.Length != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(PlaceAddress);
+      }
+      if (PlaceId.Length != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(PlaceId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4330,6 +4409,15 @@ namespace Haru {
       }
       if (other.Updated != 0L) {
         Updated = other.Updated;
+      }
+      if (other.PlaceName.Length != 0) {
+        PlaceName = other.PlaceName;
+      }
+      if (other.PlaceAddress.Length != 0) {
+        PlaceAddress = other.PlaceAddress;
+      }
+      if (other.PlaceId.Length != 0) {
+        PlaceId = other.PlaceId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4427,6 +4515,18 @@ namespace Haru {
             Updated = input.ReadInt64();
             break;
           }
+          case 162: {
+            PlaceName = input.ReadString();
+            break;
+          }
+          case 170: {
+            PlaceAddress = input.ReadString();
+            break;
+          }
+          case 178: {
+            PlaceId = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -4521,6 +4621,18 @@ namespace Haru {
           }
           case 152: {
             Updated = input.ReadInt64();
+            break;
+          }
+          case 162: {
+            PlaceName = input.ReadString();
+            break;
+          }
+          case 170: {
+            PlaceAddress = input.ReadString();
+            break;
+          }
+          case 178: {
+            PlaceId = input.ReadString();
             break;
           }
         }

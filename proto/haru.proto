@@ -138,6 +138,9 @@ message Game {
   repeated int64 reject_account_ids = 17;
   int64 created = 18; // for dorder
   int64 updated = 19;
+  string place_name = 20;
+  string place_address = 21;
+  string place_id = 22;
 }
 
 message Place {

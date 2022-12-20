@@ -1,80 +1,94 @@
 
 indexes:
-
-- kind: Game
-  properties:
-  - name: Created
-  - name: TypePlay
-
-- kind: Game
-  properties:
-  - name: Time
-  - name: TypePlay
-
-- kind: Game
-  properties:
-  - name: Price
-  - name: TypePlay
-
-- kind: Game
-  properties:
-  - name: Created
-  - name: TypePlay
-    direction: desc
-
-- kind: Game
-  properties:
-  - name: Time
-  - name: TypePlay
-    direction: desc
-
-- kind: Game
-  properties:
-  - name: Price
-  - name: TypePlay
-    direction: desc
-
-- kind: Game
-  properties:
-  - name: Created
-    direction: desc
-  - name: TypePlay
-    direction: desc
-
-- kind: Game
-  properties:
-  - name: Time
-    direction: desc
-  - name: TypePlay
-    direction: desc
-
-- kind: Game
-  properties:
-  - name: Price
-    direction: desc
-  - name: TypePlay
-    direction: desc
-
-- kind: Game
-  properties:
-  - name: Created
-    direction: desc
-  - name: TypePlay
-
-- kind: Game
-  properties:
-  - name: Time
-    direction: desc
-  - name: TypePlay
-
-- kind: Game
-  properties:
-  - name: Price
-    direction: desc
-  - name: TypePlay
-
 # indexing
 # gcloud datastore indexes cleanup
 # gcloud datastore indexes create
 # gcloud datastore indexes describe
 # gcloud datastore indexes list
+- kind: Game
+  properties:
+  - name: Time
+  - name: Created
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: Created
+    direction: asc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+  - name: Created
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+    direction: desc
+  - name: Created
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+  - name: Price
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+    direction: desc
+  - name: Price
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+    direction: desc
+  - name: Price
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: TypePlay
+  - name: Price
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: Price
+
+- kind: Game
+  properties:
+  - name: Time
+  - name: Price
+    direction: desc

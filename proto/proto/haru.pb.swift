@@ -429,6 +429,21 @@ struct Haru_Game {
     set {_uniqueStorage()._updated = newValue}
   }
 
+  var placeName: String {
+    get {return _storage._placeName}
+    set {_uniqueStorage()._placeName = newValue}
+  }
+
+  var placeAddress: String {
+    get {return _storage._placeAddress}
+    set {_uniqueStorage()._placeAddress = newValue}
+  }
+
+  var placeID: String {
+    get {return _storage._placeID}
+    set {_uniqueStorage()._placeID = newValue}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -1223,6 +1238,9 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     17: .standard(proto: "reject_account_ids"),
     18: .same(proto: "created"),
     19: .same(proto: "updated"),
+    20: .standard(proto: "place_name"),
+    21: .standard(proto: "place_address"),
+    22: .standard(proto: "place_id"),
   ]
 
   fileprivate class _StorageClass {
@@ -1245,6 +1263,9 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     var _rejectAccountIds: [Int64] = []
     var _created: Int64 = 0
     var _updated: Int64 = 0
+    var _placeName: String = String()
+    var _placeAddress: String = String()
+    var _placeID: String = String()
 
     static let defaultInstance = _StorageClass()
 
@@ -1270,6 +1291,9 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       _rejectAccountIds = source._rejectAccountIds
       _created = source._created
       _updated = source._updated
+      _placeName = source._placeName
+      _placeAddress = source._placeAddress
+      _placeID = source._placeID
     }
   }
 
@@ -1307,6 +1331,9 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
         case 17: try { try decoder.decodeRepeatedInt64Field(value: &_storage._rejectAccountIds) }()
         case 18: try { try decoder.decodeSingularInt64Field(value: &_storage._created) }()
         case 19: try { try decoder.decodeSingularInt64Field(value: &_storage._updated) }()
+        case 20: try { try decoder.decodeSingularStringField(value: &_storage._placeName) }()
+        case 21: try { try decoder.decodeSingularStringField(value: &_storage._placeAddress) }()
+        case 22: try { try decoder.decodeSingularStringField(value: &_storage._placeID) }()
         default: break
         }
       }
@@ -1376,6 +1403,15 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       if _storage._updated != 0 {
         try visitor.visitSingularInt64Field(value: _storage._updated, fieldNumber: 19)
       }
+      if !_storage._placeName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeName, fieldNumber: 20)
+      }
+      if !_storage._placeAddress.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeAddress, fieldNumber: 21)
+      }
+      if !_storage._placeID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._placeID, fieldNumber: 22)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1404,6 +1440,9 @@ extension Haru_Game: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
         if _storage._rejectAccountIds != rhs_storage._rejectAccountIds {return false}
         if _storage._created != rhs_storage._created {return false}
         if _storage._updated != rhs_storage._updated {return false}
+        if _storage._placeName != rhs_storage._placeName {return false}
+        if _storage._placeAddress != rhs_storage._placeAddress {return false}
+        if _storage._placeID != rhs_storage._placeID {return false}
         return true
       }
       if !storagesAreEqual {return false}
