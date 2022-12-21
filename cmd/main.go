@@ -117,19 +117,19 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 		5: "-Price",
 	}
 	var filterTypes = map[int64]string{
-		0: "",
+		0: "TypePlay",
 		1: "TypePlay",
-		2: "-TypePlay",
 	}
-	// 이미 종료된 게임은 조회하지 않도록
+
 	queryBase := datastore.NewQuery("GameList")
 	query := queryBase.
 		Order(orderTypes[in.TypeOrder]).
 		Limit(pageSize)
-	if in.TypeFilter != 0 {
+
+	if _, ok := filterTypes[in.TypeFilter]; ok {
 		query = queryBase.
+			Filter(filterTypes[in.TypeFilter]+" =", in.TypeFilter).
 			Order(filterTypes[in.TypeFilter]).
-			Order(orderTypes[in.TypeOrder]).
 			Limit(pageSize)
 	}
 
