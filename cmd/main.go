@@ -92,6 +92,20 @@ func (s *server) GetGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply
 	return ret, nil
 }
 
+func (s *server) GetGameMulti(ctx context.Context, in *pb.GameMultiRequest) (*pb.GameMultiReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	keys := []*datastore.Key{}
+	for i := 0; i < len(in.GameIds); i++ {
+		keys = append(keys, datastore.IDKey("Game", in.GameIds[i], nil))
+	}
+	keys = append(keys)
+	games := make([]*pb.Game, len(in.GameIds))
+	ds.GetMulti(ctx, keys, games)
+	ret := &pb.GameMultiReply{Games: games}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
 func (s *server) UpdateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	in.Game.Updated = time.Now().UTC().Unix()
@@ -106,8 +120,7 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 	tracer.Trace(time.Now().UTC(), in)
 	client := ds.GetClient(ctx)
 	cursorStr := in.Cursor
-	// todo pageSize Incr
-	const pageSize = 10
+	const pageSize = 50
 	var orderTypes = map[int64]string{
 		0: "Created",
 		1: "-Created",

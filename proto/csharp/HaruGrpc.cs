@@ -36,6 +36,8 @@ namespace Haru {
     static readonly grpc::Marshaller<global::Haru.ProfileReply> __Marshaller_haru_ProfileReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ProfileReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.GameRequest> __Marshaller_haru_GameRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.GameRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.GameReply> __Marshaller_haru_GameReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.GameReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.GameMultiRequest> __Marshaller_haru_GameMultiRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.GameMultiRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.GameMultiReply> __Marshaller_haru_GameMultiReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.GameMultiReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.FilterdGamesRequest> __Marshaller_haru_FilterdGamesRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdGamesRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.FilterdGamesReply> __Marshaller_haru_FilterdGamesReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.FilterdGamesReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.JoinRequest> __Marshaller_haru_JoinRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.JoinRequest.Parser.ParseFrom);
@@ -85,6 +87,13 @@ namespace Haru {
         "GetGame",
         __Marshaller_haru_GameRequest,
         __Marshaller_haru_GameReply);
+
+    static readonly grpc::Method<global::Haru.GameMultiRequest, global::Haru.GameMultiReply> __Method_GetGameMulti = new grpc::Method<global::Haru.GameMultiRequest, global::Haru.GameMultiReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetGameMulti",
+        __Marshaller_haru_GameMultiRequest,
+        __Marshaller_haru_GameMultiReply);
 
     static readonly grpc::Method<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply> __Method_GetFilterdGames = new grpc::Method<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply>(
         grpc::MethodType.Unary,
@@ -171,6 +180,11 @@ namespace Haru {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Haru.GameReply> GetGame(global::Haru.GameRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.GameMultiReply> GetGameMulti(global::Haru.GameMultiRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -331,6 +345,22 @@ namespace Haru {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetGame, null, options, request);
       }
+      public virtual global::Haru.GameMultiReply GetGameMulti(global::Haru.GameMultiRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameMulti(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.GameMultiReply GetGameMulti(global::Haru.GameMultiRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetGameMulti, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameMultiReply> GetGameMultiAsync(global::Haru.GameMultiRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetGameMultiAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.GameMultiReply> GetGameMultiAsync(global::Haru.GameMultiRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetGameMulti, null, options, request);
+      }
       public virtual global::Haru.FilterdGamesReply GetFilterdGames(global::Haru.FilterdGamesRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetFilterdGames(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -461,6 +491,7 @@ namespace Haru {
           .AddMethod(__Method_CreateGame, serviceImpl.CreateGame)
           .AddMethod(__Method_UpdateGame, serviceImpl.UpdateGame)
           .AddMethod(__Method_GetGame, serviceImpl.GetGame)
+          .AddMethod(__Method_GetGameMulti, serviceImpl.GetGameMulti)
           .AddMethod(__Method_GetFilterdGames, serviceImpl.GetFilterdGames)
           .AddMethod(__Method_Join, serviceImpl.Join)
           .AddMethod(__Method_GetMyJoins, serviceImpl.GetMyJoins)
@@ -482,6 +513,7 @@ namespace Haru {
       serviceBinder.AddMethod(__Method_CreateGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.CreateGame));
       serviceBinder.AddMethod(__Method_UpdateGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.UpdateGame));
       serviceBinder.AddMethod(__Method_GetGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameRequest, global::Haru.GameReply>(serviceImpl.GetGame));
+      serviceBinder.AddMethod(__Method_GetGameMulti, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.GameMultiRequest, global::Haru.GameMultiReply>(serviceImpl.GetGameMulti));
       serviceBinder.AddMethod(__Method_GetFilterdGames, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.FilterdGamesRequest, global::Haru.FilterdGamesReply>(serviceImpl.GetFilterdGames));
       serviceBinder.AddMethod(__Method_Join, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.Join));
       serviceBinder.AddMethod(__Method_GetMyJoins, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.GetMyJoins));

@@ -29,6 +29,7 @@ service version1 {
   rpc CreateGame (GameRequest) returns (GameReply) {}
   rpc UpdateGame (GameRequest) returns (GameReply) {}
   rpc GetGame (GameRequest) returns (GameReply) {}
+  rpc GetGameMulti (GameMultiRequest) returns (GameMultiReply) {}
   rpc GetFilterdGames (FilterdGamesRequest) returns (FilterdGamesReply) {}
   rpc Join (JoinRequest) returns (JoinReply) {}
   rpc GetMyJoins (JoinRequest) returns (JoinReply) {}
@@ -147,6 +148,14 @@ message Place {
   string name = 1;
   string address = 2;
   string place_id = 3;
+}
+
+message GameMultiRequest {
+  repeated int64 game_ids = 1;
+}
+
+message GameMultiReply {
+  repeated Game games = 1;
 }
 
 message GameRequest {

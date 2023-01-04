@@ -467,6 +467,30 @@ struct Haru_Place {
   init() {}
 }
 
+struct Haru_GameMultiRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var gameIds: [Int64] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_GameMultiReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var games: [Haru_Game] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Haru_GameRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -582,6 +606,8 @@ extension Haru_ChatRequest: @unchecked Sendable {}
 extension Haru_ChatReply: @unchecked Sendable {}
 extension Haru_Game: @unchecked Sendable {}
 extension Haru_Place: @unchecked Sendable {}
+extension Haru_GameMultiRequest: @unchecked Sendable {}
+extension Haru_GameMultiReply: @unchecked Sendable {}
 extension Haru_GameRequest: @unchecked Sendable {}
 extension Haru_GameReply: @unchecked Sendable {}
 extension Haru_FilterdGamesRequest: @unchecked Sendable {}
@@ -1491,6 +1517,70 @@ extension Haru_Place: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     if lhs.name != rhs.name {return false}
     if lhs.address != rhs.address {return false}
     if lhs.placeID != rhs.placeID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_GameMultiRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GameMultiRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "game_ids"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedInt64Field(value: &self.gameIds) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.gameIds.isEmpty {
+      try visitor.visitPackedInt64Field(value: self.gameIds, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_GameMultiRequest, rhs: Haru_GameMultiRequest) -> Bool {
+    if lhs.gameIds != rhs.gameIds {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_GameMultiReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GameMultiReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "games"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.games) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.games.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.games, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_GameMultiReply, rhs: Haru_GameMultiReply) -> Bool {
+    if lhs.games != rhs.games {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -28,6 +28,7 @@ type Version1Client interface {
 	CreateGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error)
 	UpdateGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error)
 	GetGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error)
+	GetGameMulti(ctx context.Context, in *GameMultiRequest, opts ...grpc.CallOption) (*GameMultiReply, error)
 	GetFilterdGames(ctx context.Context, in *FilterdGamesRequest, opts ...grpc.CallOption) (*FilterdGamesReply, error)
 	Join(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	GetMyJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
@@ -93,6 +94,15 @@ func (c *version1Client) UpdateGame(ctx context.Context, in *GameRequest, opts .
 func (c *version1Client) GetGame(ctx context.Context, in *GameRequest, opts ...grpc.CallOption) (*GameReply, error) {
 	out := new(GameReply)
 	err := c.cc.Invoke(ctx, "/haru.version1/GetGame", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) GetGameMulti(ctx context.Context, in *GameMultiRequest, opts ...grpc.CallOption) (*GameMultiReply, error) {
+	out := new(GameMultiReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetGameMulti", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,6 +182,7 @@ type Version1Server interface {
 	CreateGame(context.Context, *GameRequest) (*GameReply, error)
 	UpdateGame(context.Context, *GameRequest) (*GameReply, error)
 	GetGame(context.Context, *GameRequest) (*GameReply, error)
+	GetGameMulti(context.Context, *GameMultiRequest) (*GameMultiReply, error)
 	GetFilterdGames(context.Context, *FilterdGamesRequest) (*FilterdGamesReply, error)
 	Join(context.Context, *JoinRequest) (*JoinReply, error)
 	GetMyJoins(context.Context, *JoinRequest) (*JoinReply, error)
@@ -203,6 +214,9 @@ func (UnimplementedVersion1Server) UpdateGame(context.Context, *GameRequest) (*G
 }
 func (UnimplementedVersion1Server) GetGame(context.Context, *GameRequest) (*GameReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGame not implemented")
+}
+func (UnimplementedVersion1Server) GetGameMulti(context.Context, *GameMultiRequest) (*GameMultiReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGameMulti not implemented")
 }
 func (UnimplementedVersion1Server) GetFilterdGames(context.Context, *FilterdGamesRequest) (*FilterdGamesReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFilterdGames not implemented")
@@ -342,6 +356,24 @@ func _Version1_GetGame_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(Version1Server).GetGame(ctx, req.(*GameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_GetGameMulti_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GameMultiRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetGameMulti(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetGameMulti",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetGameMulti(ctx, req.(*GameMultiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -502,6 +534,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGame",
 			Handler:    _Version1_GetGame_Handler,
+		},
+		{
+			MethodName: "GetGameMulti",
+			Handler:    _Version1_GetGameMulti_Handler,
 		},
 		{
 			MethodName: "GetFilterdGames",

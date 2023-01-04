@@ -63,6 +63,11 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_GameRequest, Haru_GameReply>
 
+  func getGameMulti(
+    _ request: Haru_GameMultiRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_GameMultiRequest, Haru_GameMultiReply>
+
   func getFilterdGames(
     _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions?
@@ -209,6 +214,24 @@ extension Haru_version1ClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetGameInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to GetGameMulti
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetGameMulti.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getGameMulti(
+    _ request: Haru_GameMultiRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_GameMultiRequest, Haru_GameMultiReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getGameMulti.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetGameMultiInterceptors() ?? []
     )
   }
 
@@ -435,6 +458,11 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_GameRequest, Haru_GameReply>
 
+  func makeGetGameMultiCall(
+    _ request: Haru_GameMultiRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_GameMultiRequest, Haru_GameMultiReply>
+
   func makeGetFilterdGamesCall(
     _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions?
@@ -550,6 +578,18 @@ extension Haru_version1AsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetGameInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetGameMultiCall(
+    _ request: Haru_GameMultiRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_GameMultiRequest, Haru_GameMultiReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getGameMulti.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetGameMultiInterceptors() ?? []
     )
   }
 
@@ -712,6 +752,18 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
+  internal func getGameMulti(
+    _ request: Haru_GameMultiRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_GameMultiReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getGameMulti.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetGameMultiInterceptors() ?? []
+    )
+  }
+
   internal func getFilterdGames(
     _ request: Haru_FilterdGamesRequest,
     callOptions: CallOptions? = nil
@@ -836,6 +888,9 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
   /// - Returns: Interceptors to use when invoking 'getGame'.
   func makeGetGameInterceptors() -> [ClientInterceptor<Haru_GameRequest, Haru_GameReply>]
 
+  /// - Returns: Interceptors to use when invoking 'getGameMulti'.
+  func makeGetGameMultiInterceptors() -> [ClientInterceptor<Haru_GameMultiRequest, Haru_GameMultiReply>]
+
   /// - Returns: Interceptors to use when invoking 'getFilterdGames'.
   func makeGetFilterdGamesInterceptors() -> [ClientInterceptor<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>]
 
@@ -869,6 +924,7 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.createGame,
       Haru_version1ClientMetadata.Methods.updateGame,
       Haru_version1ClientMetadata.Methods.getGame,
+      Haru_version1ClientMetadata.Methods.getGameMulti,
       Haru_version1ClientMetadata.Methods.getFilterdGames,
       Haru_version1ClientMetadata.Methods.join,
       Haru_version1ClientMetadata.Methods.getMyJoins,
@@ -913,6 +969,12 @@ internal enum Haru_version1ClientMetadata {
     internal static let getGame = GRPCMethodDescriptor(
       name: "GetGame",
       path: "/haru.version1/GetGame",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getGameMulti = GRPCMethodDescriptor(
+      name: "GetGameMulti",
+      path: "/haru.version1/GetGameMulti",
       type: GRPCCallType.unary
     )
 
@@ -977,6 +1039,8 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func updateGame(request: Haru_GameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_GameReply>
 
   func getGame(request: Haru_GameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_GameReply>
+
+  func getGameMulti(request: Haru_GameMultiRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_GameMultiReply>
 
   func getFilterdGames(request: Haru_FilterdGamesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdGamesReply>
 
@@ -1057,6 +1121,15 @@ extension Haru_version1Provider {
         responseSerializer: ProtobufSerializer<Haru_GameReply>(),
         interceptors: self.interceptors?.makeGetGameInterceptors() ?? [],
         userFunction: self.getGame(request:context:)
+      )
+
+    case "GetGameMulti":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_GameMultiRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameMultiReply>(),
+        interceptors: self.interceptors?.makeGetGameMultiInterceptors() ?? [],
+        userFunction: self.getGameMulti(request:context:)
       )
 
     case "GetFilterdGames":
@@ -1168,6 +1241,11 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_GameReply
 
+  @Sendable func getGameMulti(
+    request: Haru_GameMultiRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_GameMultiReply
+
   @Sendable func getFilterdGames(
     request: Haru_FilterdGamesRequest,
     context: GRPCAsyncServerCallContext
@@ -1277,6 +1355,15 @@ extension Haru_version1AsyncProvider {
         wrapping: self.getGame(request:context:)
       )
 
+    case "GetGameMulti":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_GameMultiRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_GameMultiReply>(),
+        interceptors: self.interceptors?.makeGetGameMultiInterceptors() ?? [],
+        wrapping: self.getGameMulti(request:context:)
+      )
+
     case "GetFilterdGames":
       return GRPCAsyncServerHandler(
         context: context,
@@ -1374,6 +1461,10 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetGameInterceptors() -> [ServerInterceptor<Haru_GameRequest, Haru_GameReply>]
 
+  /// - Returns: Interceptors to use when handling 'getGameMulti'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetGameMultiInterceptors() -> [ServerInterceptor<Haru_GameMultiRequest, Haru_GameMultiReply>]
+
   /// - Returns: Interceptors to use when handling 'getFilterdGames'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetFilterdGamesInterceptors() -> [ServerInterceptor<Haru_FilterdGamesRequest, Haru_FilterdGamesReply>]
@@ -1414,6 +1505,7 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.createGame,
       Haru_version1ServerMetadata.Methods.updateGame,
       Haru_version1ServerMetadata.Methods.getGame,
+      Haru_version1ServerMetadata.Methods.getGameMulti,
       Haru_version1ServerMetadata.Methods.getFilterdGames,
       Haru_version1ServerMetadata.Methods.join,
       Haru_version1ServerMetadata.Methods.getMyJoins,
@@ -1458,6 +1550,12 @@ internal enum Haru_version1ServerMetadata {
     internal static let getGame = GRPCMethodDescriptor(
       name: "GetGame",
       path: "/haru.version1/GetGame",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getGameMulti = GRPCMethodDescriptor(
+      name: "GetGameMulti",
+      path: "/haru.version1/GetGameMulti",
       type: GRPCCallType.unary
     )
 

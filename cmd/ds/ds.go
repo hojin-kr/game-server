@@ -46,3 +46,11 @@ func GetAll(ctx context.Context, query *datastore.Query, dst interface{}) (keys 
 	}
 	return keys, err
 }
+
+func GetMulti(ctx context.Context, keys []*datastore.Key, dst interface{}) (err error) {
+	client := GetClient(ctx)
+	if err := client.GetMulti(ctx, keys, dst); err != nil {
+		log.Printf("getmulti ds" + err.Error())
+	}
+	return err
+}
