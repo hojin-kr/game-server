@@ -272,8 +272,8 @@ func (s *server) AddChatMessage(ctx context.Context, in *pb.ChatMessageRequest) 
 
 func (s *server) GetDataPlace(ctx context.Context, in *pb.DataPlaceRequest) (*pb.DataPlaceReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	names, address := data.Get(1)
-	ret := &pb.DataPlaceReply{Version: 1, Names: names, Address: address}
+	names, address, dataTime, serverPlaceVersion := data.Get(in.Version)
+	ret := &pb.DataPlaceReply{Version: serverPlaceVersion, Names: names, Address: address, Time: dataTime}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
