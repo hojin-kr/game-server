@@ -102,6 +102,11 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     _ request: Haru_ChatMessageRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_ChatMessageRequest, Haru_ChatReply>
+
+  func getDataPlace(
+    _ request: Haru_DataPlaceRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_DataPlaceRequest, Haru_DataPlaceReply>
 }
 
 extension Haru_version1ClientProtocol {
@@ -360,6 +365,24 @@ extension Haru_version1ClientProtocol {
       interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
     )
   }
+
+  /// Unary call to GetDataPlace
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetDataPlace.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getDataPlace(
+    _ request: Haru_DataPlaceRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_DataPlaceRequest, Haru_DataPlaceReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getDataPlace.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? []
+    )
+  }
 }
 
 #if compiler(>=5.6)
@@ -497,6 +520,11 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     _ request: Haru_ChatMessageRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_ChatMessageRequest, Haru_ChatReply>
+
+  func makeGetDataPlaceCall(
+    _ request: Haru_DataPlaceRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_DataPlaceRequest, Haru_DataPlaceReply>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -676,6 +704,18 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
     )
   }
+
+  internal func makeGetDataPlaceCall(
+    _ request: Haru_DataPlaceRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_DataPlaceRequest, Haru_DataPlaceReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getDataPlace.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -847,6 +887,18 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
     )
   }
+
+  internal func getDataPlace(
+    _ request: Haru_DataPlaceRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_DataPlaceReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getDataPlace.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -911,6 +963,9 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
 
   /// - Returns: Interceptors to use when invoking 'addChatMessage'.
   func makeAddChatMessageInterceptors() -> [ClientInterceptor<Haru_ChatMessageRequest, Haru_ChatReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getDataPlace'.
+  func makeGetDataPlaceInterceptors() -> [ClientInterceptor<Haru_DataPlaceRequest, Haru_DataPlaceReply>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -932,6 +987,7 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.updateJoin,
       Haru_version1ClientMetadata.Methods.getChat,
       Haru_version1ClientMetadata.Methods.addChatMessage,
+      Haru_version1ClientMetadata.Methods.getDataPlace,
     ]
   )
 
@@ -1019,6 +1075,12 @@ internal enum Haru_version1ClientMetadata {
       path: "/haru.version1/AddChatMessage",
       type: GRPCCallType.unary
     )
+
+    internal static let getDataPlace = GRPCMethodDescriptor(
+      name: "GetDataPlace",
+      path: "/haru.version1/GetDataPlace",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -1055,6 +1117,8 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func getChat(request: Haru_ChatRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ChatReply>
 
   func addChatMessage(request: Haru_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ChatReply>
+
+  func getDataPlace(request: Haru_DataPlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_DataPlaceReply>
 }
 
 extension Haru_version1Provider {
@@ -1195,6 +1259,15 @@ extension Haru_version1Provider {
         userFunction: self.addChatMessage(request:context:)
       )
 
+    case "GetDataPlace":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_DataPlaceRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_DataPlaceReply>(),
+        interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? [],
+        userFunction: self.getDataPlace(request:context:)
+      )
+
     default:
       return nil
     }
@@ -1280,6 +1353,11 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
     request: Haru_ChatMessageRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_ChatReply
+
+  @Sendable func getDataPlace(
+    request: Haru_DataPlaceRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_DataPlaceReply
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1427,6 +1505,15 @@ extension Haru_version1AsyncProvider {
         wrapping: self.addChatMessage(request:context:)
       )
 
+    case "GetDataPlace":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_DataPlaceRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_DataPlaceReply>(),
+        interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? [],
+        wrapping: self.getDataPlace(request:context:)
+      )
+
     default:
       return nil
     }
@@ -1492,6 +1579,10 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'addChatMessage'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeAddChatMessageInterceptors() -> [ServerInterceptor<Haru_ChatMessageRequest, Haru_ChatReply>]
+
+  /// - Returns: Interceptors to use when handling 'getDataPlace'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetDataPlaceInterceptors() -> [ServerInterceptor<Haru_DataPlaceRequest, Haru_DataPlaceReply>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -1513,6 +1604,7 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.updateJoin,
       Haru_version1ServerMetadata.Methods.getChat,
       Haru_version1ServerMetadata.Methods.addChatMessage,
+      Haru_version1ServerMetadata.Methods.getDataPlace,
     ]
   )
 
@@ -1598,6 +1690,12 @@ internal enum Haru_version1ServerMetadata {
     internal static let addChatMessage = GRPCMethodDescriptor(
       name: "AddChatMessage",
       path: "/haru.version1/AddChatMessage",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getDataPlace = GRPCMethodDescriptor(
+      name: "GetDataPlace",
+      path: "/haru.version1/GetDataPlace",
       type: GRPCCallType.unary
     )
   }

@@ -45,6 +45,8 @@ namespace Haru {
     static readonly grpc::Marshaller<global::Haru.ChatRequest> __Marshaller_haru_ChatRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ChatRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.ChatReply> __Marshaller_haru_ChatReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ChatReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Haru.ChatMessageRequest> __Marshaller_haru_ChatMessageRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.ChatMessageRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.DataPlaceRequest> __Marshaller_haru_DataPlaceRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.DataPlaceRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Haru.DataPlaceReply> __Marshaller_haru_DataPlaceReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Haru.DataPlaceReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Haru.AccountRequest, global::Haru.AccountReply> __Method_CreateAccount = new grpc::Method<global::Haru.AccountRequest, global::Haru.AccountReply>(
         grpc::MethodType.Unary,
@@ -144,6 +146,13 @@ namespace Haru {
         __Marshaller_haru_ChatMessageRequest,
         __Marshaller_haru_ChatReply);
 
+    static readonly grpc::Method<global::Haru.DataPlaceRequest, global::Haru.DataPlaceReply> __Method_GetDataPlace = new grpc::Method<global::Haru.DataPlaceRequest, global::Haru.DataPlaceReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetDataPlace",
+        __Marshaller_haru_DataPlaceRequest,
+        __Marshaller_haru_DataPlaceReply);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -220,6 +229,11 @@ namespace Haru {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::Haru.ChatReply> AddChatMessage(global::Haru.ChatMessageRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Haru.DataPlaceReply> GetDataPlace(global::Haru.DataPlaceRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -473,6 +487,22 @@ namespace Haru {
       {
         return CallInvoker.AsyncUnaryCall(__Method_AddChatMessage, null, options, request);
       }
+      public virtual global::Haru.DataPlaceReply GetDataPlace(global::Haru.DataPlaceRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetDataPlace(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Haru.DataPlaceReply GetDataPlace(global::Haru.DataPlaceRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetDataPlace, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.DataPlaceReply> GetDataPlaceAsync(global::Haru.DataPlaceRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetDataPlaceAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Haru.DataPlaceReply> GetDataPlaceAsync(global::Haru.DataPlaceRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetDataPlace, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override version1Client NewInstance(ClientBaseConfiguration configuration)
       {
@@ -498,7 +528,8 @@ namespace Haru {
           .AddMethod(__Method_GetGameJoins, serviceImpl.GetGameJoins)
           .AddMethod(__Method_UpdateJoin, serviceImpl.UpdateJoin)
           .AddMethod(__Method_GetChat, serviceImpl.GetChat)
-          .AddMethod(__Method_AddChatMessage, serviceImpl.AddChatMessage).Build();
+          .AddMethod(__Method_AddChatMessage, serviceImpl.AddChatMessage)
+          .AddMethod(__Method_GetDataPlace, serviceImpl.GetDataPlace).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -521,6 +552,7 @@ namespace Haru {
       serviceBinder.AddMethod(__Method_UpdateJoin, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.JoinRequest, global::Haru.JoinReply>(serviceImpl.UpdateJoin));
       serviceBinder.AddMethod(__Method_GetChat, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ChatRequest, global::Haru.ChatReply>(serviceImpl.GetChat));
       serviceBinder.AddMethod(__Method_AddChatMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.ChatMessageRequest, global::Haru.ChatReply>(serviceImpl.AddChatMessage));
+      serviceBinder.AddMethod(__Method_GetDataPlace, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Haru.DataPlaceRequest, global::Haru.DataPlaceReply>(serviceImpl.GetDataPlace));
     }
 
   }

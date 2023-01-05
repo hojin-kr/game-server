@@ -36,6 +36,7 @@ type Version1Client interface {
 	UpdateJoin(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	GetChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatReply, error)
 	AddChatMessage(ctx context.Context, in *ChatMessageRequest, opts ...grpc.CallOption) (*ChatReply, error)
+	GetDataPlace(ctx context.Context, in *DataPlaceRequest, opts ...grpc.CallOption) (*DataPlaceReply, error)
 }
 
 type version1Client struct {
@@ -172,6 +173,15 @@ func (c *version1Client) AddChatMessage(ctx context.Context, in *ChatMessageRequ
 	return out, nil
 }
 
+func (c *version1Client) GetDataPlace(ctx context.Context, in *DataPlaceRequest, opts ...grpc.CallOption) (*DataPlaceReply, error) {
+	out := new(DataPlaceReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetDataPlace", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -190,6 +200,7 @@ type Version1Server interface {
 	UpdateJoin(context.Context, *JoinRequest) (*JoinReply, error)
 	GetChat(context.Context, *ChatRequest) (*ChatReply, error)
 	AddChatMessage(context.Context, *ChatMessageRequest) (*ChatReply, error)
+	GetDataPlace(context.Context, *DataPlaceRequest) (*DataPlaceReply, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -238,6 +249,9 @@ func (UnimplementedVersion1Server) GetChat(context.Context, *ChatRequest) (*Chat
 }
 func (UnimplementedVersion1Server) AddChatMessage(context.Context, *ChatMessageRequest) (*ChatReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddChatMessage not implemented")
+}
+func (UnimplementedVersion1Server) GetDataPlace(context.Context, *DataPlaceRequest) (*DataPlaceReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDataPlace not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -504,6 +518,24 @@ func _Version1_AddChatMessage_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_GetDataPlace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DataPlaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetDataPlace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetDataPlace",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetDataPlace(ctx, req.(*DataPlaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -566,6 +598,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddChatMessage",
 			Handler:    _Version1_AddChatMessage_Handler,
+		},
+		{
+			MethodName: "GetDataPlace",
+			Handler:    _Version1_GetDataPlace_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

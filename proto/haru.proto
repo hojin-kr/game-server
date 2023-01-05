@@ -37,6 +37,7 @@ service version1 {
   rpc UpdateJoin (JoinRequest) returns (JoinReply) {}
   rpc GetChat (ChatRequest) returns (ChatReply) {}
   rpc AddChatMessage (ChatMessageRequest) returns (ChatReply) {}
+  rpc GetDataPlace (DataPlaceRequest) returns (DataPlaceReply) {}
 }
 
 message Account {
@@ -180,4 +181,15 @@ message FilterdGamesRequest {
 message FilterdGamesReply {
   repeated Game games = 1;
   string cursor = 2;
+}
+
+message DataPlaceRequest {
+  int64 version = 1;
+}
+
+message DataPlaceReply {
+  int64 version = 1;
+  int64 time = 2;
+  repeated string names = 3;
+  repeated string address = 4;
 }

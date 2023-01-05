@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/datastore"
+	data "github.com/hojin-kr/haru/cmd/data"
 	ds "github.com/hojin-kr/haru/cmd/ds"
 	pb "github.com/hojin-kr/haru/cmd/proto"
 	"github.com/hojin-kr/haru/cmd/trace"
@@ -265,6 +266,14 @@ func (s *server) AddChatMessage(ctx context.Context, in *pb.ChatMessageRequest) 
 	ds.GetAll(ctx, q, &chats)
 	log.Printf(strconv.FormatInt(in.GetGameId(), 10))
 	ret := &pb.ChatReply{Chats: chats}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetDataPlace(ctx context.Context, in *pb.DataPlaceRequest) (*pb.DataPlaceReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	names, address := data.Get(1)
+	ret := &pb.DataPlaceReply{Version: 1, Names: names, Address: address}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
