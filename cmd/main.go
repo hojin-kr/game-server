@@ -4,12 +4,13 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net"
 	"os"
 	"strconv"
 	"time"
+
+	b64 "encoding/base64"
 
 	"cloud.google.com/go/datastore"
 	apns "github.com/edganiukov/apns"
@@ -28,6 +29,8 @@ var (
 	apple_team_id     = os.Getenv("APPLE_TEAM_ID")
 	apple_bundle_id   = os.Getenv("APPLE_BUNDLE_ID")
 	apple_apns_key_id = os.Getenv("APPLE_APNS_KEY_ID")
+	apple_apns_key    = os.Getenv("APPLE_APNS_KEY")
+	is_production     = os.Getenv("IS_PRODUCTION")
 )
 
 // server is used to implement UnimplementedServiceServer
@@ -42,8 +45,8 @@ func (s *server) CreateAccount(ctx context.Context, in *pb.AccountRequest) (*pb.
 	tracer.Trace(time.Now().Unix(), in)
 	tm := time.Now().Unix()
 	// Putting an entity into the datastore under an incomplete key will cause a unique key to be generated for that entity, with a non-zero IntID.
-	key := ds.Put(ctx, datastore.IncompleteKey("Account", nil), &pb.AccountRequest{Account: &pb.Account{RegisterTimestamp: tm}})
-	ret := &pb.AccountReply{Account: &pb.Account{Id: key.ID, RegisterTimestamp: tm}}
+	key := ds.Put(ctx, datastore.IncompleteKey("Account", nil), &pb.Account{RegisterTimestamp: tm})
+	ret := &pb.AccountReply{Id: key.ID, RegisterTimestamp: tm}
 	// profile update
 	var profile = &pb.Profile{
 		AccountId: key.ID,
@@ -59,6 +62,9 @@ func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.Pro
 	key := datastore.IDKey("Profile", in.Profile.GetAccountId(), nil)
 	ds.Get(ctx, key, in.Profile)
 	ret := &pb.ProfileReply{Profile: in.GetProfile()}
+	if in.Profile.ApnsToken != "" {
+		pushNotification(in.Profile.ApnsToken, "클럽하우스", "프로필뷰 발생", "푸시 바디 내용")
+	}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -283,39 +289,45 @@ func (s *server) GetDataPlace(ctx context.Context, in *pb.DataPlaceRequest) (*pb
 	return ret, nil
 }
 
-func pushNotification() {
-	data, err := ioutil.ReadFile("AuthKey_" + apple_apns_key_id + ".pem")
-	if err != nil {
-		log.Fatal(err)
+func pushNotification(apnsToken string, title string, subtitle string, body string) {
+	const (
+		DevelopmentGateway = "https://api.sandbox.push.apple.com"
+		ProductionGateway  = "https://api.push.apple.com"
+	)
+	GateWay := DevelopmentGateway
+	if is_production == "true" {
+		GateWay = ProductionGateway
 	}
-
+	_apple_apns_key, _ := b64.StdEncoding.DecodeString(apple_apns_key)
 	c, err := apns.NewClient(
-		apns.WithJWT(data, apple_apns_key_id, apple_team_id),
+		apns.WithJWT(_apple_apns_key, apple_apns_key_id, apple_team_id),
 		apns.WithBundleID(apple_bundle_id),
 		apns.WithMaxIdleConnections(10),
 		apns.WithTimeout(5*time.Second),
+		apns.WithEndpoint(GateWay),
 	)
 	if err != nil {
+		print(err)
 		/* ... */
 	}
-	resp, err := c.Send("<device token>",
+	resp, err := c.Send(apnsToken,
 		apns.Payload{
 			APS: apns.APS{
 				Alert: apns.Alert{
-					Title: "Test Push",
-					Body:  "Hi world",
+					Title:    title,
+					Subtitle: subtitle,
+					Body:     body,
 				},
 			},
 		},
 		apns.WithExpiration(10),
-		apns.WithCollapseID("test-collapse-id"),
 		apns.WithPriority(5),
 	)
-	print(resp)
-
 	if err != nil {
+		print(err)
 		/* ... */
 	}
+	print(resp.Timestamp)
 }
 
 func main() {

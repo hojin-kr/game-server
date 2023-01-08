@@ -57,20 +57,17 @@ struct Haru_AccountRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var account: Haru_Account {
-    get {return _account ?? Haru_Account()}
-    set {_account = newValue}
-  }
-  /// Returns true if `account` has been explicitly set.
-  var hasAccount: Bool {return self._account != nil}
-  /// Clears the value of `account`. Subsequent reads from it will return its default value.
-  mutating func clearAccount() {self._account = nil}
+  var id: Int64 = 0
+
+  var platformID: String = String()
+
+  var platform: String = String()
+
+  var registerTimestamp: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _account: Haru_Account? = nil
 }
 
 struct Haru_AccountReply {
@@ -78,20 +75,17 @@ struct Haru_AccountReply {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var account: Haru_Account {
-    get {return _account ?? Haru_Account()}
-    set {_account = newValue}
-  }
-  /// Returns true if `account` has been explicitly set.
-  var hasAccount: Bool {return self._account != nil}
-  /// Clears the value of `account`. Subsequent reads from it will return its default value.
-  mutating func clearAccount() {self._account = nil}
+  var id: Int64 = 0
+
+  var platformID: String = String()
+
+  var platform: String = String()
+
+  var registerTimestamp: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _account: Haru_Account? = nil
 }
 
 struct Haru_Profile {
@@ -114,6 +108,8 @@ struct Haru_Profile {
   var games: [Int64] = []
 
   var desc: String = String()
+
+  var apnsToken: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -703,7 +699,10 @@ extension Haru_Account: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 extension Haru_AccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".AccountRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "account"),
+    1: .same(proto: "id"),
+    2: .standard(proto: "platform_id"),
+    3: .same(proto: "platform"),
+    4: .standard(proto: "register_timestamp"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -712,25 +711,36 @@ extension Haru_AccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._account) }()
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.platformID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.platform) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.registerTimestamp) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._account {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if !self.platformID.isEmpty {
+      try visitor.visitSingularStringField(value: self.platformID, fieldNumber: 2)
+    }
+    if !self.platform.isEmpty {
+      try visitor.visitSingularStringField(value: self.platform, fieldNumber: 3)
+    }
+    if self.registerTimestamp != 0 {
+      try visitor.visitSingularInt64Field(value: self.registerTimestamp, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_AccountRequest, rhs: Haru_AccountRequest) -> Bool {
-    if lhs._account != rhs._account {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.platformID != rhs.platformID {return false}
+    if lhs.platform != rhs.platform {return false}
+    if lhs.registerTimestamp != rhs.registerTimestamp {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -739,7 +749,10 @@ extension Haru_AccountRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 extension Haru_AccountReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".AccountReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "account"),
+    1: .same(proto: "id"),
+    2: .standard(proto: "platform_id"),
+    3: .same(proto: "platform"),
+    4: .standard(proto: "register_timestamp"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -748,25 +761,36 @@ extension Haru_AccountReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._account) }()
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.platformID) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.platform) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.registerTimestamp) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._account {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if !self.platformID.isEmpty {
+      try visitor.visitSingularStringField(value: self.platformID, fieldNumber: 2)
+    }
+    if !self.platform.isEmpty {
+      try visitor.visitSingularStringField(value: self.platform, fieldNumber: 3)
+    }
+    if self.registerTimestamp != 0 {
+      try visitor.visitSingularInt64Field(value: self.registerTimestamp, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_AccountReply, rhs: Haru_AccountReply) -> Bool {
-    if lhs._account != rhs._account {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.platformID != rhs.platformID {return false}
+    if lhs.platform != rhs.platform {return false}
+    if lhs.registerTimestamp != rhs.registerTimestamp {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -783,6 +807,7 @@ extension Haru_Profile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     6: .same(proto: "years"),
     7: .same(proto: "games"),
     8: .same(proto: "desc"),
+    9: .standard(proto: "apns_token"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -799,6 +824,7 @@ extension Haru_Profile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       case 6: try { try decoder.decodeSingularInt64Field(value: &self.years) }()
       case 7: try { try decoder.decodeRepeatedInt64Field(value: &self.games) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self.desc) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.apnsToken) }()
       default: break
       }
     }
@@ -829,6 +855,9 @@ extension Haru_Profile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     if !self.desc.isEmpty {
       try visitor.visitSingularStringField(value: self.desc, fieldNumber: 8)
     }
+    if !self.apnsToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.apnsToken, fieldNumber: 9)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -841,6 +870,7 @@ extension Haru_Profile: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     if lhs.years != rhs.years {return false}
     if lhs.games != rhs.games {return false}
     if lhs.desc != rhs.desc {return false}
+    if lhs.apnsToken != rhs.apnsToken {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

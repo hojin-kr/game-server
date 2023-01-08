@@ -26,76 +26,79 @@ namespace Haru {
           string.Concat(
             "ChBwcm90by9oYXJ1LnByb3RvEgRoYXJ1IlgKB0FjY291bnQSCgoCaWQYASAB",
             "KAMSEwoLcGxhdGZvcm1faWQYAiABKAkSEAoIcGxhdGZvcm0YAyABKAkSGgoS",
-            "cmVnaXN0ZXJfdGltZXN0YW1wGAQgASgDIjAKDkFjY291bnRSZXF1ZXN0Eh4K",
-            "B2FjY291bnQYASABKAsyDS5oYXJ1LkFjY291bnQiLgoMQWNjb3VudFJlcGx5",
-            "Eh4KB2FjY291bnQYASABKAsyDS5oYXJ1LkFjY291bnQigAEKB1Byb2ZpbGUS",
-            "EgoKYWNjb3VudF9pZBgBIAEoAxIMCgRuYW1lGAIgASgJEgsKA2FnZRgDIAEo",
-            "AxILCgNzZXgYBCABKAMSDQoFc2NvcmUYBSABKAMSDQoFeWVhcnMYBiABKAMS",
-            "DQoFZ2FtZXMYByADKAMSDAoEZGVzYxgIIAEoCSIwCg5Qcm9maWxlUmVxdWVz",
-            "dBIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIi4KDFByb2ZpbGVS",
-            "ZXBseRIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIm4KBEpvaW4S",
-            "DwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg4KBnN0YXR1",
-            "cxgDIAEoAxIPCgdjcmVhdGVkGAQgASgDEg8KB3VwZGF0ZWQYBSABKAMSDwoH",
-            "am9pbl9pZBgGIAEoAyInCgtKb2luUmVxdWVzdBIYCgRqb2luGAEgASgLMgou",
-            "aGFydS5Kb2luIkAKCUpvaW5SZXBseRIYCgRqb2luGAEgASgLMgouaGFydS5K",
-            "b2luEhkKBWpvaW5zGAIgAygLMgouaGFydS5Kb2luIncKBENoYXQSDwoHZ2Ft",
-            "ZV9pZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg8KB2NyZWF0ZWQYAyAB",
-            "KAMSDwoHdXBkYXRlZBgEIAEoAxIoCg1jaGF0X21lc3NhZ2VzGAUgAygLMhEu",
-            "aGFydS5DaGF0TWVzc2FnZSJDCgtDaGF0TWVzc2FnZRIPCgdjcmVhdGVkGAEg",
-            "ASgDEg8KB21lc3NhZ2UYAiABKAkSEgoKYWNjb3VudF9pZBgDIAEoAyJiChJD",
-            "aGF0TWVzc2FnZVJlcXVlc3QSDwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50",
-            "X2lkGAIgASgDEicKDGNoYXRfbWVzc2FnZRgDIAEoCzIRLmhhcnUuQ2hhdE1l",
-            "c3NhZ2UiJwoLQ2hhdFJlcXVlc3QSGAoEY2hhdBgBIAEoCzIKLmhhcnUuQ2hh",
-            "dCImCglDaGF0UmVwbHkSGQoFY2hhdHMYASADKAsyCi5oYXJ1LkNoYXQitgMK",
-            "BEdhbWUSCgoCaWQYASABKAMSFwoPaG9zdF9hY2NvdW50X2lkGAIgASgDEgwK",
-            "BHRpbWUYAyABKAMSDQoFcHJpY2UYBCABKAMSEQoJdHlwZV9wbGF5GAUgASgD",
-            "EhAKCHR5cGVfYWdlGAYgASgDEhAKCHR5cGVfc2V4GAcgASgDEhIKCnR5cGVf",
-            "c2NvcmUYCCABKAMSEgoKdHlwZV95ZWFycxgJIAEoAxIRCgl0eXBlX2hvbGUY",
-            "CiABKAMSEgoKcGVyc29uX21heBgLIAEoAxIOCgZwZXJzb24YDCABKAMSDAoE",
-            "ZGVjcxgNIAEoCRIaCgVwbGFjZRgOIAEoCzILLmhhcnUuUGxhY2USFQoNc2hv",
-            "cnRfYWRkcmVzcxgPIAEoCRIaChJhY2NlcHRfYWNjb3VudF9pZHMYECADKAMS",
-            "GgoScmVqZWN0X2FjY291bnRfaWRzGBEgAygDEg8KB2NyZWF0ZWQYEiABKAMS",
-            "DwoHdXBkYXRlZBgTIAEoAxISCgpwbGFjZV9uYW1lGBQgASgJEhUKDXBsYWNl",
-            "X2FkZHJlc3MYFSABKAkSEAoIcGxhY2VfaWQYFiABKAkiOAoFUGxhY2USDAoE",
-            "bmFtZRgBIAEoCRIPCgdhZGRyZXNzGAIgASgJEhAKCHBsYWNlX2lkGAMgASgJ",
-            "IiQKEEdhbWVNdWx0aVJlcXVlc3QSEAoIZ2FtZV9pZHMYASADKAMiKwoOR2Ft",
-            "ZU11bHRpUmVwbHkSGQoFZ2FtZXMYASADKAsyCi5oYXJ1LkdhbWUiQQoLR2Ft",
-            "ZVJlcXVlc3QSGAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIg",
-            "ASgLMgouaGFydS5Kb2luIj8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgou",
-            "aGFydS5HYW1lEhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4igwEKE0ZpbHRl",
-            "cmRHYW1lc1JlcXVlc3QSDwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgC",
-            "IAEoAxIQCgh0aW1lX21heBgDIAEoAxISCgp0eXBlX29yZGVyGAQgASgDEhMK",
-            "C3R5cGVfZmlsdGVyGAUgASgDEg4KBmN1cnNvchgGIAEoCSI+ChFGaWx0ZXJk",
-            "R2FtZXNSZXBseRIZCgVnYW1lcxgBIAMoCzIKLmhhcnUuR2FtZRIOCgZjdXJz",
-            "b3IYAiABKAkiIwoQRGF0YVBsYWNlUmVxdWVzdBIPCgd2ZXJzaW9uGAEgASgD",
-            "Ik8KDkRhdGFQbGFjZVJlcGx5Eg8KB3ZlcnNpb24YASABKAMSDAoEdGltZRgC",
-            "IAEoAxINCgVuYW1lcxgDIAMoCRIPCgdhZGRyZXNzGAQgAygJMtwGCgh2ZXJz",
-            "aW9uMRI7Cg1DcmVhdGVBY2NvdW50EhQuaGFydS5BY2NvdW50UmVxdWVzdBoS",
-            "LmhhcnUuQWNjb3VudFJlcGx5IgASOAoKR2V0UHJvZmlsZRIULmhhcnUuUHJv",
-            "ZmlsZVJlcXVlc3QaEi5oYXJ1LlByb2ZpbGVSZXBseSIAEjsKDVVwZGF0ZVBy",
-            "b2ZpbGUSFC5oYXJ1LlByb2ZpbGVSZXF1ZXN0GhIuaGFydS5Qcm9maWxlUmVw",
-            "bHkiABIyCgpDcmVhdGVHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUu",
-            "R2FtZVJlcGx5IgASMgoKVXBkYXRlR2FtZRIRLmhhcnUuR2FtZVJlcXVlc3Qa",
-            "Dy5oYXJ1LkdhbWVSZXBseSIAEi8KB0dldEdhbWUSES5oYXJ1LkdhbWVSZXF1",
-            "ZXN0Gg8uaGFydS5HYW1lUmVwbHkiABI+CgxHZXRHYW1lTXVsdGkSFi5oYXJ1",
-            "LkdhbWVNdWx0aVJlcXVlc3QaFC5oYXJ1LkdhbWVNdWx0aVJlcGx5IgASRwoP",
-            "R2V0RmlsdGVyZEdhbWVzEhkuaGFydS5GaWx0ZXJkR2FtZXNSZXF1ZXN0Ghcu",
-            "aGFydS5GaWx0ZXJkR2FtZXNSZXBseSIAEiwKBEpvaW4SES5oYXJ1LkpvaW5S",
-            "ZXF1ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIyCgpHZXRNeUpvaW5zEhEuaGFy",
-            "dS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgASNAoMR2V0R2FtZUpv",
-            "aW5zEhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgASMgoK",
-            "VXBkYXRlSm9pbhIRLmhhcnUuSm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBs",
-            "eSIAEi8KB0dldENoYXQSES5oYXJ1LkNoYXRSZXF1ZXN0Gg8uaGFydS5DaGF0",
-            "UmVwbHkiABI9Cg5BZGRDaGF0TWVzc2FnZRIYLmhhcnUuQ2hhdE1lc3NhZ2VS",
-            "ZXF1ZXN0Gg8uaGFydS5DaGF0UmVwbHkiABI+CgxHZXREYXRhUGxhY2USFi5o",
-            "YXJ1LkRhdGFQbGFjZVJlcXVlc3QaFC5oYXJ1LkRhdGFQbGFjZVJlcGx5IgBC",
-            "JFoiZ2l0aHViLmNvbS9ob2ppbi1rci9oYXJ1L2NtZC9wcm90b2IGcHJvdG8z"));
+            "cmVnaXN0ZXJfdGltZXN0YW1wGAQgASgDInIKDkFjY291bnRSZXF1ZXN0EgoK",
+            "AmlkGAEgASgDEhMKC3BsYXRmb3JtX2lkGAIgASgJEhAKCHBsYXRmb3JtGAMg",
+            "ASgJEhoKEnJlZ2lzdGVyX3RpbWVzdGFtcBgEIAEoAxIRCglhcG5zVG9rZW4Y",
+            "BSABKAkicAoMQWNjb3VudFJlcGx5EgoKAmlkGAEgASgDEhMKC3BsYXRmb3Jt",
+            "X2lkGAIgASgJEhAKCHBsYXRmb3JtGAMgASgJEhoKEnJlZ2lzdGVyX3RpbWVz",
+            "dGFtcBgEIAEoAxIRCglhcG5zVG9rZW4YBSABKAkigAEKB1Byb2ZpbGUSEgoK",
+            "YWNjb3VudF9pZBgBIAEoAxIMCgRuYW1lGAIgASgJEgsKA2FnZRgDIAEoAxIL",
+            "CgNzZXgYBCABKAMSDQoFc2NvcmUYBSABKAMSDQoFeWVhcnMYBiABKAMSDQoF",
+            "Z2FtZXMYByADKAMSDAoEZGVzYxgIIAEoCSIwCg5Qcm9maWxlUmVxdWVzdBIe",
+            "Cgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIi4KDFByb2ZpbGVSZXBs",
+            "eRIeCgdwcm9maWxlGAEgASgLMg0uaGFydS5Qcm9maWxlIm4KBEpvaW4SDwoH",
+            "Z2FtZV9pZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg4KBnN0YXR1cxgD",
+            "IAEoAxIPCgdjcmVhdGVkGAQgASgDEg8KB3VwZGF0ZWQYBSABKAMSDwoHam9p",
+            "bl9pZBgGIAEoAyInCgtKb2luUmVxdWVzdBIYCgRqb2luGAEgASgLMgouaGFy",
+            "dS5Kb2luIkAKCUpvaW5SZXBseRIYCgRqb2luGAEgASgLMgouaGFydS5Kb2lu",
+            "EhkKBWpvaW5zGAIgAygLMgouaGFydS5Kb2luIncKBENoYXQSDwoHZ2FtZV9p",
+            "ZBgBIAEoAxISCgphY2NvdW50X2lkGAIgASgDEg8KB2NyZWF0ZWQYAyABKAMS",
+            "DwoHdXBkYXRlZBgEIAEoAxIoCg1jaGF0X21lc3NhZ2VzGAUgAygLMhEuaGFy",
+            "dS5DaGF0TWVzc2FnZSJDCgtDaGF0TWVzc2FnZRIPCgdjcmVhdGVkGAEgASgD",
+            "Eg8KB21lc3NhZ2UYAiABKAkSEgoKYWNjb3VudF9pZBgDIAEoAyJiChJDaGF0",
+            "TWVzc2FnZVJlcXVlc3QSDwoHZ2FtZV9pZBgBIAEoAxISCgphY2NvdW50X2lk",
+            "GAIgASgDEicKDGNoYXRfbWVzc2FnZRgDIAEoCzIRLmhhcnUuQ2hhdE1lc3Nh",
+            "Z2UiJwoLQ2hhdFJlcXVlc3QSGAoEY2hhdBgBIAEoCzIKLmhhcnUuQ2hhdCIm",
+            "CglDaGF0UmVwbHkSGQoFY2hhdHMYASADKAsyCi5oYXJ1LkNoYXQitgMKBEdh",
+            "bWUSCgoCaWQYASABKAMSFwoPaG9zdF9hY2NvdW50X2lkGAIgASgDEgwKBHRp",
+            "bWUYAyABKAMSDQoFcHJpY2UYBCABKAMSEQoJdHlwZV9wbGF5GAUgASgDEhAK",
+            "CHR5cGVfYWdlGAYgASgDEhAKCHR5cGVfc2V4GAcgASgDEhIKCnR5cGVfc2Nv",
+            "cmUYCCABKAMSEgoKdHlwZV95ZWFycxgJIAEoAxIRCgl0eXBlX2hvbGUYCiAB",
+            "KAMSEgoKcGVyc29uX21heBgLIAEoAxIOCgZwZXJzb24YDCABKAMSDAoEZGVj",
+            "cxgNIAEoCRIaCgVwbGFjZRgOIAEoCzILLmhhcnUuUGxhY2USFQoNc2hvcnRf",
+            "YWRkcmVzcxgPIAEoCRIaChJhY2NlcHRfYWNjb3VudF9pZHMYECADKAMSGgoS",
+            "cmVqZWN0X2FjY291bnRfaWRzGBEgAygDEg8KB2NyZWF0ZWQYEiABKAMSDwoH",
+            "dXBkYXRlZBgTIAEoAxISCgpwbGFjZV9uYW1lGBQgASgJEhUKDXBsYWNlX2Fk",
+            "ZHJlc3MYFSABKAkSEAoIcGxhY2VfaWQYFiABKAkiOAoFUGxhY2USDAoEbmFt",
+            "ZRgBIAEoCRIPCgdhZGRyZXNzGAIgASgJEhAKCHBsYWNlX2lkGAMgASgJIiQK",
+            "EEdhbWVNdWx0aVJlcXVlc3QSEAoIZ2FtZV9pZHMYASADKAMiKwoOR2FtZU11",
+            "bHRpUmVwbHkSGQoFZ2FtZXMYASADKAsyCi5oYXJ1LkdhbWUiQQoLR2FtZVJl",
+            "cXVlc3QSGAoEZ2FtZRgBIAEoCzIKLmhhcnUuR2FtZRIYCgRqb2luGAIgASgL",
+            "MgouaGFydS5Kb2luIj8KCUdhbWVSZXBseRIYCgRnYW1lGAEgASgLMgouaGFy",
+            "dS5HYW1lEhgKBGpvaW4YAiABKAsyCi5oYXJ1LkpvaW4igwEKE0ZpbHRlcmRH",
+            "YW1lc1JlcXVlc3QSDwoHaXNfaW5pdBgBIAEoCBIQCgh0aW1lX21pbhgCIAEo",
+            "AxIQCgh0aW1lX21heBgDIAEoAxISCgp0eXBlX29yZGVyGAQgASgDEhMKC3R5",
+            "cGVfZmlsdGVyGAUgASgDEg4KBmN1cnNvchgGIAEoCSI+ChFGaWx0ZXJkR2Ft",
+            "ZXNSZXBseRIZCgVnYW1lcxgBIAMoCzIKLmhhcnUuR2FtZRIOCgZjdXJzb3IY",
+            "AiABKAkiIwoQRGF0YVBsYWNlUmVxdWVzdBIPCgd2ZXJzaW9uGAEgASgDIk8K",
+            "DkRhdGFQbGFjZVJlcGx5Eg8KB3ZlcnNpb24YASABKAMSDAoEdGltZRgCIAEo",
+            "AxINCgVuYW1lcxgDIAMoCRIPCgdhZGRyZXNzGAQgAygJMtwGCgh2ZXJzaW9u",
+            "MRI7Cg1DcmVhdGVBY2NvdW50EhQuaGFydS5BY2NvdW50UmVxdWVzdBoSLmhh",
+            "cnUuQWNjb3VudFJlcGx5IgASOAoKR2V0UHJvZmlsZRIULmhhcnUuUHJvZmls",
+            "ZVJlcXVlc3QaEi5oYXJ1LlByb2ZpbGVSZXBseSIAEjsKDVVwZGF0ZVByb2Zp",
+            "bGUSFC5oYXJ1LlByb2ZpbGVSZXF1ZXN0GhIuaGFydS5Qcm9maWxlUmVwbHki",
+            "ABIyCgpDcmVhdGVHYW1lEhEuaGFydS5HYW1lUmVxdWVzdBoPLmhhcnUuR2Ft",
+            "ZVJlcGx5IgASMgoKVXBkYXRlR2FtZRIRLmhhcnUuR2FtZVJlcXVlc3QaDy5o",
+            "YXJ1LkdhbWVSZXBseSIAEi8KB0dldEdhbWUSES5oYXJ1LkdhbWVSZXF1ZXN0",
+            "Gg8uaGFydS5HYW1lUmVwbHkiABI+CgxHZXRHYW1lTXVsdGkSFi5oYXJ1Lkdh",
+            "bWVNdWx0aVJlcXVlc3QaFC5oYXJ1LkdhbWVNdWx0aVJlcGx5IgASRwoPR2V0",
+            "RmlsdGVyZEdhbWVzEhkuaGFydS5GaWx0ZXJkR2FtZXNSZXF1ZXN0GhcuaGFy",
+            "dS5GaWx0ZXJkR2FtZXNSZXBseSIAEiwKBEpvaW4SES5oYXJ1LkpvaW5SZXF1",
+            "ZXN0Gg8uaGFydS5Kb2luUmVwbHkiABIyCgpHZXRNeUpvaW5zEhEuaGFydS5K",
+            "b2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgASNAoMR2V0R2FtZUpvaW5z",
+            "EhEuaGFydS5Kb2luUmVxdWVzdBoPLmhhcnUuSm9pblJlcGx5IgASMgoKVXBk",
+            "YXRlSm9pbhIRLmhhcnUuSm9pblJlcXVlc3QaDy5oYXJ1LkpvaW5SZXBseSIA",
+            "Ei8KB0dldENoYXQSES5oYXJ1LkNoYXRSZXF1ZXN0Gg8uaGFydS5DaGF0UmVw",
+            "bHkiABI9Cg5BZGRDaGF0TWVzc2FnZRIYLmhhcnUuQ2hhdE1lc3NhZ2VSZXF1",
+            "ZXN0Gg8uaGFydS5DaGF0UmVwbHkiABI+CgxHZXREYXRhUGxhY2USFi5oYXJ1",
+            "LkRhdGFQbGFjZVJlcXVlc3QaFC5oYXJ1LkRhdGFQbGFjZVJlcGx5IgBCJFoi",
+            "Z2l0aHViLmNvbS9ob2ppbi1rci9oYXJ1L2NtZC9wcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Account), global::Haru.Account.Parser, new[]{ "Id", "PlatformId", "Platform", "RegisterTimestamp" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.AccountRequest), global::Haru.AccountRequest.Parser, new[]{ "Account" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.AccountReply), global::Haru.AccountReply.Parser, new[]{ "Account" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.AccountRequest), global::Haru.AccountRequest.Parser, new[]{ "Id", "PlatformId", "Platform", "RegisterTimestamp", "ApnsToken" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Haru.AccountReply), global::Haru.AccountReply.Parser, new[]{ "Id", "PlatformId", "Platform", "RegisterTimestamp", "ApnsToken" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.Profile), global::Haru.Profile.Parser, new[]{ "AccountId", "Name", "Age", "Sex", "Score", "Years", "Games", "Desc" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ProfileRequest), global::Haru.ProfileRequest.Parser, new[]{ "Profile" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Haru.ProfileReply), global::Haru.ProfileReply.Parser, new[]{ "Profile" }, null, null, null, null),
@@ -457,7 +460,11 @@ namespace Haru {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AccountRequest(AccountRequest other) : this() {
-      account_ = other.account_ != null ? other.account_.Clone() : null;
+      id_ = other.id_;
+      platformId_ = other.platformId_;
+      platform_ = other.platform_;
+      registerTimestamp_ = other.registerTimestamp_;
+      apnsToken_ = other.apnsToken_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -467,15 +474,63 @@ namespace Haru {
       return new AccountRequest(this);
     }
 
-    /// <summary>Field number for the "account" field.</summary>
-    public const int AccountFieldNumber = 1;
-    private global::Haru.Account account_;
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private long id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Haru.Account Account {
-      get { return account_; }
+    public long Id {
+      get { return id_; }
       set {
-        account_ = value;
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "platform_id" field.</summary>
+    public const int PlatformIdFieldNumber = 2;
+    private string platformId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string PlatformId {
+      get { return platformId_; }
+      set {
+        platformId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "platform" field.</summary>
+    public const int PlatformFieldNumber = 3;
+    private string platform_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Platform {
+      get { return platform_; }
+      set {
+        platform_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "register_timestamp" field.</summary>
+    public const int RegisterTimestampFieldNumber = 4;
+    private long registerTimestamp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long RegisterTimestamp {
+      get { return registerTimestamp_; }
+      set {
+        registerTimestamp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "apnsToken" field.</summary>
+    public const int ApnsTokenFieldNumber = 5;
+    private string apnsToken_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ApnsToken {
+      get { return apnsToken_; }
+      set {
+        apnsToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -494,7 +549,11 @@ namespace Haru {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Account, other.Account)) return false;
+      if (Id != other.Id) return false;
+      if (PlatformId != other.PlatformId) return false;
+      if (Platform != other.Platform) return false;
+      if (RegisterTimestamp != other.RegisterTimestamp) return false;
+      if (ApnsToken != other.ApnsToken) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -502,7 +561,11 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (account_ != null) hash ^= Account.GetHashCode();
+      if (Id != 0L) hash ^= Id.GetHashCode();
+      if (PlatformId.Length != 0) hash ^= PlatformId.GetHashCode();
+      if (Platform.Length != 0) hash ^= Platform.GetHashCode();
+      if (RegisterTimestamp != 0L) hash ^= RegisterTimestamp.GetHashCode();
+      if (ApnsToken.Length != 0) hash ^= ApnsToken.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -521,9 +584,25 @@ namespace Haru {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (account_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Account);
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (PlatformId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(PlatformId);
+      }
+      if (Platform.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Platform);
+      }
+      if (RegisterTimestamp != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(RegisterTimestamp);
+      }
+      if (ApnsToken.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(ApnsToken);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -535,9 +614,25 @@ namespace Haru {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (account_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Account);
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (PlatformId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(PlatformId);
+      }
+      if (Platform.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Platform);
+      }
+      if (RegisterTimestamp != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(RegisterTimestamp);
+      }
+      if (ApnsToken.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(ApnsToken);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -549,8 +644,20 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (account_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Account);
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (PlatformId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlatformId);
+      }
+      if (Platform.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Platform);
+      }
+      if (RegisterTimestamp != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(RegisterTimestamp);
+      }
+      if (ApnsToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApnsToken);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -564,11 +671,20 @@ namespace Haru {
       if (other == null) {
         return;
       }
-      if (other.account_ != null) {
-        if (account_ == null) {
-          Account = new global::Haru.Account();
-        }
-        Account.MergeFrom(other.Account);
+      if (other.Id != 0L) {
+        Id = other.Id;
+      }
+      if (other.PlatformId.Length != 0) {
+        PlatformId = other.PlatformId;
+      }
+      if (other.Platform.Length != 0) {
+        Platform = other.Platform;
+      }
+      if (other.RegisterTimestamp != 0L) {
+        RegisterTimestamp = other.RegisterTimestamp;
+      }
+      if (other.ApnsToken.Length != 0) {
+        ApnsToken = other.ApnsToken;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -585,11 +701,24 @@ namespace Haru {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            if (account_ == null) {
-              Account = new global::Haru.Account();
-            }
-            input.ReadMessage(Account);
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            PlatformId = input.ReadString();
+            break;
+          }
+          case 26: {
+            Platform = input.ReadString();
+            break;
+          }
+          case 32: {
+            RegisterTimestamp = input.ReadInt64();
+            break;
+          }
+          case 42: {
+            ApnsToken = input.ReadString();
             break;
           }
         }
@@ -607,11 +736,24 @@ namespace Haru {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            if (account_ == null) {
-              Account = new global::Haru.Account();
-            }
-            input.ReadMessage(Account);
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            PlatformId = input.ReadString();
+            break;
+          }
+          case 26: {
+            Platform = input.ReadString();
+            break;
+          }
+          case 32: {
+            RegisterTimestamp = input.ReadInt64();
+            break;
+          }
+          case 42: {
+            ApnsToken = input.ReadString();
             break;
           }
         }
@@ -655,7 +797,11 @@ namespace Haru {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AccountReply(AccountReply other) : this() {
-      account_ = other.account_ != null ? other.account_.Clone() : null;
+      id_ = other.id_;
+      platformId_ = other.platformId_;
+      platform_ = other.platform_;
+      registerTimestamp_ = other.registerTimestamp_;
+      apnsToken_ = other.apnsToken_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -665,15 +811,63 @@ namespace Haru {
       return new AccountReply(this);
     }
 
-    /// <summary>Field number for the "account" field.</summary>
-    public const int AccountFieldNumber = 1;
-    private global::Haru.Account account_;
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private long id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Haru.Account Account {
-      get { return account_; }
+    public long Id {
+      get { return id_; }
       set {
-        account_ = value;
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "platform_id" field.</summary>
+    public const int PlatformIdFieldNumber = 2;
+    private string platformId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string PlatformId {
+      get { return platformId_; }
+      set {
+        platformId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "platform" field.</summary>
+    public const int PlatformFieldNumber = 3;
+    private string platform_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Platform {
+      get { return platform_; }
+      set {
+        platform_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "register_timestamp" field.</summary>
+    public const int RegisterTimestampFieldNumber = 4;
+    private long registerTimestamp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long RegisterTimestamp {
+      get { return registerTimestamp_; }
+      set {
+        registerTimestamp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "apnsToken" field.</summary>
+    public const int ApnsTokenFieldNumber = 5;
+    private string apnsToken_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ApnsToken {
+      get { return apnsToken_; }
+      set {
+        apnsToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -692,7 +886,11 @@ namespace Haru {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(Account, other.Account)) return false;
+      if (Id != other.Id) return false;
+      if (PlatformId != other.PlatformId) return false;
+      if (Platform != other.Platform) return false;
+      if (RegisterTimestamp != other.RegisterTimestamp) return false;
+      if (ApnsToken != other.ApnsToken) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -700,7 +898,11 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (account_ != null) hash ^= Account.GetHashCode();
+      if (Id != 0L) hash ^= Id.GetHashCode();
+      if (PlatformId.Length != 0) hash ^= PlatformId.GetHashCode();
+      if (Platform.Length != 0) hash ^= Platform.GetHashCode();
+      if (RegisterTimestamp != 0L) hash ^= RegisterTimestamp.GetHashCode();
+      if (ApnsToken.Length != 0) hash ^= ApnsToken.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -719,9 +921,25 @@ namespace Haru {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (account_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Account);
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (PlatformId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(PlatformId);
+      }
+      if (Platform.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Platform);
+      }
+      if (RegisterTimestamp != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(RegisterTimestamp);
+      }
+      if (ApnsToken.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(ApnsToken);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -733,9 +951,25 @@ namespace Haru {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (account_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Account);
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (PlatformId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(PlatformId);
+      }
+      if (Platform.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Platform);
+      }
+      if (RegisterTimestamp != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(RegisterTimestamp);
+      }
+      if (ApnsToken.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(ApnsToken);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -747,8 +981,20 @@ namespace Haru {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (account_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Account);
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (PlatformId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlatformId);
+      }
+      if (Platform.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Platform);
+      }
+      if (RegisterTimestamp != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(RegisterTimestamp);
+      }
+      if (ApnsToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApnsToken);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -762,11 +1008,20 @@ namespace Haru {
       if (other == null) {
         return;
       }
-      if (other.account_ != null) {
-        if (account_ == null) {
-          Account = new global::Haru.Account();
-        }
-        Account.MergeFrom(other.Account);
+      if (other.Id != 0L) {
+        Id = other.Id;
+      }
+      if (other.PlatformId.Length != 0) {
+        PlatformId = other.PlatformId;
+      }
+      if (other.Platform.Length != 0) {
+        Platform = other.Platform;
+      }
+      if (other.RegisterTimestamp != 0L) {
+        RegisterTimestamp = other.RegisterTimestamp;
+      }
+      if (other.ApnsToken.Length != 0) {
+        ApnsToken = other.ApnsToken;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -783,11 +1038,24 @@ namespace Haru {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            if (account_ == null) {
-              Account = new global::Haru.Account();
-            }
-            input.ReadMessage(Account);
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            PlatformId = input.ReadString();
+            break;
+          }
+          case 26: {
+            Platform = input.ReadString();
+            break;
+          }
+          case 32: {
+            RegisterTimestamp = input.ReadInt64();
+            break;
+          }
+          case 42: {
+            ApnsToken = input.ReadString();
             break;
           }
         }
@@ -805,11 +1073,24 @@ namespace Haru {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            if (account_ == null) {
-              Account = new global::Haru.Account();
-            }
-            input.ReadMessage(Account);
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            PlatformId = input.ReadString();
+            break;
+          }
+          case 26: {
+            Platform = input.ReadString();
+            break;
+          }
+          case 32: {
+            RegisterTimestamp = input.ReadInt64();
+            break;
+          }
+          case 42: {
+            ApnsToken = input.ReadString();
             break;
           }
         }

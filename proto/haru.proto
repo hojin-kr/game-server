@@ -48,11 +48,17 @@ message Account {
 }
 
 message AccountRequest {
-  Account account = 1;
+  int64 id = 1;
+  string platform_id = 2;
+  string platform = 3;
+  int64 register_timestamp = 4;
 }
 
 message AccountReply {
-  Account account = 1;
+  int64 id = 1;
+  string platform_id = 2;
+  string platform = 3;
+  int64 register_timestamp = 4;
 }
 
 message Profile {
@@ -64,6 +70,7 @@ message Profile {
   int64 years = 6;
   repeated int64 games = 7;
   string desc = 8;
+  string apns_token = 9;
 }
 
 message ProfileRequest {

@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	cloud.google.com/go/datastore v1.6.0
+	github.com/edganiukov/apns v0.2.1
 	github.com/gin-gonic/gin v1.7.7
 )
 
