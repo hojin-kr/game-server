@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net"
 	"os"
@@ -11,6 +12,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/datastore"
+	apns "github.com/edganiukov/apns"
 	data "github.com/hojin-kr/haru/cmd/data"
 	ds "github.com/hojin-kr/haru/cmd/ds"
 	pb "github.com/hojin-kr/haru/cmd/proto"
@@ -20,9 +22,12 @@ import (
 )
 
 var (
-	port       = flag.Int("port", 50051, "The server port")
-	project_id = os.Getenv("PROJECT_ID")
-	tracer     trace.Tracer
+	port              = flag.Int("port", 50051, "The server port")
+	project_id        = os.Getenv("PROJECT_ID")
+	tracer            trace.Tracer
+	apple_team_id     = os.Getenv("APPLE_TEAM_ID")
+	apple_bundle_id   = os.Getenv("APPLE_BUNDLE_ID")
+	apple_apns_key_id = os.Getenv("APPLE_APNS_KEY_ID")
 )
 
 // server is used to implement UnimplementedServiceServer
@@ -276,6 +281,41 @@ func (s *server) GetDataPlace(ctx context.Context, in *pb.DataPlaceRequest) (*pb
 	ret := &pb.DataPlaceReply{Version: serverPlaceVersion, Names: names, Address: address, Time: dataTime}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
+}
+
+func pushNotification() {
+	data, err := ioutil.ReadFile("AuthKey_" + apple_apns_key_id + ".pem")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	c, err := apns.NewClient(
+		apns.WithJWT(data, apple_apns_key_id, apple_team_id),
+		apns.WithBundleID(apple_bundle_id),
+		apns.WithMaxIdleConnections(10),
+		apns.WithTimeout(5*time.Second),
+	)
+	if err != nil {
+		/* ... */
+	}
+	resp, err := c.Send("<device token>",
+		apns.Payload{
+			APS: apns.APS{
+				Alert: apns.Alert{
+					Title: "Test Push",
+					Body:  "Hi world",
+				},
+			},
+		},
+		apns.WithExpiration(10),
+		apns.WithCollapseID("test-collapse-id"),
+		apns.WithPriority(5),
+	)
+	print(resp)
+
+	if err != nil {
+		/* ... */
+	}
 }
 
 func main() {

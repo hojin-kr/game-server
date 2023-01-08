@@ -20,6 +20,12 @@ spec:
           value: golf-367911
         - name: APP_KEY
           value: ""
+        - name: APPLE_TEAM_ID
+          value: ""
+        - name: APPLE_BUNDLE_ID
+          value : ""
+        - name: APPLE_APNS_KEY_ID
+          value : ""
         resources:
           limits:
             cpu: 1000m
