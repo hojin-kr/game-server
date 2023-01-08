@@ -3,5 +3,5 @@ application_default_credentials*
 __debug_bin
 .vscode
 .env.sh
-.pem
-.p8
+*.pem
+*.p8
