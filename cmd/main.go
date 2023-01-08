@@ -62,9 +62,6 @@ func (s *server) GetProfile(ctx context.Context, in *pb.ProfileRequest) (*pb.Pro
 	key := datastore.IDKey("Profile", in.Profile.GetAccountId(), nil)
 	ds.Get(ctx, key, in.Profile)
 	ret := &pb.ProfileReply{Profile: in.GetProfile()}
-	if in.Profile.ApnsToken != "" {
-		pushNotification(in.Profile.ApnsToken, "클럽하우스", "프로필뷰 발생", "푸시 바디 내용")
-	}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -121,7 +118,13 @@ func (s *server) GetGameMulti(ctx context.Context, in *pb.GameMultiRequest) (*pb
 func (s *server) UpdateGame(ctx context.Context, in *pb.GameRequest) (*pb.GameReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	in.Game.Updated = time.Now().UTC().Unix()
-	_ = ds.Put(ctx, datastore.IDKey("Game", in.Game.GetId(), nil), in.Game)
+	// 조인을 수락했습니다. 거절했습니다로 노티
+	var gameBefore pb.Game
+	IDKey := datastore.IDKey("Game", in.Game.GetId(), nil)
+	ds.Get(ctx, IDKey, &gameBefore)
+	_ctx := context.Background()
+	go setJoinChangePush(_ctx, in, &gameBefore)
+	_ = ds.Put(ctx, IDKey, in.Game)
 	ret := &pb.GameReply{Game: in.GetGame()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
@@ -202,6 +205,8 @@ func (s *server) Join(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, e
 	join.Created = time.Now().UTC().Unix()
 	_ = ds.Put(ctx, datastore.IDKey("Join", key.ID, nil), join)
 	ret := &pb.JoinReply{Join: join}
+	_ctx := context.Background()
+	go setJoinRequestPush(_ctx, in)
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -277,6 +282,8 @@ func (s *server) AddChatMessage(ctx context.Context, in *pb.ChatMessageRequest) 
 	ds.GetAll(ctx, q, &chats)
 	log.Printf(strconv.FormatInt(in.GetGameId(), 10))
 	ret := &pb.ChatReply{Chats: chats}
+	_ctx := context.Background()
+	go setChatPush(_ctx, in.GameId, in.GetAccountId(), in.ChatMessage.Message)
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -289,7 +296,75 @@ func (s *server) GetDataPlace(ctx context.Context, in *pb.DataPlaceRequest) (*pb
 	return ret, nil
 }
 
-func pushNotification(apnsToken string, title string, subtitle string, body string) {
+func setJoinRequestPush(ctx context.Context, in *pb.JoinRequest) {
+	var game pb.Game
+	var profile pb.Profile
+	var apnsTokens []string
+	ds.Get(ctx, datastore.IDKey("Game", in.Join.GetGameId(), nil), &game)
+	ds.Get(ctx, datastore.IDKey("Profile", game.GetHostAccountId(), nil), &profile)
+	if game.GetHostAccountId() == in.Join.AccountId {
+		apnsTokens = append(apnsTokens, profile.ApnsToken)
+		pushNotification(apnsTokens, "클럽하우스", game.PlaceName, "새로운 조인을 생성했습니다.")
+	} else {
+		apnsTokens = append(apnsTokens, profile.ApnsToken)
+		pushNotification(apnsTokens, "클럽하우스", game.PlaceName, "조인 신청이 도착했습니다.")
+	}
+}
+
+func difference(a, b []int64) int64 {
+	mb := make(map[int64]struct{}, len(b))
+	for _, x := range b {
+		mb[x] = struct{}{}
+	}
+	var diff []int64
+	for _, x := range a {
+		if _, found := mb[x]; !found {
+			diff = append(diff, x)
+		}
+	}
+	return diff[0]
+}
+
+func setJoinChangePush(ctx context.Context, in *pb.GameRequest, before *pb.Game) {
+	var accountID int64
+	var changeStatus = ""
+	if len(in.Game.AcceptAccountIds) > len(before.AcceptAccountIds) {
+		accountID = difference(in.Game.AcceptAccountIds, before.AcceptAccountIds)
+		changeStatus = "수락"
+	}
+	if len(in.Game.RejectAccountIds) > len(before.RejectAccountIds) {
+		accountID = difference(in.Game.RejectAccountIds, before.RejectAccountIds)
+		changeStatus = "거절"
+	}
+	if changeStatus != "" {
+		var profile pb.Profile
+		var apnsTokens []string
+		ds.Get(ctx, datastore.IDKey("Profile", accountID, nil), &profile)
+		apnsTokens = append(apnsTokens, profile.ApnsToken)
+		pushNotification(apnsTokens, "클럽하우스", in.Game.PlaceName, "조인 신청이 "+changeStatus+"됐습니다.")
+	}
+}
+
+func setChatPush(ctx context.Context, gameID int64, accountID int64, message string) {
+	if message != "" {
+		// accept account all
+		var game pb.Game
+		ds.Get(ctx, datastore.IDKey("Game", gameID, nil), &game)
+		var apnsTokens []string
+		for _, x := range game.AcceptAccountIds {
+			var profile pb.Profile
+			if x != accountID {
+				ds.Get(ctx, datastore.IDKey("Profile", x, nil), &profile)
+				apnsTokens = append(apnsTokens, profile.ApnsToken)
+			}
+		}
+		if len(apnsTokens) > 0 {
+			pushNotification(apnsTokens, "클럽하우스", game.PlaceName, message)
+		}
+	}
+}
+
+func pushNotification(apnsTokens []string, title string, subtitle string, body string) {
 	const (
 		DevelopmentGateway = "https://api.sandbox.push.apple.com"
 		ProductionGateway  = "https://api.push.apple.com"
@@ -310,24 +385,27 @@ func pushNotification(apnsToken string, title string, subtitle string, body stri
 		print(err)
 		/* ... */
 	}
-	resp, err := c.Send(apnsToken,
-		apns.Payload{
-			APS: apns.APS{
-				Alert: apns.Alert{
-					Title:    title,
-					Subtitle: subtitle,
-					Body:     body,
+	for i := 0; i < len(apnsTokens); i++ {
+		resp, err := c.Send(apnsTokens[i],
+			apns.Payload{
+				APS: apns.APS{
+					Alert: apns.Alert{
+						Title:    title,
+						Subtitle: subtitle,
+						Body:     body,
+					},
+					Sound: "default",
 				},
 			},
-		},
-		apns.WithExpiration(10),
-		apns.WithPriority(5),
-	)
-	if err != nil {
-		print(err)
-		/* ... */
+			apns.WithExpiration(10),
+			apns.WithPriority(5),
+		)
+		if err != nil {
+			print(err)
+			/* ... */
+		}
+		print(resp.Timestamp)
 	}
-	print(resp.Timestamp)
 }
 
 func main() {
