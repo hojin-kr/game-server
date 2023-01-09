@@ -351,6 +351,7 @@ func setChatPush(ctx context.Context, gameID int64, accountID int64, message str
 		var game pb.Game
 		ds.Get(ctx, datastore.IDKey("Game", gameID, nil), &game)
 		var apnsTokens []string
+		game.AcceptAccountIds = append(game.AcceptAccountIds, game.HostAccountId)
 		for _, x := range game.AcceptAccountIds {
 			var profile pb.Profile
 			if x != accountID {
