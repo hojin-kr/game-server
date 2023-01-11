@@ -176,6 +176,8 @@ struct Haru_Join {
 
   var joinID: Int64 = 0
 
+  var start: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -194,6 +196,8 @@ struct Haru_JoinRequest {
   var hasJoin: Bool {return self._join != nil}
   /// Clears the value of `join`. Subsequent reads from it will return its default value.
   mutating func clearJoin() {self._join = nil}
+
+  var cursor: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -217,6 +221,8 @@ struct Haru_JoinReply {
   mutating func clearJoin() {self._join = nil}
 
   var joins: [Haru_Join] = []
+
+  var cursor: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -300,6 +306,8 @@ struct Haru_ChatRequest {
   /// Clears the value of `chat`. Subsequent reads from it will return its default value.
   mutating func clearChat() {self._chat = nil}
 
+  var cursor: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -313,6 +321,8 @@ struct Haru_ChatReply {
   // methods supported on all messages.
 
   var chats: [Haru_Chat] = []
+
+  var cursor: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -957,6 +967,7 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     4: .same(proto: "created"),
     5: .same(proto: "updated"),
     6: .standard(proto: "join_id"),
+    7: .same(proto: "start"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -971,6 +982,7 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       case 4: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
       case 5: try { try decoder.decodeSingularInt64Field(value: &self.updated) }()
       case 6: try { try decoder.decodeSingularInt64Field(value: &self.joinID) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self.start) }()
       default: break
       }
     }
@@ -995,6 +1007,9 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if self.joinID != 0 {
       try visitor.visitSingularInt64Field(value: self.joinID, fieldNumber: 6)
     }
+    if self.start != 0 {
+      try visitor.visitSingularInt64Field(value: self.start, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1005,6 +1020,7 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if lhs.created != rhs.created {return false}
     if lhs.updated != rhs.updated {return false}
     if lhs.joinID != rhs.joinID {return false}
+    if lhs.start != rhs.start {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1014,6 +1030,7 @@ extension Haru_JoinRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   static let protoMessageName: String = _protobuf_package + ".JoinRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "join"),
+    2: .same(proto: "cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1023,6 +1040,7 @@ extension Haru_JoinRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._join) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1036,11 +1054,15 @@ extension Haru_JoinRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try { if let v = self._join {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_JoinRequest, rhs: Haru_JoinRequest) -> Bool {
     if lhs._join != rhs._join {return false}
+    if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1051,6 +1073,7 @@ extension Haru_JoinReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "join"),
     2: .same(proto: "joins"),
+    3: .same(proto: "cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1061,6 +1084,7 @@ extension Haru_JoinReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._join) }()
       case 2: try { try decoder.decodeRepeatedMessageField(value: &self.joins) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1077,12 +1101,16 @@ extension Haru_JoinReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if !self.joins.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.joins, fieldNumber: 2)
     }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_JoinReply, rhs: Haru_JoinReply) -> Bool {
     if lhs._join != rhs._join {return false}
     if lhs.joins != rhs.joins {return false}
+    if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1240,6 +1268,7 @@ extension Haru_ChatRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   static let protoMessageName: String = _protobuf_package + ".ChatRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "chat"),
+    2: .same(proto: "Cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1249,6 +1278,7 @@ extension Haru_ChatRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._chat) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1262,11 +1292,15 @@ extension Haru_ChatRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try { if let v = self._chat {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_ChatRequest, rhs: Haru_ChatRequest) -> Bool {
     if lhs._chat != rhs._chat {return false}
+    if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1276,6 +1310,7 @@ extension Haru_ChatReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   static let protoMessageName: String = _protobuf_package + ".ChatReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "chats"),
+    2: .same(proto: "Cursor"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1285,6 +1320,7 @@ extension Haru_ChatReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.chats) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
       default: break
       }
     }
@@ -1294,11 +1330,15 @@ extension Haru_ChatReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if !self.chats.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.chats, fieldNumber: 1)
     }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_ChatReply, rhs: Haru_ChatReply) -> Bool {
     if lhs.chats != rhs.chats {return false}
+    if lhs.cursor != rhs.cursor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -135,7 +135,7 @@ func (s *server) GetFilterdGames(ctx context.Context, in *pb.FilterdGamesRequest
 	tracer.Trace(time.Now().UTC(), in)
 	client := ds.GetClient(ctx)
 	cursorStr := in.Cursor
-	const pageSize = 50
+	const pageSize = 10
 	var orderTypes = map[int64]string{
 		0: "Created",
 		1: "-Created",
@@ -225,33 +225,128 @@ func (s *server) UpdateJoin(ctx context.Context, in *pb.JoinRequest) (*pb.JoinRe
 	return ret, nil
 }
 
+const (
+	StatusJoinDefault = 0
+	StatusJoinCancel  = 1
+)
+
 func (s *server) GetMyJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	var joins []*pb.Join
-	q := datastore.NewQuery("Join").Filter("AccountId =", in.Join.GetAccountId()).Limit(100)
-	ds.GetAll(ctx, q, &joins)
-	ret := &pb.JoinReply{Joins: joins}
+	client := ds.GetClient(ctx)
+	cursorStr := in.Cursor
+	const pageSize = 10
+	query := datastore.NewQuery("Join").Filter("AccountId =", in.Join.GetAccountId()).Filter("Status =", StatusJoinDefault).Order("Start").Limit(pageSize)
+	if cursorStr != "" {
+		cursor, err := datastore.DecodeCursor(cursorStr)
+		if err != nil {
+			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
+		}
+		query = query.Start(cursor)
+	}
+	// Read the join.
+	var joins []pb.Join
+	var join pb.Join
+	it := client.Run(ctx, query)
+	_, err := it.Next(&join)
+	for err == nil {
+		joins = append(joins, join)
+		_, err = it.Next(&join)
+	}
+	if err != iterator.Done {
+		log.Fatalf("Failed fetching results: %v", err)
+	}
+	// Get the cursor for the next page of results.
+	// nextCursor.String can be used as the next page's token.
+	nextCursor, err := it.Cursor()
+	// [END datastore_cursor_paging]
+	_ = err        // Check the error.
+	_ = nextCursor // Use nextCursor.String as the next page's token.
+	var _joins []*pb.Join
+	for i := 0; i < len(joins); i++ {
+		_joins = append(_joins, &joins[i])
+	}
+
+	ret := &pb.JoinReply{Joins: _joins, Cursor: nextCursor.String()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
 func (s *server) GetGameJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	var joins []*pb.Join
-	q := datastore.NewQuery("Join").Filter("GameId =", in.Join.GetGameId()).Limit(100)
-	ds.GetAll(ctx, q, &joins)
-	ret := &pb.JoinReply{Joins: joins}
+	client := ds.GetClient(ctx)
+	cursorStr := in.Cursor
+	const pageSize = 10
+	query := datastore.NewQuery("Join").Filter("GameId =", in.Join.GetGameId()).Filter("Status =", StatusJoinDefault).Order("Created").Limit(pageSize)
+	if cursorStr != "" {
+		cursor, err := datastore.DecodeCursor(cursorStr)
+		if err != nil {
+			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
+		}
+		query = query.Start(cursor)
+	}
+	// Read the join.
+	var joins []pb.Join
+	var join pb.Join
+	it := client.Run(ctx, query)
+	_, err := it.Next(&join)
+	for err == nil {
+		joins = append(joins, join)
+		_, err = it.Next(&join)
+	}
+	if err != iterator.Done {
+		log.Fatalf("Failed fetching results: %v", err)
+	}
+	// Get the cursor for the next page of results.
+	// nextCursor.String can be used as the next page's token.
+	nextCursor, err := it.Cursor()
+	// [END datastore_cursor_paging]
+	_ = err        // Check the error.
+	_ = nextCursor // Use nextCursor.String as the next page's token.
+	var _joins []*pb.Join
+	for i := 0; i < len(joins); i++ {
+		_joins = append(_joins, &joins[i])
+	}
+	ret := &pb.JoinReply{Joins: _joins, Cursor: nextCursor.String()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
 
 func (s *server) GetChat(ctx context.Context, in *pb.ChatRequest) (*pb.ChatReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	var chats []*pb.Chat
-	q := datastore.NewQuery("Chat").Filter("GameId =", in.Chat.GetGameId()).Limit(100)
-	log.Printf(strconv.FormatInt(in.Chat.GetGameId(), 10))
-	ds.GetAll(ctx, q, &chats)
-	ret := &pb.ChatReply{Chats: chats}
+	client := ds.GetClient(ctx)
+	cursorStr := in.Cursor
+	const pageSize = 10
+	query := datastore.NewQuery("Chat").Filter("GameId =", in.Chat.GetGameId()).Order("Created").Limit(pageSize)
+	if cursorStr != "" {
+		cursor, err := datastore.DecodeCursor(cursorStr)
+		if err != nil {
+			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
+		}
+		query = query.Start(cursor)
+	}
+	// Read the chat.
+	var chats []pb.Chat
+	var chat pb.Chat
+	it := client.Run(ctx, query)
+	_, err := it.Next(&chat)
+	for err == nil {
+		chats = append(chats, chat)
+		_, err = it.Next(&chat)
+	}
+	if err != iterator.Done {
+		log.Fatalf("Failed fetching results: %v", err)
+	}
+	// Get the cursor for the next page of results.
+	// nextCursor.String can be used as the next page's token.
+	nextCursor, err := it.Cursor()
+	// [END datastore_cursor_paging]
+	_ = err        // Check the error.
+	_ = nextCursor // Use nextCursor.String as the next page's token.
+	var _chats []*pb.Chat
+	for i := 0; i < len(chats); i++ {
+		_chats = append(_chats, &chats[i])
+	}
+	ret := &pb.ChatReply{Chats: _chats, Cursor: nextCursor.String()}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -278,7 +373,8 @@ func (s *server) AddChatMessage(ctx context.Context, in *pb.ChatMessageRequest) 
 	ds.Put(ctx, key, &Chat)
 	// return all chats
 	var chats []*pb.Chat
-	q := datastore.NewQuery("Chat").Filter("GameId =", in.GetGameId()).Limit(100)
+	const pageSize = 10
+	q := datastore.NewQuery("Chat").Filter("GameId =", in.GetGameId()).Order("Created").Limit(pageSize)
 	ds.GetAll(ctx, q, &chats)
 	log.Printf(strconv.FormatInt(in.GetGameId(), 10))
 	ret := &pb.ChatReply{Chats: chats}
@@ -302,12 +398,11 @@ func setJoinRequestPush(ctx context.Context, in *pb.JoinRequest) {
 	var apnsTokens []string
 	ds.Get(ctx, datastore.IDKey("Game", in.Join.GetGameId(), nil), &game)
 	ds.Get(ctx, datastore.IDKey("Profile", game.GetHostAccountId(), nil), &profile)
-	if game.GetHostAccountId() == in.Join.AccountId {
-		apnsTokens = append(apnsTokens, profile.ApnsToken)
-		pushNotification(apnsTokens, "클럽하우스", game.PlaceName, "새로운 조인을 생성했습니다.")
-	} else {
+	if game.GetHostAccountId() != in.Join.AccountId {
 		apnsTokens = append(apnsTokens, profile.ApnsToken)
 		pushNotification(apnsTokens, "클럽하우스", game.PlaceName, "조인 신청이 도착했습니다.")
+	} else {
+
 	}
 }
 
