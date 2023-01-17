@@ -33,6 +33,7 @@ service version1 {
   rpc GetFilterdGames (FilterdGamesRequest) returns (FilterdGamesReply) {}
   rpc Join (JoinRequest) returns (JoinReply) {}
   rpc GetMyJoins (JoinRequest) returns (JoinReply) {}
+  rpc GetMyBeforeJoins (JoinRequest) returns (JoinReply) {}
   rpc GetGameJoins (JoinRequest) returns (JoinReply) {}
   rpc UpdateJoin (JoinRequest) returns (JoinReply) {}
   rpc GetChat (ChatRequest) returns (ChatReply) {}
@@ -89,6 +90,7 @@ message Join {
   int64 updated = 5;
   int64 join_id = 6;
   int64 start = 7;
+  string review = 8;
 }
 
 message JoinRequest {

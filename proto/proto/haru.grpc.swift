@@ -83,6 +83,11 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
 
+  func getMyBeforeJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
   func getGameJoins(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
@@ -294,6 +299,24 @@ extension Haru_version1ClientProtocol {
     )
   }
 
+  /// Unary call to GetMyBeforeJoins
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetMyBeforeJoins.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getMyBeforeJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getMyBeforeJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetMyBeforeJoinsInterceptors() ?? []
+    )
+  }
+
   /// Unary call to GetGameJoins
   ///
   /// - Parameters:
@@ -501,6 +524,11 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
 
+  func makeGetMyBeforeJoinsCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply>
+
   func makeGetGameJoinsCall(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions?
@@ -654,6 +682,18 @@ extension Haru_version1AsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeGetMyJoinsInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetMyBeforeJoinsCall(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_JoinRequest, Haru_JoinReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getMyBeforeJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetMyBeforeJoinsInterceptors() ?? []
     )
   }
 
@@ -840,6 +880,18 @@ extension Haru_version1AsyncClientProtocol {
     )
   }
 
+  internal func getMyBeforeJoins(
+    _ request: Haru_JoinRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_JoinReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getMyBeforeJoins.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetMyBeforeJoinsInterceptors() ?? []
+    )
+  }
+
   internal func getGameJoins(
     _ request: Haru_JoinRequest,
     callOptions: CallOptions? = nil
@@ -952,6 +1004,9 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
   /// - Returns: Interceptors to use when invoking 'getMyJoins'.
   func makeGetMyJoinsInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 
+  /// - Returns: Interceptors to use when invoking 'getMyBeforeJoins'.
+  func makeGetMyBeforeJoinsInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
   /// - Returns: Interceptors to use when invoking 'getGameJoins'.
   func makeGetGameJoinsInterceptors() -> [ClientInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 
@@ -983,6 +1038,7 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.getFilterdGames,
       Haru_version1ClientMetadata.Methods.join,
       Haru_version1ClientMetadata.Methods.getMyJoins,
+      Haru_version1ClientMetadata.Methods.getMyBeforeJoins,
       Haru_version1ClientMetadata.Methods.getGameJoins,
       Haru_version1ClientMetadata.Methods.updateJoin,
       Haru_version1ClientMetadata.Methods.getChat,
@@ -1052,6 +1108,12 @@ internal enum Haru_version1ClientMetadata {
       type: GRPCCallType.unary
     )
 
+    internal static let getMyBeforeJoins = GRPCMethodDescriptor(
+      name: "GetMyBeforeJoins",
+      path: "/haru.version1/GetMyBeforeJoins",
+      type: GRPCCallType.unary
+    )
+
     internal static let getGameJoins = GRPCMethodDescriptor(
       name: "GetGameJoins",
       path: "/haru.version1/GetGameJoins",
@@ -1109,6 +1171,8 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func join(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 
   func getMyJoins(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
+
+  func getMyBeforeJoins(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 
   func getGameJoins(request: Haru_JoinRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_JoinReply>
 
@@ -1223,6 +1287,15 @@ extension Haru_version1Provider {
         userFunction: self.getMyJoins(request:context:)
       )
 
+    case "GetMyBeforeJoins":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeGetMyBeforeJoinsInterceptors() ?? [],
+        userFunction: self.getMyBeforeJoins(request:context:)
+      )
+
     case "GetGameJoins":
       return UnaryServerHandler(
         context: context,
@@ -1330,6 +1403,11 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
   ) async throws -> Haru_JoinReply
 
   @Sendable func getMyJoins(
+    request: Haru_JoinRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_JoinReply
+
+  @Sendable func getMyBeforeJoins(
     request: Haru_JoinRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_JoinReply
@@ -1469,6 +1547,15 @@ extension Haru_version1AsyncProvider {
         wrapping: self.getMyJoins(request:context:)
       )
 
+    case "GetMyBeforeJoins":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_JoinRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_JoinReply>(),
+        interceptors: self.interceptors?.makeGetMyBeforeJoinsInterceptors() ?? [],
+        wrapping: self.getMyBeforeJoins(request:context:)
+      )
+
     case "GetGameJoins":
       return GRPCAsyncServerHandler(
         context: context,
@@ -1564,6 +1651,10 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetMyJoinsInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
 
+  /// - Returns: Interceptors to use when handling 'getMyBeforeJoins'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetMyBeforeJoinsInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
+
   /// - Returns: Interceptors to use when handling 'getGameJoins'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetGameJoinsInterceptors() -> [ServerInterceptor<Haru_JoinRequest, Haru_JoinReply>]
@@ -1600,6 +1691,7 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.getFilterdGames,
       Haru_version1ServerMetadata.Methods.join,
       Haru_version1ServerMetadata.Methods.getMyJoins,
+      Haru_version1ServerMetadata.Methods.getMyBeforeJoins,
       Haru_version1ServerMetadata.Methods.getGameJoins,
       Haru_version1ServerMetadata.Methods.updateJoin,
       Haru_version1ServerMetadata.Methods.getChat,
@@ -1666,6 +1758,12 @@ internal enum Haru_version1ServerMetadata {
     internal static let getMyJoins = GRPCMethodDescriptor(
       name: "GetMyJoins",
       path: "/haru.version1/GetMyJoins",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getMyBeforeJoins = GRPCMethodDescriptor(
+      name: "GetMyBeforeJoins",
+      path: "/haru.version1/GetMyBeforeJoins",
       type: GRPCCallType.unary
     )
 

@@ -32,6 +32,7 @@ type Version1Client interface {
 	GetFilterdGames(ctx context.Context, in *FilterdGamesRequest, opts ...grpc.CallOption) (*FilterdGamesReply, error)
 	Join(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	GetMyJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
+	GetMyBeforeJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	GetGameJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	UpdateJoin(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error)
 	GetChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatReply, error)
@@ -137,6 +138,15 @@ func (c *version1Client) GetMyJoins(ctx context.Context, in *JoinRequest, opts .
 	return out, nil
 }
 
+func (c *version1Client) GetMyBeforeJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error) {
+	out := new(JoinReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetMyBeforeJoins", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *version1Client) GetGameJoins(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*JoinReply, error) {
 	out := new(JoinReply)
 	err := c.cc.Invoke(ctx, "/haru.version1/GetGameJoins", in, out, opts...)
@@ -196,6 +206,7 @@ type Version1Server interface {
 	GetFilterdGames(context.Context, *FilterdGamesRequest) (*FilterdGamesReply, error)
 	Join(context.Context, *JoinRequest) (*JoinReply, error)
 	GetMyJoins(context.Context, *JoinRequest) (*JoinReply, error)
+	GetMyBeforeJoins(context.Context, *JoinRequest) (*JoinReply, error)
 	GetGameJoins(context.Context, *JoinRequest) (*JoinReply, error)
 	UpdateJoin(context.Context, *JoinRequest) (*JoinReply, error)
 	GetChat(context.Context, *ChatRequest) (*ChatReply, error)
@@ -237,6 +248,9 @@ func (UnimplementedVersion1Server) Join(context.Context, *JoinRequest) (*JoinRep
 }
 func (UnimplementedVersion1Server) GetMyJoins(context.Context, *JoinRequest) (*JoinReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMyJoins not implemented")
+}
+func (UnimplementedVersion1Server) GetMyBeforeJoins(context.Context, *JoinRequest) (*JoinReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMyBeforeJoins not implemented")
 }
 func (UnimplementedVersion1Server) GetGameJoins(context.Context, *JoinRequest) (*JoinReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameJoins not implemented")
@@ -446,6 +460,24 @@ func _Version1_GetMyJoins_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_GetMyBeforeJoins_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetMyBeforeJoins(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetMyBeforeJoins",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetMyBeforeJoins(ctx, req.(*JoinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Version1_GetGameJoins_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JoinRequest)
 	if err := dec(in); err != nil {
@@ -582,6 +614,10 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMyJoins",
 			Handler:    _Version1_GetMyJoins_Handler,
+		},
+		{
+			MethodName: "GetMyBeforeJoins",
+			Handler:    _Version1_GetMyBeforeJoins_Handler,
 		},
 		{
 			MethodName: "GetGameJoins",

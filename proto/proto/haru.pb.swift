@@ -178,6 +178,8 @@ struct Haru_Join {
 
   var start: Int64 = 0
 
+  var review: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -968,6 +970,7 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     5: .same(proto: "updated"),
     6: .standard(proto: "join_id"),
     7: .same(proto: "start"),
+    8: .same(proto: "review"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -983,6 +986,7 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       case 5: try { try decoder.decodeSingularInt64Field(value: &self.updated) }()
       case 6: try { try decoder.decodeSingularInt64Field(value: &self.joinID) }()
       case 7: try { try decoder.decodeSingularInt64Field(value: &self.start) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.review) }()
       default: break
       }
     }
@@ -1010,6 +1014,9 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if self.start != 0 {
       try visitor.visitSingularInt64Field(value: self.start, fieldNumber: 7)
     }
+    if !self.review.isEmpty {
+      try visitor.visitSingularStringField(value: self.review, fieldNumber: 8)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1021,6 +1028,7 @@ extension Haru_Join: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if lhs.updated != rhs.updated {return false}
     if lhs.joinID != rhs.joinID {return false}
     if lhs.start != rhs.start {return false}
+    if lhs.review != rhs.review {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -234,8 +234,49 @@ func (s *server) GetMyJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinRe
 	tracer.Trace(time.Now().UTC(), in)
 	client := ds.GetClient(ctx)
 	cursorStr := in.Cursor
-	const pageSize = 10
-	query := datastore.NewQuery("Join").Filter("AccountId =", in.Join.GetAccountId()).Filter("Status =", StatusJoinDefault).Order("Start").Limit(pageSize)
+	const pageSize = 100
+	query := datastore.NewQuery("Join").Filter("AccountId =", in.Join.GetAccountId()).Filter("Status =", StatusJoinDefault).Filter("Start >", time.Now().Unix()).Order("Start").Limit(pageSize)
+	if cursorStr != "" {
+		cursor, err := datastore.DecodeCursor(cursorStr)
+		if err != nil {
+			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
+		}
+		query = query.Start(cursor)
+	}
+	// Read the join.
+	var joins []pb.Join
+	var join pb.Join
+	it := client.Run(ctx, query)
+	_, err := it.Next(&join)
+	for err == nil {
+		joins = append(joins, join)
+		_, err = it.Next(&join)
+	}
+	if err != iterator.Done {
+		log.Fatalf("Failed fetching results: %v", err)
+	}
+	// Get the cursor for the next page of results.
+	// nextCursor.String can be used as the next page's token.
+	nextCursor, err := it.Cursor()
+	// [END datastore_cursor_paging]
+	_ = err        // Check the error.
+	_ = nextCursor // Use nextCursor.String as the next page's token.
+	var _joins []*pb.Join
+	for i := 0; i < len(joins); i++ {
+		_joins = append(_joins, &joins[i])
+	}
+
+	ret := &pb.JoinReply{Joins: _joins, Cursor: nextCursor.String()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetMyBeforeJoins(ctx context.Context, in *pb.JoinRequest) (*pb.JoinReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	client := ds.GetClient(ctx)
+	cursorStr := in.Cursor
+	const pageSize = 50
+	query := datastore.NewQuery("Join").Filter("AccountId =", in.Join.GetAccountId()).Filter("Status =", StatusJoinDefault).Filter("Start <", time.Now().Unix()).Order("Start").Limit(pageSize)
 	if cursorStr != "" {
 		cursor, err := datastore.DecodeCursor(cursorStr)
 		if err != nil {
@@ -313,40 +354,11 @@ func (s *server) GetGameJoins(ctx context.Context, in *pb.JoinRequest) (*pb.Join
 
 func (s *server) GetChat(ctx context.Context, in *pb.ChatRequest) (*pb.ChatReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
-	client := ds.GetClient(ctx)
-	cursorStr := in.Cursor
-	const pageSize = 10
-	query := datastore.NewQuery("Chat").Filter("GameId =", in.Chat.GetGameId()).Order("Created").Limit(pageSize)
-	if cursorStr != "" {
-		cursor, err := datastore.DecodeCursor(cursorStr)
-		if err != nil {
-			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
-		}
-		query = query.Start(cursor)
-	}
-	// Read the chat.
-	var chats []pb.Chat
-	var chat pb.Chat
-	it := client.Run(ctx, query)
-	_, err := it.Next(&chat)
-	for err == nil {
-		chats = append(chats, chat)
-		_, err = it.Next(&chat)
-	}
-	if err != iterator.Done {
-		log.Fatalf("Failed fetching results: %v", err)
-	}
-	// Get the cursor for the next page of results.
-	// nextCursor.String can be used as the next page's token.
-	nextCursor, err := it.Cursor()
-	// [END datastore_cursor_paging]
-	_ = err        // Check the error.
-	_ = nextCursor // Use nextCursor.String as the next page's token.
-	var _chats []*pb.Chat
-	for i := 0; i < len(chats); i++ {
-		_chats = append(_chats, &chats[i])
-	}
-	ret := &pb.ChatReply{Chats: _chats, Cursor: nextCursor.String()}
+	var chats []*pb.Chat
+	const pageSize = 100
+	q := datastore.NewQuery("Chat").Filter("GameId =", in.Chat.GetGameId()).Order("Created").Limit(pageSize)
+	ds.GetAll(ctx, q, &chats)
+	ret := &pb.ChatReply{Chats: chats, Cursor: ""}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil
 }
@@ -373,7 +385,7 @@ func (s *server) AddChatMessage(ctx context.Context, in *pb.ChatMessageRequest) 
 	ds.Put(ctx, key, &Chat)
 	// return all chats
 	var chats []*pb.Chat
-	const pageSize = 10
+	const pageSize = 100
 	q := datastore.NewQuery("Chat").Filter("GameId =", in.GetGameId()).Order("Created").Limit(pageSize)
 	ds.GetAll(ctx, q, &chats)
 	log.Printf(strconv.FormatInt(in.GetGameId(), 10))
