@@ -39,6 +39,13 @@ service version1 {
   rpc GetChat (ChatRequest) returns (ChatReply) {}
   rpc AddChatMessage (ChatMessageRequest) returns (ChatReply) {}
   rpc GetDataPlace (DataPlaceRequest) returns (DataPlaceReply) {}
+  rpc GetFilterdArticles (FilterdArticlesRequest) returns (FilterdArticlesReply) {}
+  rpc CreateArticle (ArticleRequest) returns (ArticleReply) {}
+  rpc UpdateArticle (ArticleRequest) returns (ArticleReply) {}
+  rpc GetFilterdLikes (FilterdLikesRequest) returns (FilterdLikesRequest) {}
+  rpc CreateLike (LikeRequest) returns (LikeReply) {}
+  rpc UpdateLike (LikeRequest) returns (LikeReply) {}
+  rpc GetCount (Count) returns (Count) {}
 }
 
 message Account {
@@ -132,6 +139,76 @@ message ChatRequest {
 message ChatReply {
   repeated Chat chats = 1;
   string Cursor = 2;
+}
+
+message FilterdArticlesRequest {
+  int64 category = 1;
+  int64 type = 2; // 0 article 1 re_article
+  int64 article_id = 3;
+  int64 account_id = 4;
+  string cursor = 5;
+}
+
+message FilterdArticlesReply {
+  repeated Article articles = 1;
+  string cursor = 2;
+}
+
+message ArticleRequest {
+  Article article = 1;
+}
+
+message ArticleReply {
+  Article article = 1;
+}
+
+message LikeRequest {
+  Like like = 1;
+}
+
+message LikeReply {
+  Like like = 1;
+}
+
+// 좋아요한 목록 관리
+message FilterdLikesRequest {
+  int64 type = 1;
+  string cursor = 2;
+}
+
+message FilterdLikesReply {
+  repeated Article likes = 1;
+  string cursor = 2;
+}
+
+// 카운팅 레디스 개념으로 사용
+message Count {
+  int64 foregin_id = 1;
+  int64 count = 2;
+  string kind = 3;
+}
+
+message Article {
+  int64 id = 1;
+  int64 created = 2;
+  int64 updated = 3;
+  string title = 4;
+  string body = 5;
+  int64 category = 6; // 분류
+  int64 status = 7; // 0 기본 1 밴
+  int64 account_id = 8; // 게시자 계정 아이디
+  int64 type = 9; // 0 기본 1 대댓
+  int64 foregin_id = 10; // 대댓인 경우
+}
+
+message Like {
+  int64 id = 1;
+  int64 foregin_id = 2; // article_id or game_id
+  int64 account_id = 3; // 좋아요한 계정 아이디
+  int64 created = 4;
+  int64 status = 5; // 0 기본 1 밴
+  int64 foregin_account_id = 6;
+  string title = 7;
 }
 
 message Game {

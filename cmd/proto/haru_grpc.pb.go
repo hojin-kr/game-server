@@ -38,6 +38,13 @@ type Version1Client interface {
 	GetChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatReply, error)
 	AddChatMessage(ctx context.Context, in *ChatMessageRequest, opts ...grpc.CallOption) (*ChatReply, error)
 	GetDataPlace(ctx context.Context, in *DataPlaceRequest, opts ...grpc.CallOption) (*DataPlaceReply, error)
+	GetFilterdArticles(ctx context.Context, in *FilterdArticlesRequest, opts ...grpc.CallOption) (*FilterdArticlesReply, error)
+	CreateArticle(ctx context.Context, in *ArticleRequest, opts ...grpc.CallOption) (*ArticleReply, error)
+	UpdateArticle(ctx context.Context, in *ArticleRequest, opts ...grpc.CallOption) (*ArticleReply, error)
+	GetFilterdLikes(ctx context.Context, in *FilterdLikesRequest, opts ...grpc.CallOption) (*FilterdLikesRequest, error)
+	CreateLike(ctx context.Context, in *LikeRequest, opts ...grpc.CallOption) (*LikeReply, error)
+	UpdateLike(ctx context.Context, in *LikeRequest, opts ...grpc.CallOption) (*LikeReply, error)
+	GetCount(ctx context.Context, in *Count, opts ...grpc.CallOption) (*Count, error)
 }
 
 type version1Client struct {
@@ -192,6 +199,69 @@ func (c *version1Client) GetDataPlace(ctx context.Context, in *DataPlaceRequest,
 	return out, nil
 }
 
+func (c *version1Client) GetFilterdArticles(ctx context.Context, in *FilterdArticlesRequest, opts ...grpc.CallOption) (*FilterdArticlesReply, error) {
+	out := new(FilterdArticlesReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetFilterdArticles", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) CreateArticle(ctx context.Context, in *ArticleRequest, opts ...grpc.CallOption) (*ArticleReply, error) {
+	out := new(ArticleReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/CreateArticle", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) UpdateArticle(ctx context.Context, in *ArticleRequest, opts ...grpc.CallOption) (*ArticleReply, error) {
+	out := new(ArticleReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/UpdateArticle", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) GetFilterdLikes(ctx context.Context, in *FilterdLikesRequest, opts ...grpc.CallOption) (*FilterdLikesRequest, error) {
+	out := new(FilterdLikesRequest)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetFilterdLikes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) CreateLike(ctx context.Context, in *LikeRequest, opts ...grpc.CallOption) (*LikeReply, error) {
+	out := new(LikeReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/CreateLike", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) UpdateLike(ctx context.Context, in *LikeRequest, opts ...grpc.CallOption) (*LikeReply, error) {
+	out := new(LikeReply)
+	err := c.cc.Invoke(ctx, "/haru.version1/UpdateLike", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *version1Client) GetCount(ctx context.Context, in *Count, opts ...grpc.CallOption) (*Count, error) {
+	out := new(Count)
+	err := c.cc.Invoke(ctx, "/haru.version1/GetCount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Version1Server is the server API for Version1 service.
 // All implementations must embed UnimplementedVersion1Server
 // for forward compatibility
@@ -212,6 +282,13 @@ type Version1Server interface {
 	GetChat(context.Context, *ChatRequest) (*ChatReply, error)
 	AddChatMessage(context.Context, *ChatMessageRequest) (*ChatReply, error)
 	GetDataPlace(context.Context, *DataPlaceRequest) (*DataPlaceReply, error)
+	GetFilterdArticles(context.Context, *FilterdArticlesRequest) (*FilterdArticlesReply, error)
+	CreateArticle(context.Context, *ArticleRequest) (*ArticleReply, error)
+	UpdateArticle(context.Context, *ArticleRequest) (*ArticleReply, error)
+	GetFilterdLikes(context.Context, *FilterdLikesRequest) (*FilterdLikesRequest, error)
+	CreateLike(context.Context, *LikeRequest) (*LikeReply, error)
+	UpdateLike(context.Context, *LikeRequest) (*LikeReply, error)
+	GetCount(context.Context, *Count) (*Count, error)
 	mustEmbedUnimplementedVersion1Server()
 }
 
@@ -266,6 +343,27 @@ func (UnimplementedVersion1Server) AddChatMessage(context.Context, *ChatMessageR
 }
 func (UnimplementedVersion1Server) GetDataPlace(context.Context, *DataPlaceRequest) (*DataPlaceReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDataPlace not implemented")
+}
+func (UnimplementedVersion1Server) GetFilterdArticles(context.Context, *FilterdArticlesRequest) (*FilterdArticlesReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFilterdArticles not implemented")
+}
+func (UnimplementedVersion1Server) CreateArticle(context.Context, *ArticleRequest) (*ArticleReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateArticle not implemented")
+}
+func (UnimplementedVersion1Server) UpdateArticle(context.Context, *ArticleRequest) (*ArticleReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateArticle not implemented")
+}
+func (UnimplementedVersion1Server) GetFilterdLikes(context.Context, *FilterdLikesRequest) (*FilterdLikesRequest, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFilterdLikes not implemented")
+}
+func (UnimplementedVersion1Server) CreateLike(context.Context, *LikeRequest) (*LikeReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLike not implemented")
+}
+func (UnimplementedVersion1Server) UpdateLike(context.Context, *LikeRequest) (*LikeReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLike not implemented")
+}
+func (UnimplementedVersion1Server) GetCount(context.Context, *Count) (*Count, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCount not implemented")
 }
 func (UnimplementedVersion1Server) mustEmbedUnimplementedVersion1Server() {}
 
@@ -568,6 +666,132 @@ func _Version1_GetDataPlace_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Version1_GetFilterdArticles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FilterdArticlesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetFilterdArticles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetFilterdArticles",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetFilterdArticles(ctx, req.(*FilterdArticlesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_CreateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArticleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).CreateArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/CreateArticle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).CreateArticle(ctx, req.(*ArticleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_UpdateArticle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArticleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).UpdateArticle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/UpdateArticle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).UpdateArticle(ctx, req.(*ArticleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_GetFilterdLikes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FilterdLikesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetFilterdLikes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetFilterdLikes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetFilterdLikes(ctx, req.(*FilterdLikesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_CreateLike_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LikeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).CreateLike(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/CreateLike",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).CreateLike(ctx, req.(*LikeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_UpdateLike_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LikeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).UpdateLike(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/UpdateLike",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).UpdateLike(ctx, req.(*LikeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Version1_GetCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Count)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Version1Server).GetCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/haru.version1/GetCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Version1Server).GetCount(ctx, req.(*Count))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Version1_ServiceDesc is the grpc.ServiceDesc for Version1 service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -638,6 +862,34 @@ var Version1_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDataPlace",
 			Handler:    _Version1_GetDataPlace_Handler,
+		},
+		{
+			MethodName: "GetFilterdArticles",
+			Handler:    _Version1_GetFilterdArticles_Handler,
+		},
+		{
+			MethodName: "CreateArticle",
+			Handler:    _Version1_CreateArticle_Handler,
+		},
+		{
+			MethodName: "UpdateArticle",
+			Handler:    _Version1_UpdateArticle_Handler,
+		},
+		{
+			MethodName: "GetFilterdLikes",
+			Handler:    _Version1_GetFilterdLikes_Handler,
+		},
+		{
+			MethodName: "CreateLike",
+			Handler:    _Version1_CreateLike_Handler,
+		},
+		{
+			MethodName: "UpdateLike",
+			Handler:    _Version1_UpdateLike_Handler,
+		},
+		{
+			MethodName: "GetCount",
+			Handler:    _Version1_GetCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

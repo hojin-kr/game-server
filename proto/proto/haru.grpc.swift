@@ -112,6 +112,41 @@ internal protocol Haru_version1ClientProtocol: GRPCClient {
     _ request: Haru_DataPlaceRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Haru_DataPlaceRequest, Haru_DataPlaceReply>
+
+  func getFilterdArticles(
+    _ request: Haru_FilterdArticlesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_FilterdArticlesRequest, Haru_FilterdArticlesReply>
+
+  func createArticle(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_ArticleRequest, Haru_ArticleReply>
+
+  func updateArticle(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_ArticleRequest, Haru_ArticleReply>
+
+  func getFilterdLikes(
+    _ request: Haru_FilterdLikesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_FilterdLikesRequest, Haru_FilterdLikesRequest>
+
+  func createLike(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_LikeRequest, Haru_LikeReply>
+
+  func updateLike(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_LikeRequest, Haru_LikeReply>
+
+  func getCount(
+    _ request: Haru_Count,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Haru_Count, Haru_Count>
 }
 
 extension Haru_version1ClientProtocol {
@@ -406,6 +441,132 @@ extension Haru_version1ClientProtocol {
       interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? []
     )
   }
+
+  /// Unary call to GetFilterdArticles
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetFilterdArticles.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getFilterdArticles(
+    _ request: Haru_FilterdArticlesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_FilterdArticlesRequest, Haru_FilterdArticlesReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getFilterdArticles.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFilterdArticlesInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to CreateArticle
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to CreateArticle.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func createArticle(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_ArticleRequest, Haru_ArticleReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.createArticle.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreateArticleInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdateArticle
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateArticle.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateArticle(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_ArticleRequest, Haru_ArticleReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateArticle.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateArticleInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to GetFilterdLikes
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetFilterdLikes.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getFilterdLikes(
+    _ request: Haru_FilterdLikesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_FilterdLikesRequest, Haru_FilterdLikesRequest> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getFilterdLikes.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFilterdLikesInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to CreateLike
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to CreateLike.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func createLike(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_LikeRequest, Haru_LikeReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.createLike.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreateLikeInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdateLike
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateLike.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateLike(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_LikeRequest, Haru_LikeReply> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateLike.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateLikeInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to GetCount
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetCount.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getCount(
+    _ request: Haru_Count,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Haru_Count, Haru_Count> {
+    return self.makeUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getCount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetCountInterceptors() ?? []
+    )
+  }
 }
 
 #if compiler(>=5.6)
@@ -553,6 +714,41 @@ internal protocol Haru_version1AsyncClientProtocol: GRPCClient {
     _ request: Haru_DataPlaceRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Haru_DataPlaceRequest, Haru_DataPlaceReply>
+
+  func makeGetFilterdArticlesCall(
+    _ request: Haru_FilterdArticlesRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdArticlesRequest, Haru_FilterdArticlesReply>
+
+  func makeCreateArticleCall(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_ArticleRequest, Haru_ArticleReply>
+
+  func makeUpdateArticleCall(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_ArticleRequest, Haru_ArticleReply>
+
+  func makeGetFilterdLikesCall(
+    _ request: Haru_FilterdLikesRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdLikesRequest, Haru_FilterdLikesRequest>
+
+  func makeCreateLikeCall(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_LikeRequest, Haru_LikeReply>
+
+  func makeUpdateLikeCall(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_LikeRequest, Haru_LikeReply>
+
+  func makeGetCountCall(
+    _ request: Haru_Count,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Haru_Count, Haru_Count>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -756,6 +952,90 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? []
     )
   }
+
+  internal func makeGetFilterdArticlesCall(
+    _ request: Haru_FilterdArticlesRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdArticlesRequest, Haru_FilterdArticlesReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getFilterdArticles.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFilterdArticlesInterceptors() ?? []
+    )
+  }
+
+  internal func makeCreateArticleCall(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_ArticleRequest, Haru_ArticleReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.createArticle.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreateArticleInterceptors() ?? []
+    )
+  }
+
+  internal func makeUpdateArticleCall(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_ArticleRequest, Haru_ArticleReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateArticle.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateArticleInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetFilterdLikesCall(
+    _ request: Haru_FilterdLikesRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_FilterdLikesRequest, Haru_FilterdLikesRequest> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getFilterdLikes.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFilterdLikesInterceptors() ?? []
+    )
+  }
+
+  internal func makeCreateLikeCall(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_LikeRequest, Haru_LikeReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.createLike.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreateLikeInterceptors() ?? []
+    )
+  }
+
+  internal func makeUpdateLikeCall(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_LikeRequest, Haru_LikeReply> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateLike.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateLikeInterceptors() ?? []
+    )
+  }
+
+  internal func makeGetCountCall(
+    _ request: Haru_Count,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Haru_Count, Haru_Count> {
+    return self.makeAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getCount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetCountInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -951,6 +1231,90 @@ extension Haru_version1AsyncClientProtocol {
       interceptors: self.interceptors?.makeGetDataPlaceInterceptors() ?? []
     )
   }
+
+  internal func getFilterdArticles(
+    _ request: Haru_FilterdArticlesRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_FilterdArticlesReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getFilterdArticles.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFilterdArticlesInterceptors() ?? []
+    )
+  }
+
+  internal func createArticle(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_ArticleReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.createArticle.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreateArticleInterceptors() ?? []
+    )
+  }
+
+  internal func updateArticle(
+    _ request: Haru_ArticleRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_ArticleReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateArticle.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateArticleInterceptors() ?? []
+    )
+  }
+
+  internal func getFilterdLikes(
+    _ request: Haru_FilterdLikesRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_FilterdLikesRequest {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getFilterdLikes.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFilterdLikesInterceptors() ?? []
+    )
+  }
+
+  internal func createLike(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_LikeReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.createLike.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreateLikeInterceptors() ?? []
+    )
+  }
+
+  internal func updateLike(
+    _ request: Haru_LikeRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_LikeReply {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.updateLike.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateLikeInterceptors() ?? []
+    )
+  }
+
+  internal func getCount(
+    _ request: Haru_Count,
+    callOptions: CallOptions? = nil
+  ) async throws -> Haru_Count {
+    return try await self.performAsyncUnaryCall(
+      path: Haru_version1ClientMetadata.Methods.getCount.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetCountInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1021,6 +1385,27 @@ internal protocol Haru_version1ClientInterceptorFactoryProtocol: GRPCSendable {
 
   /// - Returns: Interceptors to use when invoking 'getDataPlace'.
   func makeGetDataPlaceInterceptors() -> [ClientInterceptor<Haru_DataPlaceRequest, Haru_DataPlaceReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getFilterdArticles'.
+  func makeGetFilterdArticlesInterceptors() -> [ClientInterceptor<Haru_FilterdArticlesRequest, Haru_FilterdArticlesReply>]
+
+  /// - Returns: Interceptors to use when invoking 'createArticle'.
+  func makeCreateArticleInterceptors() -> [ClientInterceptor<Haru_ArticleRequest, Haru_ArticleReply>]
+
+  /// - Returns: Interceptors to use when invoking 'updateArticle'.
+  func makeUpdateArticleInterceptors() -> [ClientInterceptor<Haru_ArticleRequest, Haru_ArticleReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getFilterdLikes'.
+  func makeGetFilterdLikesInterceptors() -> [ClientInterceptor<Haru_FilterdLikesRequest, Haru_FilterdLikesRequest>]
+
+  /// - Returns: Interceptors to use when invoking 'createLike'.
+  func makeCreateLikeInterceptors() -> [ClientInterceptor<Haru_LikeRequest, Haru_LikeReply>]
+
+  /// - Returns: Interceptors to use when invoking 'updateLike'.
+  func makeUpdateLikeInterceptors() -> [ClientInterceptor<Haru_LikeRequest, Haru_LikeReply>]
+
+  /// - Returns: Interceptors to use when invoking 'getCount'.
+  func makeGetCountInterceptors() -> [ClientInterceptor<Haru_Count, Haru_Count>]
 }
 
 internal enum Haru_version1ClientMetadata {
@@ -1044,6 +1429,13 @@ internal enum Haru_version1ClientMetadata {
       Haru_version1ClientMetadata.Methods.getChat,
       Haru_version1ClientMetadata.Methods.addChatMessage,
       Haru_version1ClientMetadata.Methods.getDataPlace,
+      Haru_version1ClientMetadata.Methods.getFilterdArticles,
+      Haru_version1ClientMetadata.Methods.createArticle,
+      Haru_version1ClientMetadata.Methods.updateArticle,
+      Haru_version1ClientMetadata.Methods.getFilterdLikes,
+      Haru_version1ClientMetadata.Methods.createLike,
+      Haru_version1ClientMetadata.Methods.updateLike,
+      Haru_version1ClientMetadata.Methods.getCount,
     ]
   )
 
@@ -1143,6 +1535,48 @@ internal enum Haru_version1ClientMetadata {
       path: "/haru.version1/GetDataPlace",
       type: GRPCCallType.unary
     )
+
+    internal static let getFilterdArticles = GRPCMethodDescriptor(
+      name: "GetFilterdArticles",
+      path: "/haru.version1/GetFilterdArticles",
+      type: GRPCCallType.unary
+    )
+
+    internal static let createArticle = GRPCMethodDescriptor(
+      name: "CreateArticle",
+      path: "/haru.version1/CreateArticle",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateArticle = GRPCMethodDescriptor(
+      name: "UpdateArticle",
+      path: "/haru.version1/UpdateArticle",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getFilterdLikes = GRPCMethodDescriptor(
+      name: "GetFilterdLikes",
+      path: "/haru.version1/GetFilterdLikes",
+      type: GRPCCallType.unary
+    )
+
+    internal static let createLike = GRPCMethodDescriptor(
+      name: "CreateLike",
+      path: "/haru.version1/CreateLike",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateLike = GRPCMethodDescriptor(
+      name: "UpdateLike",
+      path: "/haru.version1/UpdateLike",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getCount = GRPCMethodDescriptor(
+      name: "GetCount",
+      path: "/haru.version1/GetCount",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -1183,6 +1617,20 @@ internal protocol Haru_version1Provider: CallHandlerProvider {
   func addChatMessage(request: Haru_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ChatReply>
 
   func getDataPlace(request: Haru_DataPlaceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_DataPlaceReply>
+
+  func getFilterdArticles(request: Haru_FilterdArticlesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdArticlesReply>
+
+  func createArticle(request: Haru_ArticleRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ArticleReply>
+
+  func updateArticle(request: Haru_ArticleRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_ArticleReply>
+
+  func getFilterdLikes(request: Haru_FilterdLikesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_FilterdLikesRequest>
+
+  func createLike(request: Haru_LikeRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_LikeReply>
+
+  func updateLike(request: Haru_LikeRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_LikeReply>
+
+  func getCount(request: Haru_Count, context: StatusOnlyCallContext) -> EventLoopFuture<Haru_Count>
 }
 
 extension Haru_version1Provider {
@@ -1341,6 +1789,69 @@ extension Haru_version1Provider {
         userFunction: self.getDataPlace(request:context:)
       )
 
+    case "GetFilterdArticles":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdArticlesRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdArticlesReply>(),
+        interceptors: self.interceptors?.makeGetFilterdArticlesInterceptors() ?? [],
+        userFunction: self.getFilterdArticles(request:context:)
+      )
+
+    case "CreateArticle":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ArticleRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ArticleReply>(),
+        interceptors: self.interceptors?.makeCreateArticleInterceptors() ?? [],
+        userFunction: self.createArticle(request:context:)
+      )
+
+    case "UpdateArticle":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ArticleRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ArticleReply>(),
+        interceptors: self.interceptors?.makeUpdateArticleInterceptors() ?? [],
+        userFunction: self.updateArticle(request:context:)
+      )
+
+    case "GetFilterdLikes":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdLikesRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdLikesRequest>(),
+        interceptors: self.interceptors?.makeGetFilterdLikesInterceptors() ?? [],
+        userFunction: self.getFilterdLikes(request:context:)
+      )
+
+    case "CreateLike":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_LikeRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_LikeReply>(),
+        interceptors: self.interceptors?.makeCreateLikeInterceptors() ?? [],
+        userFunction: self.createLike(request:context:)
+      )
+
+    case "UpdateLike":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_LikeRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_LikeReply>(),
+        interceptors: self.interceptors?.makeUpdateLikeInterceptors() ?? [],
+        userFunction: self.updateLike(request:context:)
+      )
+
+    case "GetCount":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_Count>(),
+        responseSerializer: ProtobufSerializer<Haru_Count>(),
+        interceptors: self.interceptors?.makeGetCountInterceptors() ?? [],
+        userFunction: self.getCount(request:context:)
+      )
+
     default:
       return nil
     }
@@ -1436,6 +1947,41 @@ internal protocol Haru_version1AsyncProvider: CallHandlerProvider {
     request: Haru_DataPlaceRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Haru_DataPlaceReply
+
+  @Sendable func getFilterdArticles(
+    request: Haru_FilterdArticlesRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_FilterdArticlesReply
+
+  @Sendable func createArticle(
+    request: Haru_ArticleRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_ArticleReply
+
+  @Sendable func updateArticle(
+    request: Haru_ArticleRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_ArticleReply
+
+  @Sendable func getFilterdLikes(
+    request: Haru_FilterdLikesRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_FilterdLikesRequest
+
+  @Sendable func createLike(
+    request: Haru_LikeRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_LikeReply
+
+  @Sendable func updateLike(
+    request: Haru_LikeRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_LikeReply
+
+  @Sendable func getCount(
+    request: Haru_Count,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Haru_Count
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -1601,6 +2147,69 @@ extension Haru_version1AsyncProvider {
         wrapping: self.getDataPlace(request:context:)
       )
 
+    case "GetFilterdArticles":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdArticlesRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdArticlesReply>(),
+        interceptors: self.interceptors?.makeGetFilterdArticlesInterceptors() ?? [],
+        wrapping: self.getFilterdArticles(request:context:)
+      )
+
+    case "CreateArticle":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ArticleRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ArticleReply>(),
+        interceptors: self.interceptors?.makeCreateArticleInterceptors() ?? [],
+        wrapping: self.createArticle(request:context:)
+      )
+
+    case "UpdateArticle":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_ArticleRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_ArticleReply>(),
+        interceptors: self.interceptors?.makeUpdateArticleInterceptors() ?? [],
+        wrapping: self.updateArticle(request:context:)
+      )
+
+    case "GetFilterdLikes":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_FilterdLikesRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_FilterdLikesRequest>(),
+        interceptors: self.interceptors?.makeGetFilterdLikesInterceptors() ?? [],
+        wrapping: self.getFilterdLikes(request:context:)
+      )
+
+    case "CreateLike":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_LikeRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_LikeReply>(),
+        interceptors: self.interceptors?.makeCreateLikeInterceptors() ?? [],
+        wrapping: self.createLike(request:context:)
+      )
+
+    case "UpdateLike":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_LikeRequest>(),
+        responseSerializer: ProtobufSerializer<Haru_LikeReply>(),
+        interceptors: self.interceptors?.makeUpdateLikeInterceptors() ?? [],
+        wrapping: self.updateLike(request:context:)
+      )
+
+    case "GetCount":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Haru_Count>(),
+        responseSerializer: ProtobufSerializer<Haru_Count>(),
+        interceptors: self.interceptors?.makeGetCountInterceptors() ?? [],
+        wrapping: self.getCount(request:context:)
+      )
+
     default:
       return nil
     }
@@ -1674,6 +2283,34 @@ internal protocol Haru_version1ServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'getDataPlace'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetDataPlaceInterceptors() -> [ServerInterceptor<Haru_DataPlaceRequest, Haru_DataPlaceReply>]
+
+  /// - Returns: Interceptors to use when handling 'getFilterdArticles'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetFilterdArticlesInterceptors() -> [ServerInterceptor<Haru_FilterdArticlesRequest, Haru_FilterdArticlesReply>]
+
+  /// - Returns: Interceptors to use when handling 'createArticle'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeCreateArticleInterceptors() -> [ServerInterceptor<Haru_ArticleRequest, Haru_ArticleReply>]
+
+  /// - Returns: Interceptors to use when handling 'updateArticle'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateArticleInterceptors() -> [ServerInterceptor<Haru_ArticleRequest, Haru_ArticleReply>]
+
+  /// - Returns: Interceptors to use when handling 'getFilterdLikes'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetFilterdLikesInterceptors() -> [ServerInterceptor<Haru_FilterdLikesRequest, Haru_FilterdLikesRequest>]
+
+  /// - Returns: Interceptors to use when handling 'createLike'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeCreateLikeInterceptors() -> [ServerInterceptor<Haru_LikeRequest, Haru_LikeReply>]
+
+  /// - Returns: Interceptors to use when handling 'updateLike'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateLikeInterceptors() -> [ServerInterceptor<Haru_LikeRequest, Haru_LikeReply>]
+
+  /// - Returns: Interceptors to use when handling 'getCount'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetCountInterceptors() -> [ServerInterceptor<Haru_Count, Haru_Count>]
 }
 
 internal enum Haru_version1ServerMetadata {
@@ -1697,6 +2334,13 @@ internal enum Haru_version1ServerMetadata {
       Haru_version1ServerMetadata.Methods.getChat,
       Haru_version1ServerMetadata.Methods.addChatMessage,
       Haru_version1ServerMetadata.Methods.getDataPlace,
+      Haru_version1ServerMetadata.Methods.getFilterdArticles,
+      Haru_version1ServerMetadata.Methods.createArticle,
+      Haru_version1ServerMetadata.Methods.updateArticle,
+      Haru_version1ServerMetadata.Methods.getFilterdLikes,
+      Haru_version1ServerMetadata.Methods.createLike,
+      Haru_version1ServerMetadata.Methods.updateLike,
+      Haru_version1ServerMetadata.Methods.getCount,
     ]
   )
 
@@ -1794,6 +2438,48 @@ internal enum Haru_version1ServerMetadata {
     internal static let getDataPlace = GRPCMethodDescriptor(
       name: "GetDataPlace",
       path: "/haru.version1/GetDataPlace",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getFilterdArticles = GRPCMethodDescriptor(
+      name: "GetFilterdArticles",
+      path: "/haru.version1/GetFilterdArticles",
+      type: GRPCCallType.unary
+    )
+
+    internal static let createArticle = GRPCMethodDescriptor(
+      name: "CreateArticle",
+      path: "/haru.version1/CreateArticle",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateArticle = GRPCMethodDescriptor(
+      name: "UpdateArticle",
+      path: "/haru.version1/UpdateArticle",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getFilterdLikes = GRPCMethodDescriptor(
+      name: "GetFilterdLikes",
+      path: "/haru.version1/GetFilterdLikes",
+      type: GRPCCallType.unary
+    )
+
+    internal static let createLike = GRPCMethodDescriptor(
+      name: "CreateLike",
+      path: "/haru.version1/CreateLike",
+      type: GRPCCallType.unary
+    )
+
+    internal static let updateLike = GRPCMethodDescriptor(
+      name: "UpdateLike",
+      path: "/haru.version1/UpdateLike",
+      type: GRPCCallType.unary
+    )
+
+    internal static let getCount = GRPCMethodDescriptor(
+      name: "GetCount",
+      path: "/haru.version1/GetCount",
       type: GRPCCallType.unary
     )
   }

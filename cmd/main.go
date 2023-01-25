@@ -516,6 +516,122 @@ func pushNotification(apnsTokens []string, title string, subtitle string, body s
 	}
 }
 
+func (s *server) CreateArticle(ctx context.Context, in *pb.ArticleRequest) (*pb.ArticleReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var article = in.Article
+	article.Created = time.Now().UTC().Unix()
+	log.Print("cret")
+	put := ds.Put(ctx, datastore.IncompleteKey("Article", nil), article)
+	article.Id = put.ID
+	ret := &pb.ArticleReply{Article: article}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) UpdateArticle(ctx context.Context, in *pb.ArticleRequest) (*pb.ArticleReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	in.Article.Updated = time.Now().UTC().Unix()
+	_ = ds.Put(ctx, datastore.IDKey("Article", in.Article.GetId(), nil), in.Article)
+	ret := &pb.ArticleReply{Article: in.GetArticle()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetFilterdArticles(ctx context.Context, in *pb.FilterdArticlesRequest) (*pb.FilterdArticlesReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	client := ds.GetClient(ctx)
+	cursorStr := in.Cursor
+	const pageSize = 10
+	queryBase := datastore.NewQuery("Article")
+	// todo re article
+	query := queryBase.Order("Created").Filter("Category =", in.Category).Filter("Type = ", in.Type).Limit(pageSize)
+	if cursorStr != "" {
+		cursor, err := datastore.DecodeCursor(cursorStr)
+		if err != nil {
+			log.Fatalf("Bad cursor %q: %v", cursorStr, err)
+		}
+		query = query.Start(cursor)
+	}
+	var articles []pb.Article
+	var article pb.Article
+	it := client.Run(ctx, query)
+	_, err := it.Next(&article)
+	// todo multi get likes 카운팅할지 고민
+	for err == nil {
+		articles = append(articles, article)
+		_, err = it.Next(&article)
+	}
+	if err != iterator.Done {
+		log.Fatalf("Failed fetching results: %v", err)
+	}
+
+	// Get the cursor for the next page of results.
+	// nextCursor.String can be used as the next page's token.
+	nextCursor, err := it.Cursor()
+	// [END datastore_cursor_paging]
+	_ = err        // Check the error.
+	_ = nextCursor // Use nextCursor.String as the next page's token.
+	var _articles []*pb.Article
+	for i := 0; i < len(articles); i++ {
+		_articles = append(_articles, &articles[i])
+	}
+	ret := &pb.FilterdArticlesReply{Articles: _articles, Cursor: nextCursor.String()}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) GetCount(ctx context.Context, in *pb.Count) (*pb.Count, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	var count pb.Count
+	ds.Get(ctx, datastore.IDKey(in.Kind, in.ForeginId, nil), &count)
+	ret := &pb.Count{Count: count.Count, ForeginId: in.ForeginId, Kind: in.Kind}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func (s *server) CreateLike(ctx context.Context, in *pb.LikeRequest) (*pb.LikeReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	in.Like.Created = time.Now().UTC().Unix()
+	log.Print(in.Like.GetForeginAccountId())
+	_ = ds.Put(ctx, datastore.IncompleteKey("Like", nil), in.Like)
+	// just counting
+	go CountIncr(context.Background(), in.Like.GetForeginId(), "Like")
+	go setAccountIdPush(context.Background(), in.Like.GetForeginAccountId(), in.Like.GetTitle(), "+1 좋아합니다.")
+	ret := &pb.LikeReply{Like: in.Like}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+// 계정 아이디로 푸시 발송
+func setAccountIdPush(ctx context.Context, id int64, title string, body string) {
+	var profile pb.Profile
+	var apnsTokens []string
+	ds.Get(ctx, datastore.IDKey("Profile", id, nil), &profile)
+	apnsTokens = append(apnsTokens, profile.ApnsToken)
+	pushNotification(apnsTokens, "클럽하우스", title, body)
+}
+
+func (s *server) UpdateLike(ctx context.Context, in *pb.LikeRequest) (*pb.LikeReply, error) {
+	tracer.Trace(time.Now().UTC(), in)
+	in.Like.Created = time.Now().UTC().Unix()
+	_ = ds.Put(ctx, datastore.IncompleteKey("Like", nil), in.Like)
+	ret := &pb.LikeReply{Like: in.Like}
+	tracer.Trace(time.Now().UTC(), ret)
+	return ret, nil
+}
+
+func CountIncr(ctx context.Context, id int64, kind string) {
+	var count pb.Count
+	IDKey := datastore.IDKey(kind, id, nil)
+	err := ds.Get(ctx, IDKey, &count)
+	if err != nil {
+		count.Count = 1
+	} else {
+		count.Count = count.Count + 1
+	}
+	_ = ds.Put(ctx, IDKey, &count)
+}
+
 func main() {
 	flag.Parse()
 	tracer = trace.New(os.Stdout)

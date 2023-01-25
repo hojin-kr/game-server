@@ -988,6 +988,717 @@ func (x *ChatReply) GetCursor() string {
 	return ""
 }
 
+type FilterdArticlesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Category  int64  `protobuf:"varint,1,opt,name=category,proto3" json:"category,omitempty"`
+	Type      int64  `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"` // 0 article 1 re_article
+	ArticleId int64  `protobuf:"varint,3,opt,name=article_id,json=articleId,proto3" json:"article_id,omitempty"`
+	AccountId int64  `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Cursor    string `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"`
+}
+
+func (x *FilterdArticlesRequest) Reset() {
+	*x = FilterdArticlesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FilterdArticlesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilterdArticlesRequest) ProtoMessage() {}
+
+func (x *FilterdArticlesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilterdArticlesRequest.ProtoReflect.Descriptor instead.
+func (*FilterdArticlesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *FilterdArticlesRequest) GetCategory() int64 {
+	if x != nil {
+		return x.Category
+	}
+	return 0
+}
+
+func (x *FilterdArticlesRequest) GetType() int64 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *FilterdArticlesRequest) GetArticleId() int64 {
+	if x != nil {
+		return x.ArticleId
+	}
+	return 0
+}
+
+func (x *FilterdArticlesRequest) GetAccountId() int64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *FilterdArticlesRequest) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
+type FilterdArticlesReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Articles []*Article `protobuf:"bytes,1,rep,name=articles,proto3" json:"articles,omitempty"`
+	Cursor   string     `protobuf:"bytes,2,opt,name=cursor,proto3" json:"cursor,omitempty"`
+}
+
+func (x *FilterdArticlesReply) Reset() {
+	*x = FilterdArticlesReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FilterdArticlesReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilterdArticlesReply) ProtoMessage() {}
+
+func (x *FilterdArticlesReply) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilterdArticlesReply.ProtoReflect.Descriptor instead.
+func (*FilterdArticlesReply) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *FilterdArticlesReply) GetArticles() []*Article {
+	if x != nil {
+		return x.Articles
+	}
+	return nil
+}
+
+func (x *FilterdArticlesReply) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
+type ArticleRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Article *Article `protobuf:"bytes,1,opt,name=article,proto3" json:"article,omitempty"`
+}
+
+func (x *ArticleRequest) Reset() {
+	*x = ArticleRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArticleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArticleRequest) ProtoMessage() {}
+
+func (x *ArticleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArticleRequest.ProtoReflect.Descriptor instead.
+func (*ArticleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ArticleRequest) GetArticle() *Article {
+	if x != nil {
+		return x.Article
+	}
+	return nil
+}
+
+type ArticleReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Article *Article `protobuf:"bytes,1,opt,name=article,proto3" json:"article,omitempty"`
+}
+
+func (x *ArticleReply) Reset() {
+	*x = ArticleReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArticleReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArticleReply) ProtoMessage() {}
+
+func (x *ArticleReply) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArticleReply.ProtoReflect.Descriptor instead.
+func (*ArticleReply) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ArticleReply) GetArticle() *Article {
+	if x != nil {
+		return x.Article
+	}
+	return nil
+}
+
+type LikeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Like *Like `protobuf:"bytes,1,opt,name=like,proto3" json:"like,omitempty"`
+}
+
+func (x *LikeRequest) Reset() {
+	*x = LikeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LikeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LikeRequest) ProtoMessage() {}
+
+func (x *LikeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LikeRequest.ProtoReflect.Descriptor instead.
+func (*LikeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *LikeRequest) GetLike() *Like {
+	if x != nil {
+		return x.Like
+	}
+	return nil
+}
+
+type LikeReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Like *Like `protobuf:"bytes,1,opt,name=like,proto3" json:"like,omitempty"`
+}
+
+func (x *LikeReply) Reset() {
+	*x = LikeReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LikeReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LikeReply) ProtoMessage() {}
+
+func (x *LikeReply) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LikeReply.ProtoReflect.Descriptor instead.
+func (*LikeReply) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *LikeReply) GetLike() *Like {
+	if x != nil {
+		return x.Like
+	}
+	return nil
+}
+
+// 좋아요한 목록 관리
+type FilterdLikesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type   int64  `protobuf:"varint,1,opt,name=type,proto3" json:"type,omitempty"`
+	Cursor string `protobuf:"bytes,2,opt,name=cursor,proto3" json:"cursor,omitempty"`
+}
+
+func (x *FilterdLikesRequest) Reset() {
+	*x = FilterdLikesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FilterdLikesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilterdLikesRequest) ProtoMessage() {}
+
+func (x *FilterdLikesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilterdLikesRequest.ProtoReflect.Descriptor instead.
+func (*FilterdLikesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *FilterdLikesRequest) GetType() int64 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *FilterdLikesRequest) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
+type FilterdLikesReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Likes  []*Article `protobuf:"bytes,1,rep,name=likes,proto3" json:"likes,omitempty"`
+	Cursor string     `protobuf:"bytes,2,opt,name=cursor,proto3" json:"cursor,omitempty"`
+}
+
+func (x *FilterdLikesReply) Reset() {
+	*x = FilterdLikesReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[21]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FilterdLikesReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilterdLikesReply) ProtoMessage() {}
+
+func (x *FilterdLikesReply) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[21]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilterdLikesReply.ProtoReflect.Descriptor instead.
+func (*FilterdLikesReply) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *FilterdLikesReply) GetLikes() []*Article {
+	if x != nil {
+		return x.Likes
+	}
+	return nil
+}
+
+func (x *FilterdLikesReply) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
+// 카운팅 레디스 개념으로 사용
+type Count struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ForeginId int64  `protobuf:"varint,1,opt,name=foregin_id,json=foreginId,proto3" json:"foregin_id,omitempty"`
+	Count     int64  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Kind      string `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
+}
+
+func (x *Count) Reset() {
+	*x = Count{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Count) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Count) ProtoMessage() {}
+
+func (x *Count) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Count.ProtoReflect.Descriptor instead.
+func (*Count) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *Count) GetForeginId() int64 {
+	if x != nil {
+		return x.ForeginId
+	}
+	return 0
+}
+
+func (x *Count) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *Count) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+type Article struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Created   int64  `protobuf:"varint,2,opt,name=created,proto3" json:"created,omitempty"`
+	Updated   int64  `protobuf:"varint,3,opt,name=updated,proto3" json:"updated,omitempty"`
+	Title     string `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Body      string `protobuf:"bytes,5,opt,name=body,proto3" json:"body,omitempty"`
+	Category  int64  `protobuf:"varint,6,opt,name=category,proto3" json:"category,omitempty"`                     // 분류
+	Status    int64  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`                         // 0 기본 1 밴
+	AccountId int64  `protobuf:"varint,8,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`  // 게시자 계정 아이디
+	Type      int64  `protobuf:"varint,9,opt,name=type,proto3" json:"type,omitempty"`                             // 0 기본 1 대댓
+	ForeginId int64  `protobuf:"varint,10,opt,name=foregin_id,json=foreginId,proto3" json:"foregin_id,omitempty"` // 대댓인 경우
+}
+
+func (x *Article) Reset() {
+	*x = Article{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Article) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Article) ProtoMessage() {}
+
+func (x *Article) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Article.ProtoReflect.Descriptor instead.
+func (*Article) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *Article) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Article) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *Article) GetUpdated() int64 {
+	if x != nil {
+		return x.Updated
+	}
+	return 0
+}
+
+func (x *Article) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *Article) GetBody() string {
+	if x != nil {
+		return x.Body
+	}
+	return ""
+}
+
+func (x *Article) GetCategory() int64 {
+	if x != nil {
+		return x.Category
+	}
+	return 0
+}
+
+func (x *Article) GetStatus() int64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *Article) GetAccountId() int64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *Article) GetType() int64 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *Article) GetForeginId() int64 {
+	if x != nil {
+		return x.ForeginId
+	}
+	return 0
+}
+
+type Like struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id               int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ForeginId        int64  `protobuf:"varint,2,opt,name=foregin_id,json=foreginId,proto3" json:"foregin_id,omitempty"` // article_id or game_id
+	AccountId        int64  `protobuf:"varint,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"` // 좋아요한 계정 아이디
+	Created          int64  `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`
+	Status           int64  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"` // 0 기본 1 밴
+	ForeginAccountId int64  `protobuf:"varint,6,opt,name=foregin_account_id,json=foreginAccountId,proto3" json:"foregin_account_id,omitempty"`
+	Title            string `protobuf:"bytes,7,opt,name=title,proto3" json:"title,omitempty"`
+}
+
+func (x *Like) Reset() {
+	*x = Like{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_haru_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Like) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Like) ProtoMessage() {}
+
+func (x *Like) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_haru_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Like.ProtoReflect.Descriptor instead.
+func (*Like) Descriptor() ([]byte, []int) {
+	return file_proto_haru_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *Like) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Like) GetForeginId() int64 {
+	if x != nil {
+		return x.ForeginId
+	}
+	return 0
+}
+
+func (x *Like) GetAccountId() int64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *Like) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *Like) GetStatus() int64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *Like) GetForeginAccountId() int64 {
+	if x != nil {
+		return x.ForeginAccountId
+	}
+	return 0
+}
+
+func (x *Like) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
 type Game struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1020,7 +1731,7 @@ type Game struct {
 func (x *Game) Reset() {
 	*x = Game{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[14]
+		mi := &file_proto_haru_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1033,7 +1744,7 @@ func (x *Game) String() string {
 func (*Game) ProtoMessage() {}
 
 func (x *Game) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[14]
+	mi := &file_proto_haru_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1046,7 +1757,7 @@ func (x *Game) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Game.ProtoReflect.Descriptor instead.
 func (*Game) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{14}
+	return file_proto_haru_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *Game) GetId() int64 {
@@ -1216,7 +1927,7 @@ type Place struct {
 func (x *Place) Reset() {
 	*x = Place{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[15]
+		mi := &file_proto_haru_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1229,7 +1940,7 @@ func (x *Place) String() string {
 func (*Place) ProtoMessage() {}
 
 func (x *Place) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[15]
+	mi := &file_proto_haru_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1242,7 +1953,7 @@ func (x *Place) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Place.ProtoReflect.Descriptor instead.
 func (*Place) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{15}
+	return file_proto_haru_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *Place) GetName() string {
@@ -1277,7 +1988,7 @@ type GameMultiRequest struct {
 func (x *GameMultiRequest) Reset() {
 	*x = GameMultiRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[16]
+		mi := &file_proto_haru_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1290,7 +2001,7 @@ func (x *GameMultiRequest) String() string {
 func (*GameMultiRequest) ProtoMessage() {}
 
 func (x *GameMultiRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[16]
+	mi := &file_proto_haru_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +2014,7 @@ func (x *GameMultiRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameMultiRequest.ProtoReflect.Descriptor instead.
 func (*GameMultiRequest) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{16}
+	return file_proto_haru_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GameMultiRequest) GetGameIds() []int64 {
@@ -1324,7 +2035,7 @@ type GameMultiReply struct {
 func (x *GameMultiReply) Reset() {
 	*x = GameMultiReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[17]
+		mi := &file_proto_haru_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1337,7 +2048,7 @@ func (x *GameMultiReply) String() string {
 func (*GameMultiReply) ProtoMessage() {}
 
 func (x *GameMultiReply) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[17]
+	mi := &file_proto_haru_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1350,7 +2061,7 @@ func (x *GameMultiReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameMultiReply.ProtoReflect.Descriptor instead.
 func (*GameMultiReply) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{17}
+	return file_proto_haru_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GameMultiReply) GetGames() []*Game {
@@ -1372,7 +2083,7 @@ type GameRequest struct {
 func (x *GameRequest) Reset() {
 	*x = GameRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[18]
+		mi := &file_proto_haru_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1385,7 +2096,7 @@ func (x *GameRequest) String() string {
 func (*GameRequest) ProtoMessage() {}
 
 func (x *GameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[18]
+	mi := &file_proto_haru_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1398,7 +2109,7 @@ func (x *GameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameRequest.ProtoReflect.Descriptor instead.
 func (*GameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{18}
+	return file_proto_haru_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GameRequest) GetGame() *Game {
@@ -1427,7 +2138,7 @@ type GameReply struct {
 func (x *GameReply) Reset() {
 	*x = GameReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[19]
+		mi := &file_proto_haru_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1440,7 +2151,7 @@ func (x *GameReply) String() string {
 func (*GameReply) ProtoMessage() {}
 
 func (x *GameReply) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[19]
+	mi := &file_proto_haru_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1453,7 +2164,7 @@ func (x *GameReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameReply.ProtoReflect.Descriptor instead.
 func (*GameReply) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{19}
+	return file_proto_haru_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GameReply) GetGame() *Game {
@@ -1486,7 +2197,7 @@ type FilterdGamesRequest struct {
 func (x *FilterdGamesRequest) Reset() {
 	*x = FilterdGamesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[20]
+		mi := &file_proto_haru_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1499,7 +2210,7 @@ func (x *FilterdGamesRequest) String() string {
 func (*FilterdGamesRequest) ProtoMessage() {}
 
 func (x *FilterdGamesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[20]
+	mi := &file_proto_haru_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1512,7 +2223,7 @@ func (x *FilterdGamesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterdGamesRequest.ProtoReflect.Descriptor instead.
 func (*FilterdGamesRequest) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{20}
+	return file_proto_haru_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *FilterdGamesRequest) GetIsInit() bool {
@@ -1569,7 +2280,7 @@ type FilterdGamesReply struct {
 func (x *FilterdGamesReply) Reset() {
 	*x = FilterdGamesReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[21]
+		mi := &file_proto_haru_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1582,7 +2293,7 @@ func (x *FilterdGamesReply) String() string {
 func (*FilterdGamesReply) ProtoMessage() {}
 
 func (x *FilterdGamesReply) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[21]
+	mi := &file_proto_haru_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1595,7 +2306,7 @@ func (x *FilterdGamesReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterdGamesReply.ProtoReflect.Descriptor instead.
 func (*FilterdGamesReply) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{21}
+	return file_proto_haru_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *FilterdGamesReply) GetGames() []*Game {
@@ -1623,7 +2334,7 @@ type DataPlaceRequest struct {
 func (x *DataPlaceRequest) Reset() {
 	*x = DataPlaceRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[22]
+		mi := &file_proto_haru_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1636,7 +2347,7 @@ func (x *DataPlaceRequest) String() string {
 func (*DataPlaceRequest) ProtoMessage() {}
 
 func (x *DataPlaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[22]
+	mi := &file_proto_haru_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1649,7 +2360,7 @@ func (x *DataPlaceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataPlaceRequest.ProtoReflect.Descriptor instead.
 func (*DataPlaceRequest) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{22}
+	return file_proto_haru_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *DataPlaceRequest) GetVersion() int64 {
@@ -1673,7 +2384,7 @@ type DataPlaceReply struct {
 func (x *DataPlaceReply) Reset() {
 	*x = DataPlaceReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_haru_proto_msgTypes[23]
+		mi := &file_proto_haru_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1686,7 +2397,7 @@ func (x *DataPlaceReply) String() string {
 func (*DataPlaceReply) ProtoMessage() {}
 
 func (x *DataPlaceReply) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_haru_proto_msgTypes[23]
+	mi := &file_proto_haru_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1699,7 +2410,7 @@ func (x *DataPlaceReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataPlaceReply.ProtoReflect.Descriptor instead.
 func (*DataPlaceReply) Descriptor() ([]byte, []int) {
-	return file_proto_haru_proto_rawDescGZIP(), []int{23}
+	return file_proto_haru_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *DataPlaceReply) GetVersion() int64 {
@@ -1839,7 +2550,79 @@ var file_proto_haru_proto_rawDesc = []byte{
 	0x6c, 0x79, 0x12, 0x20, 0x0a, 0x05, 0x63, 0x68, 0x61, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x0a, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x05, 0x63,
 	0x68, 0x61, 0x74, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x43, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x43, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x22, 0x98, 0x05, 0x0a,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x43, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x22, 0x9e, 0x01, 0x0a,
+	0x16, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x72, 0x74, 0x69, 0x63,
+	0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x61, 0x72, 0x74,
+	0x69, 0x63, 0x6c, 0x65, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x22, 0x59, 0x0a,
+	0x14, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x29, 0x0a, 0x08, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41,
+	0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x08, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73,
+	0x12, 0x16, 0x0a, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x22, 0x39, 0x0a, 0x0e, 0x41, 0x72, 0x74, 0x69,
+	0x63, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x27, 0x0a, 0x07, 0x61, 0x72,
+	0x74, 0x69, 0x63, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x68, 0x61,
+	0x72, 0x75, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x07, 0x61, 0x72, 0x74, 0x69,
+	0x63, 0x6c, 0x65, 0x22, 0x37, 0x0a, 0x0c, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x12, 0x27, 0x0a, 0x07, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x72, 0x74, 0x69,
+	0x63, 0x6c, 0x65, 0x52, 0x07, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x22, 0x2d, 0x0a, 0x0b,
+	0x4c, 0x69, 0x6b, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x04, 0x6c,
+	0x69, 0x6b, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x68, 0x61, 0x72, 0x75,
+	0x2e, 0x4c, 0x69, 0x6b, 0x65, 0x52, 0x04, 0x6c, 0x69, 0x6b, 0x65, 0x22, 0x2b, 0x0a, 0x09, 0x4c,
+	0x69, 0x6b, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1e, 0x0a, 0x04, 0x6c, 0x69, 0x6b, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x4c, 0x69,
+	0x6b, 0x65, 0x52, 0x04, 0x6c, 0x69, 0x6b, 0x65, 0x22, 0x41, 0x0a, 0x13, 0x46, 0x69, 0x6c, 0x74,
+	0x65, 0x72, 0x64, 0x4c, 0x69, 0x6b, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74,
+	0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x22, 0x50, 0x0a, 0x11, 0x46,
+	0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x4c, 0x69, 0x6b, 0x65, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x23, 0x0a, 0x05, 0x6c, 0x69, 0x6b, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x0d, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x05,
+	0x6c, 0x69, 0x6b, 0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x75, 0x72, 0x73, 0x6f, 0x72, 0x22, 0x50, 0x0a,
+	0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x66, 0x6f, 0x72, 0x65, 0x67, 0x69,
+	0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x66, 0x6f, 0x72, 0x65,
+	0x67, 0x69, 0x6e, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6b,
+	0x69, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x22,
+	0xfd, 0x01, 0x0a, 0x07, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12,
+	0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x63, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
+	0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1d, 0x0a,
+	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x74, 0x79, 0x70, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65,
+	0x12, 0x1d, 0x0a, 0x0a, 0x66, 0x6f, 0x72, 0x65, 0x67, 0x69, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x0a,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x66, 0x6f, 0x72, 0x65, 0x67, 0x69, 0x6e, 0x49, 0x64, 0x22,
+	0xca, 0x01, 0x0a, 0x04, 0x4c, 0x69, 0x6b, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x66, 0x6f, 0x72, 0x65,
+	0x67, 0x69, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x66, 0x6f,
+	0x72, 0x65, 0x67, 0x69, 0x6e, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
+	0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x66, 0x6f, 0x72, 0x65,
+	0x67, 0x69, 0x6e, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x66, 0x6f, 0x72, 0x65, 0x67, 0x69, 0x6e, 0x41, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18,
+	0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x22, 0x98, 0x05, 0x0a,
 	0x04, 0x47, 0x61, 0x6d, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x26, 0x0a, 0x0f, 0x68, 0x6f, 0x73, 0x74, 0x5f, 0x61, 0x63,
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d,
@@ -1929,7 +2712,7 @@ var file_proto_haru_proto_rawDesc = []byte{
 	0x74, 0x69, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x18, 0x03, 0x20,
 	0x03, 0x28, 0x09, 0x52, 0x05, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64,
 	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x32, 0x96, 0x07, 0x0a, 0x08, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+	0x72, 0x65, 0x73, 0x73, 0x32, 0xbd, 0x0a, 0x0a, 0x08, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
 	0x31, 0x12, 0x3b, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75,
 	0x6e, 0x74, 0x12, 0x14, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e,
@@ -1986,10 +2769,37 @@ var file_proto_haru_proto_rawDesc = []byte{
 	0x0c, 0x47, 0x65, 0x74, 0x44, 0x61, 0x74, 0x61, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x12, 0x16, 0x2e,
 	0x68, 0x61, 0x72, 0x75, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x44, 0x61, 0x74,
-	0x61, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x24, 0x5a,
-	0x22, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x68, 0x6f, 0x6a, 0x69,
-	0x6e, 0x2d, 0x6b, 0x72, 0x2f, 0x68, 0x61, 0x72, 0x75, 0x2f, 0x63, 0x6d, 0x64, 0x2f, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x50, 0x0a,
+	0x12, 0x47, 0x65, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x41, 0x72, 0x74, 0x69, 0x63,
+	0x6c, 0x65, 0x73, 0x12, 0x1c, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x46, 0x69, 0x6c, 0x74, 0x65,
+	0x72, 0x64, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x1a, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x64,
+	0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12,
+	0x3b, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65,
+	0x12, 0x14, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x72,
+	0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x3b, 0x0a, 0x0d,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x12, 0x14, 0x2e,
+	0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63,
+	0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x49, 0x0a, 0x0f, 0x47, 0x65, 0x74,
+	0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x4c, 0x69, 0x6b, 0x65, 0x73, 0x12, 0x19, 0x2e, 0x68,
+	0x61, 0x72, 0x75, 0x2e, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x4c, 0x69, 0x6b, 0x65, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x46,
+	0x69, 0x6c, 0x74, 0x65, 0x72, 0x64, 0x4c, 0x69, 0x6b, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x22, 0x00, 0x12, 0x32, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4c, 0x69,
+	0x6b, 0x65, 0x12, 0x11, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x4c, 0x69, 0x6b, 0x65, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0f, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x4c, 0x69, 0x6b,
+	0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x32, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x4c, 0x69, 0x6b, 0x65, 0x12, 0x11, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x4c, 0x69,
+	0x6b, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0f, 0x2e, 0x68, 0x61, 0x72, 0x75,
+	0x2e, 0x4c, 0x69, 0x6b, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x26, 0x0a, 0x08,
+	0x47, 0x65, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x0b, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x1a, 0x0b, 0x2e, 0x68, 0x61, 0x72, 0x75, 0x2e, 0x43, 0x6f, 0x75,
+	0x6e, 0x74, 0x22, 0x00, 0x42, 0x24, 0x5a, 0x22, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x68, 0x6f, 0x6a, 0x69, 0x6e, 0x2d, 0x6b, 0x72, 0x2f, 0x68, 0x61, 0x72, 0x75,
+	0x2f, 0x63, 0x6d, 0x64, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -2004,32 +2814,43 @@ func file_proto_haru_proto_rawDescGZIP() []byte {
 	return file_proto_haru_proto_rawDescData
 }
 
-var file_proto_haru_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_proto_haru_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_proto_haru_proto_goTypes = []interface{}{
-	(*Account)(nil),             // 0: haru.Account
-	(*AccountRequest)(nil),      // 1: haru.AccountRequest
-	(*AccountReply)(nil),        // 2: haru.AccountReply
-	(*Profile)(nil),             // 3: haru.Profile
-	(*ProfileRequest)(nil),      // 4: haru.ProfileRequest
-	(*ProfileReply)(nil),        // 5: haru.ProfileReply
-	(*Join)(nil),                // 6: haru.Join
-	(*JoinRequest)(nil),         // 7: haru.JoinRequest
-	(*JoinReply)(nil),           // 8: haru.JoinReply
-	(*Chat)(nil),                // 9: haru.Chat
-	(*ChatMessage)(nil),         // 10: haru.ChatMessage
-	(*ChatMessageRequest)(nil),  // 11: haru.ChatMessageRequest
-	(*ChatRequest)(nil),         // 12: haru.ChatRequest
-	(*ChatReply)(nil),           // 13: haru.ChatReply
-	(*Game)(nil),                // 14: haru.Game
-	(*Place)(nil),               // 15: haru.Place
-	(*GameMultiRequest)(nil),    // 16: haru.GameMultiRequest
-	(*GameMultiReply)(nil),      // 17: haru.GameMultiReply
-	(*GameRequest)(nil),         // 18: haru.GameRequest
-	(*GameReply)(nil),           // 19: haru.GameReply
-	(*FilterdGamesRequest)(nil), // 20: haru.FilterdGamesRequest
-	(*FilterdGamesReply)(nil),   // 21: haru.FilterdGamesReply
-	(*DataPlaceRequest)(nil),    // 22: haru.DataPlaceRequest
-	(*DataPlaceReply)(nil),      // 23: haru.DataPlaceReply
+	(*Account)(nil),                // 0: haru.Account
+	(*AccountRequest)(nil),         // 1: haru.AccountRequest
+	(*AccountReply)(nil),           // 2: haru.AccountReply
+	(*Profile)(nil),                // 3: haru.Profile
+	(*ProfileRequest)(nil),         // 4: haru.ProfileRequest
+	(*ProfileReply)(nil),           // 5: haru.ProfileReply
+	(*Join)(nil),                   // 6: haru.Join
+	(*JoinRequest)(nil),            // 7: haru.JoinRequest
+	(*JoinReply)(nil),              // 8: haru.JoinReply
+	(*Chat)(nil),                   // 9: haru.Chat
+	(*ChatMessage)(nil),            // 10: haru.ChatMessage
+	(*ChatMessageRequest)(nil),     // 11: haru.ChatMessageRequest
+	(*ChatRequest)(nil),            // 12: haru.ChatRequest
+	(*ChatReply)(nil),              // 13: haru.ChatReply
+	(*FilterdArticlesRequest)(nil), // 14: haru.FilterdArticlesRequest
+	(*FilterdArticlesReply)(nil),   // 15: haru.FilterdArticlesReply
+	(*ArticleRequest)(nil),         // 16: haru.ArticleRequest
+	(*ArticleReply)(nil),           // 17: haru.ArticleReply
+	(*LikeRequest)(nil),            // 18: haru.LikeRequest
+	(*LikeReply)(nil),              // 19: haru.LikeReply
+	(*FilterdLikesRequest)(nil),    // 20: haru.FilterdLikesRequest
+	(*FilterdLikesReply)(nil),      // 21: haru.FilterdLikesReply
+	(*Count)(nil),                  // 22: haru.Count
+	(*Article)(nil),                // 23: haru.Article
+	(*Like)(nil),                   // 24: haru.Like
+	(*Game)(nil),                   // 25: haru.Game
+	(*Place)(nil),                  // 26: haru.Place
+	(*GameMultiRequest)(nil),       // 27: haru.GameMultiRequest
+	(*GameMultiReply)(nil),         // 28: haru.GameMultiReply
+	(*GameRequest)(nil),            // 29: haru.GameRequest
+	(*GameReply)(nil),              // 30: haru.GameReply
+	(*FilterdGamesRequest)(nil),    // 31: haru.FilterdGamesRequest
+	(*FilterdGamesReply)(nil),      // 32: haru.FilterdGamesReply
+	(*DataPlaceRequest)(nil),       // 33: haru.DataPlaceRequest
+	(*DataPlaceReply)(nil),         // 34: haru.DataPlaceReply
 }
 var file_proto_haru_proto_depIdxs = []int32{
 	3,  // 0: haru.ProfileRequest.profile:type_name -> haru.Profile
@@ -2041,50 +2862,70 @@ var file_proto_haru_proto_depIdxs = []int32{
 	10, // 6: haru.ChatMessageRequest.chat_message:type_name -> haru.ChatMessage
 	9,  // 7: haru.ChatRequest.chat:type_name -> haru.Chat
 	9,  // 8: haru.ChatReply.chats:type_name -> haru.Chat
-	15, // 9: haru.Game.place:type_name -> haru.Place
-	14, // 10: haru.GameMultiReply.games:type_name -> haru.Game
-	14, // 11: haru.GameRequest.game:type_name -> haru.Game
-	6,  // 12: haru.GameRequest.join:type_name -> haru.Join
-	14, // 13: haru.GameReply.game:type_name -> haru.Game
-	6,  // 14: haru.GameReply.join:type_name -> haru.Join
-	14, // 15: haru.FilterdGamesReply.games:type_name -> haru.Game
-	1,  // 16: haru.version1.CreateAccount:input_type -> haru.AccountRequest
-	4,  // 17: haru.version1.GetProfile:input_type -> haru.ProfileRequest
-	4,  // 18: haru.version1.UpdateProfile:input_type -> haru.ProfileRequest
-	18, // 19: haru.version1.CreateGame:input_type -> haru.GameRequest
-	18, // 20: haru.version1.UpdateGame:input_type -> haru.GameRequest
-	18, // 21: haru.version1.GetGame:input_type -> haru.GameRequest
-	16, // 22: haru.version1.GetGameMulti:input_type -> haru.GameMultiRequest
-	20, // 23: haru.version1.GetFilterdGames:input_type -> haru.FilterdGamesRequest
-	7,  // 24: haru.version1.Join:input_type -> haru.JoinRequest
-	7,  // 25: haru.version1.GetMyJoins:input_type -> haru.JoinRequest
-	7,  // 26: haru.version1.GetMyBeforeJoins:input_type -> haru.JoinRequest
-	7,  // 27: haru.version1.GetGameJoins:input_type -> haru.JoinRequest
-	7,  // 28: haru.version1.UpdateJoin:input_type -> haru.JoinRequest
-	12, // 29: haru.version1.GetChat:input_type -> haru.ChatRequest
-	11, // 30: haru.version1.AddChatMessage:input_type -> haru.ChatMessageRequest
-	22, // 31: haru.version1.GetDataPlace:input_type -> haru.DataPlaceRequest
-	2,  // 32: haru.version1.CreateAccount:output_type -> haru.AccountReply
-	5,  // 33: haru.version1.GetProfile:output_type -> haru.ProfileReply
-	5,  // 34: haru.version1.UpdateProfile:output_type -> haru.ProfileReply
-	19, // 35: haru.version1.CreateGame:output_type -> haru.GameReply
-	19, // 36: haru.version1.UpdateGame:output_type -> haru.GameReply
-	19, // 37: haru.version1.GetGame:output_type -> haru.GameReply
-	17, // 38: haru.version1.GetGameMulti:output_type -> haru.GameMultiReply
-	21, // 39: haru.version1.GetFilterdGames:output_type -> haru.FilterdGamesReply
-	8,  // 40: haru.version1.Join:output_type -> haru.JoinReply
-	8,  // 41: haru.version1.GetMyJoins:output_type -> haru.JoinReply
-	8,  // 42: haru.version1.GetMyBeforeJoins:output_type -> haru.JoinReply
-	8,  // 43: haru.version1.GetGameJoins:output_type -> haru.JoinReply
-	8,  // 44: haru.version1.UpdateJoin:output_type -> haru.JoinReply
-	13, // 45: haru.version1.GetChat:output_type -> haru.ChatReply
-	13, // 46: haru.version1.AddChatMessage:output_type -> haru.ChatReply
-	23, // 47: haru.version1.GetDataPlace:output_type -> haru.DataPlaceReply
-	32, // [32:48] is the sub-list for method output_type
-	16, // [16:32] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	23, // 9: haru.FilterdArticlesReply.articles:type_name -> haru.Article
+	23, // 10: haru.ArticleRequest.article:type_name -> haru.Article
+	23, // 11: haru.ArticleReply.article:type_name -> haru.Article
+	24, // 12: haru.LikeRequest.like:type_name -> haru.Like
+	24, // 13: haru.LikeReply.like:type_name -> haru.Like
+	23, // 14: haru.FilterdLikesReply.likes:type_name -> haru.Article
+	26, // 15: haru.Game.place:type_name -> haru.Place
+	25, // 16: haru.GameMultiReply.games:type_name -> haru.Game
+	25, // 17: haru.GameRequest.game:type_name -> haru.Game
+	6,  // 18: haru.GameRequest.join:type_name -> haru.Join
+	25, // 19: haru.GameReply.game:type_name -> haru.Game
+	6,  // 20: haru.GameReply.join:type_name -> haru.Join
+	25, // 21: haru.FilterdGamesReply.games:type_name -> haru.Game
+	1,  // 22: haru.version1.CreateAccount:input_type -> haru.AccountRequest
+	4,  // 23: haru.version1.GetProfile:input_type -> haru.ProfileRequest
+	4,  // 24: haru.version1.UpdateProfile:input_type -> haru.ProfileRequest
+	29, // 25: haru.version1.CreateGame:input_type -> haru.GameRequest
+	29, // 26: haru.version1.UpdateGame:input_type -> haru.GameRequest
+	29, // 27: haru.version1.GetGame:input_type -> haru.GameRequest
+	27, // 28: haru.version1.GetGameMulti:input_type -> haru.GameMultiRequest
+	31, // 29: haru.version1.GetFilterdGames:input_type -> haru.FilterdGamesRequest
+	7,  // 30: haru.version1.Join:input_type -> haru.JoinRequest
+	7,  // 31: haru.version1.GetMyJoins:input_type -> haru.JoinRequest
+	7,  // 32: haru.version1.GetMyBeforeJoins:input_type -> haru.JoinRequest
+	7,  // 33: haru.version1.GetGameJoins:input_type -> haru.JoinRequest
+	7,  // 34: haru.version1.UpdateJoin:input_type -> haru.JoinRequest
+	12, // 35: haru.version1.GetChat:input_type -> haru.ChatRequest
+	11, // 36: haru.version1.AddChatMessage:input_type -> haru.ChatMessageRequest
+	33, // 37: haru.version1.GetDataPlace:input_type -> haru.DataPlaceRequest
+	14, // 38: haru.version1.GetFilterdArticles:input_type -> haru.FilterdArticlesRequest
+	16, // 39: haru.version1.CreateArticle:input_type -> haru.ArticleRequest
+	16, // 40: haru.version1.UpdateArticle:input_type -> haru.ArticleRequest
+	20, // 41: haru.version1.GetFilterdLikes:input_type -> haru.FilterdLikesRequest
+	18, // 42: haru.version1.CreateLike:input_type -> haru.LikeRequest
+	18, // 43: haru.version1.UpdateLike:input_type -> haru.LikeRequest
+	22, // 44: haru.version1.GetCount:input_type -> haru.Count
+	2,  // 45: haru.version1.CreateAccount:output_type -> haru.AccountReply
+	5,  // 46: haru.version1.GetProfile:output_type -> haru.ProfileReply
+	5,  // 47: haru.version1.UpdateProfile:output_type -> haru.ProfileReply
+	30, // 48: haru.version1.CreateGame:output_type -> haru.GameReply
+	30, // 49: haru.version1.UpdateGame:output_type -> haru.GameReply
+	30, // 50: haru.version1.GetGame:output_type -> haru.GameReply
+	28, // 51: haru.version1.GetGameMulti:output_type -> haru.GameMultiReply
+	32, // 52: haru.version1.GetFilterdGames:output_type -> haru.FilterdGamesReply
+	8,  // 53: haru.version1.Join:output_type -> haru.JoinReply
+	8,  // 54: haru.version1.GetMyJoins:output_type -> haru.JoinReply
+	8,  // 55: haru.version1.GetMyBeforeJoins:output_type -> haru.JoinReply
+	8,  // 56: haru.version1.GetGameJoins:output_type -> haru.JoinReply
+	8,  // 57: haru.version1.UpdateJoin:output_type -> haru.JoinReply
+	13, // 58: haru.version1.GetChat:output_type -> haru.ChatReply
+	13, // 59: haru.version1.AddChatMessage:output_type -> haru.ChatReply
+	34, // 60: haru.version1.GetDataPlace:output_type -> haru.DataPlaceReply
+	15, // 61: haru.version1.GetFilterdArticles:output_type -> haru.FilterdArticlesReply
+	17, // 62: haru.version1.CreateArticle:output_type -> haru.ArticleReply
+	17, // 63: haru.version1.UpdateArticle:output_type -> haru.ArticleReply
+	20, // 64: haru.version1.GetFilterdLikes:output_type -> haru.FilterdLikesRequest
+	19, // 65: haru.version1.CreateLike:output_type -> haru.LikeReply
+	19, // 66: haru.version1.UpdateLike:output_type -> haru.LikeReply
+	22, // 67: haru.version1.GetCount:output_type -> haru.Count
+	45, // [45:68] is the sub-list for method output_type
+	22, // [22:45] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_proto_haru_proto_init() }
@@ -2262,7 +3103,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Game); i {
+			switch v := v.(*FilterdArticlesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2274,7 +3115,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Place); i {
+			switch v := v.(*FilterdArticlesReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2286,7 +3127,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GameMultiRequest); i {
+			switch v := v.(*ArticleRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2298,7 +3139,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GameMultiReply); i {
+			switch v := v.(*ArticleReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2310,7 +3151,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GameRequest); i {
+			switch v := v.(*LikeRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2322,7 +3163,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GameReply); i {
+			switch v := v.(*LikeReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2334,7 +3175,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FilterdGamesRequest); i {
+			switch v := v.(*FilterdLikesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2346,7 +3187,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FilterdGamesReply); i {
+			switch v := v.(*FilterdLikesReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2358,7 +3199,7 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DataPlaceRequest); i {
+			switch v := v.(*Count); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2370,6 +3211,138 @@ func file_proto_haru_proto_init() {
 			}
 		}
 		file_proto_haru_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Article); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Like); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Game); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Place); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GameMultiRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GameMultiReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GameRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GameReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FilterdGamesRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FilterdGamesReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DataPlaceRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_haru_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DataPlaceReply); i {
 			case 0:
 				return &v.state
@@ -2388,7 +3361,7 @@ func file_proto_haru_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_haru_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

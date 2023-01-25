@@ -24,7 +24,7 @@ func GetClient(ctx context.Context) *datastore.Client {
 func Get(ctx context.Context, key *datastore.Key, dst interface{}) (err error) {
 	client := GetClient(ctx)
 	if err := client.Get(ctx, key, dst); err != nil {
-		log.Printf("get ds" + err.Error())
+		log.Printf("get ds " + err.Error())
 	}
 	return err
 }

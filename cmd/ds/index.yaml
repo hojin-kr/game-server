@@ -82,3 +82,9 @@ indexes:
   properties:
   - name: GameId
   - name: Created
+
+- kind: Article
+  properties:
+  - name: Category
+  - name: Type
+  - name: Created

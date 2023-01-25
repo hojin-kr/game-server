@@ -331,6 +331,233 @@ struct Haru_ChatReply {
   init() {}
 }
 
+struct Haru_FilterdArticlesRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var category: Int64 = 0
+
+  /// 0 article 1 re_article
+  var type: Int64 = 0
+
+  var articleID: Int64 = 0
+
+  var accountID: Int64 = 0
+
+  var cursor: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_FilterdArticlesReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var articles: [Haru_Article] = []
+
+  var cursor: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_ArticleRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var article: Haru_Article {
+    get {return _article ?? Haru_Article()}
+    set {_article = newValue}
+  }
+  /// Returns true if `article` has been explicitly set.
+  var hasArticle: Bool {return self._article != nil}
+  /// Clears the value of `article`. Subsequent reads from it will return its default value.
+  mutating func clearArticle() {self._article = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _article: Haru_Article? = nil
+}
+
+struct Haru_ArticleReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var article: Haru_Article {
+    get {return _article ?? Haru_Article()}
+    set {_article = newValue}
+  }
+  /// Returns true if `article` has been explicitly set.
+  var hasArticle: Bool {return self._article != nil}
+  /// Clears the value of `article`. Subsequent reads from it will return its default value.
+  mutating func clearArticle() {self._article = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _article: Haru_Article? = nil
+}
+
+struct Haru_LikeRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var like: Haru_Like {
+    get {return _like ?? Haru_Like()}
+    set {_like = newValue}
+  }
+  /// Returns true if `like` has been explicitly set.
+  var hasLike: Bool {return self._like != nil}
+  /// Clears the value of `like`. Subsequent reads from it will return its default value.
+  mutating func clearLike() {self._like = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _like: Haru_Like? = nil
+}
+
+struct Haru_LikeReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var like: Haru_Like {
+    get {return _like ?? Haru_Like()}
+    set {_like = newValue}
+  }
+  /// Returns true if `like` has been explicitly set.
+  var hasLike: Bool {return self._like != nil}
+  /// Clears the value of `like`. Subsequent reads from it will return its default value.
+  mutating func clearLike() {self._like = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _like: Haru_Like? = nil
+}
+
+/// 좋아요한 목록 관리
+struct Haru_FilterdLikesRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var type: Int64 = 0
+
+  var cursor: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_FilterdLikesReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var likes: [Haru_Article] = []
+
+  var cursor: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+/// 카운팅 레디스 개념으로 사용
+struct Haru_Count {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var foreginID: Int64 = 0
+
+  var count: Int64 = 0
+
+  var kind: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_Article {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: Int64 = 0
+
+  var created: Int64 = 0
+
+  var updated: Int64 = 0
+
+  var title: String = String()
+
+  var body: String = String()
+
+  /// 분류
+  var category: Int64 = 0
+
+  /// 0 기본 1 밴
+  var status: Int64 = 0
+
+  /// 게시자 계정 아이디
+  var accountID: Int64 = 0
+
+  /// 0 기본 1 대댓
+  var type: Int64 = 0
+
+  /// 대댓인 경우
+  var foreginID: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Haru_Like {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: Int64 = 0
+
+  /// article_id or game_id
+  var foreginID: Int64 = 0
+
+  /// 좋아요한 계정 아이디
+  var accountID: Int64 = 0
+
+  var created: Int64 = 0
+
+  /// 0 기본 1 밴
+  var status: Int64 = 0
+
+  var foreginAccountID: Int64 = 0
+
+  var title: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Haru_Game {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -642,6 +869,17 @@ extension Haru_ChatMessage: @unchecked Sendable {}
 extension Haru_ChatMessageRequest: @unchecked Sendable {}
 extension Haru_ChatRequest: @unchecked Sendable {}
 extension Haru_ChatReply: @unchecked Sendable {}
+extension Haru_FilterdArticlesRequest: @unchecked Sendable {}
+extension Haru_FilterdArticlesReply: @unchecked Sendable {}
+extension Haru_ArticleRequest: @unchecked Sendable {}
+extension Haru_ArticleReply: @unchecked Sendable {}
+extension Haru_LikeRequest: @unchecked Sendable {}
+extension Haru_LikeReply: @unchecked Sendable {}
+extension Haru_FilterdLikesRequest: @unchecked Sendable {}
+extension Haru_FilterdLikesReply: @unchecked Sendable {}
+extension Haru_Count: @unchecked Sendable {}
+extension Haru_Article: @unchecked Sendable {}
+extension Haru_Like: @unchecked Sendable {}
 extension Haru_Game: @unchecked Sendable {}
 extension Haru_Place: @unchecked Sendable {}
 extension Haru_GameMultiRequest: @unchecked Sendable {}
@@ -1347,6 +1585,518 @@ extension Haru_ChatReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
   static func ==(lhs: Haru_ChatReply, rhs: Haru_ChatReply) -> Bool {
     if lhs.chats != rhs.chats {return false}
     if lhs.cursor != rhs.cursor {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_FilterdArticlesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".FilterdArticlesRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "category"),
+    2: .same(proto: "type"),
+    3: .standard(proto: "article_id"),
+    4: .standard(proto: "account_id"),
+    5: .same(proto: "cursor"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.category) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.type) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.articleID) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.category != 0 {
+      try visitor.visitSingularInt64Field(value: self.category, fieldNumber: 1)
+    }
+    if self.type != 0 {
+      try visitor.visitSingularInt64Field(value: self.type, fieldNumber: 2)
+    }
+    if self.articleID != 0 {
+      try visitor.visitSingularInt64Field(value: self.articleID, fieldNumber: 3)
+    }
+    if self.accountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 4)
+    }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_FilterdArticlesRequest, rhs: Haru_FilterdArticlesRequest) -> Bool {
+    if lhs.category != rhs.category {return false}
+    if lhs.type != rhs.type {return false}
+    if lhs.articleID != rhs.articleID {return false}
+    if lhs.accountID != rhs.accountID {return false}
+    if lhs.cursor != rhs.cursor {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_FilterdArticlesReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".FilterdArticlesReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "articles"),
+    2: .same(proto: "cursor"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.articles) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.articles.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.articles, fieldNumber: 1)
+    }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_FilterdArticlesReply, rhs: Haru_FilterdArticlesReply) -> Bool {
+    if lhs.articles != rhs.articles {return false}
+    if lhs.cursor != rhs.cursor {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_ArticleRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ArticleRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "article"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._article) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._article {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_ArticleRequest, rhs: Haru_ArticleRequest) -> Bool {
+    if lhs._article != rhs._article {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_ArticleReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ArticleReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "article"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._article) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._article {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_ArticleReply, rhs: Haru_ArticleReply) -> Bool {
+    if lhs._article != rhs._article {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_LikeRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LikeRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "like"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._like) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._like {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_LikeRequest, rhs: Haru_LikeRequest) -> Bool {
+    if lhs._like != rhs._like {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_LikeReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LikeReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "like"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._like) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._like {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_LikeReply, rhs: Haru_LikeReply) -> Bool {
+    if lhs._like != rhs._like {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_FilterdLikesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".FilterdLikesRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "type"),
+    2: .same(proto: "cursor"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.type) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.type != 0 {
+      try visitor.visitSingularInt64Field(value: self.type, fieldNumber: 1)
+    }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_FilterdLikesRequest, rhs: Haru_FilterdLikesRequest) -> Bool {
+    if lhs.type != rhs.type {return false}
+    if lhs.cursor != rhs.cursor {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_FilterdLikesReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".FilterdLikesReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "likes"),
+    2: .same(proto: "cursor"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.likes) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.cursor) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.likes.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.likes, fieldNumber: 1)
+    }
+    if !self.cursor.isEmpty {
+      try visitor.visitSingularStringField(value: self.cursor, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_FilterdLikesReply, rhs: Haru_FilterdLikesReply) -> Bool {
+    if lhs.likes != rhs.likes {return false}
+    if lhs.cursor != rhs.cursor {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_Count: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Count"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "foregin_id"),
+    2: .same(proto: "count"),
+    3: .same(proto: "kind"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.foreginID) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.count) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.kind) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.foreginID != 0 {
+      try visitor.visitSingularInt64Field(value: self.foreginID, fieldNumber: 1)
+    }
+    if self.count != 0 {
+      try visitor.visitSingularInt64Field(value: self.count, fieldNumber: 2)
+    }
+    if !self.kind.isEmpty {
+      try visitor.visitSingularStringField(value: self.kind, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_Count, rhs: Haru_Count) -> Bool {
+    if lhs.foreginID != rhs.foreginID {return false}
+    if lhs.count != rhs.count {return false}
+    if lhs.kind != rhs.kind {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_Article: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Article"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .same(proto: "created"),
+    3: .same(proto: "updated"),
+    4: .same(proto: "title"),
+    5: .same(proto: "body"),
+    6: .same(proto: "category"),
+    7: .same(proto: "status"),
+    8: .standard(proto: "account_id"),
+    9: .same(proto: "type"),
+    10: .standard(proto: "foregin_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.updated) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.body) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.category) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self.status) }()
+      case 8: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      case 9: try { try decoder.decodeSingularInt64Field(value: &self.type) }()
+      case 10: try { try decoder.decodeSingularInt64Field(value: &self.foreginID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if self.created != 0 {
+      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 2)
+    }
+    if self.updated != 0 {
+      try visitor.visitSingularInt64Field(value: self.updated, fieldNumber: 3)
+    }
+    if !self.title.isEmpty {
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 4)
+    }
+    if !self.body.isEmpty {
+      try visitor.visitSingularStringField(value: self.body, fieldNumber: 5)
+    }
+    if self.category != 0 {
+      try visitor.visitSingularInt64Field(value: self.category, fieldNumber: 6)
+    }
+    if self.status != 0 {
+      try visitor.visitSingularInt64Field(value: self.status, fieldNumber: 7)
+    }
+    if self.accountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 8)
+    }
+    if self.type != 0 {
+      try visitor.visitSingularInt64Field(value: self.type, fieldNumber: 9)
+    }
+    if self.foreginID != 0 {
+      try visitor.visitSingularInt64Field(value: self.foreginID, fieldNumber: 10)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_Article, rhs: Haru_Article) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.created != rhs.created {return false}
+    if lhs.updated != rhs.updated {return false}
+    if lhs.title != rhs.title {return false}
+    if lhs.body != rhs.body {return false}
+    if lhs.category != rhs.category {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs.accountID != rhs.accountID {return false}
+    if lhs.type != rhs.type {return false}
+    if lhs.foreginID != rhs.foreginID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Haru_Like: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Like"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .standard(proto: "foregin_id"),
+    3: .standard(proto: "account_id"),
+    4: .same(proto: "created"),
+    5: .same(proto: "status"),
+    6: .standard(proto: "foregin_account_id"),
+    7: .same(proto: "title"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.foreginID) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.status) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.foreginAccountID) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if self.foreginID != 0 {
+      try visitor.visitSingularInt64Field(value: self.foreginID, fieldNumber: 2)
+    }
+    if self.accountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 3)
+    }
+    if self.created != 0 {
+      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 4)
+    }
+    if self.status != 0 {
+      try visitor.visitSingularInt64Field(value: self.status, fieldNumber: 5)
+    }
+    if self.foreginAccountID != 0 {
+      try visitor.visitSingularInt64Field(value: self.foreginAccountID, fieldNumber: 6)
+    }
+    if !self.title.isEmpty {
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 7)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Haru_Like, rhs: Haru_Like) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.foreginID != rhs.foreginID {return false}
+    if lhs.accountID != rhs.accountID {return false}
+    if lhs.created != rhs.created {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs.foreginAccountID != rhs.foreginAccountID {return false}
+    if lhs.title != rhs.title {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
