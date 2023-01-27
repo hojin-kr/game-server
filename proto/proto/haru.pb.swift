@@ -538,9 +538,6 @@ struct Haru_Like {
 
   var id: Int64 = 0
 
-  /// article_id or game_id
-  var foreginID: Int64 = 0
-
   /// 좋아요한 계정 아이디
   var accountID: Int64 = 0
 
@@ -551,7 +548,11 @@ struct Haru_Like {
 
   var foreginAccountID: Int64 = 0
 
+  /// push에 포함 시킬 용도
   var title: String = String()
+
+  /// kind 분리 0 LikeArticle 1 LikeGame
+  var type: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -2038,12 +2039,12 @@ extension Haru_Like: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
   static let protoMessageName: String = _protobuf_package + ".Like"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
-    2: .standard(proto: "foregin_id"),
-    3: .standard(proto: "account_id"),
-    4: .same(proto: "created"),
-    5: .same(proto: "status"),
-    6: .standard(proto: "foregin_account_id"),
-    7: .same(proto: "title"),
+    2: .standard(proto: "account_id"),
+    3: .same(proto: "created"),
+    4: .same(proto: "status"),
+    5: .standard(proto: "foregin_account_id"),
+    6: .same(proto: "title"),
+    7: .same(proto: "type"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -2053,12 +2054,12 @@ extension Haru_Like: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
-      case 2: try { try decoder.decodeSingularInt64Field(value: &self.foreginID) }()
-      case 3: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
-      case 4: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
-      case 5: try { try decoder.decodeSingularInt64Field(value: &self.status) }()
-      case 6: try { try decoder.decodeSingularInt64Field(value: &self.foreginAccountID) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.accountID) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.created) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.status) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.foreginAccountID) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self.type) }()
       default: break
       }
     }
@@ -2068,35 +2069,35 @@ extension Haru_Like: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
     if self.id != 0 {
       try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
     }
-    if self.foreginID != 0 {
-      try visitor.visitSingularInt64Field(value: self.foreginID, fieldNumber: 2)
-    }
     if self.accountID != 0 {
-      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 3)
+      try visitor.visitSingularInt64Field(value: self.accountID, fieldNumber: 2)
     }
     if self.created != 0 {
-      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 4)
+      try visitor.visitSingularInt64Field(value: self.created, fieldNumber: 3)
     }
     if self.status != 0 {
-      try visitor.visitSingularInt64Field(value: self.status, fieldNumber: 5)
+      try visitor.visitSingularInt64Field(value: self.status, fieldNumber: 4)
     }
     if self.foreginAccountID != 0 {
-      try visitor.visitSingularInt64Field(value: self.foreginAccountID, fieldNumber: 6)
+      try visitor.visitSingularInt64Field(value: self.foreginAccountID, fieldNumber: 5)
     }
     if !self.title.isEmpty {
-      try visitor.visitSingularStringField(value: self.title, fieldNumber: 7)
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 6)
+    }
+    if self.type != 0 {
+      try visitor.visitSingularInt64Field(value: self.type, fieldNumber: 7)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Haru_Like, rhs: Haru_Like) -> Bool {
     if lhs.id != rhs.id {return false}
-    if lhs.foreginID != rhs.foreginID {return false}
     if lhs.accountID != rhs.accountID {return false}
     if lhs.created != rhs.created {return false}
     if lhs.status != rhs.status {return false}
     if lhs.foreginAccountID != rhs.foreginAccountID {return false}
     if lhs.title != rhs.title {return false}
+    if lhs.type != rhs.type {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

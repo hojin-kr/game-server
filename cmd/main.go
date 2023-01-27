@@ -589,13 +589,18 @@ func (s *server) GetCount(ctx context.Context, in *pb.Count) (*pb.Count, error) 
 	return ret, nil
 }
 
+var likeTypes = map[int64]string{
+	0: "LikeArticle",
+	1: "LikeGame",
+}
+
 func (s *server) CreateLike(ctx context.Context, in *pb.LikeRequest) (*pb.LikeReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	in.Like.Created = time.Now().UTC().Unix()
 	log.Print(in.Like.GetForeginAccountId())
-	_ = ds.Put(ctx, datastore.IncompleteKey("Like", nil), in.Like)
+	_ = ds.Put(ctx, datastore.IDKey(likeTypes[in.Like.Type], in.Like.Id, nil), in.Like)
 	// just counting
-	go CountIncr(context.Background(), in.Like.GetForeginId(), "Like")
+	go CountIncr(context.Background(), in.Like.Id, likeTypes[in.Like.Type])
 	go setAccountIdPush(context.Background(), in.Like.GetForeginAccountId(), in.Like.GetTitle(), "+1 좋아합니다.")
 	ret := &pb.LikeReply{Like: in.Like}
 	tracer.Trace(time.Now().UTC(), ret)
@@ -614,7 +619,7 @@ func setAccountIdPush(ctx context.Context, id int64, title string, body string) 
 func (s *server) UpdateLike(ctx context.Context, in *pb.LikeRequest) (*pb.LikeReply, error) {
 	tracer.Trace(time.Now().UTC(), in)
 	in.Like.Created = time.Now().UTC().Unix()
-	_ = ds.Put(ctx, datastore.IncompleteKey("Like", nil), in.Like)
+	_ = ds.Put(ctx, datastore.IDKey(likeTypes[in.Like.Type], in.Like.Id, nil), in.Like)
 	ret := &pb.LikeReply{Like: in.Like}
 	tracer.Trace(time.Now().UTC(), ret)
 	return ret, nil

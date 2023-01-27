@@ -3,20 +3,13 @@ module github.com/hojin-kr/haru
 go 1.16
 
 require (
-	cloud.google.com/go/datastore v1.6.0
+	cloud.google.com/go/datastore v1.10.0
 	github.com/edganiukov/apns v0.2.1
-	github.com/gin-gonic/gin v1.7.7
-)
-
-require (
-	github.com/kr/pretty v0.2.0
-	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/swaggo/swag v1.7.8
-	golang.org/x/net v0.0.0-20220114011407-0dd24b26b47d // indirect
-	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
-	golang.org/x/tools v0.1.8 // indirect
-	google.golang.org/api v0.54.0
-	google.golang.org/grpc v1.40.0
-	google.golang.org/protobuf v1.28.0
-	googlemaps.github.io/maps v1.3.2
+	github.com/gin-gonic/gin v1.8.2
+	github.com/kr/pretty v0.3.1
+	github.com/swaggo/swag v1.8.10
+	google.golang.org/api v0.108.0
+	google.golang.org/grpc v1.52.3
+	google.golang.org/protobuf v1.28.1
+	googlemaps.github.io/maps v1.3.3
 )
